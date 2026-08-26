@@ -1,12 +1,12 @@
 [submodule "reference/system-prompts-and-models-of-ai-tools"]
-	path = reference/system-prompts-and-models-of-ai-tools
+	path = references/system-prompts-and-models-of-ai-tools
 	url = https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools.git
 [submodule "reference/andrej-karpathy-skills"]
-	path = reference/andrej-karpathy-skills
+	path = references/andrej-karpathy-skills
 	url = https://github.com/multica-ai/andrej-karpathy-skills.git
 [submodule "reference/system_prompts_leaks"]
-	path = reference/system_prompts_leaks
+	path = references/system_prompts_leaks
 	url = https://github.com/asgeirtj/system_prompts_leaks.git
 [submodule "reference/skills"]
-	path = reference/skills
+	path = references/skills
 	url = https://github.com/anthropics/skills.git
