@@ -61,14 +61,30 @@ version: 1.0.0
 
 ## YAML Frontmatter Fields
 
+The house frontmatter contract uses a **6-field core** (see `house-frontmatter-contract.md`). The original field set plus the contract's trigger-optimized `description`.
+
 | Field | Required | Description |
 |---|---|---|
 | `name` | Yes | Kebab-case skill name (matches folder name) |
-| `description` | Yes | One-sentence description for skill discovery |
+| `description` | Yes | **Trigger-optimized**: what it does AND when to trigger. "Pushy", includes near-miss negatives. |
 | `version` | No | Semantic version (e.g., `1.0.0`) |
-| `author` | No | Creator name |
 | `tags` | No | Array of keywords for categorization |
-| `dependencies` | No | Other skills this depends on |
+| `license` | No | License / attribution |
+| `compatibility` | No | Required tools, dependencies, platforms |
+
+### The Trigger-Optimized `description` (from Anthropic)
+
+The `description` is the **primary triggering mechanism** — it's what the agent sees when deciding whether to consult the skill. Write it to combat *undertriggering*: be a little "pushy."
+
+```
+❌ "How to build a simple fast dashboard to display internal data."
+✅ "How to build a simple fast dashboard to display internal data.
+   Make sure to use this skill whenever the user mentions dashboards,
+   data visualization, internal metrics, or wants to display any kind
+   of company data, even if they don't explicitly ask for a 'dashboard.'"
+```
+
+**Key rule**: All "when to use" info goes in `description`, NOT in the body. The body holds *how*. The description holds *when* + *what*.
 
 ---
 
@@ -123,6 +139,50 @@ Ask for (or infer from context):
 | **Micro** | Single, focused task | 50–100 lines |
 | **Standard** | 2–5 related workflows | 100–300 lines |
 | **Complex** | Multi-domain with heavy references | 300+ lines + sub-files |
+
+> See `domain-engine-tiers.md` for the house tier system (micro / standard / deep engine), which refines this sizing into an explicit decision tree.
+
+---
+
+## Progressive Disclosure (3-Level Loading System)
+
+Skills use a three-level loading system with bounded context per level:
+
+| Level | Content | When in context | Size |
+|---|---|---|---|
+| 1. **Metadata** | `name` + `description` | Always | ~100 words |
+| 2. **SKILL.md body** | Instructions, workflow | Whenever the skill triggers | <500 lines ideal |
+| 3. **Bundled resources** | `references/`, `scripts/`, `assets/` | As needed | Unlimited; scripts run without loading |
+
+### Key patterns
+- **Keep SKILL.md under 500 lines.** If approaching the limit, add another layer of hierarchy with clear pointers about where the agent should go next.
+- **Reference files clearly from SKILL.md** with guidance on *when* to read them.
+- **For large reference files (>300 lines)**, include a table of contents.
+
+### Domain organization (variants)
+When a skill supports multiple domains/frameworks, organize by variant so the agent reads only the relevant file:
+
+```
+cloud-deploy/
+├── SKILL.md (workflow + selection)
+└── references/
+    ├── aws.md
+    ├── gcp.md
+    └── azure.md
+```
+
+---
+
+## The Skill Creation Workflow (Anthropic skill-creator)
+
+A mature, verified meta-workflow for authoring a skill. Use it when **CREATE** mode builds a skill:
+
+1. **Capture Intent** — Extract the workflow from conversation history: tools used, step sequence, user corrections, input/output formats. Confirm before proceeding.
+2. **Interview & Research** — Ask about edge cases, IO formats, example files, success criteria, dependencies. If MCPs/subagents are available, research in parallel.
+3. **Write the SKILL.md** — Fill `name`, trigger-optimized `description`, `compatibility`, then the body.
+4. **Validate** — Quick-validate the frontmatter (ensure `name` + `description` present, only allowed keys).
+5. **Optimize the description (optional)** — Generate trigger-eval queries (mix of should-trigger and should-not-trigger / near-misses), review, run the optimization loop, apply the best description.
+6. **Package & Present** — Package the skill and present the file.
 
 ---
 

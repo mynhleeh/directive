@@ -315,11 +315,79 @@ Use this format when the target platform is unknown — it can be converted to a
 ## Checklist for Quality Tool Definitions
 
 - [ ] `name` follows naming conventions (snake_case or camelCase; no spaces)
+- [ ] `name` is **action-prefixed** (verb first, e.g. `get_weather`, `query_database`, `send_email`)
 - [ ] `description` clearly explains WHAT and WHEN
 - [ ] All parameters have meaningful descriptions
 - [ ] All required parameters are listed in `required`
 - [ ] Enums used where values are constrained
 - [ ] Default values specified where sensible
 - [ ] `additionalProperties: false` for strict schemas
+- [ ] `outputSchema` defined for MCP tools where the return shape matters
+- [ ] Errors are **actionable and descriptive** (what happened + how to fix), not generic
 - [ ] No sensitive data (passwords, keys) in descriptions
 - [ ] Tested that the model invokes the tool as expected
+
+---
+
+## MCP Tool Conventions (from anthropics)
+
+MCP tools follow a stricter, more structured pattern than plain function schemas. Distilled and applied here.
+
+### Naming
+- **Action-prefixed**: verbs first (`search_documents`, `create_contact`, `send_email`), so models can infer intent at a glance. Avoid noun-only names.
+
+### Implied via Zod/Pydantic in generated MCP servers
+When emitting an MCP server tool (Python/TypeScript), the schema is usually derived from a validated model. Two common flavors:
+
+```python
+from pydantic import BaseModel, Field
+
+class Contact(BaseModel):
+    name: str = Field(..., description="Full name", min_length=1, max_length=100)
+    email: str = Field(..., description="Valid email address")
+```
+
+```typescript
+// Zod equivalent
+const SearchSchema = z.object({
+  query: z.string().describe("Natural language search query"),
+});
+```
+
+### `outputSchema`
+MCP tools can declare an **output schema** separate from the input schema, so the model knows the shape of the return value before calling:
+
+```json
+{
+  "name": "get_weather",
+  "inputSchema": { "type": "object", "properties": { "location": {"type": "string"} }, "required": ["location"] },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "temperature": {"type": "number"},
+      "conditions": {"type": "string"}
+    }
+  }
+}
+```
+
+### Actionable errors
+MCP tool errors should be descriptive and include a fix hint:
+
+```
+❌ "Error: something went wrong."
+✅ "Error: Contact not found for email 'foo@bar.com'. Check the email, or create a new contact first."
+```
+
+---
+
+## `Prompt.txt` + `Tools.json` Pairing
+
+A common MCP/agent convention is to pair a **prompt** (the descriptive instructions for the agent) with a **tool registry** (the machine-readable tool definitions). When the target is a shared agent resource (not a single function call), emit both:
+
+| File | Purpose | Example content |
+|---|---|---|
+| `Prompt.txt` | Human/agent-facing description of the workflow | Natural-language guidance on when/what to do |
+| `Tools.json` | Machine-readable tool definitions | JSON Schema array of the server's tools |
+
+> **Rule**: When you emit a packaged agent resource, keep `Prompt.txt` and `Tools.json` in sync — the tools listed in the prompt must be the same set defined in the JSON. This mirrors the single-source → multi-format sync rule from `rules-guide.md`.

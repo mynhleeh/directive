@@ -207,7 +207,7 @@ directive/
 │       │   ├── deep-flashcard-generator/   # Flashcard generation skill
 │       │   ├── doc-drill/                  # Document drilling & Q&A skill
 │       │   ├── document-vocab-extractor/   # Vocabulary extraction skill
-│       │   ├── skill-forge/                # Skill creation and editing
+│       │   ├── skill-forge/                # Meta-orchestrator: generates/critiques/converts/explains/distills/navigates artifacts
 │       │   └── vocab-lookup/               # Vocabulary lookup skill
 │       └── external/
 │           ├── andrej-karpathy/ [submodule]

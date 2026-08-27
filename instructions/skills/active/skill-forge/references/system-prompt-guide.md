@@ -51,6 +51,66 @@ Use this when the target platform is unknown or when portability matters:
 
 ---
 
+## Cross-Platform Anatomy (What Every System Prompt Contains)
+
+Regardless of platform, every quality system prompt encodes the same five slots. This is the universal anatomy that underlies all platform-specific templates below:
+
+| Slot | Question it answers | Must be |
+|---|---|---|
+| **Role & Identity** | Who are you? | Specific, named persona |
+| **Capabilities** | What can you do? | Actionable, bounded |
+| **Constraints** | What must you NOT do? | Concrete, specific actions |
+| **Communication Style** | How do you speak? | Tone + format + length |
+| **Context** | What environment are you in? | App name, user type, use case |
+
+> A system prompt is **complete** only when all five slots are filled. Missing any one produces a generic or unreliable agent.
+
+---
+
+## Agent vs. Assistant Distinction
+
+A system prompt's shape differs sharply based on whether the target behaves as an **assistant** (conversational, single-turn answers) or an **agent** (autonomous, multi-step, tool-using loop).
+
+| Dimension | Assistant | Agent |
+|---|---|---|
+| **Goal** | Answer well | Complete a task autonomously |
+| **Loop** | Single turn → respond | Plan → act → observe → repeat |
+| **Tools** | Optional | Core; must know when/how to call |
+| **Planning** | Rarely explicit | Must state a plan, then execute |
+| **Verification** | Light | Chain-of-verification / self-check loops |
+| **Guardrails** | Tone + accuracy | Safety checks per action, approval gates |
+
+### Agent system prompt components
+- **Tool contract** — which tools exist, their schemas, when to use each.
+- **Execution loop** — plan, act, evaluate interleaved.
+- **Verification & safety** — approval gates, error interception, conditional execution.
+- **Stop conditions** — when to declare done (vs. loop again).
+
+### Assistant system prompt components
+- Persona + tone + format.
+- Capabilities + constraints.
+- Escalation rules (e.g., when to hand off to a human).
+
+> **Rule**: Route the generated system prompt to the agent path if it needs tools, a loop, or autonomous multi-step work; otherwise use the assistant path.
+
+---
+
+## XML vs. Markdown Serialization
+
+Different platforms handle structure differently. Serialization is a *delivery* choice — the anatomy stays the same.
+
+| Serialization | Platforms | Best for |
+|---|---|---|
+| **XML tags** (`<identity>...`) | Claude (first-class) | Structured, well-delimited sections; strong parsing |
+| **Markdown headers** (`## Role & Identity`) | Platform-agnostic, OpenAI, Gemini, AGY | Portability, human-readable |
+| **JSON blocks** | Gemini | Rule-based parsing, structured config |
+
+### Choosing a serialization
+- **Weigh portability vs. fidelity.** XML delimiters are the most robust for Claude but less portable. Markdown is the recommended default for platform-agnostic output.
+- **Aim for structure the platform parses well.** If targeting Claude specifically, prefer XML for high-consequence sections (constraints, security rules).
+
+
+
 ## Claude-Optimized Structure
 
 ```xml
