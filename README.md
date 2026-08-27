@@ -191,12 +191,16 @@ directive/
 ├── instructions/               # Resources to DIRECTLY COMMAND AI (execute immediately)
 │   ├── prompts/                # System prompts & prompt collections
 │   │   ├── active/
-│   │   │   ├── function-anatomist.md       # Prompt structure breakdown
-│   │   │   ├── git-github.md               # Git commands and workflow
-│   │   │   └── system-architecture.md      # Architecture design prompt
+│   │   │   └── tech-mentor/                # Unified IT mentor (deep engine)
+│   │   │       ├── tech-mentor.md          # Core brain + router
+│   │   │       └── references/             # Lazy-loaded object-files + shared conventions
 │   │   ├── archive/
+│   │   │   ├── ai-mentor.md                # [superseded] Teaching mentor
 │   │   │   ├── dsa.md                      # Data structures & algorithms
-│   │   │   └── n8n.md                      # n8n automation workflows
+│   │   │   ├── function-anatomist.md       # [superseded] Prompt structure breakdown
+│   │   │   ├── git-github.md               # [superseded] Git commands and workflow
+│   │   │   ├── n8n.md                      # n8n automation workflows
+│   │   │   └── system-architecture.md      # [superseded] Architecture design prompt
 │   │   └── external/
 │   │       ├── system-prompts-and-models-of-ai-tools/ [submodule]
 │   │       └── system_prompts_leaks/ [submodule]
@@ -204,11 +208,16 @@ directive/
 │   ├── scripts/                # Automation scripts for AI workflows
 │   └── skills/                 # Skill files (SKILL.md format)
 │       ├── active/
+│       │   ├── bug-solver/                  # Root-cause debug & fix skill
+│       │   ├── deep-explainer/              # Deep concept explanation skill
 │       │   ├── deep-flashcard-generator/   # Flashcard generation skill
 │       │   ├── doc-drill/                  # Document drilling & Q&A skill
 │       │   ├── document-vocab-extractor/   # Vocabulary extraction skill
+│       │   ├── project-tutor/              # Project onboarding mentor skill
 │       │   ├── skill-forge/                # Meta-orchestrator: generates/critiques/converts/explains/distills/navigates artifacts
 │       │   └── vocab-lookup/               # Vocabulary lookup skill
+│       ├── archive/
+│       │   └── ai-mentor/                  # [superseded by tech-mentor]
 │       └── external/
 │           ├── andrej-karpathy/ [submodule]
 │           └── anthropics/ [submodule]
