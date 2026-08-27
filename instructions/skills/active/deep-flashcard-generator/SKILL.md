@@ -1,18 +1,33 @@
 ---
 name: deep-flashcard-generator
-description: "Reads any attached document (PDF, DOCX, TXT, images, etc.), exhaustively extracts core concepts and generates high-quality Anki-ready flashcards using a strict source-only approach. Every card — definition, mechanism, comparison, How/Why, and knowledge connection — must be directly grounded in the provided document. Works with any subject."
+description: "Reads any attached document (PDF, DOCX, TXT, images, etc.), exhaustively extracts core concepts and generates high-quality Anki-ready flashcards using a strict source-only approach. Every card — definition, mechanism, comparison, How/Why, and knowledge connection — must be directly grounded in the provided document. Works with any subject. Trigger whenever the user attaches a document and wants study flashcards. Do NOT trigger when the user wants a summary, translation, quiz, or vocabulary lookup rather than flashcards — use doc-drill or vocab-lookup for those."
+version: 1.1.0
 tags:
   - flashcards
   - anki
   - study
   - knowledge-extraction
+license: MIT
+compatibility: "Any agent"
 ---
 
 # Deep Flashcard Generator
 
 > Turn any attached document into a high-quality, multi-dimensional Anki flashcard deck — exhaustively extracted from the source with strict fidelity. Every card is directly grounded in the provided document.
 
-This skill is designed to work with a **minimal prompt**: `activate deep-flashcard-generator` + an attached document. Any parameter not explicitly stated by the user → apply the skill's defaults.
+## When to Activate
+
+Activate when the user attaches a document (PDF, DOCX, TXT, slides, images, notes) and wants to study it by generating Anki-ready flashcards. Works with a **minimal prompt**: `activate deep-flashcard-generator` + an attached document. Any parameter not explicitly stated by the user → apply the skill's defaults.
+
+> **Do NOT trigger** when the user wants a summary, translation, a quiz, or a vocabulary lookup of specific words. Use `doc-drill` (document quiz), `document-vocab-extractor` (extract all vocabulary), or `vocab-lookup` (look up specific words) for those.
+
+## Overview
+
+This skill turns any attached document into a **multi-dimensional Anki flashcard deck**, exhaustively extracted from the source with strict fidelity. Cards span definitions, mechanisms, comparisons, How/Why reasoning, and knowledge connections — all grounded in the document. The pipeline enforces a **source-test / anchor-test** gate: if the answer is not clearly in the document, the card is omitted rather than invented.
+
+## Language Policy
+
+Follow the house language policy. **Priority order**: user's explicit request > document's dominant language. If the user does not specify a language, auto-detect the dominant language of the attached document and use it for all cards. The target language applies to **all content**, including how the question is phrased on the front. Internal processing follows these English instructions; output matches the user's/document's language. IT/technical terms always stay in English.
 
 ---
 
@@ -40,75 +55,11 @@ Before creating any cards, silently scan the entire document and identify (inter
 
 ## Step 2: Card Generation Strategy (Exhaustive Extraction)
 
-**There is no fixed card count.** The number of cards is determined by the document content and one guiding principle:
+There is **no fixed card count**; the number of cards is determined by the document content and the guiding principle:
 
 > **One card = One unit of knowledge (Minimum Information Principle)**
 
-Generate cards across all 5 types:
-
-### Type 1 — Definition
-Cover every key term, concept, and acronym. At least 1 card per term.
-
-### Type 2 — Mechanism / Process (How/Why)
-Cover every mechanism, algorithm, workflow, or causal relationship mentioned. 1 card per topic.
-
-### Type 3 — Comparison / Distinction
-Cover every pair of concepts that could be confused or that appear side by side. 1 card per pair.
-
-### Type 4 — How / Why (Source-Grounded)
-
-Generate cards that ask **How** or **Why** about mechanisms, processes, design rationale, and causal relationships — but **only when the answer is explicitly or clearly stated in the document**.
-
-**Permitted angles:**
-- **How it works**: "How does [mechanism X] operate?" — answer must be in the document.
-- **Why it is designed this way**: "Why is [component/approach] designed as described?" — answer must be in the document.
-- **What happens when**: "What happens when [process/condition] occurs?" — answer must be in the document.
-- **Prerequisites / conditions**: "What must be true for [concept X] to work?" — answer must be in the document.
-
-**NOT permitted:**
-- ✗ Questions whose answers require you to infer or speculate beyond what is written
-- ✗ "What if" scenarios not addressed in the document
-- ✗ Topics or subtopics not mentioned anywhere in the document
-
-**Source Test** — Before creating any Type 4 card, ask yourself:
-> *"Is the answer to this question directly stated or clearly implied in the document?"*
-- **YES** → Create the card (no special prefix)
-- **NO** → Skip entirely
-
-### Type 5 — Knowledge Connection
-
-After completing Types 1–4, identify conceptual links between 2 or more concepts that **both appear in the document**.
-
-**Valid connection angles:**
-- Causal chains: "Concept A enables Concept B, which in turn makes Concept C possible"
-- Dependency maps: "What does Concept X depend on, and what depends on it?"
-- Synthesis: "How do components A, B, C work together to achieve outcome Y?"
-- Contrast within document: "How do A and B differ in purpose, even though they both serve function X?"
-
-**Classification:** All connection cards are treated equally — no prefix. Connections may be explicitly stated or reasonably inferred, as long as all referenced concepts exist in the document.
-
-**Anchor Test**: All concepts referenced must exist in the document.
-
-**Number of connection cards**: No fixed quota. Create as many as meaningfully possible.
-
----
-
-### Diversity Rule (Critical)
-
-**Actively vary your question phrasing across all cards.** Do NOT repeat the same sentence structure for multiple cards. Explore different angles and framings:
-- What it is, what it does, why it exists, how it works
-- What happens when it fails / is misused
-- How it compares to something else in the document
-- When to use it vs. when not to
-- Real-world analogies, consequences
-- **Design rationale**: why was it designed this way?
-- **Prerequisite thinking**: what must be true for this to work?
-- **Inversion**: what would the system look like WITHOUT this component/concept?
-- **Stakeholder perspective**: how does this concept look from the user's vs. system's vs. developer's viewpoint?
-- **Degree/scale**: what happens if this is pushed to extremes?
-- **Connection**: how do 2+ concepts in the document relate, depend on, or contrast with each other?
-
-The goal is a deck that feels **rich and multi-dimensional**, not a list of `"What is X?"` cards.
+Generate cards across 5 types: definition, mechanism/process, comparison/distinction, How/Why (source-grounded), and knowledge connection. For the full per-type rules, permitted angles, the **Source Test**, the **Anchor Test**, and the **Diversity Rule**, read `references/card-types.md`.
 
 ---
 
@@ -141,59 +92,30 @@ Generate **Basic cards only** (front / back).
 
 ## Step 5: Language (Strictly Enforced)
 
-**Priority order**: User's explicit request > Document's dominant language.
-
-**If the user does not specify a language**: Auto-detect the dominant language of the attached document and use it for all cards.
-
-> **The target language applies to ALL content — including how the question is phrased on the Front, not just the answer on the Back.**
-
-This is a hard rule. If the target language is Vietnamese, the question itself must be written in Vietnamese. If the target language is English, the question must be in English.
-
-**The only exception**: IT / technical terms (protocol names, algorithm names, tool names, data structures, design patterns, programming constructs) always stay in English regardless of the output language.
-
-### Anti-examples (do not do this)
-
-```
-❌ WRONG — language split (Front English, Back Vietnamese):
-Front: "What is Hệ điều hành?"
-Back:  "HDH là phần mềm trung gian giữa phần cứng và người dùng."
-
-❌ WRONG — language split (Front English, Back Vietnamese):
-Front: "What is the difference between phần mềm hệ thống and phần mềm ứng dụng?"
-Back:  "Phần mềm hệ thống quản lý phần cứng..."
-```
-
-```
-✅ CORRECT — full Vietnamese:
-Front: "Hệ điều hành đóng vai trò gì trong hệ thống máy tính?"
-Back:  "HDH là phần mềm trung gian giữa phần cứng và người dùng/ứng dụng, giúp quản lý tài nguyên và cung cấp môi trường chạy cho các chương trình."
-
-✅ CORRECT — full English:
-Front: "What role does an Operating System play in a computer system?"
-Back:  "The OS acts as an intermediary between hardware and user/application programs, managing resources and providing a runtime environment."
-```
-
----
+**Priority order**: User's explicit request > Document's dominant language. If the user does not specify a language, auto-detect the dominant language of the attached document and use it for all cards. The target language applies to **all content**, including the front phrasing — but IT/technical terms stay in English. See full rules + correct/incorrect examples in `references/language-and-output.md`.
 
 ## Step 6: Output Format (Strictly Enforced)
 
-1. **2 columns, Tab-Separated (TSV)**: `front[TAB]back`
-2. **One line = one card.** No line breaks inside card content.
-3. **No header row** (do not write `front\tback` at the top).
-4. **No tab characters inside card content**: use `;` or `|` as inline separators when listing items.
-5. Wrap the entire output in a **single markdown text block**:
+Produce **2 columns, tab-separated (TSV)**, `front[TAB]back`, one card per line, no header row, no tabs inside card content, wrapped in a single `text` markdown block, and nothing outside it. See full rules + the canonical template in `references/language-and-output.md`.
 
-````
-```text
-[front of card 1]	[back of card 1]
-[front of card 2]	[back of card 2]
-[front of card 3]	[back of card 3]
-```
-````
+## Output Contract
 
-6. **No conversational text, explanations, or any content outside the `text` block.**
+## [What to emit, and ONLY what to emit]
+Emit a **single `text` fenced block** containing the TSV cards. No preamble, no postamble, no explanations, and nothing outside the block. See `references/language-and-output.md`.
 
----
+## Anti-Examples
+
+| ❌ Avoid | ✅ Prefer | Why |
+|---|---|---|
+| "What is Hệ điều hành?" (Front English, Back Vietnamese) | "Hệ điều hành đóng vai trò gì trong hệ thống máy tính?" (full Vietnamese) | The target language must apply to the front too. |
+| Blending languages inside a single card | Writing the whole card in one target language, keeping only technical terms in English | Prevents confusing language-split cards. |
+| Speculating when the answer isn't in the document | Omitting the card entirely | Accuracy/fidelity is the hard guarantee — never fabricate. |
+| Adding prose or a summary before/after the TSV block | Emitting only the single `text` block | Output must be machine-parseable. |
+
+## References
+- `references/card-types.md` — read when generating card types and applying the Source Test / Anchor Test / Diversity Rule.
+- `references/language-and-output.md` — read for language rules and the TSV output format.
+- `../skill-forge/references/house-language-policy.md` — read when choosing the response language.
 
 ## Example Output
 

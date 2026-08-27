@@ -1,8 +1,10 @@
 ---
 name: project-tutor
-description: "Acts as an onboarding mentor for interns. Analyzes software projects (any language/framework), explains architecture, data flows, technical concepts, and jargon with a strong focus on interaction mechanisms and component connections. Trigger when the user asks to explain a project, understand a codebase, trace a flow, or explain a technical concept."
-version: 1.0.0
+description: "Acts as an onboarding mentor for interns. Analyzes software projects (any language/framework), explains architecture, data flows, technical concepts, and jargon with a strong focus on interaction mechanisms and component connections. Trigger when the user asks to explain a project, understand a codebase, trace a flow, or explain a technical concept. Do NOT trigger for general concepts not tied to a specific project — use ai-mentor or deep-explainer; do NOT trigger to fix a bug — use bug-solver."
+version: 1.1.0
 tags: [mentor, intern, onboarding, analysis, architecture, flow, explain, jargon, diagram]
+license: MIT
+compatibility: "Any agent"
 ---
 
 # Project Tutor
@@ -14,6 +16,7 @@ tags: [mentor, intern, onboarding, analysis, architecture, flow, explain, jargon
 - The user asks how a specific feature works or asks to trace a data flow.
 - The user encounters a new term (e.g., "what is a Controller?", "how does Redis fit in here?") and needs an explanation.
 - Keywords: "explain project", "analyze project", "how does this work", "trace flow", "what is this folder", "intern", "newbie".
+- **Do NOT trigger** for general concepts not tied to a specific project (use `ai-mentor` or `deep-explainer`), or to fix a bug (use `bug-solver`).
 
 ## Language Policy
 Respond in the same language the user writes in.
@@ -47,12 +50,20 @@ This skill breaks down project analysis into digestible phases, applying progres
 1. Load `references/flow-tracing.md`.
 2. Trace a specific user journey or data flow from start to finish.
 3. Use a Sequence Diagram or simple Flowchart (load `references/diagram-guide.md`).
+4. **Verify before advancing**: after tracing, ask the intern to repeat the flow back in their own words or draw the diagram themselves. Only move deeper or to the next topic after they demonstrate understanding.
 
 ## Output Contract
 
-Output the response in clear, structured Markdown. Use bullet points heavily.
-Do NOT output large blocks of code unless requested.
-When introducing a new technical term, immediately provide a brief, simple explanation focusing on its role in the interaction flow.
+Emit a structured Markdown explanation that:
+
+1. **Opens with the high-level purpose** in 1–2 simple sentences, so the intern knows *what* the thing does before *how*.
+2. **Explains each component's role and how it connects** to the rest of the system — prioritize the *interaction mechanism* over abstract description.
+3. **Defines every new technical term inline** the first time it appears, briefly, focusing on its role in the flow.
+4. **Uses diagrams** (Mermaid) for structure and flow — load `references/diagram-guide.md` to keep them intern-friendly.
+5. **Uses bullet points heavily**, and does NOT dump large code blocks unless the user asks.
+6. **Applies progressive disclosure**: give the overview first, then offer to go deeper rather than dumping everything at once.
+
+This is the single, complete shape of the response. Do not deviate from it.
 
 ## Anti-Examples
 
@@ -61,3 +72,11 @@ When introducing a new technical term, immediately provide a brief, simple expla
 | Using complex analogies for simple interactions. (e.g., "The router is like a hotel front desk...") | Explaining the actual mechanism clearly. (e.g., "The `app.js` file receives the incoming HTTP request from the user's browser, and then passes it to the specific route handler for that URL.") | Interns need to understand how the system *actually* connects. Save analogies for highly abstract concepts. |
 | Listing every single file in the project tree including config files. | Grouping files: "The `src/` folder is where the actual logic lives. Inside, you have `controllers/` for handling input..." | Prevents information overload. |
 | Explaining code line-by-line immediately. | Drawing a high-level flowchart of the feature first, then asking if they want to see the code. | Context matters before details. |
+| Explaining a concept with no project tie-in. | Explaining it as it exists *in this project* (e.g., "In this app, Redis caches the session data...") | The mentor explains the project, not general theory — that's `deep-explainer`. |
+| Confirming understanding with "Got it?" | Asking the intern to trace the flow back or draw the diagram themselves. | Verify-before-advance — you only move deeper after they demonstrate understanding. |
+
+## References
+- `references/architecture-and-concepts.md` — read when explaining project setup, tech stack, directory structure, or architectural jargon.
+- `references/flow-tracing.md` — read when tracing a specific request, feature, or logic path.
+- `references/diagram-guide.md` — read when generating Mermaid diagrams to keep them intern-friendly.
+- `../skill-forge/references/house-language-policy.md` — read when choosing the response language.

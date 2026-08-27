@@ -1,10 +1,10 @@
 ---
 name: skill-forge
-description: "Meta-orchestrator for the directive knowledge base: generates, critiques, converts, explains, distills, and navigates AI artifact types (SKILL.md skills, system/user prompts, function schemas, rules files). Use whenever the user wants to create, improve, port, understand, or distill any prompt-related artifact or skill for any AI platform. Make sure to use this skill whenever the user mentions prompts, system prompts, user prompts, skills, function calling, tool schemas, rules files, CLAUDE.md, AGENTS.md, .cursorrules, .mdc, prompt frameworks, or wants to turn existing content/repos into reusable artifacts — even if they don't explicitly ask for a 'skill'."
+description: "Meta-orchestrator for the directive knowledge base: generates, critiques, converts, explains, distills, and navigates AI artifacts — skills (SKILL.md), system/user prompts, function/tool schemas, and rules files — for any domain, platform, or language. Trigger whenever the user wants to create, improve, port, understand, or distill any prompt-related or skill-related artifact, e.g. mentions prompts, system prompts, skills, function calling, tool schemas, CLAUDE.md, AGENTS.md, GEMINI.md, .cursorrules, .mdc, MCP, or asks to turn existing content/repos into reusable artifacts. Do NOT trigger for ordinary coding questions, runtime debugging, or a general 'explain a concept' request that does not involve creating or converting an AI artifact."
 version: 2.0.0
 tags: [meta-skill, orchestrator, prompt, system-prompt, user-prompt, function-calling, tool-schema, skill, rules, critique, convert, explain, distill, navigate, multilingual]
 license: MIT
-compatibility: [any-agent, claude, openai, gemini, mcp, cursor, agy]
+compatibility: "Any agent (Claude, OpenAI, Gemini, MCP, Cursor, AGY)"
 ---
 
 # Skill Forge
@@ -27,6 +27,12 @@ Activate when the user:
 - Is working with **AI commanding** — turning instructions into repeatable, machine-usable artifacts
 
 **Trigger keywords**: `prompt`, `system prompt`, `user prompt`, `skill`, `SKILL.md`, `function calling`, `tool schema`, `tool definition`, `rules file`, `CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, `.cursorrules`, `.mdc`, `MCP`, `critique`, `convert`, `distill`, `tạo skill`, `tạo prompt`, `système prompt`, `プロンプト`, `提示词`
+
+> **Do NOT trigger** for:
+> - Ordinary coding questions / feature requests (use a normal coding agent).
+> - Runtime debugging or error diagnosis (use `bug-solver`).
+> - A generic "explain a concept" request with no artifact to create or convert (use `deep-explainer`).
+> - A project onboarding / codebase walkthrough (use `project-tutor`).
 
 ---
 

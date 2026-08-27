@@ -8,7 +8,7 @@ description: >-
   Trigger phrases: "doc drill", "drill me on this", "quiz me on the document",
   "tạo quiz", "ôn tập tài liệu này", "start studying", "deep tutor",
   "hoi toi ve tai lieu nay", "tao quiz cho toi".
-  NOT for open-ended tutoring without a document — use socratic-tutor instead.
+  NOT for open-ended tutoring without a document.
   NOT for a one-time static question set with no adaptive follow-up.
 tags:
   - custom
@@ -16,10 +16,16 @@ tags:
   - study
   - quiz
   - adaptive
-version: 3.0.0
+version: 3.1.0
+license: MIT
+compatibility: "Any agent"
 ---
 
 # Doc Drill — Adaptive Batch Quiz Engine
+
+## When to Activate
+
+Activate when the user attaches a document and wants to study it through rounds of adaptive quiz questions, with automatic difficulty adjustment and knowledge-gap targeting between rounds. See the trigger phrases in the frontmatter `description` for the full keyword list. Do **NOT** activate for open-ended tutoring without a document, or for a one-time static question set with no adaptive follow-up.
 
 ## Overview
 
@@ -34,6 +40,10 @@ the user's performance.
 ```
 ANALYZE DOC → BUILD ROUND → USER ANSWERS → [lazy] EVALUATE → ADAPT → BUILD NEXT ROUND
 ```
+
+## Language Policy
+
+Follow the house language policy: internal processing (instructions, keywords, technical terms) is in **English**; all **user-facing output** (kickoff, round questions, reports, commands) is in the **same language as the document and/or the user**. If the document is English but the user types Vietnamese, respond in Vietnamese. Keep English technical terms (e.g., `topic_mastery`, `lazy evaluation`) even when surrounding prose is in the user's language.
 
 **Quick Reference** — load detail from `references/` on demand:
 
@@ -332,6 +342,13 @@ QUIZ SESSION SUMMARY — Doc Drill
 ```
 
 ---
+
+## References
+- `references/adaptive-difficulty.md` — read when adjusting round difficulty.
+- `references/question-types.md` — read when choosing the question type per content.
+- `references/round-protocol.md` — read for the full round output format, evaluation flow, and grading rules.
+- `references/misconceptions.md` — read when a user answer reveals a broken mental model.
+- `references/format-ladder.md` — read when the user does not understand an explanation.
 
 ## Session Commands (always available)
 

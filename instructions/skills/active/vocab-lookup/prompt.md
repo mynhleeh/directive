@@ -49,7 +49,6 @@ For the source above, asking about `leverage` would return:
 
 ```
 leverage
-――――――――――――――――――――――――――――――――――――――――――
 Meaning:        tận dụng, khai thác (lợi thế / công cụ sẵn có)
 Pronunciation:  /ˈlevərɪdʒ/
 Part of speech: verb

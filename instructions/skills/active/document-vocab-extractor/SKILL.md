@@ -3,7 +3,10 @@ name: document-vocab-extractor
 description: >
   Extract English vocabulary from any attached document, regardless of domain.
   Applies consistent filtering and formatting criteria based on reasoning principles,
-  not domain-specific rules. Outputs a clean TSV flashcard set.
+  not domain-specific rules. Outputs a clean TSV flashcard set. Trigger when the user
+  attaches a document and wants all its vocabulary extracted. Do NOT trigger when the
+  user asks about specific words — use vocab-lookup instead.
+version: 1.1.0
 tags:
   - custom
   - vocab
@@ -14,11 +17,25 @@ tags:
   - attachment
   - domain-agnostic
   - flashcard
+license: MIT
+compatibility: "Any agent"
 ---
 
 # Document Vocab Extractor
 
 You are a precise, context-aware vocabulary extraction assistant. Your job is to extract English vocabulary from the attached document(s), using strict criteria and a consistent format.
+
+## When to Activate
+
+Activate when the user attaches a document (e.g., md, txt, pdf) and wants to extract **all** the English vocabulary from it as a clean TSV flashcard set. Trigger phrases: `activate document-vocab-extractor`, `extract vocabulary from this`, `lọc từ vựng từ tài liệu`. Do **NOT** trigger when the user wants to look up specific words they chose — use `vocab-lookup` for that.
+
+## Overview
+
+This skill scans every sentence of an attached document and extracts English vocabulary by reasoning-based criteria (domain-specific terms, acronyms, CEFR B2+, author-highlighted, high-frequency), then runs four refinement passes (decomposition, merging, meaning quality, dedup) and outputs a clean 6-column TSV flashcard set. It is domain-agnostic — the categorization logic is based on reasoning principles, not fixed domain rules.
+
+## Language Policy
+
+Follow the house language policy. Internal processing and instructions are in **English**; the **Meaning** column (Col 2) is output in **Vietnamese**, and all other columns are in **English**. Technical terms stay in English. Output is a single TSV block with nothing before or after it.
 
 ---
 
@@ -34,80 +51,19 @@ When the user attaches a document (e.g., md, txt, pdf) and prompts with "activat
 
 You must scan **every sentence** in the document and evaluate **every individual word and multi-word expression** against the categories below. Do NOT skip or skim entire sentences. Extract a word if it belongs to **at least one** of the following categories:
 
-### Category A — Domain-Specific Terms & Technical Vocabulary
-Any word, phrase, or expression that is specific to the subject domain of the document, regardless of whether it appears simple in everyday English. This includes specialized nouns, verbs, and adjectives used with a field-specific meaning. Apply this category using the domain implied by the document itself — do not assume a fixed domain in advance.
+- **Category A** — Domain-specific terms & technical vocabulary.
+- **Category B** — Abbreviations, acronyms & proper technical nouns (with the crucial acronym rule).
+- **Category C** — Mid-to-high difficulty general vocabulary (CEFR B2+).
+- **Category D** — Author-highlighted / defined terms.
+- **Category E** — High-frequency words within the document (3+ occurrences).
 
-### Category B — Abbreviations, Acronyms & Proper Technical Nouns
-Any abbreviation, acronym, initialism, or proper name that carries a specific technical or conceptual meaning within the context of the document.
-
-**Crucial Acronym Rule:** When extracting an acronym, output its **full expanded form** as the main Word in Col 1. Do NOT translate the words literally. Instead, use the document context together with your knowledge to **explain what it is and what it does** in the Meaning column. Put the short acronym itself in the Synonyms column.
-
-### Category C — Mid-to-High Difficulty General Vocabulary (CEFR B2+)
-Any general English word or phrase that is at CEFR B2 level or above and appears in a context that gives it weight or importance. This includes abstract verbs, precise adjectives, formal nouns, and idiomatic expressions used in a professional or academic register.
-
-### Category D — Author-Highlighted / Defined Terms
-Any word or phrase that the author:
-- Places in **quotation marks** or *italics*
-- Defines explicitly using phrases like "known as", "called", "referred to as", "that is,", "defined as", "termed", or similar
-- Introduces as a new concept or technical term for the first time
-
-### Category E — High-Frequency Words Within the Document
-Any word or phrase that appears **3 or more times** within the document, even if it seems common, because repetition signals importance within this specific context.
-
-### Quantity Rule
-- Do NOT set an upper limit on the number of words extracted.
-- Output **all** words that satisfy at least one category above.
-- Do not merge separate technical terms into a single compound entry — extract each significant term independently.
+Plus the **Quantity Rule** (no upper limit; extract each significant term independently). For the full definitions of each category, the acronym rule, and the quantity rule, read `references/filtering-criteria.md`.
 
 ---
 
 ## PHASE 2.5 — Pre-Output Refinement
 
-Before producing the final output, apply the following four passes in order.
-
-### Pass A — Multi-Word Expression Decomposition
-
-For every multi-word candidate on your list, apply this single decision question:
-
-> *If I look up each component word individually and combine their meanings, do I arrive at the same meaning as the full phrase?*
-
-- **Yes (meaning is compositional)** → The phrase is a literal combination. Decompose it and extract only the individual words that meet filtering criteria on their own.
-- **No (meaning is non-compositional), OR the author explicitly named/defined this phrase as a unit** → Keep the phrase intact as a single entry.
-
-This principle applies regardless of domain, word count, or language register. It covers technical compounds, idioms, proper nouns used as unified concepts, and author-defined terminology equally.
-
-### Pass B — Merged / Joined Term Splitting
-
-Scan the document for tokens where multiple distinct terms have been merged into one using any connecting symbol (such as a slash, ampersand, plus sign, interpunct, or any similar connector). When you find such a token:
-
-1. Identify each component as an independent extraction candidate.
-2. Apply all filtering criteria (Phase 2) and Pass A to each component separately.
-3. Extract qualifying components as individual entries; do not carry the merged token into the output as-is.
-
-This applies regardless of the specific symbol used, the number of components in the merged token, or the domain of the document.
-
-### Pass C — Meaning Quality Enforcement
-
-For every entry, evaluate whether the Meaning field (Col 2) genuinely explains *what the term is or does* from the learner's perspective — not merely restating or transliterating the word.
-
-Apply this decision process:
-
-1. **Is the Meaning field substantively different from the Word field?**
-   - No → proceed to step 2.
-   - Yes → entry is acceptable; move on.
-
-2. **Is this entry purely a bibliographic reference or citation marker** (i.e., its only function in the document is to credit a source, and it carries no independent concept the learner needs to understand)?
-   - Yes → **remove the entry entirely from the output**.
-   - No → proceed to step 3.
-
-3. **Can a meaningful explanation be found?**
-   - Search the internet for a concise definition. If search is unavailable, apply your own knowledge.
-   - Write the Meaning in Vietnamese, no longer than two sentences, explaining what the term is or does.
-   - If even after this step no substantive meaning can be constructed → remove the entry.
-
-### Pass D — Deduplication
-
-Review the full list and remove entries where the same Word appears with the same core meaning. If the same Word has genuinely distinct meanings in the document, retain one row per distinct meaning.
+Before producing the final output, apply four passes in order: **Pass A** (multi-word expression decomposition), **Pass B** (merged/joined term splitting), **Pass C** (meaning quality enforcement), **Pass D** (deduplication). Read `references/filtering-criteria.md` for the full decision rules for each pass.
 
 ---
 
@@ -169,3 +125,21 @@ Word	Meaning	Pronunciation	Part of speech	Example	Synonyms
 - **Forbidden outputs:** markdown tables (| col | col |), numbered lists of vocabulary, "Key Terms" sections, "Study Tips" sections, offer to generate Anki cards, or any unsolicited commentary.
 - **Never skip a column.** If a value is genuinely unavailable, write `—`.
 - **Never summarize, explain, or analyze** the extracted vocabulary outside the TSV structure.
+
+## Output Contract
+
+## [What to emit, and ONLY what to emit]
+Emit a **single **```` ```tsv ````** fenced block** containing the extracted vocabulary. Nothing before it (no title, heading, emoji, or intro) and nothing after it (no summary, no "Key Terms", no study tips, no follow-ups). One word/meaning = one row, tab-separated, always starting with the header row.
+
+## Anti-Examples
+
+| ❌ Avoid | ✅ Prefer | Why |
+|---|---|---|
+| "Here are the keywords from your document:" then the TSV | Emit only the `tsv` block | Output must be machine-parseable with no preamble. |
+| Splitting an author-defined phrase into its literal words | Keep the phrase intact as a single entry | The full phrase is the unit of meaning. |
+| Translating an acronym literally in the Meaning column | Use the expanded form as the Word and explain what it does | The learner needs the concept, not a literal translation. |
+| A markdown table, numbered list, or "Study Tips" section | A single clean TSV block | Matches the contract and is importable. |
+
+## References
+- `references/filtering-criteria.md` — read for the full category definitions (A–E), the acronym rule, the quantity rule, and the four refinement passes.
+- `../skill-forge/references/house-language-policy.md` — read when choosing the response language.

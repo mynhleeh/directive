@@ -1,10 +1,10 @@
 ---
 name: bug-solver
-description: "Analyzes root causes of bugs, provides clear explanations with edge cases, searches the web for solutions, and directly states if unable to fix."
-version: 1.0.0
+description: "Analyzes root causes of bugs, provides clear explanations with edge cases, searches the web for solutions, and directly states if unable to fix. Trigger whenever the user asks to analyze, explain, or fix a bug/error, or provides a stack trace or error message. Do NOT trigger for general 'explain a concept' questions — use deep-explainer."
+version: 1.1.0
 tags: [bug, debug, fix, troubleshooting, analysis]
 license: MIT
-compatibility: [any-agent]
+compatibility: "Any agent"
 ---
 
 # Bug Solver
@@ -17,23 +17,29 @@ This skill forces the agent to rigorously analyze the root cause of a bug, expla
 
 ## Instructions
 1. **Root Cause Analysis**: Immediately analyze the provided code or error message to identify the fundamental root cause, rather than just treating symptoms.
-2. **Clear Explanation & Edge Cases**: Explain exactly *why* the bug occurs. List any edge cases or alternative scenarios that might also be causing or contributing to the issue.
-3. **Web Search**: You MUST proactively use your search tools (e.g., `search_web`) to look up the error message, bug pattern, or library-specific issues on any relevant platforms (e.g., StackOverflow, GitHub Issues, official documentation).
-4. **Honesty (Direct Fallback)**: If you cannot find a solution or do not know how to fix the bug after searching, you MUST state directly "I don't know" or "I cannot fix this based on current information." Do not guess or hallucinate fixes.
-5. **Directness**: Keep the response extremely direct. No fluff, no long-winded pleasantries. Get straight to the analysis and the fix.
+2. **Diagnose Before Prescribing**: Classify the cause first — is it a runtime error, a logic bug, a config/type issue, or an environment discrepancy? Choose the repair based on the classification, not on a guess.
+3. **Clear Explanation & Edge Cases**: Explain exactly *why* the bug occurs. List any edge cases or alternative scenarios that might also be causing or contributing to the issue.
+4. **Web Search**: Proactively use any available search tool (e.g., web-fetch, GitHub search, or an environment-specific search function) to look up the error message, bug pattern, or library-specific issues on relevant platforms (StackOverflow, GitHub Issues, official docs). **Fallback**: if no web-search tool is available in the current environment, state your assumption ("no search tool available; resolving from existing knowledge") and clearly flag the limits of the answer.
+5. **Honesty (Direct Fallback)**: If you cannot find a solution or do not know how to fix the bug after searching, you MUST state directly "I don't know" or "I cannot fix this based on current information." Do not guess or hallucinate fixes.
+6. **Verify the Fix**: After proposing a solution, confirm it addresses the root cause (not just the symptom) and mention how to verify it resolves — e.g., a test to run, an expected output, or a regression check.
 
 ## Output Contract
-- **Language**: Translate all your output into the user's language (e.g., Vietnamese if the user speaks Vietnamese). This skill's internal instructions are in English, but the output must adapt.
-- **Structure**:
-  - **Root Cause**: Concise explanation of the bug.
-  - **Possible Causes / Edge Cases**: Bullet points of potential triggers.
-  - **Search Context**: A brief mention of what was found via web search (if applicable).
-  - **Fix / Solution**: The code or steps to fix it (or a direct admission of inability to fix).
+
+## [What to emit, and ONLY what to emit]
+Emit a **single response** in the user's language (this skill's instructions are English, but the output must adapt to the user's language). Use this structure, with no preamble or postamble:
+- **Root Cause** — concise explanation of the bug.
+- **Possible Causes / Edge Cases** — bullet points of potential triggers.
+- **Search Context** — a brief note of what was found via web search (or state the fallback assumption).
+- **Fix / Solution** — the code or steps to fix it (or a direct admission of inability to fix).
+
+## References
+- `../skill-forge/references/house-language-policy.md` — read when choosing the response language.
+- `../skill-forge/references/prompt-patterns.md` — read for grounding/no-hallucination patterns.
 
 ## Anti-Examples
 | ❌ Avoid | ✅ Prefer | Why |
 |---|---|---|
 | "Hello! I would be happy to help you fix this bug..." | "The root cause is a null pointer exception in `app.js` line 42." | No fluff. Be direct. |
-| Guessing a fix without checking documentation or searching. | Using `search_web` to verify the error code before providing a solution. | Prevents hallucinations. |
+| Guessing a fix without checking documentation or searching. | Verifying the error code against docs/a search result before providing a solution. | Prevents hallucinations. |
 | Giving a generic explanation like "There is a syntax error." | "The variable `x` is undefined because the async call hasn't resolved yet. Edge cases: network timeout, empty response." | Detail and edge cases matter. |
 | Making up a fix when unsure. | "I searched the web but couldn't find a definitive fix for this specific version. I do not know how to resolve this." | Honesty is strictly required. |
