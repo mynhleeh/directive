@@ -1,0 +1,436 @@
+{
+  "study-habit-coach": {
+    "hub": "eduhub",
+    "slug": "study-habit-coach",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-06-28T02:07:54+00:00"
+  },
+  "lesson-plan-studio": {
+    "hub": "eduhub",
+    "slug": "lesson-plan-studio",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-06-28T06:20:48+00:00"
+  },
+  "concept-explainer": {
+    "hub": "eduhub",
+    "slug": "concept-explainer",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-06-28T06:21:23+00:00"
+  },
+  "essay-feedback": {
+    "hub": "eduhub",
+    "slug": "essay-feedback",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-06-28T06:21:26+00:00"
+  },
+  "flashcard-deck": {
+    "hub": "eduhub",
+    "slug": "flashcard-deck",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-06-28T06:21:27+00:00"
+  },
+  "eduhub-skill-manager": {
+    "hub": "eduhub",
+    "slug": "eduhub-skill-manager",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-06-28T06:21:35+00:00"
+  },
+  "rubric-builder": {
+    "hub": "eduhub",
+    "slug": "rubric-builder",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-06-28T06:21:42+00:00"
+  },
+  "exam-blueprint": {
+    "hub": "eduhub",
+    "slug": "exam-blueprint",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-06-28T06:21:51+00:00"
+  },
+  "socratic-tutor": {
+    "hub": "eduhub",
+    "slug": "socratic-tutor",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-06-28T06:21:55+00:00"
+  },
+  "exam-anxiety-reset": {
+    "hub": "eduhub",
+    "slug": "exam-anxiety-reset",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-06-28T06:21:58+00:00"
+  },
+  "python-playground-coach": {
+    "hub": "eduhub",
+    "slug": "python-playground-coach",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-07-10T05:26:11+00:00"
+  },
+  "grill-me": {
+    "hub": "eduhub",
+    "slug": "grill-me",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:00+00:00"
+  },
+  "paper-reading-notes": {
+    "hub": "eduhub",
+    "slug": "paper-reading-notes",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:03+00:00"
+  },
+  "llm-learning-coach": {
+    "hub": "eduhub",
+    "slug": "llm-learning-coach",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:03+00:00"
+  },
+  "investment-mentor": {
+    "hub": "eduhub",
+    "slug": "investment-mentor",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:04+00:00"
+  },
+  "s10-transfer-create": {
+    "hub": "eduhub",
+    "slug": "s10-transfer-create",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:06+00:00"
+  },
+  "s08-knowledge-system": {
+    "hub": "eduhub",
+    "slug": "s08-knowledge-system",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:08+00:00"
+  },
+  "s05-review-model": {
+    "hub": "eduhub",
+    "slug": "s05-review-model",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:09+00:00"
+  },
+  "s04-understanding": {
+    "hub": "eduhub",
+    "slug": "s04-understanding",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:10+00:00"
+  },
+  "s07-model-definition": {
+    "hub": "eduhub",
+    "slug": "s07-model-definition",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:12+00:00"
+  },
+  "s03-memory": {
+    "hub": "eduhub",
+    "slug": "s03-memory",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:12+00:00"
+  },
+  "s12-prune-model-tree": {
+    "hub": "eduhub",
+    "slug": "s12-prune-model-tree",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:12+00:00"
+  },
+  "s02-control-variable": {
+    "hub": "eduhub",
+    "slug": "s02-control-variable",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:13+00:00"
+  },
+  "s06-six-step-reading": {
+    "hub": "eduhub",
+    "slug": "s06-six-step-reading",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:15+00:00"
+  },
+  "s09-first-principles": {
+    "hub": "eduhub",
+    "slug": "s09-first-principles",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:17+00:00"
+  },
+  "s11-model-tree-four-steps": {
+    "hub": "eduhub",
+    "slug": "s11-model-tree-four-steps",
+    "version": "1.0.1",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:17+00:00"
+  },
+  "s01-san-gui": {
+    "hub": "eduhub",
+    "slug": "s01-san-gui",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:18+00:00"
+  },
+  "teaching-app-builder": {
+    "hub": "eduhub",
+    "slug": "clawhub-teaching-app-builder",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:19+00:00"
+  },
+  "quiz-generator": {
+    "hub": "eduhub",
+    "slug": "clawhub-quiz-creator",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:19+00:00"
+  },
+  "language-tutor-en": {
+    "hub": "eduhub",
+    "slug": "clawhub-language-tutor-en",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:20+00:00"
+  },
+  "english-homework-grader": {
+    "hub": "eduhub",
+    "slug": "clawhub-english-homework-grader",
+    "version": "1.1.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:22+00:00"
+  },
+  "calculus-lobster-teacher": {
+    "hub": "eduhub",
+    "slug": "clawhub-calculus-lobster-teacher",
+    "version": "2.1.1",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:24+00:00"
+  },
+  "math-mentor-simple": {
+    "hub": "eduhub",
+    "slug": "clawhub-socraticmathcoach",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:24+00:00"
+  },
+  "zuowen-score-expert": {
+    "hub": "eduhub",
+    "slug": "clawhub-zuowen-score-expert",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:25+00:00"
+  },
+  "toefl": {
+    "hub": "eduhub",
+    "slug": "clawhub-toefl",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:26+00:00"
+  },
+  "football-english": {
+    "hub": "eduhub",
+    "slug": "clawhub-football-english",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:26+00:00"
+  },
+  "khan-tutor": {
+    "hub": "eduhub",
+    "slug": "clawhub-khan-tutor",
+    "version": "0.1.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:28+00:00"
+  },
+  "learning-path-generator": {
+    "hub": "eduhub",
+    "slug": "clawhub-learning-path-generator",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:30+00:00"
+  },
+  "study-planner": {
+    "hub": "eduhub",
+    "slug": "clawhub-study-planner",
+    "version": "1.0.1",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:31+00:00"
+  },
+  "teaching-physical-skills": {
+    "hub": "eduhub",
+    "slug": "clawhub-teaching-physical-skills",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:31+00:00"
+  },
+  "lesson-plan-architect": {
+    "hub": "eduhub",
+    "slug": "clawhub-lesson-plan-architect",
+    "version": "0.1.2",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:31+00:00"
+  },
+  "ib-dp-english-a-langlit": {
+    "hub": "eduhub",
+    "slug": "clawhub-ib-dp-english-a-langlit",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:33+00:00"
+  },
+  "acg-rust-teacher": {
+    "hub": "eduhub",
+    "slug": "clawhub-acg-rust-teacher",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:35+00:00"
+  },
+  "ket-exam-prep-app": {
+    "hub": "eduhub",
+    "slug": "clawhub-ket",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:35+00:00"
+  },
+  "teacher-kit": {
+    "hub": "eduhub",
+    "slug": "clawhub-teacher-kit",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:36+00:00"
+  },
+  "piano-teacher": {
+    "hub": "eduhub",
+    "slug": "clawhub-piano-teacher",
+    "version": "1.0.4",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:37+00:00"
+  },
+  "primary-school-homework": {
+    "hub": "eduhub",
+    "slug": "clawhub-primary-school-homework",
+    "version": "1.2.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:37+00:00"
+  },
+  "math-tutor-lite": {
+    "hub": "eduhub",
+    "slug": "clawhub-math-tutor-lite",
+    "version": "0.1.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:38+00:00"
+  },
+  "flashcards": {
+    "hub": "eduhub",
+    "slug": "clawhub-flashcards",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:40+00:00"
+  },
+  "homework": {
+    "hub": "eduhub",
+    "slug": "clawhub-homework",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:40+00:00"
+  },
+  "quiz": {
+    "hub": "eduhub",
+    "slug": "clawhub-quiz",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:41+00:00"
+  },
+  "japanese-translation-and-tutor": {
+    "hub": "eduhub",
+    "slug": "clawhub-japanese-translation-and-tutor",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:41+00:00"
+  },
+  "scientific-writing": {
+    "hub": "eduhub",
+    "slug": "kdense-scientific-writing",
+    "version": "2.0.2",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:43+00:00"
+  },
+  "language-learning": {
+    "hub": "eduhub",
+    "slug": "clawhub-language-learning",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:43+00:00"
+  },
+  "scientific-critical-thinking": {
+    "hub": "eduhub",
+    "slug": "kdense-scientific-critical-thinking",
+    "version": "1.2.2",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:44+00:00"
+  },
+  "learning-coach": {
+    "hub": "eduhub",
+    "slug": "clawhub-learning-coach",
+    "version": "0.3.2",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:45+00:00"
+  },
+  "study": {
+    "hub": "eduhub",
+    "slug": "clawhub-study",
+    "version": "1.0.5",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:46+00:00"
+  },
+  "tutor": {
+    "hub": "eduhub",
+    "slug": "clawhub-tutor",
+    "version": "1.0.2",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:46+00:00"
+  },
+  "learning": {
+    "hub": "eduhub",
+    "slug": "clawhub-learning",
+    "version": "1.0.5",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:48+00:00"
+  },
+  "guitar-practice-coach": {
+    "hub": "eduhub",
+    "slug": "guitar-practice-coach",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:50+00:00"
+  },
+  "public-speaking-rehearsal": {
+    "hub": "eduhub",
+    "slug": "public-speaking-rehearsal",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:51+00:00"
+  },
+  "friendship-conflict-roleplay": {
+    "hub": "eduhub",
+    "slug": "friendship-conflict-roleplay",
+    "version": "1.0.0",
+    "verdict": "ok",
+    "installed_at": "2026-08-18T14:42:56+00:00"
+  }
+}
