@@ -68,17 +68,33 @@ Q3: Is this a system design, architecture, or mental model?
 | System architecture diagrams | BLUEPRINTS | `blueprints/architectures/` |
 | Mental models, frameworks | BLUEPRINTS | `blueprints/concepts/` |
 
-### Dynamic `owned/` vs `external/` Split
+### Dynamic Lifecycle Split
 
-Sub-folders are created only **when a folder contains BOTH owned and external resources**.
+Sub-folders are created **only when a folder contains 2 or more different tiers**.
+If a folder has only one type of resource, files sit directly in that folder (implicitly treated as `active`).
 
-| Folder state | Structure |
+#### The 3 Tiers
+
+| Tier | Symbol | Purpose | Contains |
+|---|---|---|---|
+| `active/` | 🟢 | Currently used, actively maintained | Self-created resources in use |
+| `archive/` | 🟡 | Retired — historical reference only | Self-created resources no longer in use |
+| `external/` | 🔵 | Third-party content, submodules | External repos, cloned resources |
+
+#### Trigger Rule
+
+| Types present in folder | Action |
 |---|---|
-| Only owned | Files/dirs directly in folder |
-| Only external | Files/dirs directly in folder |
-| **Both owned & external** | Create `owned/` and `external/` sub-folders |
+| Only 1 type | **No sub-folders** — files sit directly in folder |
+| 2 or more types | **Create sub-folders** for each type present |
 
-Currently `instructions/skills/` is the only folder with both types.
+#### MECE Boundary
+
+- `active/` and `archive/` contain **only self-created resources**.
+- `external/` contains **only third-party resources**.
+- When an `external/` resource is no longer needed → **remove/untrack the submodule** (do not move to `archive/`).
+
+Currently split folders: `instructions/skills/` (`active/` + `external/`), `instructions/prompts/` (`active/` + `external/`).
 
 ---
 
