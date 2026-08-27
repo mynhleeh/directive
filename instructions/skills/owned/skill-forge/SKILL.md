@@ -1,7 +1,6 @@
 ---
 name: skill-forge
 description: Creates, critiques, converts, and explains prompts, system prompts, skills, function/tool schemas, and rules files for any AI platform. Content is written in English; user-facing output adapts to English, Vietnamese, or any detected language.
-version: 3.0.0
 tags: [prompt, system-prompt, user-prompt, function-calling, tool-schema, skill, rules, critique, convert, explain, multilingual]
 ---
 
