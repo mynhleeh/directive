@@ -11,15 +11,8 @@ Optimized for both human navigation and AI Agent reference.
 ```
 directive/
 ├── instructions/               # Resources to DIRECTLY COMMAND AI (execute immediately)
-│   ├── skills/
-│   │   ├── owned/              # Self-created skill files
-│   │   │   └── skill-forge/   # Skill for creating/critiquing prompts & skills
-│   │   └── external/          # Skills from external sources (git submodules)
-│   │       ├── andrej-karpathy/
-│   │       └── anthropics/
+│   ├── skills/                 # Skill files (SKILL.md format)
 │   ├── prompts/                # System prompts & prompt collections
-│   │   ├── system_prompts_leaks/
-│   │   └── system-prompts-and-models-of-ai-tools/
 │   ├── rules/                  # Rules files (AGENTS.md, .cursorrules, GEMINI.md…)
 │   └── scripts/                # Automation scripts for AI workflows
 │
