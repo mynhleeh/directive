@@ -1,11 +1,11 @@
 [submodule "concepts/system-prompts-and-models-of-ai-tools"]
-	path = instructions/prompts/system-prompts-and-models-of-ai-tools
+	path = instructions/prompts/external/system-prompts-and-models-of-ai-tools
 	url = https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools.git
 [submodule "skills/andrej-karpathy"]
 	path = instructions/skills/external/andrej-karpathy
 	url = https://github.com/multica-ai/andrej-karpathy-skills.git
 [submodule "raw-prompts/system_prompts_leaks"]
-	path = instructions/prompts/system_prompts_leaks
+	path = instructions/prompts/external/system_prompts_leaks
 	url = https://github.com/asgeirtj/system_prompts_leaks.git
 [submodule "skills/anthropics"]
 	path = instructions/skills/external/anthropics
