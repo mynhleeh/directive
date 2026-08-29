@@ -314,6 +314,8 @@ Use this format when the target platform is unknown — it can be converted to a
 
 ## Checklist for Quality Tool Definitions
 
+Run as a **stranger-review** — separate re-read after writing; each item PASS/FAIL with evidence; re-check failed items after fixes (max 2 iterations).
+
 - [ ] `name` follows naming conventions (snake_case or camelCase; no spaces)
 - [ ] `name` is **action-prefixed** (verb first, e.g. `get_weather`, `query_database`, `send_email`)
 - [ ] `description` clearly explains WHAT and WHEN

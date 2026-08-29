@@ -56,18 +56,18 @@ This applies regardless of the specific symbol used, the number of components in
 
 ### Pass C — Meaning Quality Enforcement
 
-For every entry, evaluate whether the Meaning field (Col 2) genuinely explains *what the term is or does* from the learner's perspective — not merely restating or transliterating the word.
+For every entry, verify that the Meaning field (Col 2) is a **dictionary gloss**: the English–Vietnamese dictionary meaning of the word in the sense the document uses it — not a sentence retelling what happens in the document. There is **no word limit** on the gloss; it may be long when the sense requires it, but it must stay a phrase, never a paragraph.
 
-1. **Is the Meaning field substantively different from the Word field?**
+1. **Does the term have a dictionary meaning?**
+   - Yes → write the Vietnamese gloss for the sense the document uses. Entry is acceptable; move on.
    - No → proceed to step 2.
-   - Yes → entry is acceptable; move on.
 2. **Is this entry purely a bibliographic reference or citation marker** (i.e., its only function in the document is to credit a source, and it carries no independent concept the learner needs to understand)?
-   - Yes → **remove the entry entirely from the output**.
+   - Yes → **remove the entry entirely from the output** (no gloss needed).
    - No → proceed to step 3.
-3. **Can a meaningful explanation be found?**
-   - Search the internet for a concise definition. If search is unavailable, apply your own knowledge.
-   - Write the Meaning in Vietnamese, no longer than two sentences, explaining what the term is or does.
-   - If even after this step no substantive meaning can be constructed → remove the entry.
+3. **Establish a reliable gloss, in order:**
+   - Search the internet for the dictionary meaning of the term.
+   - If search is unavailable or inconclusive, reason from your own knowledge to construct the gloss.
+   - If you still cannot produce a gloss that is accurate and certain → **never fabricate one**. Drop the entry from the TSV and **flag it to the user** in the single permitted note line after the TSV block (see SKILL.md → Behavior Rules). Do not delete it silently.
 
 ### Pass D — Deduplication
 

@@ -1,6 +1,6 @@
-﻿# Skill Guide — Creating AGY Skills
+﻿# Skill Guide — Creating Skills (AGY-flavored)
 
-A guide for creating skills for the Antigravity (AGY) agent system.
+A guide for creating skills, written for the Antigravity (AGY) agent system. **Platform note:** the workflow and structure generalize to other platforms (Claude, OpenAI, Gemini, Cursor); only AGY-specific packaging details (loading, tooling) are AGY-only. Cross-check platform specifics against `references/system-prompt-guide.md` and the platform matrix.
 
 ---
 
@@ -18,7 +18,7 @@ skills/
     ├── SKILL.md          ← REQUIRED: Main instruction file
     ├── scripts/          ← Optional: Helper scripts
     ├── examples/         ← Optional: Reference implementations
-    ├── resources/        ← Optional: Additional files and templates
+    ├── assets/           ← Optional: Additional files and templates
     └── references/       ← Optional: External documentation
 ```
 
@@ -61,7 +61,7 @@ version: 1.0.0
 
 ## YAML Frontmatter Fields
 
-The house frontmatter contract uses a **6-field core** (see `house-frontmatter-contract.md`). The original field set plus the contract's trigger-optimized `description`.
+The house frontmatter contract defines an **8-field core** (see `house-frontmatter-contract.md`): the six below plus `metadata` and `allowed-tools`.
 
 | Field | Required | Description |
 |---|---|---|
@@ -69,8 +69,10 @@ The house frontmatter contract uses a **6-field core** (see `house-frontmatter-c
 | `description` | Yes | **Trigger-optimized**: what it does AND when to trigger. "Pushy", includes near-miss negatives. |
 | `version` | No | Semantic version (e.g., `1.0.0`) |
 | `tags` | No | Array of keywords for categorization |
-| `license` | No | License / attribution |
+| `license` | No | License / attribution — only for redistributable external content |
 | `compatibility` | No | Required tools, dependencies, platforms |
+| `metadata` | No | Arbitrary string map (e.g., `author`) |
+| `allowed-tools` | No | Space-separated pre-approved tools |
 
 ### The Trigger-Optimized `description` (from Anthropic)
 

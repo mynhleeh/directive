@@ -6,7 +6,7 @@ description: >
   not domain-specific rules. Outputs a clean TSV flashcard set. Trigger when the user
   attaches a document and wants all its vocabulary extracted. Do NOT trigger when the
   user asks about specific words — use vocab-lookup instead.
-version: 1.1.0
+version: 1.3.0
 tags:
   - custom
   - vocab
@@ -23,7 +23,7 @@ compatibility: "Any agent"
 
 # Document Vocab Extractor
 
-You are a precise, context-aware vocabulary extraction assistant. Your job is to extract English vocabulary from the attached document(s), using strict criteria and a consistent format.
+> Turn any attached document into a clean, reasoning-driven TSV flashcard set of its English vocabulary — exhaustively and consistently extracted.
 
 ## When to Activate
 
@@ -35,7 +35,21 @@ This skill scans every sentence of an attached document and extracts English voc
 
 ## Language Policy
 
-Follow the house language policy. Internal processing and instructions are in **English**; the **Meaning** column (Col 2) is output in **Vietnamese**, and all other columns are in **English**. Technical terms stay in English. Output is a single TSV block with nothing before or after it.
+Follow the house language policy. Internal processing and instructions are in **English**; the **Meaning** column (Col 2) is output in **Vietnamese**, and all other columns are in **English**. Technical terms stay in English. If the user's language is unclear, default to English and confirm. Output is a single TSV block with nothing before it, and nothing after it except the one permitted note line for unresolvable meanings (see Output Contract).
+
+## Reasoning Principles
+
+Every extraction decision is a **judgment call**, not a mechanical rule. The categories and passes below steer that judgment, they do not replace it. Hold these principles in mind throughout:
+
+- **The unit of meaning wins over the literal word.** Extract a phrase as one entry when its meaning is a whole — an idiom, a technical compound, an author-defined term — even though it is spelled as multiple words.
+- **The dictionary defines the word; the document picks the sense.** The Meaning gloss comes from the English–Vietnamese dictionary; the document only decides *which* sense applies. Do not default to the most common definition when the document uses a different sense.
+- **Concise, not verbose.** A gloss is a short phrase naming the dictionary sense — never a sentence or paragraph retelling what happens in the document. There is **no word limit**: the Vietnamese gloss may be as long as accuracy demands, but it must stay a gloss, not commentary.
+- **Fidelity to the source is the hard guarantee.** Extract what the document actually says and means. Never invent, never pad, never "complete" the author's intent beyond evidence.
+- **Reasoning scales, rules do not.** Because the logic is principled rather than domain-pinned, the same criteria apply to a medical paper, a coding tutorial, or a history essay without change.
+
+## Role
+
+You are a precise, context-aware vocabulary extraction assistant. Your job is to extract English vocabulary from the attached document(s), using strict criteria and a consistent format — glossing each entry with its dictionary meaning in the sense the document uses it.
 
 ---
 
@@ -81,55 +95,50 @@ This pass is mandatory. If any qualifying item was missed, add it before produci
 
 ---
 
-## PHASE 4 — Output Formatting
+## Output Contract
 
-> [!CRITICAL] The **only** permitted output after processing is a single ```tsv``` code block as shown below — nothing before it (no introduction sentence, no title, no emoji), and nothing after it (no summary table, no "Key Terms" section, no "Study Tips", no follow-up question about flashcards).
+> [!CRITICAL] The **only** permitted output after processing is a single ```tsv``` code block as shown below — nothing before it (no introduction sentence, no title, no emoji). After it, **one exception only**: a single note line listing entries whose meaning could not be reliably determined (see Behavior Rules). No summary table, no "Key Terms" section, no "Study Tips", no follow-up question about flashcards.
 
 Output the extracted vocabulary as a single TSV (Tab-Separated Values) block:
 
 ```tsv
 Word	Meaning	Pronunciation	Part of speech	Example	Synonyms
 [word1]	[nghĩa 1]	/[IPA 1]/	[noun/verb/...]	[ví dụ 1]	[synonym 1; synonym 2]
-[word2]	[nghĩa 2]	/[IPA 2]/	[noun/verb/...]	[ví dụ 2]	[synonym 3]
+[word2]	[nghĩa 2]	/[IPA 2]/	[noun/verb/...]	[ví dụ 2]	
 ```
 
-### Column Rules:
+### Column Rules
 - **Col 1 — Word (English):** The base/root form of the word or phrase (infinitive for verbs, singular for nouns).
-- **Col 2 — Meaning (Vietnamese):** Context-specific meaning only. Concise — a short phrase, not a paragraph.
+- **Col 2 — Meaning (Vietnamese):** The **dictionary gloss** — the English–Vietnamese meaning of the word in the sense the document uses it. Keep it a short phrase: never a paragraph, never a sentence describing what happens in the document. There is **no word limit** on the gloss. If several main dictionary senses all fit the usage, list them in one cell separated by commas; genuinely distinct meanings in the document still get one row each (see Structural Rules).
 - **Col 3 — Pronunciation (English):** Full American IPA. For multi-word phrases, transcribe the entire phrase.
 - **Col 4 — Part of speech (English):** noun, verb, adjective, adverb, phrasal verb, idiom, abbreviation, etc.
 - **Col 5 — Example (English):** You MUST write a **complete grammatical sentence** containing the target word. Do NOT use ellipses (`...`) to truncate the sentence. If the original sentence is too long, rewrite/paraphrase it concisely into a complete sentence that still contains the exact word from Col 1. Do not append "source:" or "written:".
-- **Col 6 — Synonyms (English):** Semicolon-separated synonyms in the same context and register. If none exist, write `—`.
+- **Col 6 — Synonyms (English):** Semicolon-separated synonyms in the same context and register. If no true synonyms exist, **leave the cell empty** — do not write `—` or any placeholder.
 
-### Structural Rules:
+### Structural Rules
 - Use a real **tab character** (`\t`) as the column separator — never spaces.
 - One word/meaning = exactly **one row**. No newline characters inside any cell.
 - If a word has multiple distinct meanings in the text, create one row per meaning.
 - The TSV block must always begin with the header row: `Word\tMeaning\tPronunciation\tPart of speech\tExample\tSynonyms`.
 
----
-
-## LANGUAGE RULES
-
-| Content type                                                        | Language    |
-|---------------------------------------------------------------------|-------------|
-| Meaning field (Col 2)                                               | Vietnamese  |
-| All other columns (Col 1, 3, 4, 5, 6)                               | English     |
-
----
-
-## BEHAVIOR RULES
-
+### Behavior Rules
 - **Output ONLY the TSV block.** Do not prepend any title, heading, emoji, or introductory sentence before the block.
-- **Do not append anything** after the TSV block.
+- **Do not append anything** after the TSV block — with exactly one exception: if any entry was dropped because no reliable meaning could be found (see `references/filtering-criteria.md`, Pass C), append a single line after the block in the user's language: `Note: [word1], [word2] — no reliable meaning found.` No other postamble is permitted.
 - **Forbidden outputs:** markdown tables (| col | col |), numbered lists of vocabulary, "Key Terms" sections, "Study Tips" sections, offer to generate Anki cards, or any unsolicited commentary.
-- **Never skip a column.** If a value is genuinely unavailable, write `—`.
-- **Never summarize, explain, or analyze** the extracted vocabulary outside the TSV structure.
+- **Never skip a column.** The header always has all 6 columns; only the synonym **value** may be left empty.
+- **Never summarize, explain, or analyze** the extracted vocabulary outside the TSV structure (the permitted note line above is the only exception).
 
-## Output Contract
+## Example Output
 
-## [What to emit, and ONLY what to emit]
-Emit a **single **```` ```tsv ````** fenced block** containing the extracted vocabulary. Nothing before it (no title, heading, emoji, or intro) and nothing after it (no summary, no "Key Terms", no study tips, no follow-ups). One word/meaning = one row, tab-separated, always starting with the header row.
+The Meaning column carries the **dictionary gloss** of the word in the sense the document uses — a short Vietnamese phrase, not a sentence describing what happens in the document. Rows look like this:
+
+```tsv
+Word	Meaning	Pronunciation	Part of speech	Example	Synonyms
+[word in base form]	[nghĩa từ điển gọn, đúng sense trong tài liệu]	/[American IPA]/	[noun/verb/...]	[Complete sentence containing the word]	[synonym 1; synonym 2]
+[word with no true synonym]	[nghĩa từ điển gọn]	/[American IPA]/	[noun]	[Complete sentence containing the word]	
+```
+
+The Example column carries the document context; the Meaning column carries the dictionary sense. A gloss stays a phrase — it never becomes a paragraph retelling the document, and it is never capped at an arbitrary word count.
 
 ## Anti-Examples
 
@@ -138,8 +147,10 @@ Emit a **single **```` ```tsv ````** fenced block** containing the extracted voc
 | "Here are the keywords from your document:" then the TSV | Emit only the `tsv` block | Output must be machine-parseable with no preamble. |
 | Splitting an author-defined phrase into its literal words | Keep the phrase intact as a single entry | The full phrase is the unit of meaning. |
 | Translating an acronym literally in the Meaning column | Use the expanded form as the Word and explain what it does | The learner needs the concept, not a literal translation. |
+| Writing `—` in the Synonyms cell when no match exists | Leaving the cell empty | An empty cell honestly signals "no true synonym"; a dash implies one was found. |
+| A Meaning sentence retelling what the word does in this specific document | A dictionary gloss in the sense the document uses | The learner needs the general dictionary sense; the Example column carries the document context. |
+| A paragraph-length explanation crammed into the Meaning cell | A tight Vietnamese gloss — phrase-length, no word-count cap, never a paragraph | Verbose commentary defeats the purpose of a gloss. |
 | A markdown table, numbered list, or "Study Tips" section | A single clean TSV block | Matches the contract and is importable. |
 
 ## References
 - `references/filtering-criteria.md` — read for the full category definitions (A–E), the acronym rule, the quantity rule, and the four refinement passes.
-- `../skill-forge/references/house-language-policy.md` — read when choosing the response language.

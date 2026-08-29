@@ -20,7 +20,7 @@ license: MIT                    # optional — only for redistributable external
 compatibility: "Product 1.x"    # optional — environment requirements
 metadata:                        # optional — arbitrary string map, use unique keys
   author: "directive"
-allowed-tools: "read_file,wirte_file"   # optional — space-separated pre-approved tools
+allowed-tools: "read_file,write_file"   # optional — space-separated pre-approved tools
 ---
 ```
 
@@ -87,6 +87,8 @@ Resolve the conflict between `description`-embedded triggers and a body `## When
 ---
 
 ## Frontmatter Validation Checklist
+
+Run as a **stranger-review** — separate re-read after writing; each item PASS/FAIL with evidence, then re-check failed items (max 2 iterations).
 
 - [ ] `name` is kebab-case and **exactly matches** the parent directory name
 - [ ] `name` ≤ 64 chars; no `_`, spaces, or uppercase

@@ -142,12 +142,16 @@ Every skill that bounds behavior should use explicit contrast pairs instead of a
 
 ## Generated-Skill Checklist
 
+Run this as a **stranger-review** — a separate re-read after writing, never the same pass. Each item is PASS/FAIL with evidence (a count or a quoted line); every FAIL gets its fix recipe applied, then the failed items are re-checked (max 2 iterations).
+
 - [ ] Frontmatter follows the House Frontmatter Contract (name matches dir, trigger description)
 - [ ] `## When to Activate` present (for standard/deep tiers)
 - [ ] `## Overview` states scope
 - [ ] `## Instructions` is imperative and step-by-step
+- [ ] Every instruction is **countable** — a number, threshold, or fixed recipe; 0 judgment-call rules (weak-model-first)
 - [ ] `## Output Contract` declares exactly what to emit
 - [ ] `## Anti-Examples` uses ❌/✅ contrast pairs
+- [ ] Examples are neutral and generalized — 0 real brand/domain names, 0 single-case hardcodes
 - [ ] `## References` uses relative paths with "when to read this"
 - [ ] `SKILL.md` under 500 lines; depth moved to `references/`
 - [ ] Language Policy section present (if multilingual)

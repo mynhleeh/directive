@@ -2,6 +2,7 @@
 
 > Source: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/claude-prompting-best-practices
 > Last fetched: 2026-08-26
+> **Platform note:** this guide is **Claude-specific** (e.g., adaptive thinking 4.6+, `<thinking>` tags, XML conventions). When generating for other platforms, translate the *principles*, not the syntax — cross-check against `references/system-prompt-guide.md` and the platform matrix.
 
 ---
 

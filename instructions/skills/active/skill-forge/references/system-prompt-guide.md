@@ -271,7 +271,7 @@ When building multilingual assistants, add explicit language guidance:
 Respond in the same language the user writes in.
 If the user writes in French, respond in French.
 If the user writes in Japanese, respond in Japanese.
-Default to English if the language is unclear.
+If the language is unclear, ask one question (default option: English).
 ```
 
 Or for a fixed language:

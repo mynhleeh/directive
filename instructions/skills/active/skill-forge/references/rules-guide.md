@@ -68,9 +68,9 @@ Recommended for: Claude agents, coding agents, Antigravity IDE
 
 ---
 
-## The Karpathy Four Principles (Submodule)
+## The Karpathy Four Principles (External / Tier-5 candidate)
 
-These are the proven, published principles that directly address common LLM coding failures. A rules file that encodes these produces far more reliable agent behavior.
+These principles come from an external submodule (Tier 5) — **unverified** per the repo's citation hierarchy (`taxonomy-navigation.md`). Treat them as *candidate* principles: useful, but validate each against your own experience before promoting it into a premise. A rules file that encodes them tends to produce more reliable agent behavior.
 
 | Principle | Addresses | Core rule |
 |---|---|---|

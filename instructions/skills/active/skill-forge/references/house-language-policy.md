@@ -51,7 +51,7 @@ Every generated, multilingual skill should include this section verbatim:
 - All internal processing follows these English instructions.
 - All user-facing output should match the user's language.
 - Preserve English technical terms even when the surrounding text is in the user's language.
-- If the language is unclear, default to English and confirm.
+- If the language is unclear, ask one question (default option: English). Never guess the user's language.
 ```
 
 ---

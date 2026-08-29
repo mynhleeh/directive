@@ -71,7 +71,7 @@ When citing or referencing content, apply this order. **Higher tiers carry great
 | Priority | Type | Location | Signal |
 |---|---|---|---|
 | Tier 1 | Academic papers, technical reports | `knowledge/papers/` | Peer-reviewed, cited, reproducible |
-| Tier 2 | Official documentation, specs | `blueprints/architectures/`, `knowledge/guides/` | Authoritative |
+| Tier 2 | Official documentation, specs | `blueprints/architectures/` (design/architecture specs); else `knowledge/guides/` with a `specs/` subfolder | Authoritative |
 | Tier 3 | Curated guides, tutorials | `knowledge/guides/` | Practitioner-verified |
 | Tier 4 | Articles, blog posts | `knowledge/articles/` | Community knowledge |
 | Tier 5 | External submodules | `instructions/*/external/` | Third-party curated |
@@ -79,6 +79,8 @@ When citing or referencing content, apply this order. **Higher tiers carry great
 | Tier 7 | Archive | `instructions/*/archive/` | Historical, may be outdated |
 
 > **Note on Tier 5 vs Tier 6**: External submodules rank above active files (broader scope, though unverified). Neither supports factual claims when Tier 1–4 exist.
+
+> **Tier 2 vs Tier 3 (shared folder):** `knowledge/guides/` holds both official specs (Tier 2) and curated guides (Tier 3). When both exist for the same topic, the Tier 2 source wins for factual claims; Tier 3 wins for methodology. Within the folder, prefix official specs with `specs/` to keep the tiers distinguishable.
 
 ---
 

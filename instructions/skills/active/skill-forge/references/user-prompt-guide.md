@@ -18,7 +18,7 @@ Every request is routed by four dimensions. A well-formed request supplies all f
 | **Domain + context** | What's the subject, stack, language? | "English vocab flashcards", "REST API in TypeScript", "Tiếng Việt output" |
 
 ### Routing rule
-> If a signal is missing, the meta-skill *infers* a default. Only supply defaults you're confident about — otherwise spell every signal out.
+> If a signal is missing or ambiguous, the meta-skill **asks at the CLARIFY gate** (max 3 questions, one batch, each with a default option). If a default is genuinely confident, it states the default + one-line reason in the Working Notes block and proceeds — it never silently guesses (Principle 3: ask, don't invent).
 
 ---
 
@@ -103,5 +103,5 @@ So a user writing in Vietnamese gets a skill whose *instructions* are Vietnamese
 ## How the Meta-Skill Uses This
 
 - **Route** the request by mapping the four signals.
-- **Ask follow-ups** only for *critical* missing signals (artifact type + domain). Never over-ask.
-- **Infer defaults** for tier/language when reasonable, and state the chosen defaults back to the user so they can correct them.
+- **Ask at the CLARIFY gate** when any signal is missing or ambiguous — max 3 questions, one batch, each with a default option. Never guess.
+- **Infer defaults** for tier/language only when genuinely confident, and state the chosen defaults + reason in the Working Notes block so the user can correct them.

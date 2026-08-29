@@ -82,6 +82,8 @@ Before ANY output, the model must reason inside `<thinking>`. This is the **chai
 ### 3. The "XÁC NHẬN KHỞI ĐỘNG" Startup Line
 A literal confirmation marker (`XÁC NHẬN KHỞI ĐỘNG` = "startup confirmed") that the model prints once it has read and accepted the prompt. It signals the prompt has been understood and is ready to receive real input — an orienting anchor for both user and model.
 
+> **Language note:** the marker is intentionally a **literal string** in Vietnamese, not translated — it is a fixed token, not prose. The house language policy ("internal processing: English") governs instructions; fixed literal markers are exempt.
+
 ### 4. Zero-Speculation Constraint
 A hard rule that the model must not invent facts. Cite sources; if uncertain, state the uncertainty or omit. This prevents hallucination and keeps output verifiable.
 

@@ -4,6 +4,8 @@ A framework for deciding **how deep** a generated artifact should be. A meta-ski
 
 > **Why this file exists**: The repo spans micro-skills (simple lookup) to deep multi-phase engines (doc-drill, flashcard generator). A single-skill template can't fit all; this tier system tells a meta-skill how much structure to emit. Distilled from `doc-drill` (deep, lazy-loaded references) and the vocabulary skills (micro/standard).
 
+> **Model-strength note (Principle 1 of `SKILL.md`):** tier choice is independent of model strength. A micro artifact still needs countable, mechanical rules — tier decides *how deep*, weak-model-first decides *how precise each rule is*.
+
 ---
 
 ## The Three Tiers
