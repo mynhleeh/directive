@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "1b27cb8c-adc2-4644-ae16-4827cfe07549",
+  "path": "instructions/skills/external/deeptutor-eduhub/tutor",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/tutor",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

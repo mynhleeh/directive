@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "107d3997-ee74-478d-a4aa-747fbb9b01ec",
+  "path": "instructions/skills/active/tech-mentor",
+  "path_key": "instructions/skills/active/tech-mentor",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

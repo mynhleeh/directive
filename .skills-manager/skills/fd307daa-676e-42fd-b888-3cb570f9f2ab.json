@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "fd307daa-676e-42fd-b888-3cb570f9f2ab",
+  "path": "instructions/skills/external/deeptutor-eduhub/learning-coach",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/learning-coach",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

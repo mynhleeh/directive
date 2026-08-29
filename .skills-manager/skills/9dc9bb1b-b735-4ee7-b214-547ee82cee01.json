@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "9dc9bb1b-b735-4ee7-b214-547ee82cee01",
+  "path": "instructions/skills/external/deeptutor-eduhub/friendship-conflict-roleplay",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/friendship-conflict-roleplay",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

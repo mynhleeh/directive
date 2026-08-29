@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "f8005bdf-6f1e-43dc-b3e8-2ff5286383ee",
+  "path": "instructions/skills/external/deeptutor-eduhub/learning-path-generator",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/learning-path-generator",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

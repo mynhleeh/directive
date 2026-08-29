@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "5f0deb08-7725-4f2c-9c63-283cffddaa0f",
+  "path": "instructions/skills/archive/project-tutor",
+  "path_key": "instructions/skills/archive/project-tutor",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

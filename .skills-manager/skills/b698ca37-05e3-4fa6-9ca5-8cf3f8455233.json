@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "b698ca37-05e3-4fa6-9ca5-8cf3f8455233",
+  "path": "instructions/skills/external/deeptutor-eduhub/primary-school-homework",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/primary-school-homework",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

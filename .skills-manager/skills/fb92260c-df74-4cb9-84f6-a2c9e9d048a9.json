@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "fb92260c-df74-4cb9-84f6-a2c9e9d048a9",
+  "path": "instructions/skills/archive/ai-mentor",
+  "path_key": "instructions/skills/archive/ai-mentor",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

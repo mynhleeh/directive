@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "b6d03f57-ca52-4240-b89a-42712a07d91c",
+  "path": "instructions/skills/external/deeptutor-eduhub/python-playground-coach",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/python-playground-coach",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

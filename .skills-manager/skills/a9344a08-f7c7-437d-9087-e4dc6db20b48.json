@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "a9344a08-f7c7-437d-9087-e4dc6db20b48",
+  "path": "instructions/skills/external/deeptutor-eduhub/scientific-writing",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/scientific-writing",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

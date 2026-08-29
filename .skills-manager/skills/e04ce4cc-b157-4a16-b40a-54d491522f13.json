@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "e04ce4cc-b157-4a16-b40a-54d491522f13",
+  "path": "instructions/skills/external/deeptutor-eduhub/math-tutor-lite",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/math-tutor-lite",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

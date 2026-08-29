@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "ecc76346-e642-4ab1-a2fc-bc001bb4c43d",
+  "path": "instructions/skills/archive/deep-explainer",
+  "path_key": "instructions/skills/archive/deep-explainer",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

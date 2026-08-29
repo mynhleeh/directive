@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "b2dc6dfe-a6b6-42ac-9cdc-a774d5f8867b",
+  "path": "instructions/skills/external/deeptutor-eduhub/public-speaking-rehearsal",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/public-speaking-rehearsal",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

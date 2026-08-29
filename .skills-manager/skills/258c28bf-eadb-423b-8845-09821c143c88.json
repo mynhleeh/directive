@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "258c28bf-eadb-423b-8845-09821c143c88",
+  "path": "instructions/skills/external/deeptutor-eduhub/s10-transfer-create",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/s10-transfer-create",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

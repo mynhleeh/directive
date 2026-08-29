@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "bd101112-8ff5-4564-afce-42030d643779",
+  "path": "instructions/skills/external/deeptutor-eduhub/homework",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/homework",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}
