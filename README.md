@@ -8,10 +8,10 @@ Optimized for both human navigation and AI Agent reference.
 
 ## 🎯 Mission
 
-This repository serves a **dual purpose**:
+This repository serves as a structured **Second Brain & Knowledge Base** for AI commanding.
 
-- **For humans**: a navigable knowledge base for everything related to AI commanding — organized by intent, not by format.
-- **For AI agents**: a system-level directive and entry point. When this README is in context, an AI agent should use it to autonomously navigate, prioritize, and retrieve resources from this repository to fulfill user requests.
+- **For humans**: This `README.md` is your navigable entry point — organized by intent, not by format.
+- **For AI agents**: DO NOT READ THIS FILE. Your system-level directives, rules, and entry points live in `AGENTS.md` and `REFERENCE_INDEX.md`.
 
 ---
 
@@ -107,24 +107,6 @@ Currently split folders: `instructions/skills/` (`active/` + `archive/` + `exter
 
 ---
 
-## 📚 Knowledge Source Hierarchy
-
-When citing or referencing content from this repository, apply the following priority order. Higher tiers carry greater epistemic weight — always prefer the highest available tier for any given claim.
-
-| Priority | Type | Location | Signal |
-|---|---|---|---|
-| Tier 1 | Academic papers, technical reports, benchmark studies | `knowledge/papers/` | Peer-reviewed, cited, reproducible |
-| Tier 2 | Official documentation, architecture specs | `blueprints/architectures/`, `knowledge/guides/` | Authoritative source |
-| Tier 3 | Curated guides, tutorials | `knowledge/guides/` | Practitioner-verified |
-| Tier 4 | Articles, blog posts | `knowledge/articles/` | Community knowledge |
-| Tier 5 | External submodules | `instructions/*/external/` | Third-party curated resources |
-| Tier 6 | Active working files | `instructions/*/active/` | Operational, not necessarily evidence-based |
-| Tier 7 | Archive | `instructions/*/archive/` | Historical, may be outdated |
-
-> **Note on Tier 5 vs Tier 6**: External submodules rank above active files because they typically represent curated third-party collections with broader scope, even though their quality is unverified. Neither should be used to support factual claims when Tier 1–4 sources exist.
-
----
-
 ## 📋 Metadata Convention (YAML Frontmatter)
 
 All owned files should include a YAML frontmatter header:
@@ -141,25 +123,10 @@ tags: [tag1, tag2, tag3]
 
 ## 🤖 AI Agent Directive
 
-This section is a **system-level directive** for any AI agent operating with this repository in context — applies universally to all tools and ecosystems (Cursor, Claude, Gemini, GPT, Copilot, and others).
-
-> **Executable agent rules** — request classification, resource discovery, and routing — live in **`AGENTS.md`** (root). This README holds the canonical **citation policy** and **trust rules** that `AGENTS.md` and `REFERENCE_INDEX.md` point to.
-
-### Trust & Citation Rules
-
-```
-ALWAYS cite source tier when referencing content.
-PREFER knowledge/papers/ over any other source for factual claims.
-PREFER knowledge/guides/ over instructions/prompts/ for methodology.
-TREAT instructions/*/external/ as higher priority than active/archive context.
-TREAT instructions/*/active/ as operational context, not as evidence.
-DO NOT reference archive/ unless explicitly asked for historical context.
-DO NOT treat submodule content as peer-reviewed or verified, despite being external.
-```
-
-### Reference Sources
-
-> **`REFERENCE_INDEX.md`** (root) is the canonical catalog of every reference source in this repo — submodules, vendored directories, and knowledge documents — with path, license, citation tier, and trust status. Consult it before citing any external source; update it (one row) when sources change.
+> **[STOP] AI AGENTS: DO NOT READ THIS FILE.**
+> This file is strictly for human navigation. All executable agent rules, request classification, resource discovery, routing, trust rules, and citation policies have been moved to **`AGENTS.md`** (root).
+> 
+> Proceed immediately to `AGENTS.md` and `REFERENCE_INDEX.md`.
 
 ### Current Resource Index
 

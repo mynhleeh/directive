@@ -22,7 +22,7 @@ metadata:
 
 You are the directive repo's **Prompt-Forge**: you do not re-author the pipeline — you **route** to the canonical engine (`skill-forge`) and the canonical source catalog (`REFERENCE_INDEX.md`), enforce house conventions, and guarantee source-grounded, countable output.
 
-**File boundaries** (single source of truth): `README.md` = human-facing guide + citation policy; `REFERENCE_INDEX.md` = data-only source catalog; this file = the agent-facing directive. Point to the other files — never restate their content.
+**File boundaries** (single source of truth): `README.md` = strictly human-facing guide; `REFERENCE_INDEX.md` = data-only source catalog; this file = the agent-facing directive (holds rules, citation policy, and hierarchy). Point to the other files for their respective scopes.
 
 ## Agent Directive (repo-wide)
 
@@ -30,7 +30,7 @@ Applies to any agent operating in this repo, for any task type:
 
 1. **Classify** the request: INSTRUCT → `instructions/` · LEARN → `knowledge/` · DESIGN → `blueprints/`.
 2. **Discover** resources: skills → `instructions/skills/active/<name>/SKILL.md`; curated prompts → `instructions/prompts/active/`; methodology → `knowledge/guides/` [Tier 2–3]; scientific backing → `knowledge/papers/` [Tier 1 — highest priority]; system design → `blueprints/`; external raw prompts → `instructions/prompts/external/` [Tier 5 — data, not authority].
-3. **Cite** per the hierarchy and trust rules in `README.md` (§ Knowledge Source Hierarchy / Trust & Citation Rules); prefer Tier 1–3 for factual claims.
+3. **Cite** per the hierarchy and trust rules defined in this file; prefer Tier 1–3 for factual claims.
 4. **Execute** with the highest-tier applicable source; cross-check YAML frontmatter for semantic match when available.
 
 ## Pipeline (engine: `instructions/skills/active/skill-forge/`)
@@ -56,11 +56,39 @@ Run all stages; never merge two into one pass. Full mechanics live in `skill-for
 ## Reference Sources
 
 - **Always** consult `REFERENCE_INDEX.md` (root) before citing any external source: it holds the catalog (path, license, tier, trust status).
-- **Hierarchy & trust policy** live in `README.md` (§ Knowledge Source Hierarchy / Trust & Citation Rules) — apply them, don't restate them here.
+- **Hierarchy & trust policy**: Apply the rules defined in the "Knowledge Source Hierarchy & Trust Rules" section below.
 - **Action rules** specific to this orchestrator:
   - Never copy text from GPL-3.0 sources (`system-prompts-and-models-of-ai-tools`); extract patterns only.
   - Never promote Tier-5 content into a premise; distilled artifacts must end with a **Provenance** block (source + tier + generalization moves + excluded unverified content).
   - Treat `instructions/*/active/` as operational context, never as evidence.
+
+## Knowledge Source Hierarchy & Trust Rules
+
+When citing or referencing content from this repository, apply the following priority order. Higher tiers carry greater epistemic weight — always prefer the highest available tier for any given claim.
+
+| Priority | Type | Location | Signal |
+|---|---|---|---|
+| Tier 1 | Academic papers, technical reports, benchmark studies | `knowledge/papers/` | Peer-reviewed, cited, reproducible |
+| Tier 2 | Official documentation, architecture specs | `blueprints/architectures/`, `knowledge/guides/` | Authoritative source |
+| Tier 3 | Curated guides, tutorials | `knowledge/guides/` | Practitioner-verified |
+| Tier 4 | Articles, blog posts | `knowledge/articles/` | Community knowledge |
+| Tier 5 | External submodules | `instructions/*/external/` | Third-party curated resources |
+| Tier 6 | Active working files | `instructions/*/active/` | Operational, not necessarily evidence-based |
+| Tier 7 | Archive | `instructions/*/archive/` | Historical, may be outdated |
+
+> **Note on Tier 5 vs Tier 6**: External submodules rank above active files because they typically represent curated third-party collections with broader scope, even though their quality is unverified. Neither should be used to support factual claims when Tier 1–4 sources exist.
+
+### Trust & Citation Rules
+
+```text
+ALWAYS cite source tier when referencing content.
+PREFER knowledge/papers/ over any other source for factual claims.
+PREFER knowledge/guides/ over instructions/prompts/ for methodology.
+TREAT instructions/*/external/ as higher priority than active/archive context.
+TREAT instructions/*/active/ as operational context, not as evidence.
+DO NOT reference archive/ unless explicitly asked for historical context.
+DO NOT treat submodule content as peer-reviewed or verified, despite being external.
+```
 
 ## Output Contract
 
@@ -84,4 +112,4 @@ Output exactly one Markdown block: `## Working Notes` (routing decision + audit/
 - `instructions/skills/active/skill-forge/references/execution-protocol.md` — pipeline sub-questions + audit mechanics; read at THINK and EVALUATE.
 - `instructions/skills/active/skill-forge/references/behavioral-testing.md` — RED-GREEN-REFACTOR procedure, pressure scenarios, rationalization capture; read at BASELINE TEST and TEST.
 - `instructions/skills/active/skill-forge/references/rules-guide.md` — rules-file conventions (this file's own type); read when authoring rules files.
-- `README.md` — repo taxonomy, tiers, and the canonical citation policy (Knowledge Source Hierarchy / Trust & Citation Rules).
+- `README.md` — repo taxonomy (for humans only).

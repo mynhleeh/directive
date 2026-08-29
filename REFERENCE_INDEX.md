@@ -1,6 +1,6 @@
 ---
 name: reference-index
-description: "Catalog of every reference source in the directive repo — git submodules, vendored directories, and knowledge documents — with path, license, citation tier, and trust status. Read to discover which external source to consult for a task and how to cite it. Update by adding or removing one row when a source changes. Do NOT use as the policy file — citation policy lives in AGENTS.md and README.md."
+description: "Catalog of every reference source in the directive repo — git submodules, vendored directories, and knowledge documents — with path, license, citation tier, and trust status. Read to discover which external source to consult for a task and how to cite it. Update by adding or removing one row when a source changes. Do NOT use as the policy file — citation policy lives in AGENTS.md."
 version: 1.0.0
 tags: [reference, index, catalog, submodules, license, taxonomy, citation]
 metadata:
@@ -15,13 +15,13 @@ metadata:
 ## How to Read (humans)
 
 - This index lists **reference sources** — external submodules, vendored directories, and knowledge documents — that an agent or user may consult when authoring prompts, skills, schemas, or rules.
-- The **policy** for *when* to use a source and *how* to cite it lives in `AGENTS.md` (root) and `README.md` (§ Knowledge Source Hierarchy). This file holds only the **data**: what exists and its metadata.
+- The **policy** for *when* to use a source and *how* to cite it lives in `AGENTS.md` (root). This file holds only the **data**: what exists and its metadata.
 - To add or remove a source, edit the matching table: add/remove exactly one row. Then follow the Maintenance Rules.
 
 ## How to Read (AI agents)
 
 1. When a task needs external reference material, read this file first.
-2. Locate the source by path; read its `License`, `Tier`, and `Status` columns as **data** — then apply the citation policy in `README.md` (§ Knowledge Source Hierarchy / Trust & Citation Rules) and any action rules in `AGENTS.md` before using the content.
+2. Locate the source by path; read its `License`, `Tier`, and `Status` columns as **data** — then apply the citation policy in `AGENTS.md` before using the content.
 
 ---
 
@@ -64,4 +64,4 @@ Curated documents in `knowledge/` (Tier 1–4) — the highest-trust sources for
 ## Provenance
 
 - Compiled 2026-08-29 from `.gitmodules` (4 submodules), `deeptutor-eduhub/.hub-lock.json` (install ledger), and per-source LICENSE files.
-- Status flags reflect the repo's citation policy (`README.md` § Knowledge Source Hierarchy): external content is Tier 5 — usable as curated reference, never as evidence.
+- Status flags reflect the repo's citation policy (`AGENTS.md`): external content is Tier 5 — usable as curated reference, never as evidence.
