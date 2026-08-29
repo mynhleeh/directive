@@ -10,3 +10,6 @@
 [submodule "skills/anthropics"]
 	path = instructions/skills/external/anthropics
 	url = https://github.com/anthropics/skills.git
+[submodule "instructions/skills/external/superpowers"]
+	path = instructions/skills/external/superpowers
+	url = https://github.com/obra/superpowers.git
