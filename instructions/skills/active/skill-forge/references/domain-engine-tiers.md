@@ -76,6 +76,20 @@ Emit a single card block: meaning, pronunciation, POS, example, synonyms.
 
 ---
 
+## Behavioral Testing by Tier
+
+Test *form* scales with the artifact's risk, not its size:
+
+| Tier | Minimum behavioral test |
+|---|---|
+| **Micro** | Fresh-context run verifying the exact output contract (e.g., card format) — green-pass retrieval is enough |
+| **Standard** | Fresh-context run per workflow branch + 1 pressure scenario if any rule is likely skipped |
+| **Deep Engine** | Full pressure scenario per critical rule (3+ combined pressures), rationalization table + red flags; verify the adaptive loop (e.g., difficulty band) actually re-enters |
+
+Full procedure, pressure types, and the RED-GREEN-REFACTOR loop: `behavioral-testing.md`.
+
+---
+
 ## DEEP ENGINE Tier — Adaptive, Multi-Phase, Stateful
 
 - Structure: `## Overview` → core loop → `Quick Reference` table pointing to `references/` → iterative phases → session commands → anti-example table → rules.

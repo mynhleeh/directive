@@ -1,6 +1,6 @@
 # Execution Protocol — longCOT, Audit Loop, Weak-Model-First
 
-Reference for `SKILL.md` v3.0.0. Read this file at **STAGE 2 THINK** (pick the mode's sub-questions) and **STAGE 4 EVALUATE** (run the stranger-audit). It makes the pipeline executable by an average model: every step is a fixed question or a countable check, never a judgment call.
+Reference for `SKILL.md` v4.0.0. Read this file at **STAGE 2 THINK** (pick the mode's sub-questions) and **STAGE 5 EVALUATE** (run the stranger-audit). It makes the pipeline executable by an average model: every step is a fixed question or a countable check, never a judgment call.
 
 > **Weak-model-first rule (Principle 1):** if any step below reads like "be careful" or "use good judgment," it is broken — replace it with a numbered question or a pass/fail boundary.
 
@@ -16,7 +16,8 @@ Run **all** sub-questions for your mode, in order, inside the internal chain-of-
 3. **Known vs missing:** list what the input provides (KNOWN) and what it lacks (AMBIGUOUS/MISSING).
    - If AMBIGUOUS/MISSING contains anything that would change the artifact → **STOP, go to CLARIFY gate** (ask max 3, one batch, each with a default option).
    - If the input is complete → proceed.
-4. **Acceptance criteria:** write 2–4 countable criteria the final output must satisfy (these feed STAGE 5 TEST).
+4. **Acceptance criteria:** write 2–4 countable criteria the final output must satisfy (these feed STAGE 6 TEST).
+5. **Test-plan design (Iron Law):** design the failing test BEFORE writing — for skills/rules a pressure scenario (3+ combined pressures), for prompts/schemas a fresh-context control run. Define the scenario, pressures, and compliance criteria. These feed STAGE 3 BASELINE TEST and STAGE 6 GREEN re-run. See `behavioral-testing.md`.
 
 ### CREATE (skill / prompt / schema / rules)
 5. **Type recipe:** which reference file is canonical for this type? (`skill-guide.md` + `house-structure-conventions.md` for skills, `system-prompt-guide.md` for system prompts, `function-schema-guide.md` for schemas, `rules-guide.md` for rules)
@@ -51,7 +52,7 @@ Run **all** sub-questions for your mode, in order, inside the internal chain-of-
 
 ---
 
-## 2. STAGE 4 EVALUATE — Stranger-Audit Mechanics
+## 2. STAGE 5 EVALUATE — Stranger-Audit Mechanics
 
 Review the finished artifact as a stranger reviewing someone else's work. **Never audit in the same pass that wrote it** — re-read from the top after generation.
 
@@ -60,7 +61,7 @@ Review the finished artifact as a stranger reviewing someone else's work. **Neve
 2. Run every criterion below; mark each PASS or FAIL with the evidence (quote the failing line).
 3. For each FAIL, apply the fix recipe; do not rewrite anything that passed.
 4. Re-check only the fixed items (targeted re-audit, not a full redo).
-5. Iterate with STAGE 5 TEST — max 2 iterations total. Over the cap: emit with residual defects flagged in the Working Notes block.
+5. Iterate with STAGE 6 TEST — max 2 iterations total. Over the cap: emit with residual defects flagged in the Working Notes block.
 
 ### Countable criteria (all artifact types)
 | # | Criterion | Countable check | Fix recipe |
@@ -73,6 +74,9 @@ Review the finished artifact as a stranger reviewing someone else's work. **Neve
 | 6 | Language | Output language matches user; internal terms stay English | Re-serialize the output block |
 | 7 | Line budget | Skill ≤ 500 lines / 5000 tokens; depth in `references/` | Move depth to a new reference file |
 | 8 | Trigger test (skills only) | description fires for 3 should-trigger queries, stays silent for 3 should-not queries | Rewrite description for near-miss negatives |
+| 9 | Form matches failure | Guidance type matches the baseline failure: wrong-shaped output → recipe; skipped rules → prohibition + rationalization table; omitted elements → REQUIRED slot | Switch form (see `behavioral-testing.md` § Match-the-Form) |
+| 10 | SDO description | Description states trigger conditions + near-miss negatives only; 0 workflow-summary words ("generates", "critiques", "distills"…)" | Cut the summary; keep what/when/not-trigger |
+| 11 | Baseline evidence | Working Notes contains the verbatim baseline rationalization + scenario name; test-plan existed before GENERATE | Re-run baseline; record quotes (Iron Law) |
 
 ### Common failure modes (model shortcuts)
 | Shortcut | Detection | Fix |
@@ -84,14 +88,21 @@ Review the finished artifact as a stranger reviewing someone else's work. **Neve
 
 ---
 
-## 3. STAGE 5 TEST — Acceptance & Generality
+## 3. STAGE 6 TEST — GREEN ⇄ REFACTOR & Generality
 
-Run after EVALUATE fixes. All four must pass; each failure returns to EVALUATE with a specific fix.
+Run after EVALUATE fixes, plus the behavioral re-run. All checks must pass; each failure returns to STAGE 5 EVALUATE with a specific fix.
 
-1. **Acceptance:** re-check the 2–4 criteria written in STAGE 1 prelude. Count them: N/4.
-2. **Neutrality & generality:** scan every example and example-derived phrase. 0 occurrences of user-supplied proper nouns or single-case terms. (This is the anti-contamination scan.)
-3. **Trigger test (skills):** 3 should-trigger queries hit the description; 3 should-not queries miss it. (Optimization loop from `skill-guide.md`.)
-4. **Consistency:** grep the artifact for contradictory terms (e.g., two field counts, two directory names, two platform claims). 0 hits.
+1. **GREEN re-run (behavioral):** re-run the STAGE 3 baseline scenario WITH the artifact in a fresh context. Agent must comply — record the evidence (quote the agent's compliant action).
+2. **REFACTOR loop:** if the agent produced a NEW rationalization (did not comply, but for a reason not seen at baseline):
+   - capture the rationalization verbatim into the Working Notes,
+   - close the loophole with an explicit negation (no-exceptions wording),
+   - add it to the artifact's rationalization table + red flags,
+   - update the description with the violation symptom as a near-miss negative,
+   - re-run once (max 2 iterations total with EVALUATE).
+3. **Acceptance:** re-check the 2–4 criteria written in STAGE 1 prelude. Count them: N/4.
+4. **Neutrality & generality:** scan every example and example-derived phrase. 0 occurrences of user-supplied proper nouns or single-case terms. (This is the anti-contamination scan.)
+5. **Trigger test (skills):** 3 should-trigger queries hit the description; 3 should-not queries miss it. (Optimization loop from `skill-guide.md`.)
+6. **Consistency:** grep the artifact for contradictory terms (e.g., two field counts, two directory names, two platform claims). 0 hits.
 
 ---
 
@@ -113,6 +124,9 @@ These make the pipeline executable by an average model. Apply them while writing
 | ❌ Avoid | ✅ Prefer | Why |
 |---|---|---|
 | "Think carefully about the requirements" | "List KNOWN vs AMBIGUOUS; if AMBIGUOUS has items that change the artifact, ask at CLARIFY (max 3)" | Vague instruction is skippable; a split list is not |
-| "Make sure the output is high quality" | "Run the 8-count criteria; each PASS needs evidence; iterate max 2" | Quality is unfalsifiable; counts are not |
+| "Make sure the output is high quality" | "Run the 11-count criteria; each PASS needs evidence; iterate max 2" | Quality is unfalsifiable; counts are not |
 | "Don't copy the example" | "Type out the supporting sentence from the input for each claim; if you cannot, drop it" | Negative rules are weak; a mechanical scan is strong |
 | "Use good judgment when converting" | "Run the mapping table + loss audit + round-trip diff" | Judgment varies by model; a diff is deterministic |
+| "Write the skill, then test it" | "Design the pressure scenario and run it WITHOUT the artifact first (RED); write to defeat the recorded rationalizations; re-run WITH it (GREEN)" | Testing after writing only proves the model liked its own work |
+| "Make sure it follows the rules" | "Add a prohibition + rationalization table; add red flags; re-test under the same pressure" | Rule-skipping needs a targeted form, not a vague reminder |
+| "Write a good description" | "State trigger conditions + near-miss negatives only; 0 workflow-summary verbs; test 3 should-trigger vs 3 should-not" | A summary description lets agents follow the description and skip the body |

@@ -69,6 +69,7 @@ The `references/` folder is the key to keeping `SKILL.md` lean. Follow the three
 
 ### Rules
 - **Keep `SKILL.md` under 500 lines / 5000 tokens.** If a workflow needs more depth, split it into `references/`.
+- **Respect the token budget in practice.** Frequently-loaded micro skills should target < 500 words of core instructions; every token competes with conversation history. Cross-reference instead of repeating; point to `--help` or external files instead of listing details.
 - **Split by variant**, not by concern, when a domain has multiple flavors — e.g., `references/aws.md`, `references/gcp.md` so the agent reads only the relevant one.
 - **Reference files should be one directory deep** with relative paths, and include *"when to read this"* guidance so the agent knows if/when to open them.
 
@@ -105,6 +106,26 @@ No other prose before or after the block.
 - Eliminates the model "explaining" instead of emitting.
 - Makes output machine-parseable (TSV, JSON, Markdown table).
 - Mirrors the real-world skill pattern: *"output only this exact format."*
+
+---
+
+## Behavioral Discipline Sections (optional — discipline skills)
+
+For skills that must enforce rules the agent is likely to skip under pressure (e.g., "never answer directly", "never copy GPL-3.0 text"), add beyond the skeleton:
+
+1. **Rationalization table** — anticipated excuses for skipping each rule (time pressure, sunk cost, authority, economic, exhaustion, social, pragmatic) + the explicit negation for each ("no-exceptions" wording).
+2. **Red flags** — observable violation symptoms in the agent's reasoning/output, so the agent can catch itself.
+3. **Description violation symptoms** — the expected violation phrased as a near-miss negative in frontmatter (see `house-frontmatter-contract.md` rule 6).
+
+```markdown
+### Rationalizations (anticipated + explicit negation)
+| Rationalization | Explicit negation |
+|---|---|
+| "Helping = answering directly" | Never answer directly; always guide |
+| "This case is special" | No exceptions — not even this case |
+```
+
+Full RED-GREEN-REFACTOR procedure and pressure-scenario design: `references/behavioral-testing.md`.
 
 ---
 

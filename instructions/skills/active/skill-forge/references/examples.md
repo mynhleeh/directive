@@ -1,6 +1,6 @@
-# Worked Examples — skill-forge v3.0.0 Pipeline
+# Worked Examples — skill-forge v4.0.0 Pipeline
 
-Five worked examples, one per MODE, rewritten through the v3.0.0 pipeline: **Working Notes → Generate → Evaluate (stranger-audit) → Test → Emit**. Read the example for a MODE before your first use of that MODE. Every example shows the *visible* trace (Working Notes) and the *result* — the internal chain-of-thought itself is never shown (it stays internal).
+Five worked examples, one per MODE, rewritten through the v4.0.0 pipeline: **Working Notes (+ test plan) → Baseline (RED) → Generate → Evaluate (stranger-audit) → Green re-run → Emit**. Read the example for a MODE before your first use of that MODE. Every example shows the *visible* trace (Working Notes) and the *result* — the internal chain-of-thought itself is never shown (it stays internal).
 
 ---
 
@@ -13,8 +13,10 @@ Five worked examples, one per MODE, rewritten through the v3.0.0 pipeline: **Wor
 - Mode=CREATE · Type=System Prompt · Platform=platform-agnostic · Tier=standard
 - Known: tutoring domain, learner profile. Missing: none → proceed (no CLARIFY needed)
 - Acceptance: 5-slot anatomy complete · constraints countable · examples neutral · ≤ 200 lines
+- Test plan: fresh-context run — does the agent answer for the learner or guide them?
+- Baseline (RED): control run without artifact → agent answered the learner's question directly (rationalization: "helpful = answer")
 - Audit (stranger pass): 5 slots ✓ · constraints concrete ("do not do homework" → "guide toward the answer") ✓ · no judgment-call rules ✓
-- Test: acceptance 4/4 · neutrality 0 hits · consistency 0 contradictions · PASS (1 iteration)
+- Test (GREEN): re-run with artifact → agent guided instead of answering ✓ · acceptance 4/4 · PASS (1 iteration)
 
 ### Output
 ```
@@ -56,8 +58,9 @@ students. Users range from beginner (A1) to upper-intermediate (B2).
 - Known: text to critique. Missing: target app/users → one CLARIFY question asked, default offered; user answered "general assistant"
 - Defect inventory: 3 — generic role (Specificity), no capabilities (Completeness), vague negation (Clarity)
 - Root principles: "be helpful" → role must be specific; constraints must be action-based, not negations
+- Baseline (RED): control run → assistant replied with no capability framing (rationalization: "generic = safe")
 - Audit: fix each defect by principle, not instance · PASS (1 iteration)
-- Test: acceptance 3/3 · output language = FR ✓
+- Test (GREEN): re-run with artifact → capabilities stated, constraints action-based ✓ · acceptance 3/3 · output language = FR ✓
 
 ### Output (FR)
 ## 🔧 Modifications Apportées
@@ -120,8 +123,9 @@ Chaleureux et professionnel. Adaptez la profondeur technique au niveau d'experti
 - Mapping row: OpenAI → Anthropic (remove `type:"function"` wrapper, `parameters`→`input_schema`, drop `strict`)
 - Loss audit: `strict` has no Anthropic equivalent → dropped with justification (schema enforces via `required`); `additionalProperties: false` → preserved inside `input_schema`
 - Round-trip plan: convert back to OpenAI, diff vs original — expected diffs: wrapper + `strict` re-added, descriptions added
+- Baseline (RED): naive convert without recipe → kept `parameters`/`strict` verbatim (rationalization: "valid JSON = correct format")
 - Audit: mapping table row applied ✓ · loss items accounted 2/2 ✓ · PASS (1 iteration)
-- Test: round-trip diff shows only the 2 expected deltas ✓
+- Test (GREEN): re-run with recipe → Anthropic-native `input_schema`, `strict` dropped ✓ · round-trip diff shows only the 2 expected deltas ✓
 
 ### Output
 ## Converted Function Schema — OpenAI → Anthropic
@@ -164,8 +168,9 @@ Chaleureux et professionnel. Adaptez la profondeur technique au niveau d'experti
 - Workflow extracted: 5 steps (reproduce → isolate → minimal repro → fix → verify)
 - Transmutation: "the specific bug in the conversation" → general rule "fix must be provable" (covers the whole class of debugging requests)
 - Provenance plan: source = conversation (Tier 6) · generalization move: "reproduce-then-fix generalized to any bug class" · excluded: no external content
+- Baseline (RED): naive distill → copied the specific bug steps verbatim (rationalization: "specific = faithful")
 - Audit: steps countable ✓ · example neutral (no real codebase names) ✓ · PASS (1 iteration)
-- Test: trigger test — "my api returns 500" ✓ fires; "what is a lambda" ✓ does not fire · consistency 0 ✓
+- Test (GREEN): re-run with transmutation rule → generalized 5-step workflow ✓ · trigger test — "my api returns 500" ✓ fires; "what is a lambda" ✓ does not fire · consistency 0 ✓
 
 ### Output
 `## When to Activate` fires on bug reports and debugging requests; `## Instructions` enumerates the 5 steps imperatively; `## Output Contract` requires a `✅ How to Verify` slot (the fix must be provable); `## Anti-Examples` pairs ❌ "fix blindly" with ✅ "write a repro first".
@@ -189,7 +194,9 @@ Chaleureux et professionnel. Adaptez la profondeur technique au niveau d'experti
 - Axis decision: feed to AI to execute? Yes → `instructions/`. Rules file → `instructions/rules/`. Third-party? No → `active/`
 - Tier: self-created → Tier 6 (active)
 - No ambiguity → no CLARIFY needed
+- Baseline (RED): control classification → guessed `knowledge/` from the filename alone (rationalization: "rules = knowledge")
 - Audit: decision tree applied ✓ · tier stated ✓ · PASS (1 iteration)
+- Test (GREEN): re-run with the Q1/Q2/Q3 tree → correct `instructions/rules/active/` ✓
 
 ### Output
 `instructions/rules/active/` (self-created, always-on rules file).

@@ -35,14 +35,15 @@ Applies to any agent operating in this repo, for any task type:
 
 ## Pipeline (engine: `instructions/skills/active/skill-forge/`)
 
-Run all stages; never merge two into one pass. Full mechanics live in `skill-forge/SKILL.md` and `skill-forge/references/execution-protocol.md` — read them at the THINK and EVALUATE stages.
+Run all stages; never merge two into one pass. Full mechanics live in `skill-forge/SKILL.md`, `skill-forge/references/execution-protocol.md`, and `skill-forge/references/behavioral-testing.md` — read them at the THINK, EVALUATE, and TEST stages.
 
 1. **PARSE** — restate the request in ≤2 lines; classify mode · artifact type · intensity tier · platform · language.
 2. **CLARIFY gate** — anything ambiguous or missing → STOP, ask max 3 questions in one batch, each with a default option. Never invent data.
-3. **THINK** — run the mode's fixed sub-questions (`references/execution-protocol.md` §1); end with a compact `## Working Notes` block (routing decision + one-line rationale + audit/test counts).
-4. **GENERATE** — follow the per-type recipe: skill → `skill-guide.md` + `house-structure-conventions.md`; system prompt → `system-prompt-guide.md`; user prompt → `user-prompt-guide.md`; schema → `function-schema-guide.md`; rules → `rules-guide.md`.
-5. **EVALUATE** — stranger re-read; run the 8 countable criteria (`references/execution-protocol.md` §2); every PASS/FAIL needs evidence (quote or count).
-6. **TEST** — acceptance (from PARSE) · example neutrality · trigger test (skills) · consistency. Loop with EVALUATE, max 2 iterations; over the cap, emit with residual defects flagged.
+3. **THINK** — run the mode's fixed sub-questions (`references/execution-protocol.md` §1), including the test-plan design (scenario + pressures + compliance criteria); end with a compact `## Working Notes` block (routing decision + test plan + one-line rationale + audit/test counts).
+4. **BASELINE TEST (RED — Iron Law)** — run the failing test BEFORE writing: pressure scenario (skills/rules) or fresh-context run (prompts/schemas) WITHOUT the artifact; record rationalizations verbatim. **NO ARTIFACT WITHOUT A FAILING TEST FIRST** (`references/behavioral-testing.md`).
+5. **GENERATE** — follow the per-type recipe: skill → `skill-guide.md` + `house-structure-conventions.md`; system prompt → `system-prompt-guide.md`; user prompt → `user-prompt-guide.md`; schema → `function-schema-guide.md`; rules → `rules-guide.md`.
+6. **EVALUATE** — stranger re-read; run the 11 countable criteria (`references/execution-protocol.md` §2); every PASS/FAIL needs evidence (quote or count).
+7. **TEST — GREEN ⇄ REFACTOR** — re-run the baseline scenario WITH the artifact (GREEN); a NEW rationalization → REFACTOR (explicit negation, rationalization table, red flags, description violation symptoms). Plus acceptance · neutrality · trigger test (skills) · consistency. Loop with EVALUATE, max 2 iterations; over the cap, emit with residual defects flagged.
 7. **EMIT** — single output block per the Output Contract below.
 
 ## House Conventions (apply, don't rewrite)
@@ -81,5 +82,6 @@ Output exactly one Markdown block: `## Working Notes` (routing decision + audit/
 - `REFERENCE_INDEX.md` — source catalog; read before citing any external source.
 - `instructions/skills/active/skill-forge/SKILL.md` — the engine; read before any artifact work.
 - `instructions/skills/active/skill-forge/references/execution-protocol.md` — pipeline sub-questions + audit mechanics; read at THINK and EVALUATE.
+- `instructions/skills/active/skill-forge/references/behavioral-testing.md` — RED-GREEN-REFACTOR procedure, pressure scenarios, rationalization capture; read at BASELINE TEST and TEST.
 - `instructions/skills/active/skill-forge/references/rules-guide.md` — rules-file conventions (this file's own type); read when authoring rules files.
 - `README.md` — repo taxonomy, tiers, and the canonical citation policy (Knowledge Source Hierarchy / Trust & Citation Rules).

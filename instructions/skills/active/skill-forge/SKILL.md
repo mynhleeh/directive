@@ -1,8 +1,8 @@
 ---
 name: skill-forge
-description: "Meta-orchestrator for the directive knowledge base: generates, critiques, converts, explains, distills, and navigates AI artifacts — skills (SKILL.md), system/user prompts, function/tool schemas, and rules files — for any domain, platform, or language. Trigger whenever the user wants to create, improve, port, understand, or distill any prompt-related or skill-related artifact, e.g. mentions prompts, system prompts, skills, function calling, tool schemas, CLAUDE.md, AGENTS.md, GEMINI.md, .cursorrules, .mdc, MCP, or asks to turn existing content/repos into reusable artifacts. Do NOT trigger for ordinary coding questions, runtime debugging, or a general 'explain a concept' request that does not involve creating or converting an AI artifact."
-version: 3.0.0
-tags: [meta-skill, orchestrator, prompt, system-prompt, user-prompt, function-calling, tool-schema, skill, rules, critique, convert, explain, distill, navigate, multilingual, reasoning, chain-of-thought, audit, weak-model-first]
+description: "Authoring engine for the directive knowledge base: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user prompts, function/tool schemas, rules files (CLAUDE.md, AGENTS.md, GEMINI.md, .cursorrules, .mdc), MCP tools — for any domain, platform (Claude, OpenAI, Gemini, Cursor, MCP), or language. Trigger whenever the user asks to write, improve, convert, explain, or extract a prompt/skill/schema/rules artifact, or to turn a conversation or repo into reusable artifacts — e.g. 'viết prompt', 'tạo skill', 'critique this prompt', 'convert this schema', 'distill this conversation'. Do NOT trigger for ordinary coding questions, runtime debugging, or a generic concept question with no artifact to create or convert."
+version: 4.0.0
+tags: [meta-skill, orchestrator, prompt, system-prompt, user-prompt, function-calling, tool-schema, skill, rules, critique, convert, explain, distill, navigate, multilingual, reasoning, chain-of-thought, audit, weak-model-first, behavioral-testing, red-green-refactor, iron-law, sdo]
 compatibility: "Any agent (Claude, OpenAI, Gemini, MCP, Cursor, AGY). Weak-model-first: every rule is mechanical and countable so average models comply; stronger models can only exceed the floor."
 ---
 
@@ -29,9 +29,7 @@ Activate when the user:
 
 > **Do NOT trigger** for:
 > - Ordinary coding questions / feature requests (use a normal coding agent).
-> - Runtime debugging or error diagnosis (use `bug-solver`).
-> - A generic "explain a concept" request with no artifact to create or convert (use `deep-explainer`).
-> - A project onboarding / codebase walkthrough (use `project-tutor`).
+> - Runtime debugging, error diagnosis, concept explanation, or project onboarding (use `tech-mentor`).
 
 ---
 
@@ -51,27 +49,35 @@ User Input
   │     default option). Clear? → proceed. NEVER invent data (Principle 3).
   │
   ├─ STAGE 2: THINK (long chain-of-thought)
-  │     Reason through the mode's fixed sub-questions (see references/execution-protocol.md).
-  │     Do not skip or merge sub-questions. End with a compact ## Working Notes block:
-  │     routing decision + one-line rationale each. The block is the ONLY visible trace of
-  │     thinking — the full chain stays internal.
+  │     Reason through the mode's fixed sub-questions (see references/execution-protocol.md),
+  │     including the test-plan design (scenario + pressures + compliance criteria,
+  │     see references/behavioral-testing.md). Do not skip or merge sub-questions.
+  │     End with a compact ## Working Notes block: routing decision + test plan +
+  │     one-line rationale each. The block is the ONLY visible trace of thinking.
   │
-  ├─ STAGE 3: GENERATE
-  │     Produce the artifact following the per-type recipe (House Contract). Mechanical,
+  ├─ STAGE 3: BASELINE TEST (RED — Iron Law)
+  │     Run the failing test BEFORE writing: pressure scenario (skills/rules) or
+  │     fresh-context run (prompts/schemas) WITHOUT the artifact. Record rationalizations
+  │     verbatim in Working Notes. NO ARTIFACT WITHOUT A FAILING TEST FIRST.
+  │
+  ├─ STAGE 4: GENERATE
+  │     Produce the artifact addressing the documented baseline failures. Mechanical,
   │     countable rules only — no "make it better" language.
   │
-  ├─ STAGE 4: EVALUATE (stranger-review)
+  ├─ STAGE 5: EVALUATE (stranger-review)
   │     Re-read the artifact as a stranger reviewing someone else's work — never in the
   │     same pass that wrote it. Run every countable criterion: PASS/FAIL + fix recipe.
   │
-  ├─ STAGE 5: TEST
-  │     Acceptance criteria from STAGE 1 · example neutrality & generality ·
-  │     trigger test (skills) · consistency (no contradictions).
+  ├─ STAGE 6: TEST — GREEN ⇄ REFACTOR
+  │     Re-run the STAGE 3 scenario WITH the artifact → agent must comply (GREEN).
+  │     New rationalization? → REFACTOR: explicit negation, rationalization table,
+  │     red flags, description violation symptoms (references/behavioral-testing.md).
+  │     Acceptance criteria from STAGE 1 · neutrality · trigger test · consistency.
   │
-  ├─ LOOP: STAGE 4 ⇄ STAGE 5 (max 2 iterations)
+  ├─ LOOP: STAGE 5 ⇄ STAGE 6 (max 2 iterations)
   │     Apply fixes → re-audit → re-test. Over the cap → emit with residual defects flagged.
   │
-  └─ STAGE 6: EMIT
+  └─ STAGE 7: EMIT
         Output block only (per output contract). State assumptions/defaults used.
         Offer exactly one follow-up.
 ```
@@ -120,6 +126,8 @@ Determine **artifact type**, then **intensity tier**, then **platform** (Princip
 | **Language** | English / Vietnamese / other (follow user) | `references/house-language-policy.md` |
 
 > The **intensity tier** is the biggest structural lever. A micro skill is a single self-contained file; a deep engine is adaptive and stateful with lazy-loaded `references/`. Pick it before writing.
+
+> **Test-first (Iron Law)**: before writing any artifact, design and run the failing test (STAGE 3 BASELINE TEST) — pressure scenario for skills/rules, fresh-context run for prompts/schemas. Record rationalizations verbatim; they are the spec the artifact must defeat. Full procedure in `references/behavioral-testing.md`.
 
 ### Per-Type Recipe
 
@@ -185,6 +193,11 @@ Cross-check `references/house-structure-conventions.md` in the EVALUATE stage (s
 - [ ] Examples are neutral and generalized — no domain-specific names or single-case hardcodes (Principle 2)
 - [ ] Every rule is mechanical and countable — a weak model can execute it without judgment calls (Principle 1)
 - [ ] Every claim traces to user input or a cited source tier (Principle 5)
+- [ ] Baseline test ran BEFORE writing (Iron Law) — rationalizations recorded verbatim (see `references/behavioral-testing.md`)
+- [ ] Guidance form matches the baseline failure type — recipe vs prohibition vs REQUIRED slot (Match the Form table)
+- [ ] Discipline artifact has a rationalization table + red flags; description includes violation symptoms
+- [ ] Description follows SDO — trigger conditions only, NO workflow summary (a summary lets agents follow the description and skip the body)
+- [ ] Token budget respected — SKILL.md ≤ 500 lines / ~5000 tokens; descriptions < 500 chars where possible
 
 Apply every FAIL item's fix recipe, then re-check the failed items only (LOOP, max 2 iterations).
 
@@ -357,11 +370,15 @@ Platform mapping (system prompts, function/tool schemas, JSON types, rules files
 ## Best-Practice Rules
 
 - **Think of the model as a smart new hire lacking your norms** — and assume it is an *average* model: if a colleague would be confused, the model will be too. Write every rule to be executed correctly by a weak model; a strong model only exceeds the floor (Principle 1).
+- **Behavior is verified, not assumed.** The self-audit proves the artifact's *shape*; the baseline test proves *compliance*. Run RED before writing (Iron Law), GREEN after — see `references/behavioral-testing.md`.
+- **Match the form to the failure.** Recipes fix wrong-shaped output; prohibitions + rationalization tables fix rule-skipping under pressure; REQUIRED slots fix omitted elements. Never default to prohibition (it backfires on shaping problems).
 - **Explain *why* a behavior matters**, not just *what* to do — but keep the *why* in one line; the *what* must stay mechanical and countable.
 - **Use few-shot examples** (2–5) to steer format, tone, and structure; wrap them in `<examples>` / `<example>` tags. Keep examples neutral and generalizable — never contaminate output with example content (Principle 2).
 - **Structure complex prompts with XML tags**: `<instructions>`, `<context>`, `<input>`, `<examples>`, `<thinking>`, `<answer>`.
 - **Give a role** — even one sentence improves performance.
 - **Apply progressive disclosure**: keep `SKILL.md` under 500 lines; push depth into `references/`.
+- **Respect the token budget.** Every token competes with conversation history. Keep frequently-loaded skills lean; reference `--help` or external files instead of listing details; cross-reference instead of repeating.
+- **Use persuasion deliberately for discipline rules** (authority, commitment, scarcity, social proof, unity) — see `references/behavioral-testing.md` § Persuasion Principles. Never for manipulation.
 - **Never copy submodule/external content verbatim** — extract patterns only (Tier 5 is unverified; Principle 5).
 - **State the chosen default** (platform/tier/language) back to the user in the Working Notes block so they can correct them.
 - **Audit as a stranger, never in the writing pass.** Models — weak or strong — fail when they "check" their own output in the same pass that produced it. Separate writing and reviewing; make every review item countable (PASS/FAIL boundary + fix recipe).
@@ -373,8 +390,9 @@ Platform mapping (system prompts, function/tool schemas, JSON types, rules files
 
 | File | Contents | Read when |
 |---|---|---|
-| `references/execution-protocol.md` | Long chain-of-thought sub-questions per mode; stranger-audit mechanics; test checklist; weak-model-first rules | Every request, STAGE 2 THINK + STAGE 4 EVALUATE |
-| `references/examples.md` | 5 worked examples rewritten through the v3.0.0 pipeline (Working Notes → audit → test) | Before first use of each MODE |
+| `references/execution-protocol.md` | Long chain-of-thought sub-questions per mode; stranger-audit mechanics; test checklist; weak-model-first rules | Every request, STAGE 2 THINK + STAGE 5 EVALUATE |
+| `references/behavioral-testing.md` | RED-GREEN-REFACTOR procedure; pressure scenarios; rationalization capture; micro-test wording; persuasion principles | Every request, STAGE 3 BASELINE TEST + STAGE 6 GREEN ⇄ REFACTOR |
+| `references/examples.md` | 5 worked examples rewritten through the v4.0.0 pipeline (Working Notes → baseline → audit → test) | Before first use of each MODE |
 | `references/house-frontmatter-contract.md` | Unified YAML schema: `name`/`description`/`version`/`tags`/`compatibility`/`metadata`/`allowed-tools`; trigger-optimized description anatomy; validation checklist | Every create/rewrite of a skill |
 | `references/house-language-policy.md` | English internal / user-language output; language buckets; artifact vs output distinction | Every multilingual artifact |
 | `references/house-structure-conventions.md` | Unified SKILL.md skeleton; progressive disclosure; lazy-loaded `references/`; output contract; anti-example table | Every skill |
@@ -395,7 +413,7 @@ Platform mapping (system prompts, function/tool schemas, JSON types, rules files
 
 ## Examples
 
-Five worked examples — CREATE (system prompt), CRITIQUE (multilingual), CONVERT (schema + round-trip), DISTILL (skill + provenance), NAVIGATE (classification) — rewritten through the v3.0.0 pipeline with Working Notes, audit, and test stages, live in **`references/examples.md`**. Read it before your first use of each MODE.
+Five worked examples — CREATE (system prompt), CRITIQUE (multilingual), CONVERT (schema + round-trip), DISTILL (skill + provenance), NAVIGATE (classification) — rewritten through the v4.0.0 pipeline with Working Notes, audit, and test stages, live in **`references/examples.md`**. Read it before your first use of each MODE.
 
 ### Inline example: Working Notes block shape (CREATE)
 
@@ -404,8 +422,9 @@ Five worked examples — CREATE (system prompt), CRITIQUE (multilingual), CONVER
 - Request: create a system prompt for a tutoring chatbot (EN input)
 - Mode=CREATE · Type=System Prompt · Platform=platform-agnostic · Tier=standard
 - Known: tutoring domain, target learners. Missing: none — proceed (no CLARIFY needed)
+- Baseline (RED): control run without artifact → agent gave the answer outright (rationalization: "helpful = answer")
 - Audit (stranger pass): 5-slot anatomy complete ✓ · constraints countable ✓ · neutral examples ✓
-- Test: acceptance = 5 slots + concrete constraints → PASS (1 iteration)
+- Test: GREEN run → agent guides instead of answering ✓ · acceptance 4/4 · PASS (1 iteration)
 
 ## Output
 [the artifact, single block]

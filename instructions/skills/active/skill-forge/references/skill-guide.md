@@ -181,10 +181,13 @@ A mature, verified meta-workflow for authoring a skill. Use it when **CREATE** m
 
 1. **Capture Intent** — Extract the workflow from conversation history: tools used, step sequence, user corrections, input/output formats. Confirm before proceeding.
 2. **Interview & Research** — Ask about edge cases, IO formats, example files, success criteria, dependencies. If MCPs/subagents are available, research in parallel.
-3. **Write the SKILL.md** — Fill `name`, trigger-optimized `description`, `compatibility`, then the body.
-4. **Validate** — Quick-validate the frontmatter (ensure `name` + `description` present, only allowed keys).
-5. **Optimize the description (optional)** — Generate trigger-eval queries (mix of should-trigger and should-not-trigger / near-misses), review, run the optimization loop, apply the best description.
-6. **Package & Present** — Package the skill and present the file.
+3. **Design & run the failing test (RED — Iron Law)** — Before writing anything: design a pressure scenario (3+ combined pressures: time / sunk cost / authority / economic / exhaustion / social / pragmatic) that would make an agent skip the skill's key rules. Run it WITHOUT the artifact in a fresh context; record the rationalizations verbatim. These rationalizations ARE the spec the skill must defeat. See `references/behavioral-testing.md`.
+4. **Write the SKILL.md** — Fill `name`, trigger-optimized `description`, `compatibility`, then the body — explicitly targeting each recorded rationalization (prohibition + rationalization table + red flags where the baseline skipped rules).
+5. **Validate + GREEN re-run** — Quick-validate the frontmatter (ensure `name` + `description` present, only allowed keys). Then re-run the STAGE 3 scenario WITH the artifact: the agent must comply. A NEW rationalization → REFACTOR: explicit negation, add to rationalization table, update description with the violation symptom; re-run. Max 2 iterations.
+6. **Optimize the description (optional)** — Generate trigger-eval queries (mix of should-trigger and should-not-trigger / near-misses), review, run the optimization loop, apply the best description.
+7. **Package & Present** — Package the skill and present the file.
+
+> **Behavioral testing is mandatory, not optional.** Structural validation proves the skill is *well-formed*; the RED-GREEN run proves it *works under pressure*. Full procedure, pressure types, Match-the-Form table, and micro-test wording: `references/behavioral-testing.md`.
 
 ---
 

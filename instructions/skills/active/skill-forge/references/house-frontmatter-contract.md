@@ -56,6 +56,8 @@ The `description` is the **primary triggering mechanism**, not a summary. It con
 2. **"Pushy" is good** — agents tend to *undertrigger* skills, so make the trigger explicit and slightly assertive.
 3. **Include near-miss negatives** — tell the agent when to *skip* (e.g., "Do NOT trigger when the primary deliverable is a Word document").
 4. **Put all "when to use" info in `description`**, not the body. The body is for *how*, `description` is for *when*.
+5. **No workflow summary (SDO).** Never list the skill's internal steps ("generates, critiques, converts, explains, distills, and navigates"). A summary lets agents follow the description and skip the body. Describe a *behavior* instead (evidence pattern: "code review between tasks → 1 review per pair").
+6. **Discipline skills: include violation symptoms.** For skills that enforce rules under pressure, add the expected violation as a near-miss negative ("Do NOT trigger when the agent is expected to answer directly rather than guide") so the description fails safe. See `behavioral-testing.md`.
 
 ### Example: Low vs High Trigger
 
@@ -95,6 +97,7 @@ Run as a **stranger-review** — separate re-read after writing; each item PASS/
 - [ ] `description` ≤ 1024 chars
 - [ ] `description` contains both **what** it does and **when** to trigger
 - [ ] `description` includes at least one near-miss negative (SKIP condition)
+- [ ] `description` contains **0 workflow-summary verbs** ("generates", "critiques", "converts", "distills"…) — behavior, not steps (SDO rule)
 - [ ] `version` uses semver (if present)
 - [ ] `tags` array uses kebab-case or lowercase single words
 - [ ] No empty/blank required fields
