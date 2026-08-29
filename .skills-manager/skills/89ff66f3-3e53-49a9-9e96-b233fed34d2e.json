@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "89ff66f3-3e53-49a9-9e96-b233fed34d2e",
+  "path": "instructions/skills/external/deeptutor-eduhub/paper-reading-notes",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/paper-reading-notes",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "a86459f1-0b37-48e5-8e25-3787afe35831",
+  "path": "instructions/skills/external/deeptutor-eduhub/s03-memory",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/s03-memory",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

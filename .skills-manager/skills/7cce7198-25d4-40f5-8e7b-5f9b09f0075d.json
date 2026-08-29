@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "7cce7198-25d4-40f5-8e7b-5f9b09f0075d",
+  "path": "instructions/skills/external/deeptutor-eduhub/concept-explainer",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/concept-explainer",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

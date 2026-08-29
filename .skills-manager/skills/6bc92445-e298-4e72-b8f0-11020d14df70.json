@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "6bc92445-e298-4e72-b8f0-11020d14df70",
+  "path": "instructions/skills/external/deeptutor-eduhub/grill-me",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/grill-me",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

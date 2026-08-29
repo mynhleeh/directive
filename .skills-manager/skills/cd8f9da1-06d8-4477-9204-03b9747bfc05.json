@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "cd8f9da1-06d8-4477-9204-03b9747bfc05",
+  "path": "instructions/skills/external/deeptutor-eduhub/teaching-physical-skills",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/teaching-physical-skills",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "fc95b5ea-a536-4f99-aef5-9b905e80e15d",
+  "path": "instructions/skills/active/deep-flashcard-generator",
+  "path_key": "instructions/skills/active/deep-flashcard-generator",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

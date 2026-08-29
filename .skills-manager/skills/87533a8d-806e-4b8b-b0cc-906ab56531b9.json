@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "87533a8d-806e-4b8b-b0cc-906ab56531b9",
+  "path": "instructions/skills/active/doc-drill",
+  "path_key": "instructions/skills/active/doc-drill",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

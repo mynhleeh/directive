@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "9dabad16-2c23-4ef3-bf66-b6f1e3222ec0",
+  "path": "instructions/skills/external/deeptutor-eduhub/piano-teacher",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/piano-teacher",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

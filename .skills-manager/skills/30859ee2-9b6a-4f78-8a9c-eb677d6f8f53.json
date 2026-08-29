@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "30859ee2-9b6a-4f78-8a9c-eb677d6f8f53",
+  "path": "instructions/skills/external/deeptutor-eduhub/teaching-app-builder",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/teaching-app-builder",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

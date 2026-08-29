@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "d4c2edf7-8f1d-4650-88bd-d322aa43a8f8",
+  "path": "instructions/skills/external/deeptutor-eduhub/s05-review-model",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/s05-review-model",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

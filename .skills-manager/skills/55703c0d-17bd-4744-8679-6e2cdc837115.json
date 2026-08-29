@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "55703c0d-17bd-4744-8679-6e2cdc837115",
+  "path": "instructions/skills/external/deeptutor-eduhub/lesson-plan-architect",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/lesson-plan-architect",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "75b873db-95e3-4a3b-bb0f-b0bccfd7a1aa",
+  "path": "instructions/skills/external/deeptutor-eduhub/deep-flashcard-generator",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/deep-flashcard-generator",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

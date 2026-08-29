@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "72b12922-91ad-48a6-8514-372290380a90",
+  "path": "instructions/skills/external/deeptutor-eduhub/s11-model-tree-four-steps",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/s11-model-tree-four-steps",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

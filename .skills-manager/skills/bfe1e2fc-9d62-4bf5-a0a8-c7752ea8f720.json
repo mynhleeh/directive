@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "bfe1e2fc-9d62-4bf5-a0a8-c7752ea8f720",
+  "path": "instructions/skills/external/deeptutor-eduhub/investment-mentor",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/investment-mentor",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "c44dd81c-2bdc-4e61-a4bc-8f723daaa58b",
+  "path": "instructions/skills/external/deeptutor-eduhub/ket-exam-prep-app",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/ket-exam-prep-app",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

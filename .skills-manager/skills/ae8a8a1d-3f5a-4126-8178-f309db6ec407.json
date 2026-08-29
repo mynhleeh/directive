@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "ae8a8a1d-3f5a-4126-8178-f309db6ec407",
+  "path": "instructions/skills/external/deeptutor-eduhub/study-planner",
+  "path_key": "instructions/skills/external/deeptutor-eduhub/study-planner",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}
