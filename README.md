@@ -103,7 +103,7 @@ If a folder has only one type of resource, files sit directly in that folder (im
 - `external/` contains **only third-party resources**.
 - When an `external/` resource is no longer needed → **remove/untrack the submodule** (do not move to `archive/`).
 
-Currently split folders: `instructions/skills/` (`active/` + `external/`), `instructions/prompts/` (`active/` + `archive/` + `external/`).
+Currently split folders: `instructions/skills/` (`active/` + `archive/` + `external/`), `instructions/prompts/` (`active/` + `archive/` + `external/`).
 
 ---
 
@@ -143,30 +143,7 @@ tags: [tag1, tag2, tag3]
 
 This section is a **system-level directive** for any AI agent operating with this repository in context — applies universally to all tools and ecosystems (Cursor, Claude, Gemini, GPT, Copilot, and others).
 
-### Execution Protocol
-
-When receiving a user request in the context of this repository:
-
-```
-Step 1: Read this README — establish repo scope and available resources.
-Step 2: Classify the request type:
-          INSTRUCT  → navigate to instructions/
-          LEARN     → navigate to knowledge/
-          DESIGN    → navigate to blueprints/
-Step 3: Consult the Knowledge Source Hierarchy before citing any resource.
-Step 4: Prioritize Tier 1–3 sources for factual or methodological claims.
-Step 5: Cross-reference YAML frontmatter for semantic matching where available.
-Step 6: Execute the request using the highest-tier applicable source found.
-```
-
-### Resource Discovery Rules
-
-- **Skills** → `instructions/skills/active/` — each skill is a directory containing a `SKILL.md` file
-- **Curated prompts** → `instructions/prompts/active/`
-- **Scientific backing** → `knowledge/papers/` [HIGHEST PRIORITY — Tier 1]
-- **Methodology and guides** → `knowledge/guides/` [Tier 2–3]
-- **System design reference** → `blueprints/`
-- **External raw prompts** → `instructions/prompts/external/` [Tier 5 — use as data source, not authority]
+> **Executable agent rules** — request classification, resource discovery, and routing — live in **`AGENTS.md`** (root). This README holds the canonical **citation policy** and **trust rules** that `AGENTS.md` and `REFERENCE_INDEX.md` point to.
 
 ### Trust & Citation Rules
 
@@ -180,6 +157,10 @@ DO NOT reference archive/ unless explicitly asked for historical context.
 DO NOT treat submodule content as peer-reviewed or verified, despite being external.
 ```
 
+### Reference Sources
+
+> **`REFERENCE_INDEX.md`** (root) is the canonical catalog of every reference source in this repo — submodules, vendored directories, and knowledge documents — with path, license, citation tier, and trust status. Consult it before citing any external source; update it (one row) when sources change.
+
 ### Current Resource Index
 
 <!-- INDEX:START -->
@@ -190,43 +171,22 @@ directive/
 │   └── concepts/               # Mental models, taxonomy, frameworks
 ├── instructions/               # Resources to DIRECTLY COMMAND AI (execute immediately)
 │   ├── prompts/                # System prompts & prompt collections
-│   │   ├── active/
-│   │   │   └── tech-mentor/                # Unified IT mentor (deep engine)
-│   │   │       ├── tech-mentor.md          # Core brain + router
-│   │   │       └── references/             # Lazy-loaded object-files + shared conventions
-│   │   ├── archive/
-│   │   │   ├── ai-mentor.md                # [superseded] Teaching mentor
-│   │   │   ├── dsa.md                      # Data structures & algorithms
-│   │   │   ├── function-anatomist.md       # [superseded] Prompt structure breakdown
-│   │   │   ├── git-github.md               # [superseded] Git commands and workflow
-│   │   │   ├── n8n.md                      # n8n automation workflows
-│   │   │   └── system-architecture.md      # [superseded] Architecture design prompt
-│   │   └── external/
-│   │       ├── system-prompts-and-models-of-ai-tools/ [submodule]
-│   │       └── system_prompts_leaks/ [submodule]
+│   │   ├── active/             # tech-mentor
+│   │   ├── archive/            # ai-mentor, dsa, function-anatomist, git-github, n8n, system-architecture
+│   │   └── external/           # system-prompts-and-models-of-ai-tools [submodule], system_prompts_leaks [submodule]
 │   ├── rules/                  # Rules files (AGENTS.md, .cursorrules, GEMINI.md…)
 │   ├── scripts/                # Automation scripts for AI workflows
 │   └── skills/                 # Skill files (SKILL.md format)
-│       ├── active/
-│       │   ├── bug-solver/                  # Root-cause debug & fix skill
-│       │   ├── deep-explainer/              # Deep concept explanation skill
-│       │   ├── deep-flashcard-generator/   # Flashcard generation skill
-│       │   ├── doc-drill/                  # Document drilling & Q&A skill
-│       │   ├── document-vocab-extractor/   # Vocabulary extraction skill
-│       │   ├── project-tutor/              # Project onboarding mentor skill
-│       │   ├── skill-forge/                # Meta-orchestrator: generates/critiques/converts/explains/distills/navigates artifacts
-│       │   └── vocab-lookup/               # Vocabulary lookup skill
-│       ├── archive/
-│       │   └── ai-mentor/                  # [superseded by tech-mentor]
-│       └── external/
-│           ├── andrej-karpathy/ [submodule]
-│           └── anthropics/ [submodule]
+│       ├── active/             # deep-flashcard-generator, doc-drill, document-vocab-extractor, skill-forge, tech-mentor, vocab-lookup
+│       ├── archive/            # ai-mentor, bug-solver, deep-explainer, project-tutor
+│       └── external/           # andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub
 └── knowledge/                  # Resources to READ & LEARN about AI/prompting
     ├── articles/               # Blog posts, case studies, saved pages
     ├── guides/                 # How-to guides, tutorials, manuals
-    │   └── the-complete-guide-to-building-skill-for-claude.pdf
     └── papers/                 # Academic & technical papers [PRIORITY SLOT — Tier 1]
 ```
 <!-- INDEX:END -->
+
+> Per-source detail — paths, licenses, citation tiers, trust status — lives in **`REFERENCE_INDEX.md`** (root). Update this tree only when a top-level folder's lifecycle split changes.
 
 > External submodules (e.g., `system_prompts_leaks`, `andrej-karpathy`, `anthropics`) may have their own README files with internal navigation.
