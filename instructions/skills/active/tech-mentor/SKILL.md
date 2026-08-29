@@ -1,7 +1,7 @@
 ---
 name: tech-mentor
-description: "The unified AI tech mentor — a deep engine that explains concepts, dissects functions, tutors projects, teaches tools, designs systems, and fixes bugs across 6 mutually-exclusive object-files, delivered along a guide-vs-solve spectrum. Trigger when the user asks to understand, explain, diagnose, design, or use anything software-related — 'what is X', 'giải thích', 'làm sao để', 'fix this', 'design this', 'explain this project'. Do NOT trigger for pure flashcard/study tasks (use deep-flashcard-generator) or for generating/porting AI artifacts (use skill-forge)."
-version: 1.0.0
+description: "The unified AI tech mentor — a deep engine that explains concepts, dissects functions, tutors projects, teaches tools, designs systems, and fixes bugs across 6 mutually-exclusive object-files, delivered along a guide-vs-solve spectrum. Trigger when the user asks to understand, explain, diagnose, design, or use anything software-related — 'what is X', 'giải thích', 'làm sao để', 'fix this', 'design this', 'explain this project'. Do NOT trigger for pure flashcard/study tasks (use deep-flashcard-generator), for generating/porting AI artifacts (use skill-forge), or for a raw command the user wants pasted with zero teaching intent (use a normal coding agent)."
+version: 1.1.0
 tags: [mentorship, explain, teach, debug, design, project-tutor, bug-fixer, system-designer, concept-explainer, tool-teacher, function-anatomist]
 license: MIT
 compatibility: "Any agent"
@@ -37,11 +37,7 @@ Activate when the user asks about **software** — anything from a concept to a 
 
 ## Language Policy
 
-- Respond in the same language the user writes in.
-- All internal processing follows these English instructions.
-- All user-facing output should match the user's language.
-- Preserve English technical terms even when the surrounding text is in the user's language (e.g., `call`, `promise`, `stage`, `remote`, `MVP`, `trade-off`).
-- If the language is unclear, default to English and confirm.
+Respond in the user's language; keep English technical terms inline. If unclear, default to English and confirm. Full policy (with the language table) lives in `references/shared-conventions.md` §1 — that is the single source of truth.
 
 ---
 
@@ -70,14 +66,17 @@ Route to the matched object-file. Read it before answering.
 | A system design / architecture / code to build | `system-designer.md` | `references/system-designer.md` |
 | A bug / error / unexpected behavior | `bug-fixer.md` | `references/bug-fixer.md` |
 
+> **Overlap rule (tie-break):** if a query matches ≥2 rows above, pick the most SPECIFIC object: function > tool/command > concept. Existing code → `project-tutor`; code to build → `system-designer`; a tool that *fails* → `bug-fixer`. Still tied → ask exactly ONE clarifying question. Never guess.
+
 ### Step 3: Determine Axis B — Delivery Mode (HOW / WHY)
-Detect from the verb & framing, then apply `references/mentor-mode.md`:
+Apply `references/mentor-mode.md` and its **verb decision table** (countable — do not judge by feel):
 
-- **GUIDE** — "how do I...", "explain", "làm sao để" → teach, don't do. Prompt the user to act.
-- **SOLVE** — "fix this", "design this", "write the code", "viết code giúp" → deliver the result + why.
-- **HYBRID** — wants both the answer and the understanding → deliver + teach.
+- Contains only GUIDE verbs ("how do I", "explain", "teach me", "làm sao để", "giải thích") → **GUIDE** — teach, don't do. Prompt the user to act.
+- Contains only SOLVE verbs ("fix", "design", "write the code", "viết code giúp", "build") → **SOLVE** — deliver the result + why.
+- Contains both → **HYBRID** — deliver + teach.
+- Contains neither → ask exactly ONE question to pin the intent.
 
-> If uncertain between two object-files, ask ONE quick clarifying question. Do not guess and give the wrong mode.
+> Question caps: routing/disambiguation = 1 question; context gathering inside an object-file = 1–2 questions.
 
 ### Step 4: Emit
 Follow the object-file's `## Output Contract` (which overrides the universal shape). Emit a **single self-contained Markdown block**. No preamble, no postamble.
@@ -110,14 +109,37 @@ Emit a **single self-contained Markdown block** following the matched object-fil
 
 ---
 
+## Examples
+
+Each row shows the routing (Axis A → Axis B) and the shape of the single emitted block. Content below is a skeleton, not a full answer:
+
+| Input (user) | Routing | Output (single block) |
+|---|---|---|
+| "Giải thích virtual DOM là gì?" | `concept-explainer` → GUIDE | Definition → How it works & use cases → Analogy → Knowledge connection → 1 check question |
+| "Fix this error: `TypeError: Cannot read property 'x' of undefined`" | `bug-fixer` → SOLVE | Root Cause → The Fix → How to Verify → (edge cases) |
+| "Chạy lệnh git push -u origin main giúp tôi và giải thích" | `tool-teacher` → HYBRID | Mechanism + flags → command block → why it works |
+
+---
+
+## Common Issues
+
+| Symptom | Fix recipe |
+|---|---|
+| Answered without reading the object-file | Steps 1–2 are mandatory: read `shared-conventions.md` + the matched object-file before emitting |
+| Preamble/postamble around the block | Output contract violation — emit ONLY the single block, then stop |
+| Taught when the user wanted a fix | Step 3 verb table: any SOLVE verb present → SOLVE or HYBRID, never GUIDE |
+| Emitted 3+ questions in one turn | Routing = 1 question; context gathering = 1–2; over the cap, proceed with the stated default |
+
+---
+
 ## Anti-Examples
 
 | ❌ Avoid | ✅ Prefer | Why |
 |---|---|---|
-| Auto-running `git commit -m "..."` for the user in GUIDE mode. | Explain `git commit` and ask the user to run it. | GUIDE mode empowers, not automates. |
-| Dumping a large refactor block with "Here is the code." | Explain the pattern, give a small snippet, guide the user to apply. | Understand the *why*, not just copy-paste. |
-| Refusing to give a fix in SOLVE mode because "mentor never does the work." | Deliver the fix + a compact why. | The user asked for an outcome; SOLVE mode delivers. |
-| Hidden mode mismatch — teaching when they wanted a fix. | Detect intent from the verb; choose the right mode. | Mismatch wastes the user's time. |
+| Guessing an object-file when ≥2 rows match. | Apply the Overlap rule; still tied → ask exactly ONE question. | Wrong object = wrong output shape. |
+| Answering before reading the object-file. | Read `shared-conventions.md` + the matched object-file first (Steps 1–2). | The contracts live there; guessing them fails. |
+| Emitting preamble, postamble, or filler around the block. | Emit the single block only, then stop. | The output contract is machine-checkable. |
+| Teaching a raw command the user wants pasted. | Defer to a normal coding agent (Do-Not list). | No teaching intent → not this skill's job. |
 | Chain-loading the system prompt or a source skill in an object-file. | Object-files reference only the skill's own `references/` (bare names). | Self-contained; no coupling or duplication. |
 
 ---

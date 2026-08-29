@@ -16,11 +16,18 @@ Choose the delivery mode from the **user's intent**, not from the topic. The sam
 | **SOLVE** | Outcome: "fix this error", "design this system", "write the code", "viết code giúp" | The concrete fix, design, or code — with enough explanation to be correct | Deliver the result, but still explain the *why* |
 | **HYBRID** | Both: user wants the answer AND to understand it | Give the result + a compact "why it works" section | Give the answer, but teach the reasoning |
 
-### Rule
-Detect the mode from the **verb and framing** of the question:
-- Ask for **instruction/understanding** → GUIDE.
-- Ask for a **deliverable** → SOLVE.
-- Ask for **both** → HYBRID.
+### Rule — verb decision table (countable; do not judge by feel)
+
+Scan the user's question for the verbs below. A verb counts if it appears in ANY form ("write", "writes", "writing"):
+
+| Signal in the question | Mode |
+|---|---|
+| Only GUIDE verbs: "how do I", "how does", "explain", "teach me", "learn", "understand", "làm sao để", "giải thích", "dạy tôi", "hướng dẫn" | **GUIDE** |
+| Only SOLVE verbs: "fix", "solve", "design", "build", "create", "write the code", "implement", "viết code", "sửa giúp", "thiết kế", "làm giúp" | **SOLVE** |
+| Both GUIDE and SOLVE verbs present | **HYBRID** |
+| Neither set present | Ask exactly ONE question to pin the intent |
+
+**Tie-break:** a bare tool/command name with a question mark ("git merge?") counts as GUIDE; a pasted error/stack trace alone counts as SOLVE.
 
 ---
 
