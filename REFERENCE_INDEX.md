@@ -41,7 +41,7 @@ directive/
 │   ├── scripts/                # Automation scripts for AI workflows
 │   └── skills/                 # Skill files (SKILL.md format)
 │       ├── active/             # deep-flashcard-generator, doc-drill, document-vocab-extractor, skill-forge, tech-mentor, vocab-lookup
-│       └── external/           # andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub, superpowers [submodule]
+│       └── external/           # AI-Research-SKILLs [submodule], andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub, superpowers [submodule]
 └── knowledge/                  # Resources to READ & LEARN about AI/prompting
     ├── articles/               # Blog posts, case studies, saved pages
     ├── guides/                 # How-to guides, tutorials, manuals
@@ -60,6 +60,7 @@ Sources tracked as git submodules (see `.gitmodules`); version-pinned, updatable
 | Source | Path | License | Tier | Status | Notes (use when / caveats) |
 |---|---|---|---|---|---|
 | `anthropics` (official Claude skills) | `instructions/skills/external/anthropics/` | Apache-2.0 (most skills); `docx`/`pdf`/`pptx`/`xlsx` proprietary | 5 | First-party (official Anthropic) | Use as authoritative reference for SKILL.md format, frontmatter, the `skill-creator` workflow, and the agentskills.io spec. Caveats: the 4 document skills are source-available, not open source; do not redistribute their content. |
+| `AI-Research-SKILLs` | `instructions/skills/external/AI-Research-SKILLs/` | MIT | 5 | Third-party submodule | Use for AI research orchestration and domain-specific ML engineering skills (training, evaluation, inference). Caveats: Contains a massive number of skills; treat as Tier-5 reference material for complex workflows. |
 | `andrej-karpathy` | `instructions/skills/external/andrej-karpathy/` | MIT (declared in skill) | 5 | Third-party, self-authored (derived from Karpathy's public notes) | Use for the 4 candidate behavioral principles (Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven Execution). Caveats: Tier-5 content is unverified — treat as candidate principles, never as premise; README promotes the author's platform. |
 | `superpowers` | `instructions/skills/external/superpowers/` | MIT | 5 | Third-party submodule | Use for development workflow skills. |
 | `system_prompts_leaks` | `instructions/prompts/external/system_prompts_leaks/` | CC0 1.0 (collection) | 5 | Third-party, unverified verbatim captures | Use as structural reference for how real agents serialize prompts (Cursor, Claude Code, etc.). Caveats: leaked material with unclear original ownership; use for structure only, never promote captured content as fact. |
@@ -93,5 +94,5 @@ Curated documents in `knowledge/` (Tier 1–4) — the highest-trust sources for
 
 ## Provenance
 
-- Compiled 2026-08-29 from `.gitmodules` (4 submodules), `deeptutor-eduhub/.hub-lock.json` (install ledger), and per-source LICENSE files.
+- Compiled 2026-08-30 from `.gitmodules` (5 submodules), `deeptutor-eduhub/.hub-lock.json` (install ledger), and per-source LICENSE files.
 - Status flags reflect the repo's citation policy (`.agents/agents/directive/agent.md`): external content is Tier 5 — usable as curated reference, never as evidence.
