@@ -42,15 +42,15 @@ When a folder contains multiple sources or states, it is split into sub-folders:
 
 The repository incorporates several external repositories and registries for research and skill building. Below is a complete catalog of all external references (see `REFERENCE_INDEX.md` for full citation policies, caveats, and licenses):
 
-| Reference Source | Path | Description | Type |
-|---|---|---|---|
-| **AI-Research-SKILLs** | `instructions/skills/external/AI-Research-SKILLs/` | Domain-specific ML engineering and AI research orchestration. | Git Submodule |
-| **andrej-karpathy** | `instructions/skills/external/andrej-karpathy/` | Behavioral principles and skills derived from Karpathy's notes. | Git Submodule |
-| **anthropics** | `instructions/skills/external/anthropics/` | Official Claude skills and tool-use patterns. | Git Submodule |
-| **superpowers** | `instructions/skills/external/superpowers/` | Advanced agentic skills for enhanced development workflows. | Git Submodule |
-| **system_prompts_leaks** | `instructions/prompts/external/system_prompts_leaks/` | Structural references of leaked system prompts (Claude Code, Cursor, etc.). | Git Submodule |
-| **system-prompts-and-models-of-ai-tools** | `instructions/prompts/external/system-prompts-and-models-of-ai-tools/` | Older collection of AI tool system prompts for cross-vendor comparison. | Git Submodule |
-| **deeptutor-eduhub** | `instructions/skills/external/deeptutor-eduhub/` | Education and tutoring skill patterns via EduHub registry. | Vendored Dir |
+| Reference Source | Description | Type |
+|---|---|---|
+| [**AI-Research-SKILLs**](instructions/skills/external/AI-Research-SKILLs/) | Domain-specific ML engineering and AI research orchestration. | Git Submodule |
+| [**andrej-karpathy**](instructions/skills/external/andrej-karpathy/) | Behavioral principles and skills derived from Karpathy's notes. | Git Submodule |
+| [**anthropics**](instructions/skills/external/anthropics/) | Official Claude skills and tool-use patterns. | Git Submodule |
+| [**superpowers**](instructions/skills/external/superpowers/) | Advanced agentic skills for enhanced development workflows. | Git Submodule |
+| [**system_prompts_leaks**](instructions/prompts/external/system_prompts_leaks/) | Structural references of leaked system prompts (Claude Code, Cursor, etc.). | Git Submodule |
+| [**system-prompts-and-models-of-ai-tools**](instructions/prompts/external/system-prompts-and-models-of-ai-tools/) | Older collection of AI tool system prompts for cross-vendor comparison. | Git Submodule |
+| [**deeptutor-eduhub**](instructions/skills/external/deeptutor-eduhub/) | Education and tutoring skill patterns via EduHub registry. | Vendored Dir |
 
 ---
 
