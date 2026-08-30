@@ -13,3 +13,6 @@
 [submodule "instructions/skills/external/superpowers"]
 	path = instructions/skills/external/superpowers
 	url = https://github.com/obra/superpowers.git
+[submodule "instructions/skills/external/AI-Research-SKILLs"]
+	path = instructions/skills/external/AI-Research-SKILLs
+	url = https://github.com/Orchestra-Research/AI-Research-SKILLs.git
