@@ -2,7 +2,30 @@
 name: skill-forge
 description: "Authoring engine for the directive knowledge base: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user prompts, function/tool schemas, rules files (CLAUDE.md, AGENTS.md, GEMINI.md, .cursorrules, .mdc), MCP tools — for any domain, platform (Claude, OpenAI, Gemini, Cursor, MCP), or language. Trigger whenever the user asks to write, improve, convert, explain, or extract a prompt/skill/schema/rules artifact, or to turn a conversation or repo into reusable artifacts — e.g. 'viết prompt', 'tạo skill', 'critique this prompt', 'convert this schema', 'distill this conversation'. Do NOT trigger for ordinary coding questions, runtime debugging, or a generic concept question with no artifact to create or convert."
 version: 4.0.0
-tags: [meta-skill, orchestrator, prompt, system-prompt, user-prompt, function-calling, tool-schema, skill, rules, critique, convert, explain, distill, navigate, multilingual, reasoning, chain-of-thought, audit, weak-model-first, behavioral-testing, red-green-refactor, iron-law, sdo]
+tags:
+  - meta-skill
+  - orchestrator
+  - prompt
+  - system-prompt
+  - user-prompt
+  - function-calling
+  - tool-schema
+  - skill
+  - rules
+  - critique
+  - convert
+  - explain
+  - distill
+  - navigate
+  - multilingual
+  - reasoning
+  - chain-of-thought
+  - audit
+  - weak-model-first
+  - behavioral-testing
+  - red-green-refactor
+  - iron-law
+  - sdo
 compatibility: "Any agent (Claude, OpenAI, Gemini, MCP, Cursor, AGY). Weak-model-first: every rule is mechanical and countable so average models comply; stronger models can only exceed the floor."
 ---
 

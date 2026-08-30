@@ -1,11 +1,6 @@
 ---
 name: document-vocab-extractor
-description: >
-  Extract English vocabulary from any attached document, regardless of domain.
-  Applies consistent filtering and formatting criteria based on reasoning principles,
-  not domain-specific rules. Outputs a clean TSV flashcard set. Trigger when the user
-  attaches a document and wants all its vocabulary extracted. Do NOT trigger when the
-  user asks about specific words — use vocab-lookup instead.
+description: "Extract English vocabulary from any attached document, regardless of domain. Applies consistent filtering and formatting criteria based on reasoning principles, not domain-specific rules. Outputs a clean TSV flashcard set. Trigger when the user attaches a document and wants all its vocabulary extracted. Do NOT trigger when the user asks about specific words — use vocab-lookup instead."
 version: 1.3.0
 tags:
   - custom

@@ -1,14 +1,6 @@
 ---
 name: vocab-lookup
-description: >
-  Receive a source text (passage, article, video transcript, document, etc.), then look up any
-  English word, phrase, or idiom from that source. Returns: a context-specific Vietnamese meaning,
-  American IPA pronunciation, part of speech, an example sentence drawn from or based on the source,
-  and synonyms. If a word carries multiple distinct meanings even within the same context, generate
-  one card per meaning — each card must be fully distinct from the others.
-  Triggers when the user provides a source AND asks about one or more specific words/phrases,
-  or uses phrases like "tra từ", "nghĩa của", "look up", "what does ... mean".
-  Do NOT trigger when the user wants ALL the vocabulary from a document — use document-vocab-extractor.
+description: "Receive a source text (passage, article, video transcript, document, etc.), then look up any English word, phrase, or idiom from that source. Returns: a context-specific Vietnamese meaning, American IPA pronunciation, part of speech, an example sentence drawn from or based on the source, and synonyms. If a word carries multiple distinct meanings even within the same context, generate one card per meaning — each card must be fully distinct from the others. Triggers when the user provides a source AND asks about one or more specific words/phrases, or uses phrases like 'tra từ', 'nghĩa của', 'look up', 'what does ... mean'. Do NOT trigger when the user wants ALL the vocabulary from a document — use document-vocab-extractor."
 version: 1.1.0
 tags:
   - custom

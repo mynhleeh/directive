@@ -2,7 +2,18 @@
 name: tech-mentor
 description: "The unified AI tech mentor — a deep engine that explains concepts, dissects functions, tutors projects, teaches tools, designs systems, and fixes bugs across 6 mutually-exclusive object-files, delivered along a guide-vs-solve spectrum. Trigger when the user asks to understand, explain, diagnose, design, or use anything software-related — 'what is X', 'giải thích', 'làm sao để', 'fix this', 'design this', 'explain this project'. Do NOT trigger for pure flashcard/study tasks (use deep-flashcard-generator), for generating/porting AI artifacts (use skill-forge), or for a raw command the user wants pasted with zero teaching intent (use a normal coding agent)."
 version: 1.1.0
-tags: [mentorship, explain, teach, debug, design, project-tutor, bug-fixer, system-designer, concept-explainer, tool-teacher, function-anatomist]
+tags:
+  - mentorship
+  - explain
+  - teach
+  - debug
+  - design
+  - project-tutor
+  - bug-fixer
+  - system-designer
+  - concept-explainer
+  - tool-teacher
+  - function-anatomist
 license: MIT
 compatibility: "Any agent"
 ---

@@ -1,15 +1,6 @@
 ---
 name: doc-drill
-description: >-
-  Activates a document-grounded adaptive batch quiz session (Doc Drill).
-  Use when the user attaches a document (PDF, markdown, notes, slides, etc.)
-  and wants to study or review it through rounds of quiz questions, with
-  automatic adaptive difficulty and knowledge-gap targeting between rounds.
-  Trigger phrases: "doc drill", "drill me on this", "quiz me on the document",
-  "tạo quiz", "ôn tập tài liệu này", "start studying", "deep tutor",
-  "hoi toi ve tai lieu nay", "tao quiz cho toi".
-  NOT for open-ended tutoring without a document.
-  NOT for a one-time static question set with no adaptive follow-up.
+description: "Activates a document-grounded adaptive batch quiz session (Doc Drill). Use when the user attaches a document (PDF, markdown, notes, slides, etc.) and wants to study or review it through rounds of quiz questions, with automatic adaptive difficulty and knowledge-gap targeting between rounds. Trigger phrases: 'doc drill', 'drill me on this', 'quiz me on the document', 'tạo quiz', 'ôn tập tài liệu này', 'start studying', 'deep tutor', 'hoi toi ve tai lieu nay', 'tao quiz cho toi'. NOT for open-ended tutoring without a document. NOT for a one-time static question set with no adaptive follow-up."
 tags:
   - custom
   - eduhub
