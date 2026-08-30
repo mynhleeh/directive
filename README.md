@@ -15,101 +15,48 @@ This repository serves as a structured **Second Brain & Knowledge Base** for AI 
 
 ---
 
-## 🗂️ Directory Structure
+## 🗂️ Repository Architecture
 
-```
-directive/
-├── instructions/               # Resources to DIRECTLY COMMAND AI (execute immediately)
-│   ├── skills/                 # Skill files (SKILL.md format)
-│   ├── prompts/                # System prompts & prompt collections
-│   ├── rules/                  # Rules files (.cursorrules, GEMINI.md…)
-│   └── scripts/                # Automation scripts for AI workflows
-│
-├── knowledge/                  # Resources to READ & LEARN about AI/prompting
-│   ├── guides/                 # How-to guides, tutorials, manuals
-│   ├── papers/                 # Academic & technical papers
-│   └── articles/               # Blog posts, case studies, saved pages
-│
-└── blueprints/                 # Resources to DESIGN AI systems
-    ├── architectures/          # System designs, agent architectures
-    └── concepts/               # Mental models, taxonomy, frameworks
-```
+Our directories are organized by an **Intent-Based Taxonomy** along 3 axes.
 
----
+### Decision Tree & Locations
 
-## 🧭 Classification Standard
+| Intent Axis | Question | Location | Resource Types |
+|---|---|---|---|
+| **INSTRUCTIONS** | Will I feed this directly to AI for it to execute? | `instructions/` | Skills (`SKILL.md`), System Prompts, Rules (`.cursorrules`), Automation Scripts |
+| **KNOWLEDGE** | Will I read this to learn about AI/prompting? | `knowledge/` | How-to Guides, Tutorials, Academic Papers, Articles |
+| **BLUEPRINTS** | Is this a system design, blueprint, or mental model? | `blueprints/` | Architectures, Agent Designs, Mental Models, Frameworks |
 
-### 3 Axes — Intent-Based Taxonomy
+### Dynamic Lifecycle Splits (Tiers)
 
-| Axis | Decision Question | Folder |
-|---|---|---|
-| **INSTRUCTIONS** | Will I feed this directly to AI for it to execute? | `instructions/` |
-| **KNOWLEDGE** | Will I read this to learn about AI/prompting? | `knowledge/` |
-| **BLUEPRINTS** | Is this a design, blueprint, or mental model? | `blueprints/` |
+When a folder contains multiple sources or states, it is split into sub-folders:
+- **`active/`**: Currently used, self-created resources.
+- **`archive/`**: Retired, historical reference only.
+- **`external/`**: Third-party content, git submodules, vendored directories.
 
-### Decision Tree
-
-```
-Q1: Will I feed this directly to an AI agent to execute?
-  → Yes → instructions/
-  → No  → Q2
-
-Q2: Will I read this to learn about AI or prompting?
-  → Yes → knowledge/
-  → No  → Q3
-
-Q3: Is this a system design, architecture, or mental model?
-  → Yes → blueprints/
-```
-
-### Resource Classification Table
-
-| Resource type | Axis | Location |
-|---|---|---|
-| Skill files (`SKILL.md`) | INSTRUCTIONS | `instructions/skills/` |
-| System prompts | INSTRUCTIONS | `instructions/prompts/` |
-| System prompt leaks (raw) | INSTRUCTIONS | `instructions/prompts/` |
-| Rules files (`.agents/...`, `.cursorrules`) | INSTRUCTIONS | `instructions/rules/` |
-| Automation scripts | INSTRUCTIONS | `instructions/scripts/` |
-| How-to guides, tutorials | KNOWLEDGE | `knowledge/guides/` |
-| Academic / technical papers | KNOWLEDGE | `knowledge/papers/` |
-| Blog posts, saved articles | KNOWLEDGE | `knowledge/articles/` |
-| System architecture diagrams | BLUEPRINTS | `blueprints/architectures/` |
-| Mental models, frameworks | BLUEPRINTS | `blueprints/concepts/` |
-
-### Dynamic Lifecycle Split
-
-Sub-folders are created **only when a folder contains 2 or more different tiers**.
-If a folder has only one type of resource, files sit directly in that folder (implicitly treated as `active`).
-
-#### The 3 Tiers
-
-| Tier | Purpose | Contains |
-|---|---|---|
-| `active/` | Currently used, actively maintained | Self-created resources in use |
-| `archive/` | Retired — historical reference only | Self-created resources no longer in use |
-| `external/` | Third-party content, submodules | External repos, cloned resources |
-
-#### Trigger Rule
-
-| Types present in folder | Action |
-|---|---|
-| Only 1 type | **No sub-folders** — files sit directly in folder |
-| 2 or more types | **Create sub-folders** for each type present |
-
-#### MECE Boundary
-
-- `active/` and `archive/` contain **only self-created resources**.
-- `external/` contains **only third-party resources**.
-- When an `external/` resource is no longer needed → **remove/untrack the submodule** (do not move to `archive/`).
-
-Currently split folders: `instructions/skills/` (`active/` + `external/`), `instructions/prompts/` (`archive/` + `external/`).
+*Note: If only one tier exists, files sit directly in the root folder (implicitly `active`).*
 
 ---
 
-## 📋 Metadata Convention (YAML Frontmatter)
+## 📚 External Reference Sources
 
-All owned files should include a YAML frontmatter header:
+The repository incorporates several external repositories and registries for research and skill building. Below is a complete catalog of all external references (see `REFERENCE_INDEX.md` for full citation policies, caveats, and licenses):
+
+| Reference Source | Path | Description | Type |
+|---|---|---|---|
+| **AI-Research-SKILLs** | `instructions/skills/external/AI-Research-SKILLs/` | Domain-specific ML engineering and AI research orchestration. | Git Submodule |
+| **andrej-karpathy** | `instructions/skills/external/andrej-karpathy/` | Behavioral principles and skills derived from Karpathy's notes. | Git Submodule |
+| **anthropics** | `instructions/skills/external/anthropics/` | Official Claude skills and tool-use patterns. | Git Submodule |
+| **superpowers** | `instructions/skills/external/superpowers/` | Advanced agentic skills for enhanced development workflows. | Git Submodule |
+| **system_prompts_leaks** | `instructions/prompts/external/system_prompts_leaks/` | Structural references of leaked system prompts (Claude Code, Cursor, etc.). | Git Submodule |
+| **system-prompts-and-models-of-ai-tools** | `instructions/prompts/external/system-prompts-and-models-of-ai-tools/` | Older collection of AI tool system prompts for cross-vendor comparison. | Git Submodule |
+| **deeptutor-eduhub** | `instructions/skills/external/deeptutor-eduhub/` | Education and tutoring skill patterns via EduHub registry. | Vendored Dir |
+
+---
+
+## 📋 Metadata Convention
+
+All owned files in the repository should include a YAML frontmatter header to assist with indexing:
 
 ```yaml
 ---
@@ -118,5 +65,3 @@ description: "Brief description"
 tags: [tag1, tag2, tag3]
 ---
 ```
-
----
