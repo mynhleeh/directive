@@ -1,9 +1,10 @@
 ---
+id: directive-prompt-forge
 name: directive-prompt-forge
 description: "Always-on orchestrator for authoring AI artifacts (skills, system/user prompts, function schemas, rules files) across the whole directive repo. Trigger when the user asks to create, critique, convert, explain, distill, or navigate any prompt/skill/schema/rules content and the work should use this repo's knowledge base, skill-forge engine, and reference sources. Do NOT trigger for ordinary coding (default agent), concept/debug/project help (tech-mentor), or study-tool tasks like flashcards, quizzes, or vocab (study skills)."
 version: 1.1.0
 tags: [prompt-forge, orchestrator, rules, prompt-engineering, skills, reference-index]
-compatibility: "Any agent that auto-loads AGENTS.md (Claude Code, Gemini CLI, VS Code Copilot, Cursor)"
+compatibility: "Any agent that auto-loads rules (e.g. .agents/, .cursorrules, Claude Code, Gemini CLI)"
 metadata:
   author: "directive"
 ---

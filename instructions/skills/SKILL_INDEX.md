@@ -128,15 +128,15 @@ Skills are grouped by their primary function to help you select the best tool fo
 | [claude-api](external/anthropics/skills/claude-api/SKILL.md) | Anthropic | Text Prompt / Ideas | *(No description provided)* |
 | [concept-explainer](external/deeptutor-eduhub/concept-explainer/SKILL.md) | DeepTutor | Text Prompt / Ideas | Explain a hard concept clearly with progressive depth, a concrete analogy, |
 | [discernment-nudge](external/anthropics/skills/discernment-nudge/SKILL.md) | Anthropic | Text Prompt / Ideas | *(No description provided)* |
-| [doc-drill](active/doc-drill/SKILL.md) | Owner | Text Prompt / Ideas | *(No description provided)* |
+| [doc-drill](active/doc-drill/SKILL.md) | Owner | Text Prompt / Ideas | Activates a document-grounded adaptive batch quiz session (Doc Drill). Use when the user attaches a document (PDF, markdown, notes, slides, etc.) a... |
 | [doc-drill](external/deeptutor-eduhub/doc-drill/SKILL.md) | DeepTutor | Text Prompt / Ideas | *(No description provided)* |
-| [document-vocab-extractor](active/document-vocab-extractor/SKILL.md) | Owner | Text Prompt / Ideas | *(No description provided)* |
+| [document-vocab-extractor](active/document-vocab-extractor/SKILL.md) | Owner | Text Prompt / Ideas | Extract English vocabulary from any attached document, regardless of domain. Applies consistent filtering and formatting criteria based on reasoning ... |
 | [document-vocab-extractor](external/deeptutor-eduhub/document-vocab-extractor/SKILL.md) | DeepTutor | Text Prompt / Ideas | *(No description provided)* |
 | [grill-me](external/deeptutor-eduhub/grill-me/SKILL.md) | DeepTutor | Text Prompt / Ideas | grill-me from mattpocock |
 | [paper-reading-notes](external/deeptutor-eduhub/paper-reading-notes/SKILL.md) | DeepTutor | Text Prompt / Ideas | Extract key information from academic papers (abstract, methodology, |
 | [slack-gif-creator](external/anthropics/skills/slack-gif-creator/SKILL.md) | Anthropic | Text Prompt / Ideas | Knowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when us... |
 | [template-skill](external/anthropics/template/SKILL.md) | Anthropic | Text Prompt / Ideas | Replace with description of the skill and when Claude should use it. |
-| [vocab-lookup](active/vocab-lookup/SKILL.md) | Owner | Text Prompt / Ideas | *(No description provided)* |
+| [vocab-lookup](active/vocab-lookup/SKILL.md) | Owner | Text Prompt / Ideas | Receive a source text (passage, article, video transcript, document, etc.), then look up any English word, phrase, or idiom from that source. Retu... |
 | [vocab-lookup](external/deeptutor-eduhub/vocab-lookup/SKILL.md) | DeepTutor | Text Prompt / Ideas | *(No description provided)* |
 
 
@@ -401,11 +401,11 @@ Skills grouped by their originating repository or author.
 | Skill Name | Target / Input | Description |
 |---|---|---|
 | [deep-flashcard-generator](active/deep-flashcard-generator/SKILL.md) | Files / Documents | Reads any attached document (PDF, DOCX, TXT, images, etc.), exhaustively extracts core concepts and generates high-quality Anki-ready flashcards us... |
-| [doc-drill](active/doc-drill/SKILL.md) | Text Prompt / Ideas | *(No description provided)* |
-| [document-vocab-extractor](active/document-vocab-extractor/SKILL.md) | Text Prompt / Ideas | *(No description provided)* |
+| [doc-drill](active/doc-drill/SKILL.md) | Text Prompt / Ideas | Activates a document-grounded adaptive batch quiz session (Doc Drill). Use when the user attaches a document (PDF, markdown, notes, slides, etc.) a... |
+| [document-vocab-extractor](active/document-vocab-extractor/SKILL.md) | Text Prompt / Ideas | Extract English vocabulary from any attached document, regardless of domain. Applies consistent filtering and formatting criteria based on reasoning ... |
 | [skill-forge](active/skill-forge/SKILL.md) | Files / Documents | Authoring engine for the directive knowledge base: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user ... |
 | [tech-mentor](active/tech-mentor/SKILL.md) | Files / Documents | The unified AI tech mentor — a deep engine that explains concepts, dissects functions, tutors projects, teaches tools, designs systems, and fixes b... |
-| [vocab-lookup](active/vocab-lookup/SKILL.md) | Text Prompt / Ideas | *(No description provided)* |
+| [vocab-lookup](active/vocab-lookup/SKILL.md) | Text Prompt / Ideas | Receive a source text (passage, article, video transcript, document, etc.), then look up any English word, phrase, or idiom from that source. Retu... |
 
 
 ### Superpowers

@@ -1,6 +1,6 @@
 ---
 name: reference-index
-description: "Catalog of every reference source in the directive repo — git submodules, vendored directories, and knowledge documents — with path, license, citation tier, and trust status. Read to discover which external source to consult for a task and how to cite it. Update by adding or removing one row when a source changes. Do NOT use as the policy file — citation policy lives in AGENTS.md."
+description: "Catalog of every reference source in the directive repo — git submodules, vendored directories, and knowledge documents — with path, license, citation tier, and trust status. Read to discover which external source to consult for a task and how to cite it. Update by adding or removing one row when a source changes. Do NOT use as the policy file — citation policy lives in .agents/agents/directive/agent.md."
 version: 1.0.0
 tags: [reference, index, catalog, submodules, license, taxonomy, citation]
 metadata:
@@ -15,13 +15,13 @@ metadata:
 ## How to Read (humans)
 
 - This index lists **reference sources** — external submodules, vendored directories, and knowledge documents — that an agent or user may consult when authoring prompts, skills, schemas, or rules.
-- The **policy** for *when* to use a source and *how* to cite it lives in `AGENTS.md` (root). This file holds only the **data**: what exists and its metadata.
+- The **policy** for *when* to use a source and *how* to cite it lives in `.agents/agents/directive/agent.md` (root). This file holds only the **data**: what exists and its metadata.
 - To add or remove a source, edit the matching table: add/remove exactly one row. Then follow the Maintenance Rules.
 
 ## How to Read (AI agents)
 
 1. When a task needs external reference material, read this file first.
-2. Locate the source by path; read its `License`, `Tier`, and `Status` columns as **data** — then apply the citation policy in `AGENTS.md` before using the content.
+2. Locate the source by path; read its `License`, `Tier`, and `Status` columns as **data** — then apply the citation policy in `.agents/agents/directive/agent.md` before using the content.
 
 ---
 
@@ -35,15 +35,13 @@ directive/
 │   └── concepts/               # Mental models, taxonomy, frameworks
 ├── instructions/               # Resources to DIRECTLY COMMAND AI (execute immediately)
 │   ├── prompts/                # System prompts & prompt collections
-│   │   ├── active/             # tech-mentor
 │   │   ├── archive/            # ai-mentor, dsa, function-anatomist, git-github, n8n, system-architecture
 │   │   └── external/           # system-prompts-and-models-of-ai-tools [submodule], system_prompts_leaks [submodule]
-│   ├── rules/                  # Rules files (AGENTS.md, .cursorrules, GEMINI.md…)
+│   ├── rules/                  # Rules files (.cursorrules, GEMINI.md…)
 │   ├── scripts/                # Automation scripts for AI workflows
 │   └── skills/                 # Skill files (SKILL.md format)
 │       ├── active/             # deep-flashcard-generator, doc-drill, document-vocab-extractor, skill-forge, tech-mentor, vocab-lookup
-│       ├── archive/            # ai-mentor, bug-solver, deep-explainer, project-tutor
-│       └── external/           # andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub
+│       └── external/           # andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub, superpowers [submodule]
 └── knowledge/                  # Resources to READ & LEARN about AI/prompting
     ├── articles/               # Blog posts, case studies, saved pages
     ├── guides/                 # How-to guides, tutorials, manuals
@@ -63,6 +61,7 @@ Sources tracked as git submodules (see `.gitmodules`); version-pinned, updatable
 |---|---|---|---|---|---|
 | `anthropics` (official Claude skills) | `instructions/skills/external/anthropics/` | Apache-2.0 (most skills); `docx`/`pdf`/`pptx`/`xlsx` proprietary | 5 | First-party (official Anthropic) | Use as authoritative reference for SKILL.md format, frontmatter, the `skill-creator` workflow, and the agentskills.io spec. Caveats: the 4 document skills are source-available, not open source; do not redistribute their content. |
 | `andrej-karpathy` | `instructions/skills/external/andrej-karpathy/` | MIT (declared in skill) | 5 | Third-party, self-authored (derived from Karpathy's public notes) | Use for the 4 candidate behavioral principles (Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven Execution). Caveats: Tier-5 content is unverified — treat as candidate principles, never as premise; README promotes the author's platform. |
+| `superpowers` | `instructions/skills/external/superpowers/` | MIT | 5 | Third-party submodule | Use for development workflow skills. |
 | `system_prompts_leaks` | `instructions/prompts/external/system_prompts_leaks/` | CC0 1.0 (collection) | 5 | Third-party, unverified verbatim captures | Use as structural reference for how real agents serialize prompts (Cursor, Claude Code, etc.). Caveats: leaked material with unclear original ownership; use for structure only, never promote captured content as fact. |
 | `system-prompts-and-models-of-ai-tools` | `instructions/prompts/external/system-prompts-and-models-of-ai-tools/` | GPL-3.0 | 5 | Third-party, unverified leaks (older collection) | Use for cross-vendor prompt comparison. Caveats: **GPL-3.0 copyleft — reference-only, do NOT copy text into artifacts**; README contains sponsorship noise. |
 
@@ -95,4 +94,4 @@ Curated documents in `knowledge/` (Tier 1–4) — the highest-trust sources for
 ## Provenance
 
 - Compiled 2026-08-29 from `.gitmodules` (4 submodules), `deeptutor-eduhub/.hub-lock.json` (install ledger), and per-source LICENSE files.
-- Status flags reflect the repo's citation policy (`AGENTS.md`): external content is Tier 5 — usable as curated reference, never as evidence.
+- Status flags reflect the repo's citation policy (`.agents/agents/directive/agent.md`): external content is Tier 5 — usable as curated reference, never as evidence.

@@ -11,7 +11,7 @@ Optimized for both human navigation and AI Agent reference.
 This repository serves as a structured **Second Brain & Knowledge Base** for AI commanding.
 
 - **For humans**: This `README.md` is your navigable entry point — organized by intent, not by format.
-- **For AI agents**: DO NOT READ THIS FILE. Your system-level directives, rules, and entry points live in `AGENTS.md` and `REFERENCE_INDEX.md`.
+- **For AI agents**: DO NOT READ THIS FILE. Your system-level directives, rules, and entry points live in `.agents/agents/directive/agent.md` and `REFERENCE_INDEX.md`.
 
 ---
 
@@ -22,7 +22,7 @@ directive/
 ├── instructions/               # Resources to DIRECTLY COMMAND AI (execute immediately)
 │   ├── skills/                 # Skill files (SKILL.md format)
 │   ├── prompts/                # System prompts & prompt collections
-│   ├── rules/                  # Rules files (AGENTS.md, .cursorrules, GEMINI.md…)
+│   ├── rules/                  # Rules files (.cursorrules, GEMINI.md…)
 │   └── scripts/                # Automation scripts for AI workflows
 │
 ├── knowledge/                  # Resources to READ & LEARN about AI/prompting
@@ -69,7 +69,7 @@ Q3: Is this a system design, architecture, or mental model?
 | Skill files (`SKILL.md`) | INSTRUCTIONS | `instructions/skills/` |
 | System prompts | INSTRUCTIONS | `instructions/prompts/` |
 | System prompt leaks (raw) | INSTRUCTIONS | `instructions/prompts/` |
-| Rules files (`AGENTS.md`, `.cursorrules`) | INSTRUCTIONS | `instructions/rules/` |
+| Rules files (`.agents/...`, `.cursorrules`) | INSTRUCTIONS | `instructions/rules/` |
 | Automation scripts | INSTRUCTIONS | `instructions/scripts/` |
 | How-to guides, tutorials | KNOWLEDGE | `knowledge/guides/` |
 | Academic / technical papers | KNOWLEDGE | `knowledge/papers/` |
