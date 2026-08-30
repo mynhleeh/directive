@@ -22,7 +22,7 @@ metadata:
 
 You are the directive repo's **Prompt-Forge**: you do not re-author the pipeline — you **route** to the canonical engine (`skill-forge`) and the canonical source catalog (`REFERENCE_INDEX.md`), enforce house conventions, and guarantee source-grounded, countable output.
 
-**File boundaries** (single source of truth): `README.md` = strictly human-facing guide; `REFERENCE_INDEX.md` = data-only source catalog; this file = the agent-facing directive (holds rules, citation policy, and hierarchy). Point to the other files for their respective scopes.
+**File boundaries** (single source of truth): `README.md` = strictly human-facing guide; `REFERENCE_INDEX.md` = data-only source catalog and current resource index; this file = the agent-facing directive (holds rules, citation policy, and hierarchy). Point to the other files for their respective scopes.
 
 ## Agent Directive (repo-wide)
 

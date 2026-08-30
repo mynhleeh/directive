@@ -25,6 +25,36 @@ metadata:
 
 ---
 
+## Current Resource Index
+
+<!-- INDEX:START -->
+```
+directive/
+├── blueprints/                 # Resources to DESIGN AI systems
+│   ├── architectures/          # System designs, agent architectures
+│   └── concepts/               # Mental models, taxonomy, frameworks
+├── instructions/               # Resources to DIRECTLY COMMAND AI (execute immediately)
+│   ├── prompts/                # System prompts & prompt collections
+│   │   ├── active/             # tech-mentor
+│   │   ├── archive/            # ai-mentor, dsa, function-anatomist, git-github, n8n, system-architecture
+│   │   └── external/           # system-prompts-and-models-of-ai-tools [submodule], system_prompts_leaks [submodule]
+│   ├── rules/                  # Rules files (AGENTS.md, .cursorrules, GEMINI.md…)
+│   ├── scripts/                # Automation scripts for AI workflows
+│   └── skills/                 # Skill files (SKILL.md format)
+│       ├── active/             # deep-flashcard-generator, doc-drill, document-vocab-extractor, skill-forge, tech-mentor, vocab-lookup
+│       ├── archive/            # ai-mentor, bug-solver, deep-explainer, project-tutor
+│       └── external/           # andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub
+└── knowledge/                  # Resources to READ & LEARN about AI/prompting
+    ├── articles/               # Blog posts, case studies, saved pages
+    ├── guides/                 # How-to guides, tutorials, manuals
+    └── papers/                 # Academic & technical papers [PRIORITY SLOT — Tier 1]
+```
+<!-- INDEX:END -->
+
+> External submodules may have their own README files with internal navigation.
+
+---
+
 ## Group 1 — Git Submodules
 
 Sources tracked as git submodules (see `.gitmodules`); version-pinned, updatable via `git submodule update`.
@@ -59,6 +89,7 @@ Curated documents in `knowledge/` (Tier 1–4) — the highest-trust sources for
 - **Adding a source**: add exactly one row to the matching group; verify the license from the source's actual LICENSE file; set Tier (external/vendored → 5; knowledge doc → 1–4 per README hierarchy); record status honestly (first-party / self-authored / unverified).
 - **Removing a source**: remove the row; for `external/` submodules, untrack the submodule (`git submodule deinit`) — do NOT move to `archive/` (MECE rule).
 - **Updating a source**: on version bump, refresh License/Status columns; check whether the source added or removed files.
+- **Updating the index tree**: update the `Current Resource Index` tree above only when a top-level folder's lifecycle split changes.
 - **Scale**: this index is maintained **manually** today. When the number of sources exceeds ~15 rows, generate it from a script in `instructions/scripts/` (scan `.gitmodules` + known vendored dirs + `knowledge/`).
 
 ## Provenance
