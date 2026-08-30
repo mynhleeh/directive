@@ -35,7 +35,7 @@ directive/
 │   └── concepts/               # Mental models, taxonomy, frameworks
 ├── instructions/               # Resources to DIRECTLY COMMAND AI (execute immediately)
 │   ├── prompts/                # System prompts & prompt collections
-│   │   ├── archive/            # ai-mentor, dsa, function-anatomist, git-github, n8n, system-architecture
+│   │   ├── archive/            # dsa, n8n
 │   │   └── external/           # system-prompts-and-models-of-ai-tools [submodule], system_prompts_leaks [submodule]
 │   ├── rules/                  # Rules files (.cursorrules, GEMINI.md…)
 │   ├── scripts/                # Automation scripts for AI workflows

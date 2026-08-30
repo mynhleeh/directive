@@ -103,7 +103,7 @@ If a folder has only one type of resource, files sit directly in that folder (im
 - `external/` contains **only third-party resources**.
 - When an `external/` resource is no longer needed → **remove/untrack the submodule** (do not move to `archive/`).
 
-Currently split folders: `instructions/skills/` (`active/` + `archive/` + `external/`), `instructions/prompts/` (`active/` + `archive/` + `external/`).
+Currently split folders: `instructions/skills/` (`active/` + `external/`), `instructions/prompts/` (`archive/` + `external/`).
 
 ---
 
