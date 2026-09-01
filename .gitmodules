@@ -16,3 +16,6 @@
 [submodule "instructions/skills/external/AI-Research-SKILLs"]
 	path = instructions/skills/external/AI-Research-SKILLs
 	url = https://github.com/Orchestra-Research/AI-Research-SKILLs.git
+[submodule "instructions/skills/external/ui-ux-pro-max-skill"]
+	path = instructions/skills/external/ui-ux-pro-max-skill
+	url = https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git
