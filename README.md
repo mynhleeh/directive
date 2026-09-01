@@ -52,6 +52,7 @@ The repository incorporates several external repositories and registries for res
 | [**system-prompts-and-models-of-ai-tools**](instructions/prompts/external/system-prompts-and-models-of-ai-tools/) | Older collection of AI tool system prompts for cross-vendor comparison. | Git Submodule |
 | [**ui-ux-pro-max-skill**](instructions/skills/external/ui-ux-pro-max-skill/) | AI-powered design intelligence and UI/UX engineering workflows. | Git Submodule |
 | [**deeptutor-eduhub**](instructions/skills/external/deeptutor-eduhub/) | Education and tutoring skill patterns via EduHub registry. | Vendored Dir |
+| [**Skillboard**](https://www.skillboard.lol/) | Global open-source catalog of custom skills for AI IDEs. | Website |
 
 ---
 

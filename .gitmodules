@@ -19,3 +19,6 @@
 [submodule "instructions/skills/external/ui-ux-pro-max-skill"]
 	path = instructions/skills/external/ui-ux-pro-max-skill
 	url = https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git
+[submodule "instructions/skills/external/orca"]
+	path = instructions/skills/external/orca
+	url = https://github.com/stablyai/orca.git
