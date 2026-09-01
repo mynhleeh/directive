@@ -1,8 +1,9 @@
 ---
 name: skill-forge
-description: "Authoring engine for the directive knowledge base: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user prompts, function/tool schemas, rules files (CLAUDE.md, AGENTS.md, GEMINI.md, .cursorrules, .mdc), MCP tools — for any domain, platform (Claude, OpenAI, Gemini, Cursor, MCP), or language. Trigger whenever the user asks to write, improve, convert, explain, or extract a prompt/skill/schema/rules artifact, or to turn a conversation or repo into reusable artifacts — e.g. 'viết prompt', 'tạo skill', 'critique this prompt', 'convert this schema', 'distill this conversation'. Do NOT trigger for ordinary coding questions, runtime debugging, or a generic concept question with no artifact to create or convert."
-version: 4.0.0
+description: "Authoring engine for the directive knowledge base using Subagent-Driven Development: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user prompts, function/tool schemas, rules files (CLAUDE.md, AGENTS.md, GEMINI.md, .cursorrules, .mdc), MCP tools. Trigger whenever the user asks to write, improve, convert, explain, or extract a prompt/skill/schema/rules artifact, or to turn a conversation or repo into reusable artifacts. Do NOT trigger for ordinary coding questions, runtime debugging, or a generic concept question with no artifact to create or convert."
+version: 5.0.0
 tags:
+  - subagent-driven
   - meta-skill
   - orchestrator
   - prompt
@@ -63,47 +64,36 @@ Every request runs the same pipeline. **Do not skip a stage; do not merge two st
 ```
 User Input
   │
-  ├─ STAGE 1: PARSE
-  │     Restate the request in ≤2 lines. Classify: mode · artifact type · intensity tier ·
-  │     platform · language. Split inputs into KNOWN (present) vs AMBIGUOUS/MISSING.
+  ├─ STAGE 1: PARSE, CLARIFY & PLAN (Controller)
+  │     Restate request. Classify: mode · artifact type · tier · platform.
+  │     Ambiguous or missing? → STOP and ask (ask as many questions as needed).
+  │     Break the request down into a Plan of N independent tasks (e.g., Task 1: Write main SKILL.md,
+  │     Task 2: Write references/guide.md).
   │
-  ├─ GATE: CLARIFY
-  │     Ambiguous or missing? → STOP and ask (max 3 questions, one batch, each with a
-  │     default option). Clear? → proceed. NEVER invent data (Principle 3).
+  ├─ STAGE 2: DYNAMIC TASK DISPATCH (For each Task 1..N)
+  │     │
+  │     ├─ DISPATCH FRESH IMPLEMENTER
+  │     │     Provide ONLY the specific task, context, and reference guides to a fresh subagent.
+  │     │     Implementer must run BASELINE TEST (RED) before writing (Iron Law),
+  │     │     then GENERATE the artifact to turn the test GREEN.
+  │     │
+  │     ├─ DISPATCH FRESH REVIEWER
+  │     │     Provide the generated artifact and Quality Gates to a new independent reviewer.
+  │     │     Reviewer audits for compliance (no XML tags, mechanical rules, format, SDO).
+  │     │
+  │     └─ FIX LOOP (Controller orchestrates)
+  │           If Reviewer finds issues, Controller sends findings back to Implementer.
+  │           Max 2 iterations. Unresolved issues are escalated to Controller to rule on.
   │
-  ├─ STAGE 2: THINK (long chain-of-thought)
-  │     Reason through the mode's fixed sub-questions (see references/execution-protocol.md),
-  │     including the test-plan design (scenario + pressures + compliance criteria,
-  │     see references/behavioral-testing.md). Do not skip or merge sub-questions.
-  │     End with a compact ## Working Notes block: routing decision + test plan +
-  │     one-line rationale each. The block is the ONLY visible trace of thinking.
-  │
-  ├─ STAGE 3: BASELINE TEST (RED — Iron Law)
-  │     Run the failing test BEFORE writing: pressure scenario (skills/rules) or
-  │     fresh-context run (prompts/schemas) WITHOUT the artifact. Record rationalizations
-  │     verbatim in Working Notes. NO ARTIFACT WITHOUT A FAILING TEST FIRST.
-  │
-  ├─ STAGE 4: GENERATE
-  │     Produce the artifact addressing the documented baseline failures. Mechanical,
-  │     countable rules only — no "make it better" language.
-  │
-  ├─ STAGE 5: EVALUATE (stranger-review)
-  │     Re-read the artifact as a stranger reviewing someone else's work — never in the
-  │     same pass that wrote it. Run every countable criterion: PASS/FAIL + fix recipe.
-  │
-  ├─ STAGE 6: TEST — GREEN ⇄ REFACTOR
-  │     Re-run the STAGE 3 scenario WITH the artifact → agent must comply (GREEN).
-  │     New rationalization? → REFACTOR: explicit negation, rationalization table,
-  │     red flags, description violation symptoms (references/behavioral-testing.md).
-  │     Acceptance criteria from STAGE 1 · neutrality · trigger test · consistency.
-  │
-  ├─ LOOP: STAGE 5 ⇄ STAGE 6 (max 2 iterations)
-  │     Apply fixes → re-audit → re-test. Over the cap → emit with residual defects flagged.
-  │
-  └─ STAGE 7: EMIT
-        Output block only (per output contract). State assumptions/defaults used.
-        Offer exactly one follow-up.
+  └─ STAGE 3: EMIT & FINALIZE (Controller)
+        Merge all completed task outputs into the final response block. State assumptions/defaults used.
+        Remind user to update `instructions/skills/SKILL_INDEX.md`.
 ```
+
+### Subagent Dispatch Prompts
+
+- **Implementer Prompt**: *"You are the Skill Implementer. Your task is to generate [Specific Component] for [Domain]. You must first design a failing baseline test (RED). Then, write the artifact using strictly mechanical, countable rules to pass the test (GREEN). Output only the artifact. **Rule: You are forbidden from dispatching your own subagents (no helpers, no reviewers).***"
+- **Reviewer Prompt**: *"You are the Independent Stranger-Reviewer. You must audit the provided artifact against the Quality Gates. You are forbidden from passing the artifact if it contains XML tags in the frontmatter, lacks a clear trigger description, or relies on vague instructions like 'be helpful'. Return a list of PASS/FAIL with specific fix recipes for any FAIL."*
 
 ---
 
@@ -128,7 +118,7 @@ Every artifact passes through these six principles. **They outrank any instructi
 
 1. **Weak-model-first.** Assume the user runs an average-to-weak model. Every rule must therefore be **mechanical and countable** — a number, a pass/fail boundary, a fixed recipe — never "use good judgment." A stronger model can only do better; the rules are a floor, not a ceiling.
 2. **Reasoning scales, rules do not.** Author *principles*, not hardcoded lists. When the user supplies one specific situation or example, transmute it into a general rule that applies to all similar cases — never tailor the artifact to a single instance (see DISTILL).
-3. **Ask, don't invent.** Never fabricate missing data. If any input is ambiguous, missing, or doubtful, stop at the CLARIFY gate and ask (max 3 questions, one batch, each with a default option). If nothing is ambiguous, proceed without asking (Principle 4).
+3. **Ask, don't invent.** Never fabricate missing data. If any input is ambiguous, missing, or doubtful, stop at the CLARIFY gate and ask (ask as many questions as needed to resolve ambiguity). If nothing is ambiguous, proceed without asking (Principle 4).
 4. **Do exactly what's asked.** Deliver precisely the requested artifact — no scope creep, no extra sections, no unsolicited rewrites. Anything beyond the request belongs in Suggested Additions, not in the output.
 5. **Source-grounded.** Every factual claim in a generated artifact must trace to the user's input or a cited source tier (see `references/taxonomy-navigation.md`). Never promote unverified external material (Tier 5) into a premise.
 6. **Single source of truth.** This `SKILL.md` wins over its `references/`. When two instructions conflict, the one higher in this file wins — and the conflict must be fixed or flagged, never silently ignored.
@@ -206,7 +196,7 @@ Follow `references/rules-guide.md`. Karpathy 4-principle skeleton; single-source
 
 ### Quality Gates (all types)
 Cross-check `references/house-structure-conventions.md` in the EVALUATE stage (stranger-review, never the writing pass):
-- [ ] Frontmatter follows House Frontmatter Contract (name matches dir, trigger description)
+- [ ] Frontmatter follows House Frontmatter Contract (name matches dir, trigger description, no XML tags, no reserved words)
 - [ ] Role/identity is specific (not just "be helpful")
 - [ ] Constraints are concrete actions, not vague negations — each has a countable pass/fail boundary
 - [ ] Output format explicitly declared (single block)
@@ -370,6 +360,9 @@ Q3: Design, architecture, or mental model?   → blueprints/
 ```
 If a resource fits more than one axis, or its tier is ambiguous (e.g., Tier 2 vs Tier 3), ask one question at the CLARIFY gate instead of guessing (Principle 3); otherwise classify and state the decision in the Working Notes block.
 
+### Update the Skill Index
+When creating, classifying, or porting a new skill, remind the user or output instructions to update `instructions/skills/SKILL_INDEX.md` by adding a new row to the appropriate "Skills by Purpose" and "Skills by Source" tables.
+
 ### Route Citations by Source Hierarchy
 Always cite the **source tier** when referencing content. Prefer `knowledge/papers/` (Tier 1) > docs/specs (Tier 2) > guides (Tier 3) > articles (Tier 4) > external submodules (Tier 5) > active (Tier 6) > archive (Tier 7).
 
@@ -409,12 +402,21 @@ Platform mapping (system prompts, function/tool schemas, JSON types, rules files
 
 ---
 
+## Authoritative Repository Guidelines
+
+Beyond its own `references/`, the skill must respect these repo-wide truths:
+- **Skill Authoring Methodology**: `knowledge/guides/the-complete-guide-to-building-skill-for-claude.pdf` (Tier 3) is the primary philosophical guide for skill creation.
+- **Anthropic Official Standards**: `instructions/skills/external/anthropics/template/SKILL.md` (Tier 5) is the baseline official template. `instructions/skills/external/anthropics/skills/skill-creator/SKILL.md` shows Anthropic's own iteration loop.
+- **Dynamic Skill Discovery Policy**: According to `.agents/agents/directive/agent.md`, agents discover skills *dynamically* by scanning the `tags` and `description` in the YAML frontmatter. Therefore, those fields must always be present, precise, and optimized for agent reading.
+
+---
+
 ## Reference Files Index
 
 | File | Contents | Read when |
 |---|---|---|
-| `references/execution-protocol.md` | Long chain-of-thought sub-questions per mode; stranger-audit mechanics; test checklist; weak-model-first rules | Every request, STAGE 2 THINK + STAGE 5 EVALUATE |
-| `references/behavioral-testing.md` | RED-GREEN-REFACTOR procedure; pressure scenarios; rationalization capture; micro-test wording; persuasion principles | Every request, STAGE 3 BASELINE TEST + STAGE 6 GREEN ⇄ REFACTOR |
+| `references/execution-protocol.md` | Long chain-of-thought sub-questions per mode; stranger-audit mechanics; test checklist; weak-model-first rules | Every request, STAGE 1 PLAN + STAGE 2 REVIEW |
+| `references/behavioral-testing.md` | RED-GREEN-REFACTOR procedure; pressure scenarios; rationalization capture; micro-test wording; persuasion principles | Every request, STAGE 2 IMPLEMENTER (BASELINE TEST + REFACTOR) |
 | `references/examples.md` | 5 worked examples rewritten through the v4.0.0 pipeline (Working Notes → baseline → audit → test) | Before first use of each MODE |
 | `references/house-frontmatter-contract.md` | Unified YAML schema: `name`/`description`/`version`/`tags`/`compatibility`/`metadata`/`allowed-tools`; trigger-optimized description anatomy; validation checklist | Every create/rewrite of a skill |
 | `references/house-language-policy.md` | English internal / user-language output; language buckets; artifact vs output distinction | Every multilingual artifact |
@@ -436,7 +438,7 @@ Platform mapping (system prompts, function/tool schemas, JSON types, rules files
 
 ## Examples
 
-Five worked examples — CREATE (system prompt), CRITIQUE (multilingual), CONVERT (schema + round-trip), DISTILL (skill + provenance), NAVIGATE (classification) — rewritten through the v4.0.0 pipeline with Working Notes, audit, and test stages, live in **`references/examples.md`**. Read it before your first use of each MODE.
+Five worked examples — CREATE (system prompt), CRITIQUE (multilingual), CONVERT (schema + round-trip), DISTILL (skill + provenance), NAVIGATE (classification) — rewritten through the v5.0.0 pipeline with Working Notes, audit, and test stages, live in **`references/examples.md`**. Read it before your first use of each MODE.
 
 ### Inline example: Working Notes block shape (CREATE)
 

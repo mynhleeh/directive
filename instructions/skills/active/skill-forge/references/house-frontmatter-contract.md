@@ -30,8 +30,8 @@ allowed-tools: "read_file,write_file"   # optional — space-separated pre-appro
 
 | Field | Required | Constraint | Purpose |
 |---|---|---|---|
-| `name` | **Yes** | Kebab-case; max 64 chars; lowercase alphanumerics + hyphens; no leading/trailing/consecutive hyphens; **must match parent directory name** | Identity; used by the launcher to route to the skill |
-| `description` | **Yes** | Max 1024 chars; state **what it does AND when to use it**; include trigger keywords | The activation/discovery signal |
+| `name` | **Yes** | Kebab-case; max 64 chars; lowercase alphanumerics + hyphens; no leading/trailing/consecutive hyphens; **must match parent directory name**; **cannot contain XML tags**; **cannot contain reserved words: "anthropic", "claude"** | Identity; used by the launcher to route to the skill |
+| `description` | **Yes** | Max 1024 chars; state **what it does AND when to use it**; include trigger keywords; **cannot contain XML tags** | The activation/discovery signal |
 | `version` | No | Semantic version (e.g., `1.0.0`) | Change tracking |
 | `tags` | No | Array of keywords | Categorization / semantic search |
 | `license` | No | License name or reference | Only for redistributable content |
@@ -93,8 +93,8 @@ Resolve the conflict between `description`-embedded triggers and a body `## When
 Run as a **stranger-review** — separate re-read after writing; each item PASS/FAIL with evidence, then re-check failed items (max 2 iterations).
 
 - [ ] `name` is kebab-case and **exactly matches** the parent directory name
-- [ ] `name` ≤ 64 chars; no `_`, spaces, or uppercase
-- [ ] `description` ≤ 1024 chars
+- [ ] `name` ≤ 64 chars; no `_`, spaces, uppercase, XML tags, or reserved words ("anthropic", "claude")
+- [ ] `description` ≤ 1024 chars; no XML tags
 - [ ] `description` contains both **what** it does and **when** to trigger
 - [ ] `description` includes at least one near-miss negative (SKIP condition)
 - [ ] `description` contains **0 workflow-summary verbs** ("generates", "critiques", "converts", "distills"…) — behavior, not steps (SDO rule)
