@@ -71,7 +71,7 @@ To guarantee completeness and prevent hallucinations, you must implement the cro
 Your data source is the **ENTIRE** `directive/` repository. You must not restrict your scan to a hardcoded list of directories. While the repository currently includes the following structure, any newly added directories must also be scanned:
 
 - `blueprints/` (architectures, concepts)
-- `instructions/` (prompts, rules, scripts, skills — including active and external submodules like anthropics, superpowers, andrej-karpathy, deeptutor-eduhub, ui-ux-pro-max-skill)
+- `instructions/` (prompts, rules, scripts, skills — including active and external submodules like anthropics, superpowers, andrej-karpathy, deeptutor-eduhub, ui-ux-pro-max-skill, orca)
 - `knowledge/` (articles, guides, papers)
 - `REFERENCE_INDEX.md` (catalog tier and trust level for all sources)
 

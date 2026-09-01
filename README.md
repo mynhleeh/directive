@@ -51,6 +51,7 @@ The repository incorporates several external repositories and registries for res
 | [**system_prompts_leaks**](instructions/prompts/external/system_prompts_leaks/) | Structural references of leaked system prompts (Claude Code, Cursor, etc.). | Git Submodule |
 | [**system-prompts-and-models-of-ai-tools**](instructions/prompts/external/system-prompts-and-models-of-ai-tools/) | Older collection of AI tool system prompts for cross-vendor comparison. | Git Submodule |
 | [**ui-ux-pro-max-skill**](instructions/skills/external/ui-ux-pro-max-skill/) | AI-powered design intelligence and UI/UX engineering workflows. | Git Submodule |
+| [**orca**](instructions/skills/external/orca/) | The AI Orchestrator for 100x builders (Codex, ClaudeCode, OpenCode, Pi). | Git Submodule |
 | [**deeptutor-eduhub**](instructions/skills/external/deeptutor-eduhub/) | Education and tutoring skill patterns via EduHub registry. | Vendored Dir |
 | [**Skillboard**](https://www.skillboard.lol/) | Global open-source catalog of custom skills for AI IDEs. | Website |
 

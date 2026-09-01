@@ -41,7 +41,7 @@ directive/
 │   ├── scripts/                # Automation scripts for AI workflows
 │   └── skills/                 # Skill files (SKILL.md format)
 │       ├── active/             # deep-flashcard-generator, doc-drill, document-vocab-extractor, skill-forge, tech-mentor, vocab-lookup
-│       └── external/           # AI-Research-SKILLs [submodule], andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub, superpowers [submodule], ui-ux-pro-max-skill [submodule]
+│       └── external/           # AI-Research-SKILLs [submodule], andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub, orca [submodule], superpowers [submodule], ui-ux-pro-max-skill [submodule]
 └── knowledge/                  # Resources to READ & LEARN about AI/prompting
     ├── articles/               # Blog posts, case studies, saved pages
     ├── guides/                 # How-to guides, tutorials, manuals
@@ -66,6 +66,7 @@ Sources tracked as git submodules (see `.gitmodules`); version-pinned, updatable
 | `system_prompts_leaks` | `instructions/prompts/external/system_prompts_leaks/` | CC0 1.0 (collection) | 5 | Third-party, unverified verbatim captures | Use as structural reference for how real agents serialize prompts (Cursor, Claude Code, etc.). Caveats: leaked material with unclear original ownership; use for structure only, never promote captured content as fact. |
 | `system-prompts-and-models-of-ai-tools` | `instructions/prompts/external/system-prompts-and-models-of-ai-tools/` | GPL-3.0 | 5 | Third-party, unverified leaks (older collection) | Use for cross-vendor prompt comparison. Caveats: **GPL-3.0 copyleft — reference-only, do NOT copy text into artifacts**; README contains sponsorship noise. |
 | `ui-ux-pro-max-skill` | `instructions/skills/external/ui-ux-pro-max-skill/` | MIT | 5 | Third-party submodule | Use for AI-powered design intelligence, UI/UX workflows, and asset generation. |
+| `orca` | `instructions/skills/external/orca/` | MIT | 5 | Third-party submodule | Use for AI orchestrator tools and related workflows. |
 
 ## Group 2 — Vendored Directories (not git submodules)
 
@@ -95,5 +96,5 @@ Curated documents in `knowledge/` (Tier 1–4) — the highest-trust sources for
 
 ## Provenance
 
-- Compiled 2026-08-30 from `.gitmodules` (5 submodules), `deeptutor-eduhub/.hub-lock.json` (install ledger), and per-source LICENSE files.
+- Compiled 2026-09-01 from `.gitmodules` (8 submodules), `deeptutor-eduhub/.hub-lock.json` (install ledger), and per-source LICENSE files.
 - Status flags reflect the repo's citation policy (`.agents/agents/directive/agent.md`): external content is Tier 5 — usable as curated reference, never as evidence.
