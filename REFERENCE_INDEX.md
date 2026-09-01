@@ -41,7 +41,7 @@ directive/
 │   ├── scripts/                # Automation scripts for AI workflows
 │   └── skills/                 # Skill files (SKILL.md format)
 │       ├── active/             # deep-flashcard-generator, doc-drill, document-vocab-extractor, skill-forge, tech-mentor, vocab-lookup
-│       └── external/           # AI-Research-SKILLs [submodule], andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub, superpowers [submodule]
+│       └── external/           # AI-Research-SKILLs [submodule], andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub, superpowers [submodule], ui-ux-pro-max-skill [submodule]
 └── knowledge/                  # Resources to READ & LEARN about AI/prompting
     ├── articles/               # Blog posts, case studies, saved pages
     ├── guides/                 # How-to guides, tutorials, manuals
@@ -65,6 +65,7 @@ Sources tracked as git submodules (see `.gitmodules`); version-pinned, updatable
 | `superpowers` | `instructions/skills/external/superpowers/` | MIT | 5 | Third-party submodule | Use for development workflow skills. |
 | `system_prompts_leaks` | `instructions/prompts/external/system_prompts_leaks/` | CC0 1.0 (collection) | 5 | Third-party, unverified verbatim captures | Use as structural reference for how real agents serialize prompts (Cursor, Claude Code, etc.). Caveats: leaked material with unclear original ownership; use for structure only, never promote captured content as fact. |
 | `system-prompts-and-models-of-ai-tools` | `instructions/prompts/external/system-prompts-and-models-of-ai-tools/` | GPL-3.0 | 5 | Third-party, unverified leaks (older collection) | Use for cross-vendor prompt comparison. Caveats: **GPL-3.0 copyleft — reference-only, do NOT copy text into artifacts**; README contains sponsorship noise. |
+| `ui-ux-pro-max-skill` | `instructions/skills/external/ui-ux-pro-max-skill/` | MIT | 5 | Third-party submodule | Use for AI-powered design intelligence, UI/UX workflows, and asset generation. |
 
 ## Group 2 — Vendored Directories (not git submodules)
 

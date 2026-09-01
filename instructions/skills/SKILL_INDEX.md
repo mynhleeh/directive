@@ -22,6 +22,7 @@ This document provides a comprehensive index of all skills available in the inst
   - [Karpathy](#karpathy)
   - [Owner](#owner)
   - [Superpowers](#superpowers)
+  - [UI/UX Pro Max](#ui-ux-pro-max)
 
 ---
 
@@ -293,6 +294,12 @@ Skills are grouped by their primary function to help you select the best tool fo
 | [theme-factory](external/anthropics/skills/theme-factory/SKILL.md) | Anthropic | Codebase / Repository | Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes w... |
 | [vocab-lookup](active/vocab-lookup/SKILL.md) | Owner | Text Prompt / Ideas | Receive a source text (passage, article, video transcript, document, etc.), then look up any English word, phrase, or idiom from that source. Retur... |
 | [vocab-lookup](external/deeptutor-eduhub/vocab-lookup/SKILL.md) | DeepTutor | Text Prompt / Ideas | Receive a source text (passage, article, video transcript, document, etc.), then look up any English word, phrase, or idiom from that source. Retur... |
+| [banner-design](external/ui-ux-pro-max-skill/cli/assets/skills/banner-design/SKILL.md) | UI/UX Pro Max | Design Ideas / UI Specs | Design banners for social media, ads, website heroes, creative assets, and print. Multiple art direction options with optional generated or supplied visuals. |
+| [brand](external/ui-ux-pro-max-skill/cli/assets/skills/brand/SKILL.md) | UI/UX Pro Max | Design Ideas / UI Specs | Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets. |
+| [design](external/ui-ux-pro-max-skill/cli/assets/skills/design/SKILL.md) | UI/UX Pro Max | Design Ideas / UI Specs | Comprehensive design skill: brand identity, design tokens, UI styling, logo generation, corporate identity program, HTML presentations, banner design, icon design, social photos. |
+| [design-system](external/ui-ux-pro-max-skill/cli/assets/skills/design-system/SKILL.md) | UI/UX Pro Max | Design Ideas / UI Specs | Token architecture, component specifications, and slide generation. Three-layer tokens, CSS variables, spacing/typography scales, component specs. |
+| [slides](external/ui-ux-pro-max-skill/cli/assets/skills/slides/SKILL.md) | UI/UX Pro Max | Design Ideas / UI Specs | Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies. |
+| [ui-styling](external/ui-ux-pro-max-skill/cli/assets/skills/ui-styling/SKILL.md) | UI/UX Pro Max | Design Ideas / UI Specs | Create beautiful, accessible user interfaces with shadcn/ui components, Tailwind CSS utility-first styling, and canvas-based visual designs. |
 
 
 ## 2. Skills by Source
@@ -540,3 +547,15 @@ Skills are grouped by their origin. This helps you explore skills within a speci
 | [writing-plans](external/superpowers/skills/writing-plans/SKILL.md) | Codebase / Repository | Use when you have a spec or requirements for a multi-step task, before touching code |
 | [writing-skills](external/superpowers/skills/writing-skills/SKILL.md) | Text Prompt / Ideas | Use when creating new skills, editing existing skills, or verifying skills work before deployment |
 
+
+
+### UI/UX Pro Max
+
+| Skill Name | Target / Input | Description |
+|---|---|---|
+| [banner-design](external/ui-ux-pro-max-skill/cli/assets/skills/banner-design/SKILL.md) | Design Ideas / UI Specs | Design banners for social media, ads, website heroes, creative assets, and print. Multiple art direction options with optional generated or supplied visuals. |
+| [brand](external/ui-ux-pro-max-skill/cli/assets/skills/brand/SKILL.md) | Design Ideas / UI Specs | Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets. |
+| [design](external/ui-ux-pro-max-skill/cli/assets/skills/design/SKILL.md) | Design Ideas / UI Specs | Comprehensive design skill: brand identity, design tokens, UI styling, logo generation, corporate identity program, HTML presentations, banner design, icon design, social photos. |
+| [design-system](external/ui-ux-pro-max-skill/cli/assets/skills/design-system/SKILL.md) | Design Ideas / UI Specs | Token architecture, component specifications, and slide generation. Three-layer tokens, CSS variables, spacing/typography scales, component specs. |
+| [slides](external/ui-ux-pro-max-skill/cli/assets/skills/slides/SKILL.md) | Design Ideas / UI Specs | Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies. |
+| [ui-styling](external/ui-ux-pro-max-skill/cli/assets/skills/ui-styling/SKILL.md) | Design Ideas / UI Specs | Create beautiful, accessible user interfaces with shadcn/ui components, Tailwind CSS utility-first styling, and canvas-based visual designs. |
