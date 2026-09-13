@@ -34,14 +34,16 @@ directive/
 │   ├── architectures/          # System designs, agent architectures
 │   └── concepts/               # Mental models, taxonomy, frameworks
 ├── instructions/               # Resources to DIRECTLY COMMAND AI (execute immediately)
+│   ├── agents/                 # Custom agent configurations (directive, omni)
 │   ├── prompts/                # System prompts & prompt collections
+│   │   ├── active/             # psychological-counselor
 │   │   ├── archive/            # dsa, n8n
 │   │   └── external/           # system-prompts-and-models-of-ai-tools [submodule], system_prompts_leaks [submodule]
 │   ├── rules/                  # Rules files (.cursorrules, GEMINI.md…)
 │   ├── scripts/                # Automation scripts for AI workflows
 │   └── skills/                 # Skill files (SKILL.md format)
-│       ├── active/             # deep-flashcard-generator, doc-drill, document-vocab-extractor, skill-forge, tech-mentor, vocab-lookup
-│       └── external/           # AI-Research-SKILLs [submodule], andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub, orca [submodule], superpowers [submodule], ui-ux-pro-max-skill [submodule]
+│       ├── active/             # deep-flashcard-generator, doc-drill, document-vocab-extractor, oj-problem-extractor, skill-forge, tech-mentor, vocab-lookup
+│       └── external/           # AI-Research-SKILLs [submodule], andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub, humanizer [submodule], orca [submodule], superpowers [submodule], ui-ux-pro-max-skill [submodule]
 └── knowledge/                  # Resources to READ & LEARN about AI/prompting
     ├── articles/               # Blog posts, case studies, saved pages
     ├── guides/                 # How-to guides, tutorials, manuals
@@ -67,6 +69,7 @@ Sources tracked as git submodules (see `.gitmodules`); version-pinned, updatable
 | `system-prompts-and-models-of-ai-tools` | `instructions/prompts/external/system-prompts-and-models-of-ai-tools/` | GPL-3.0 | 5 | Third-party, unverified leaks (older collection) | Use for cross-vendor prompt comparison. Caveats: **GPL-3.0 copyleft — reference-only, do NOT copy text into artifacts**; README contains sponsorship noise. |
 | `ui-ux-pro-max-skill` | `instructions/skills/external/ui-ux-pro-max-skill/` | MIT | 5 | Third-party submodule | Use for AI-powered design intelligence, UI/UX workflows, and asset generation. |
 | `orca` | `instructions/skills/external/orca/` | MIT | 5 | Third-party submodule | Use for AI orchestrator tools and related workflows. |
+| `humanizer` | `instructions/skills/external/humanizer/` | MIT | 5 | Third-party submodule | Use for rewriting and editing AI-sounding text to remove stock AI writing tells and align with natural human voice. Caveats: Tier-5 reference material. |
 
 ## Group 2 — Vendored Directories (not git submodules)
 
@@ -96,5 +99,5 @@ Curated documents in `knowledge/` (Tier 1–4) — the highest-trust sources for
 
 ## Provenance
 
-- Compiled 2026-09-01 from `.gitmodules` (8 submodules), `deeptutor-eduhub/.hub-lock.json` (install ledger), and per-source LICENSE files.
+- Compiled 2026-09-13 from `.gitmodules` (9 submodules), `deeptutor-eduhub/.hub-lock.json` (install ledger), and per-source LICENSE files.
 - Status flags reflect the repo's citation policy (`.agents/agents/directive/agent.md`): external content is Tier 5 — usable as curated reference, never as evidence.

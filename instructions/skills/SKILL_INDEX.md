@@ -19,6 +19,7 @@ This document provides a comprehensive index of all skills available in the inst
   - [AI-Research-SKILLs](#ai-research-skills)
   - [Anthropic](#anthropic)
   - [DeepTutor](#deeptutor)
+  - [Humanizer](#humanizer)
   - [Karpathy](#karpathy)
   - [Owner](#owner)
   - [Superpowers](#superpowers)
@@ -142,16 +143,17 @@ Skills are grouped by their primary function to help you select the best tool fo
 |---|---|---|---|---|
 | 1 | [eduhub-skill-manager](external/deeptutor-eduhub/eduhub-skill-manager/SKILL.md) | DeepTutor | Design Ideas / UI Specs | Guide an agent through using the eduhub CLI to discover, inspect, install, package, publish, and verify Codex skills on an EduHub registry. Use whe... |
 | 2 | [karpathy-guidelines](external/andrej-karpathy/skills/karpathy-guidelines/SKILL.md) | Karpathy | Codebase / Repository | Behavioral guidelines to reduce common LLM coding mistakes. Use when writing, reviewing, or refactoring code to avoid overcomplication, make surgic... |
-| 3 | [python-playground-coach](external/deeptutor-eduhub/python-playground-coach/SKILL.md) | DeepTutor | Codebase / Repository | Teach beginner Python through tiny runnable challenges, hints, and debugging questions. Use when the learner wants to learn Python basics, understa... |
-| 4 | [receiving-code-review](external/superpowers/skills/receiving-code-review/SKILL.md) | Superpowers | Codebase / Repository | Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requir... |
-| 5 | [requesting-code-review](external/superpowers/skills/requesting-code-review/SKILL.md) | Superpowers | Codebase / Repository | Use when completing tasks, implementing major features, or before merging to verify work meets requirements |
-| 6 | [systematic-debugging](external/superpowers/skills/systematic-debugging/SKILL.md) | Superpowers | Codebase / Repository | Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes |
-| 7 | [tech-mentor](active/tech-mentor/SKILL.md) | Owner | Files / Documents | The unified AI tech mentor — a deep engine that explains concepts, dissects functions, tutors projects, teaches tools, designs systems, and fixes b... |
-| 8 | [test-driven-development](external/superpowers/skills/test-driven-development/SKILL.md) | Superpowers | Codebase / Repository | Use when implementing any feature or bugfix, before writing implementation code |
-| 9 | [using-git-worktrees](external/superpowers/skills/using-git-worktrees/SKILL.md) | Superpowers | Codebase / Repository | Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace... |
-| 10 | [webapp-testing](external/anthropics/skills/webapp-testing/SKILL.md) | Anthropic | Codebase / Repository | Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior,... |
-| 11 | [writing-plans](external/superpowers/skills/writing-plans/SKILL.md) | Superpowers | Codebase / Repository | Use when you have a spec or requirements for a multi-step task, before touching code |
-| 12 | [zuowen-score-expert](external/deeptutor-eduhub/zuowen-score-expert/SKILL.md) | DeepTutor | Project Ideas / Specs | Full-spectrum Chinese composition tutoring skill for the Composition Score Expert persona. Use when Codex needs to coach students on Chinese essay ... |
+| 3 | [oj-problem-extractor](active/oj-problem-extractor/SKILL.md) | Owner | Web Context / Text | Extracts programming problem descriptions from Online Judge (OJ) websites dynamically based on their original structure when triggered by "extract" or "/oj-problem-extractor". |
+| 4 | [python-playground-coach](external/deeptutor-eduhub/python-playground-coach/SKILL.md) | DeepTutor | Codebase / Repository | Teach beginner Python through tiny runnable challenges, hints, and debugging questions. Use when the learner wants to learn Python basics, understa... |
+| 5 | [receiving-code-review](external/superpowers/skills/receiving-code-review/SKILL.md) | Superpowers | Codebase / Repository | Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requir... |
+| 6 | [requesting-code-review](external/superpowers/skills/requesting-code-review/SKILL.md) | Superpowers | Codebase / Repository | Use when completing tasks, implementing major features, or before merging to verify work meets requirements |
+| 7 | [systematic-debugging](external/superpowers/skills/systematic-debugging/SKILL.md) | Superpowers | Codebase / Repository | Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes |
+| 8 | [tech-mentor](active/tech-mentor/SKILL.md) | Owner | Files / Documents | The unified AI tech mentor — a deep engine that explains concepts, dissects functions, tutors projects, teaches tools, designs systems, and fixes b... |
+| 9 | [test-driven-development](external/superpowers/skills/test-driven-development/SKILL.md) | Superpowers | Codebase / Repository | Use when implementing any feature or bugfix, before writing implementation code |
+| 10 | [using-git-worktrees](external/superpowers/skills/using-git-worktrees/SKILL.md) | Superpowers | Codebase / Repository | Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace... |
+| 11 | [webapp-testing](external/anthropics/skills/webapp-testing/SKILL.md) | Anthropic | Codebase / Repository | Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior,... |
+| 12 | [writing-plans](external/superpowers/skills/writing-plans/SKILL.md) | Superpowers | Codebase / Repository | Use when you have a spec or requirements for a multi-step task, before touching code |
+| 13 | [zuowen-score-expert](external/deeptutor-eduhub/zuowen-score-expert/SKILL.md) | DeepTutor | Project Ideas / Specs | Full-spectrum Chinese composition tutoring skill for the Composition Score Expert persona. Use when Codex needs to coach students on Chinese essay ... |
 
 
 ### Cognitive Frameworks
@@ -241,17 +243,18 @@ Skills are grouped by their primary function to help you select the best tool fo
 | 1 | [dispatching-parallel-agents](external/superpowers/skills/dispatching-parallel-agents/SKILL.md) | Superpowers | Text Prompt / Ideas | Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies |
 | 2 | [finishing-a-development-branch](external/superpowers/skills/finishing-a-development-branch/SKILL.md) | Superpowers | Text Prompt / Ideas | Use when implementation is complete, all tests pass, and you need to decide how to integrate the work |
 | 3 | [grill-me](external/deeptutor-eduhub/grill-me/SKILL.md) | DeepTutor | Text Prompt / Ideas | grill-me from mattpocock |
-| 4 | [primary-school-homework](external/deeptutor-eduhub/primary-school-homework/SKILL.md) | DeepTutor | Text Prompt / Ideas | 小学低年级作业管理助手。支持老师消息解析、睡前检查清单、错题拍照归档、每日闯关复习、每周错题总结（含表扬统计）、备考提醒、作业计时七个模式，适合1-3年级家长使用。 |
-| 5 | [s02-control-variable](external/deeptutor-eduhub/s02-control-variable/SKILL.md) | DeepTutor | Text Prompt / Ideas | 【何时调用】归因时想提高准确率、判断"是它导致结果还是只是相关"，或做 A/B 测试、对照实验、拆解多因素纠缠（如业绩下滑因谁）时。触发词：控制变量（control variables）、是因果还是相关（causal or correlated）、做个对照测试（run a controlled... |
-| 6 | [s03-memory](external/deeptutor-eduhub/s03-memory/SKILL.md) | DeepTutor | Text Prompt / Ideas | 【何时调用】学完就忘、要记术语/外语/考点、备考或准备演讲需稳定长时记忆，或用笔记软件设计高效复习节奏时。触发词：记不住/学完就忘（can't remember）、怎么高效复习（how to review efficiently）、间隔重复（spaced repetition）。 【何时不调用... |
-| 7 | [s04-understanding](external/deeptutor-eduhub/s04-understanding/SKILL.md) | DeepTutor | Text Prompt / Ideas | 当你读不懂/记不住却说不清"为什么"、听懂了却不会用、或要快速入门陌生学科时调用。不要在纯机械记忆(归 s03)、消遣阅读、或领域完全无旧知且无框架可用时调用。触发词: "看不懂/听不懂"、"懂了但用不出来"、"这书太难了"、"I don't get it"、"I can recite but... |
-| 8 | [s08-knowledge-system](external/deeptutor-eduhub/s08-knowledge-system/SKILL.md) | DeepTutor | Text Prompt / Ideas | 用于从零搭建一个领域的知识体系（主题/框架/结构），并理解"知识体系本质=知识之间的关系"。 何时调用：①用户想搭"XX领域"知识体系 ②用户学了很多却混乱、记不住、用不上 ③用户用双链笔记但说不清关系 ④用户做主题阅读想串起多本书。 何时不调用：只需记孤立事实、或问题只涉及单点理解（用 s0... |
-| 9 | [s09-first-principles](external/deeptutor-eduhub/s09-first-principles/SKILL.md) | DeepTutor | Text Prompt / Ideas | 用于逼近事物本质、获取并运用"第一原理"（绝对为真的起点知识），核心思维是极致求根+求真。 何时调用：①用户想看透某事物本质/根源 ②用户做重大决策（创业/战略/择业）想基于根本而非经验 ③用户习惯类比同行却难以创新 ④用户想把自己知识体系收敛到本质。 何时不调用：只是一次性具体技巧、或问题用... |
-| 10 | [s10-transfer-create](external/deeptutor-eduhub/s10-transfer-create/SKILL.md) | DeepTutor | Text Prompt / Ideas | 何时调用：当你需要把已掌握的知识迁移到新领域、想做出真正创新、或要做高确定性决策时使用；含用户想类比/照搬/校仿他人或竞品做法（以为照着做就行）时，激活本 skill 以纠正"真迁移≠简单类比，先抽象到原理再演绎"；用户想创新但自感原理不足时，激活以判停并引导先去 s09 积累第一原理。 何时... |
-| 11 | [skill-creator](external/anthropics/skills/skill-creator/SKILL.md) | Anthropic | Text Prompt / Ideas | Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or ... |
-| 12 | [template-skill](external/anthropics/template/SKILL.md) | Anthropic | Text Prompt / Ideas | Replace with description of the skill and when Claude should use it. |
-| 13 | [universal-flashcard-generator](external/deeptutor-eduhub/universal-flashcard-generator/SKILL.md) | DeepTutor | Text Prompt / Ideas | Trích xuất từ vựng từ mọi loại văn bản đầu vào (danh sách từ, câu, đoạn văn, bài kiểm tra,...) và xuất ra bộ flashcards 6 cột TSV, tương thích với ... |
-| 14 | [writing-skills](external/superpowers/skills/writing-skills/SKILL.md) | Superpowers | Text Prompt / Ideas | Use when creating new skills, editing existing skills, or verifying skills work before deployment |
+| 4 | [humanizer](external/humanizer/SKILL.md) | Humanizer | Text Prompt / Ideas | Rewrite AI-sounding text so it reads like the writer without changing what it says. Use when editing or reviewing prose for AI tells. |
+| 5 | [primary-school-homework](external/deeptutor-eduhub/primary-school-homework/SKILL.md) | DeepTutor | Text Prompt / Ideas | 小学低年级作业管理助手。支持老师消息解析、睡前检查清单、错题拍照归档、每日闯关复习、每周错题总结（含表扬统计）、备考提醒、作业计时七个模式，适合1-3年级家长使用。 |
+| 6 | [s02-control-variable](external/deeptutor-eduhub/s02-control-variable/SKILL.md) | DeepTutor | Text Prompt / Ideas | 【何时调用】归因时想提高准确率、判断"是它导致结果还是只是相关"，或做 A/B 测试、对照实验、拆解多因素纠缠（如业绩下滑因谁）时。触发词：控制变量（control variables）、是因果还是相关（causal or correlated）、做个对照测试（run a controlled... |
+| 7 | [s03-memory](external/deeptutor-eduhub/s03-memory/SKILL.md) | DeepTutor | Text Prompt / Ideas | 【何时调用】学完就忘、要记术语/外语/考点、备考或准备演讲需稳定长时记忆，或用笔记软件设计高效复习节奏时。触发词：记不住/学完就忘（can't remember）、怎么高效复习（how to review efficiently）、间隔重复（spaced repetition）。 【何时不调用... |
+| 8 | [s04-understanding](external/deeptutor-eduhub/s04-understanding/SKILL.md) | DeepTutor | Text Prompt / Ideas | 当你读不懂/记不住却说不清"为什么"、听懂了却不会用、或要快速入门陌生学科时调用。不要在纯机械记忆(归 s03)、消遣阅读、或领域完全无旧知且无框架可用时调用。触发词: "看不懂/听不懂"、"懂了但用不出来"、"这书太难了"、"I don't get it"、"I can recite but... |
+| 9 | [s08-knowledge-system](external/deeptutor-eduhub/s08-knowledge-system/SKILL.md) | DeepTutor | Text Prompt / Ideas | 用于从零搭建一个领域的知识体系（主题/框架/结构），并理解"知识体系本质=知识之间的关系"。 何时调用：①用户想搭"XX领域"知识体系 ②用户学了很多却混乱、记不住、用不上 ③用户用双链笔记但说不清关系 ④用户做主题阅读想串起多本书。 何时不调用：只需记孤立事实、或问题只涉及单点理解（用 s0... |
+| 10 | [s09-first-principles](external/deeptutor-eduhub/s09-first-principles/SKILL.md) | DeepTutor | Text Prompt / Ideas | 用于逼近事物本质、获取并运用"第一原理"（绝对为真的起点知识），核心思维是极致求根+求真。 何时调用：①用户想看透某事物本质/根源 ②用户做重大决策（创业/战略/择业）想基于根本而非经验 ③用户习惯类比同行却难以创新 ④用户想把自己知识体系收敛到本质。 何时不调用：只是一次性具体技巧、或问题用... |
+| 11 | [s10-transfer-create](external/deeptutor-eduhub/s10-transfer-create/SKILL.md) | DeepTutor | Text Prompt / Ideas | 何时调用：当你需要把已掌握的知识迁移到新领域、想做出真正创新、或要做高确定性决策时使用；含用户想类比/照搬/校仿他人或竞品做法（以为照着做就行）时，激活本 skill 以纠正"真迁移≠简单类比，先抽象到原理再演绎"；用户想创新但自感原理不足时，激活以判停并引导先去 s09 积累第一原理。 何时... |
+| 12 | [skill-creator](external/anthropics/skills/skill-creator/SKILL.md) | Anthropic | Text Prompt / Ideas | Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or ... |
+| 13 | [template-skill](external/anthropics/template/SKILL.md) | Anthropic | Text Prompt / Ideas | Replace with description of the skill and when Claude should use it. |
+| 14 | [universal-flashcard-generator](external/deeptutor-eduhub/universal-flashcard-generator/SKILL.md) | DeepTutor | Text Prompt / Ideas | Trích xuất từ vựng từ mọi loại văn bản đầu vào (danh sách từ, câu, đoạn văn, bài kiểm tra,...) và xuất ra bộ flashcards 6 cột TSV, tương thích với ... |
+| 15 | [writing-skills](external/superpowers/skills/writing-skills/SKILL.md) | Superpowers | Text Prompt / Ideas | Use when creating new skills, editing existing skills, or verifying skills work before deployment |
 
 
 ### Project Workflow
@@ -524,9 +527,10 @@ Skills are grouped by their origin. This helps you explore skills within a speci
 | 1 | [deep-flashcard-generator](active/deep-flashcard-generator/SKILL.md) | Files / Documents | Reads any attached document (PDF, DOCX, TXT, images, etc.), exhaustively extracts core concepts and generates high-quality Anki-ready flashcards us... |
 | 2 | [doc-drill](active/doc-drill/SKILL.md) | Text Prompt / Ideas | Activates a document-grounded adaptive batch quiz session (Doc Drill). Use when the user attaches a document (PDF, markdown, notes, slides, etc.) a... |
 | 3 | [document-vocab-extractor](active/document-vocab-extractor/SKILL.md) | Text Prompt / Ideas | Extract English vocabulary from any attached document, regardless of domain. Applies consistent filtering and formatting criteria based on reasonin... |
-| 4 | [skill-forge](active/skill-forge/SKILL.md) | Files / Documents | Authoring engine for the directive knowledge base: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user ... |
-| 5 | [tech-mentor](active/tech-mentor/SKILL.md) | Files / Documents | The unified AI tech mentor — a deep engine that explains concepts, dissects functions, tutors projects, teaches tools, designs systems, and fixes b... |
-| 6 | [vocab-lookup](active/vocab-lookup/SKILL.md) | Text Prompt / Ideas | Receive a source text (passage, article, video transcript, document, etc.), then look up any English word, phrase, or idiom from that source. Retur... |
+| 4 | [oj-problem-extractor](active/oj-problem-extractor/SKILL.md) | Web Context / Text | Extracts programming problem descriptions from Online Judge (OJ) websites dynamically based on their original structure when triggered by "extract" or "/oj-problem-extractor". |
+| 5 | [skill-forge](active/skill-forge/SKILL.md) | Files / Documents | Authoring engine for the directive knowledge base: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user ... |
+| 6 | [tech-mentor](active/tech-mentor/SKILL.md) | Files / Documents | The unified AI tech mentor — a deep engine that explains concepts, dissects functions, tutors projects, teaches tools, designs systems, and fixes b... |
+| 7 | [vocab-lookup](active/vocab-lookup/SKILL.md) | Text Prompt / Ideas | Receive a source text (passage, article, video transcript, document, etc.), then look up any English word, phrase, or idiom from that source. Retur... |
 
 
 ### Superpowers
@@ -573,3 +577,9 @@ Skills are grouped by their origin. This helps you explore skills within a speci
 | 6 | [orca-linear](external/orca/skills/orca-linear/SKILL.md) | Text Prompt / Ideas | Use Orca's Linear CLI through `orca linear ...` commands to read linked ticket context with `orca linear issue --current --full --json`, post compl... |
 | 7 | [orca-per-workspace-env](external/orca/skills/orca-per-workspace-env/SKILL.md) | Text Prompt / Ideas | Set up, review, debug, or validate Orca per-workspace environment recipes — on-demand, disposable runtimes (cloud sandboxes, VMs, or local) created... |
 | 8 | [orchestration](external/orca/skills/orchestration/SKILL.md) | Text Prompt / Ideas | Use Orca orchestration for structured multi-agent coordination: threaded messages, blocking ask/reply flows, task dispatch, worker_done/escalation ... |
+
+### Humanizer
+
+| # | Skill Name | Target / Input | Description |
+|---|---|---|---|
+| 1 | [humanizer](external/humanizer/SKILL.md) | Text Prompt / Ideas | Rewrite AI-sounding text so it reads like the writer without changing what it says. Use when editing or reviewing prose for AI tells: not-X-but-Y contrasts, one-line closers, staged openers, forced triads, dashes everywhere, inflated claims, sales language, stock AI words, bold labels, or filler. |
