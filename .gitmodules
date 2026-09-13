@@ -22,3 +22,6 @@
 [submodule "instructions/skills/external/orca"]
 	path = instructions/skills/external/orca
 	url = https://github.com/stablyai/orca.git
+[submodule "instructions/skills/external/humanizer"]
+	path = instructions/skills/external/humanizer
+	url = https://github.com/blader/humanizer.git
