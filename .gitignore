@@ -1,0 +1,16 @@
+# Python cache & artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.coverage
+htmlcov/
+
+# Editor / IDE configuration
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary cache files
+canvas-fonts/
+*.tmp

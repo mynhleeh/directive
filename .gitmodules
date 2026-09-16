@@ -25,3 +25,9 @@
 [submodule "instructions/skills/external/humanizer"]
 	path = instructions/skills/external/humanizer
 	url = https://github.com/blader/humanizer.git
+[submodule "instructions/skills/external/scientific-agent-skills"]
+	path = instructions/skills/external/scientific-agent-skills
+	url = https://github.com/K-Dense-AI/scientific-agent-skills.git
+[submodule "instructions/skills/external/Auto-Empirical-Research-Skills"]
+	path = instructions/skills/external/Auto-Empirical-Research-Skills
+	url = https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills
