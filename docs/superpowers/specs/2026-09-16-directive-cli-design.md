@@ -56,10 +56,12 @@ directive/
 │   ├── skills/                  # Source skills (active/ & external/*)
 │   └── scripts/
 │       └── extract_skills.py    # Unmodified legacy script
-└── .agents/                     # Default output target directory
-    ├── agents/
-    ├── rules/
-    └── skills/
+└── directive-cli/
+    └── output/                  # Default output target directory (contains .agents/)
+        └── .agents/
+            ├── agents/
+            ├── rules/
+            └── skills/
 ```
 
 ---
@@ -165,7 +167,9 @@ Prompt with choices:
 
 ### 4.3 Scaffolding Workflow (`Scaffold .agents`)
 1. **Target Confirmation**:
-   - Prompts for target directory (default: `./.agents`). User can press Enter to keep default or type a custom path.
+   - Prompts for target directory (default: `directive-cli/output/`).
+   - If user presses Enter, outputs to `directive-cli/output/.agents/`.
+   - If user provides a custom path (e.g., `./` or `/custom/path`), outputs to that custom path (e.g. `<path>/.agents/` or `<path>` if already ending in `.agents`).
 2. **Agents Selection**:
    - Prompt: *"Do you want to configure Agents?"* `[Y/n]`
    - If Yes:
@@ -190,10 +194,10 @@ Prompt with choices:
    - Displays a clean Rich Summary Table:
      | Resource | Selected Count | Destination |
      | :--- | :--- | :--- |
-     | Agents | 2 | `./.agents/agents/` |
-     | Rules | 1 | `./.agents/rules/` |
-     | Skills | 35 | `./.agents/skills/` |
-   - Prompt: *"Proceed with exporting to `./.agents`?"* `[Y/n]`
+     | Agents | 2 | `<resolved_target>/.agents/agents/` |
+     | Rules | 1 | `<resolved_target>/.agents/rules/` |
+     | Skills | 35 | `<resolved_target>/.agents/skills/` |
+   - Prompt: *"Proceed with exporting to `<resolved_target>/.agents`?"* `[Y/n]`
    - On confirmation, executes `export_scaffold()`, displays live progress, and prints success summary.
 
 ### 4.4 Add Submodule Workflow
