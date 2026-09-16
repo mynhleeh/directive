@@ -187,3 +187,15 @@ def test_prompt_select_skills():
 
         res = prompt_select_skills([group1, group2])
         assert res == [s1]
+
+    # User cancels drill-down (target_group_name is None or empty)
+    with patch("questionary.confirm") as mock_confirm, \
+         patch("questionary.checkbox") as mock_checkbox, \
+         patch("questionary.select") as mock_select:
+        mock_confirm.return_value.ask.return_value = True
+        mock_checkbox.return_value.ask.return_value = ["__DRILL_DOWN__"]
+        mock_select.return_value.ask.return_value = None
+
+        res = prompt_select_skills([group1, group2])
+        assert res == []
+

@@ -104,6 +104,8 @@ def prompt_select_skills(skill_groups: List[SkillGroup]) -> List[SkillItem]:
                 "Choose group to inspect and select individual skills:",
                 choices=[g.name for g in skill_groups],
             ).ask()
+            if not target_group_name:
+                break
             group_obj = next(g for g in skill_groups if g.name == target_group_name)
 
             skill_choices = [

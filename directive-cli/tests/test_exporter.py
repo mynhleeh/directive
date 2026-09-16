@@ -93,3 +93,23 @@ def test_export_scaffold_empty_and_overwrite(tmp_path):
     (skill_dir / "SKILL.md").write_text("v2")
     export_scaffold(target, agents=[], rules=[], skills=[skill])
     assert (target / ".agents" / "skills" / "skill1" / "SKILL.md").read_text() == "v2"
+
+
+def test_export_scaffold_replace_file_with_dir(tmp_path):
+    # Destination already has a file where a directory should be copied
+    source_dir = tmp_path / "source3"
+    source_dir.mkdir()
+    skill_dir = source_dir / "dir_skill"
+    skill_dir.mkdir()
+    (skill_dir / "SKILL.md").write_text("dir content")
+    skill = SkillItem(source_group="active", name="dir_skill", source_path=skill_dir)
+
+    target = tmp_path / "target_file_conflict"
+    dest_file = target / ".agents" / "skills" / "dir_skill"
+    dest_file.parent.mkdir(parents=True, exist_ok=True)
+    dest_file.write_text("i am an unexpected file")
+
+    export_scaffold(target, agents=[], rules=[], skills=[skill])
+    assert dest_file.is_dir()
+    assert (dest_file / "SKILL.md").read_text() == "dir content"
+

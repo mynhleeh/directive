@@ -40,8 +40,10 @@ def resolve_target_directory(target_path: Path) -> Path:
 def _copy_item(src: Path, dst: Path) -> None:
     """Copy file or directory recursively, replacing destination if exists."""
     if src.is_dir():
-        if dst.exists():
+        if dst.is_dir():
             shutil.rmtree(dst)
+        elif dst.is_file():
+            dst.unlink()
         shutil.copytree(src, dst)
     elif src.is_file():
         dst.parent.mkdir(parents=True, exist_ok=True)
