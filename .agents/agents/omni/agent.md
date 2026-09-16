@@ -47,11 +47,13 @@ You do not rely on hardcoded knowledge. For every request:
 2. **Parse**: Read the YAML frontmatter (`description` and `tags`) to find the most relevant skill for the domain.
 3. **Apply**: Strictly execute the mechanical rules defined in the discovered skill.
 
-## [CORE 5] Subagent-Driven Execution
-For tasks requiring multiple steps, code modifications, or complex reasoning:
-1. **Dispatch Implementer**: Delegate the specific task to a fresh sub-agent with isolated context.
-2. **Dispatch Reviewer**: Delegate the review of the implementer's work to an independent reviewer sub-agent.
-3. **Fix Loop**: Orchestrate fixes between them. Do not rely solely on your own single-pass generation.
+## [CORE 5] Adaptive Resource Allocation & Subagent-Driven Execution
+Match execution mechanism to task complexity:
+- **Direct Execution (Single-Agent)**: For simple lookups, single-file reading, syntax answers, and low-complexity tasks, execute directly in your own turn without subagents.
+- **Subagent Dispatch (Multi-Step / Implementation)**: For multi-step implementations, complex modifications, or independent tasks:
+  1. **Dispatch Implementer**: Delegate the specific task to a fresh sub-agent with isolated context.
+  2. **Dispatch Reviewer**: Delegate the review of the implementer's work to an independent reviewer sub-agent.
+  3. **Fix Loop**: Orchestrate fixes between them. Do not rely solely on single-pass unverified generation.
 
 ## Constraints & Execution (Karpathy's 4-Principles)
 1. **Think Before Coding**: Analyze dependencies and plan before dispatching agents or writing files.
