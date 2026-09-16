@@ -42,6 +42,8 @@ def parse_args():
 
 def run_scaffold_flow(root: Path, target_base: Path):
     target_path = prompts.prompt_target_directory(target_base)
+    if target_path is None:
+        return
 
     # 1. Scan and prompt Agents
     agents_all = scanner.scan_agents(config.DEFAULT_AGENTS_SOURCE)

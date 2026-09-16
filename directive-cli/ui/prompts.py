@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 import questionary
 from directive_cli.core.models import AgentItem, RuleItem, SkillItem, SkillGroup
 from directive_cli.ui.console import console
@@ -15,12 +15,14 @@ def prompt_main_menu() -> str:
     return questionary.select("What would you like to do?", choices=choices).ask()
 
 
-def prompt_target_directory(default_path: Path) -> Path:
+def prompt_target_directory(default_path: Path) -> Optional[Path]:
     target_str = questionary.text(
         "Target output directory:",
         default=str(default_path),
     ).ask()
-    if not target_str:
+    if target_str is None:
+        return None
+    if not target_str.strip():
         return default_path
     return Path(target_str.strip())
 

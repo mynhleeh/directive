@@ -76,6 +76,12 @@ def test_prompt_target_directory():
         res = prompt_target_directory(default_p)
         assert res == Path("spaced/dir")
 
+    # Cancelled returns None
+    with patch("questionary.text") as mock_text:
+        mock_text.return_value.ask.return_value = None
+        res = prompt_target_directory(default_p)
+        assert res is None
+
 
 def test_prompt_select_agents():
     # Empty list
