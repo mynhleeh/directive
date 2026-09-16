@@ -18,12 +18,14 @@ This document provides a comprehensive index of all skills available in the inst
 - [2. Skills by Source](#2-skills-by-source)
   - [AI-Research-SKILLs](#ai-research-skills)
   - [Anthropic](#anthropic)
+  - [Auto-Empirical-Research-Skills](#auto-empirical-research-skills)
   - [DeepTutor](#deeptutor)
   - [Humanizer](#humanizer)
   - [Karpathy](#karpathy)
-  - [Owner](#owner)
-  - [Superpowers](#superpowers)
   - [Orca](#orca)
+  - [Owner](#owner)
+  - [Scientific-Agent-Skills](#scientific-agent-skills)
+  - [Superpowers](#superpowers)
   - [UI/UX Pro Max](#ui-ux-pro-max)
 
 ---
@@ -524,13 +526,15 @@ Skills are grouped by their origin. This helps you explore skills within a speci
 
 | # | Skill Name | Target / Input | Description |
 |---|---|---|---|
-| 1 | [deep-flashcard-generator](active/deep-flashcard-generator/SKILL.md) | Files / Documents | Reads any attached document (PDF, DOCX, TXT, images, etc.), exhaustively extracts core concepts and generates high-quality Anki-ready flashcards us... |
-| 2 | [doc-drill](active/doc-drill/SKILL.md) | Text Prompt / Ideas | Activates a document-grounded adaptive batch quiz session (Doc Drill). Use when the user attaches a document (PDF, markdown, notes, slides, etc.) a... |
-| 3 | [document-vocab-extractor](active/document-vocab-extractor/SKILL.md) | Text Prompt / Ideas | Extract English vocabulary from any attached document, regardless of domain. Applies consistent filtering and formatting criteria based on reasonin... |
-| 4 | [oj-problem-extractor](active/oj-problem-extractor/SKILL.md) | Web Context / Text | Extracts programming problem descriptions from Online Judge (OJ) websites dynamically based on their original structure when triggered by "extract" or "/oj-problem-extractor". |
-| 5 | [skill-forge](active/skill-forge/SKILL.md) | Files / Documents | Authoring engine for the directive knowledge base: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user ... |
-| 6 | [tech-mentor](active/tech-mentor/SKILL.md) | Files / Documents | The unified AI tech mentor — a deep engine that explains concepts, dissects functions, tutors projects, teaches tools, designs systems, and fixes b... |
-| 7 | [vocab-lookup](active/vocab-lookup/SKILL.md) | Text Prompt / Ideas | Receive a source text (passage, article, video transcript, document, etc.), then look up any English word, phrase, or idiom from that source. Retur... |
+| 1 | [academic-research-synthesizer](active/academic-research-synthesizer/SKILL.md) | Academic Papers / Corpuses | Synthesizes academic literature, builds structured empirical evidence matrices, critiques methodology rigor, and verifies scholarly claims without hallucinations. |
+| 2 | [code-architect-auditor](active/code-architect-auditor/SKILL.md) | Codebase / Repositories | Audits software architecture, reviews proposed code changes, enforces surgical refactoring, and verifies test-driven implementation. |
+| 3 | [deep-flashcard-generator](active/deep-flashcard-generator/SKILL.md) | Files / Documents | Reads any attached document (PDF, DOCX, TXT, images, etc.), exhaustively extracts core concepts and generates high-quality Anki-ready flashcards us... |
+| 4 | [doc-drill](active/doc-drill/SKILL.md) | Text Prompt / Ideas | Activates a document-grounded adaptive batch quiz session (Doc Drill). Use when the user attaches a document (PDF, markdown, notes, slides, etc.) a... |
+| 5 | [document-vocab-extractor](active/document-vocab-extractor/SKILL.md) | Text Prompt / Ideas | Extract English vocabulary from any attached document, regardless of domain. Applies consistent filtering and formatting criteria based on reasonin... |
+| 6 | [oj-problem-extractor](active/oj-problem-extractor/SKILL.md) | Web Context / Text | Extracts programming problem descriptions from Online Judge (OJ) websites dynamically based on their original structure when triggered by "extract" or "/oj-problem-extractor". |
+| 7 | [skill-forge](active/skill-forge/SKILL.md) | Files / Documents | Authoring engine for the directive knowledge base: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user ... |
+| 8 | [tech-mentor](active/tech-mentor/SKILL.md) | Files / Documents | The unified AI tech mentor — a deep engine that explains concepts, dissects functions, tutors projects, teaches tools, designs systems, and fixes b... |
+| 9 | [vocab-lookup](active/vocab-lookup/SKILL.md) | Text Prompt / Ideas | Receive a source text (passage, article, video transcript, document, etc.), then look up any English word, phrase, or idiom from that source. Retur... |
 
 
 ### Superpowers
@@ -583,3 +587,48 @@ Skills are grouped by their origin. This helps you explore skills within a speci
 | # | Skill Name | Target / Input | Description |
 |---|---|---|---|
 | 1 | [humanizer](external/humanizer/SKILL.md) | Text Prompt / Ideas | Rewrite AI-sounding text so it reads like the writer without changing what it says. Use when editing or reviewing prose for AI tells: not-X-but-Y contrasts, one-line closers, staged openers, forced triads, dashes everywhere, inflated claims, sales language, stock AI words, bold labels, or filler. |
+
+### Auto-Empirical-Research-Skills
+
+Tracked submodule at `instructions/skills/external/Auto-Empirical-Research-Skills/` (Stanford/brycewang). Contains 70+ empirical analysis, causal inference, and econometrics skill suites.
+
+| # | Skill Suite | Target / Input | Description |
+|---|---|---|---|
+| 1 | [00-Full-empirical-analysis-skill_StatsPAI](external/Auto-Empirical-Research-Skills/skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md) | Empirical Research | End-to-end empirical research analysis pipeline covering data cleaning, summary statistics, baseline regression, robustness checks, and visualization. |
+| 2 | [00.1-Full-empirical-analysis-skill_Python](external/Auto-Empirical-Research-Skills/skills/00.1-Full-empirical-analysis-skill_Python/SKILL.md) | Python Research | Python econometric workflow with pandas, statsmodels, pyfixest, linearmodels, and publication-ready tables. |
+| 3 | [00.2-Full-empirical-analysis-skill_Stata](external/Auto-Empirical-Research-Skills/skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md) | Stata Research | Stata empirical pipeline for econometric estimation, outreg2/esttab table exports, and panel regression analysis. |
+| 4 | [00.3-Full-empirical-analysis-skill_R](external/Auto-Empirical-Research-Skills/skills/00.3-Full-empirical-analysis-skill_R/SKILL.md) | R Research | R empirical modeling pipeline with fixest, causal inference packages, modelsummary, and ggplot2 figures. |
+| 5 | [01-lishix520-academic-paper-skills](external/Auto-Empirical-Research-Skills/skills/01-lishix520-academic-paper-skills/SKILL.md) | Academic Papers | Academic paper drafting, structuring, abstract polish, literature review synthesis, and journal submission readiness. |
+| 6 | [10-Jill0099-causal-inference-mixtape](external/Auto-Empirical-Research-Skills/skills/10-Jill0099-causal-inference-mixtape/SKILL.md) | Causal Inference | Causal inference methodologies: Difference-in-Differences (DiD), Instrumental Variables (IV), Regression Discontinuity (RDD), and Synthetic Control. |
+| 7 | [23-Learning-Bayesian-Statistics-baygent-skills](external/Auto-Empirical-Research-Skills/skills/23-Learning-Bayesian-Statistics-baygent-skills/SKILL.md) | Bayesian Stats | Bayesian statistical modeling, prior/posterior distributions, MCMC diagnostics, and probabilistic programming. |
+| 8 | [28-maxwell2732-paper-replicate-agent-demo](external/Auto-Empirical-Research-Skills/skills/28-maxwell2732-paper-replicate-agent-demo/SKILL.md) | Paper Replication | Scientific paper replication agent: verifies code, re-runs estimation models, and validates empirical findings against published tables. |
+| 9 | [40-py-econometrics-pyfixest](external/Auto-Empirical-Research-Skills/skills/40-py-econometrics-pyfixest/SKILL.md) | Python Econometrics | High-performance fast fixed-effects estimation in Python (equivalent to R's fixest), multiway clustering, and wild cluster bootstrap. |
+| 10 | [51-pymc-labs-CausalPy](external/Auto-Empirical-Research-Skills/skills/51-pymc-labs-CausalPy/SKILL.md) | Bayesian Causal | Causal inference for quasi-experiments with Bayesian modeling (Interrupted Time Series, Synthetic Control, ANCOVA). |
+| 11 | [71-brycewang-lit-review-agent-tools](external/Auto-Empirical-Research-Skills/skills/71-brycewang-lit-review-agent-tools/SKILL.md) | Literature Review | Literature review synthesis and bibliographic matrix builder for academic research. |
+
+### Scientific-Agent-Skills
+
+Tracked submodule at `instructions/skills/external/scientific-agent-skills/` (K-Dense-AI). Contains 160+ scientific computing, computational biology, materials science, and quantum computing skills.
+
+| # | Skill Name | Target / Input | Description |
+|---|---|---|---|
+| 1 | [anndata](external/scientific-agent-skills/skills/anndata/SKILL.md) | Bioinformatics | Annotated data matrices for single-cell omics analysis and integration with the scverse ecosystem (.h5ad files). |
+| 2 | [astropy](external/scientific-agent-skills/skills/astropy/SKILL.md) | Astronomy | Core Python library for astronomy and astrophysics workflows: units/quantities, coordinates, FITS I/O, tables, WCS, and cosmology. |
+| 3 | [benchling-integration](external/scientific-agent-skills/skills/benchling-integration/SKILL.md) | Lab Automation | Benchling Python SDK and REST API integration for registry entities, inventory, ELN entries, and workflows. |
+| 4 | [biopython](external/scientific-agent-skills/skills/biopython/SKILL.md) | Computational Biology | Sequence I/O, alignment parsing, BLAST search, PDB structure manipulation, and phylogenetics with Biopython. |
+| 5 | [cirq](external/scientific-agent-skills/skills/cirq/SKILL.md) | Quantum Computing | Google's framework for creating, editing, and invoking Noisy Intermediate Scale Quantum (NISQ) circuits. |
+| 6 | [cobrapy](external/scientific-agent-skills/skills/cobrapy/SKILL.md) | Systems Biology | Constraint-based metabolic modeling (COBRA): Flux Balance Analysis (FBA), Flux Variability Analysis (FVA), gene knockouts. |
+| 7 | [deepchem](external/scientific-agent-skills/skills/deepchem/SKILL.md) | Cheminformatics / ML | Deep learning for chemistry, drug discovery, materials science, and quantum chemistry. |
+| 8 | [diffdock](external/scientific-agent-skills/skills/diffdock/SKILL.md) | Molecular Modeling | Diffusion-based molecular docking: blind protein-small-molecule pose prediction from PDB + SMILES. |
+| 9 | [fluidsim](external/scientific-agent-skills/skills/fluidsim/SKILL.md) | Physics / CFD | Computational fluid dynamics framework using pseudo-spectral methods and HPC acceleration. |
+| 10 | [lamindb](external/scientific-agent-skills/skills/lamindb/SKILL.md) | Data Lakehouse | Lineage-native data lakehouse for biology: tracking datasets, features, models, and biological ontologies with Bionty. |
+| 11 | [molecular-dynamics](external/scientific-agent-skills/skills/molecular-dynamics/SKILL.md) | Biophysics | Setup, simulation, and trajectory analysis of molecular dynamics with OpenMM and MDAnalysis. |
+| 12 | [nextflow](external/scientific-agent-skills/skills/nextflow/SKILL.md) | Pipeline Orchestration | Scalable, reproducible data-driven computational pipelines with containers and cloud executors. |
+| 13 | [polars-bio](external/scientific-agent-skills/skills/polars-bio/SKILL.md) | Genomic Data | High-performance genomic interval operations (overlap, merge, coverage, intersect) on Polars DataFrames. |
+| 14 | [pysam](external/scientific-agent-skills/skills/pysam/SKILL.md) | Genomics | Python interface to HTSlib for reading, manipulating, and indexing SAM/BAM/CRAM, VCF/BCF, and FASTA/FASTQ files. |
+| 15 | [qiskit](external/scientific-agent-skills/skills/qiskit/SKILL.md) | Quantum Computing | IBM Qiskit framework for building, optimizing, simulating, and executing quantum circuits on real QPUs. |
+| 16 | [rdkit](external/scientific-agent-skills/skills/rdkit/SKILL.md) | Cheminformatics | Open-source cheminformatics toolkit: molecule manipulation, 2D/3D structure generation, fingerprints, substructure search. |
+| 17 | [scanpy](external/scientific-agent-skills/skills/scanpy/SKILL.md) | Single-cell Genomics | Single-cell RNA-seq analysis: preprocessing, normalization, dimensionality reduction (PCA/UMAP), clustering, and marker identification. |
+| 18 | [scikit-survival](external/scientific-agent-skills/skills/scikit-survival/SKILL.md) | Survival Analysis | Machine learning for survival analysis and time-to-event data with censoring. |
+| 19 | [torchdrug](external/scientific-agent-skills/skills/torchdrug/SKILL.md) | Drug Discovery ML | Graph neural networks and representation learning for drug discovery, property prediction, and retrosynthesis. |
+| 20 | [zarr-python](external/scientific-agent-skills/skills/zarr-python/SKILL.md) | Scientific Storage | Chunked, compressed N-dimensional array storage for large-scale scientific datasets in cloud or local filesystems. |

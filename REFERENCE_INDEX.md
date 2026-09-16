@@ -36,14 +36,14 @@ directive/
 ├── instructions/               # Resources to DIRECTLY COMMAND AI (execute immediately)
 │   ├── agents/                 # Custom agent configurations (directive, omni)
 │   ├── prompts/                # System prompts & prompt collections
-│   │   ├── active/             # psychological-counselor
+│   │   ├── active/             # autonomous-software-engineer, deep-reasoning-researcher, psychological-counselor
 │   │   ├── archive/            # dsa, n8n
 │   │   └── external/           # system-prompts-and-models-of-ai-tools [submodule], system_prompts_leaks [submodule]
 │   ├── rules/                  # Rules files (.cursorrules, GEMINI.md…)
 │   ├── scripts/                # Automation scripts for AI workflows
 │   └── skills/                 # Skill files (SKILL.md format)
-│       ├── active/             # deep-flashcard-generator, doc-drill, document-vocab-extractor, oj-problem-extractor, skill-forge, tech-mentor, vocab-lookup
-│       └── external/           # AI-Research-SKILLs [submodule], andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub, humanizer [submodule], orca [submodule], superpowers [submodule], ui-ux-pro-max-skill [submodule]
+│       ├── active/             # academic-research-synthesizer, code-architect-auditor, deep-flashcard-generator, doc-drill, document-vocab-extractor, oj-problem-extractor, skill-forge, tech-mentor, vocab-lookup
+│       └── external/           # AI-Research-SKILLs [submodule], Auto-Empirical-Research-Skills [submodule], andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub, humanizer [submodule], orca [submodule], scientific-agent-skills [submodule], superpowers [submodule], ui-ux-pro-max-skill [submodule]
 └── knowledge/                  # Resources to READ & LEARN about AI/prompting
     ├── articles/               # Blog posts, case studies, saved pages
     ├── guides/                 # How-to guides, tutorials, manuals
@@ -63,7 +63,9 @@ Sources tracked as git submodules (see `.gitmodules`); version-pinned, updatable
 |---|---|---|---|---|---|
 | `anthropics` (official Claude skills) | `instructions/skills/external/anthropics/` | Apache-2.0 (most skills); `docx`/`pdf`/`pptx`/`xlsx` proprietary | 5 | First-party (official Anthropic) | Use as authoritative reference for SKILL.md format, frontmatter, the `skill-creator` workflow, and the agentskills.io spec. Caveats: the 4 document skills are source-available, not open source; do not redistribute their content. |
 | `AI-Research-SKILLs` | `instructions/skills/external/AI-Research-SKILLs/` | MIT | 5 | Third-party submodule | Use for AI research orchestration and domain-specific ML engineering skills (training, evaluation, inference). Caveats: Contains a massive number of skills; treat as Tier-5 reference material for complex workflows. |
+| `Auto-Empirical-Research-Skills` | `instructions/skills/external/Auto-Empirical-Research-Skills/` | MIT | 5 | Third-party submodule | Use for empirical research, econometric modeling, replication pipelines, and academic paper writing in social/data sciences. Caveats: Tier-5 reference material; contains 70+ modular research skill suites. |
 | `andrej-karpathy` | `instructions/skills/external/andrej-karpathy/` | MIT (declared in skill) | 5 | Third-party, self-authored (derived from Karpathy's public notes) | Use for the 4 candidate behavioral principles (Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven Execution). Caveats: Tier-5 content is unverified — treat as candidate principles, never as premise; README promotes the author's platform. |
+| `scientific-agent-skills` | `instructions/skills/external/scientific-agent-skills/` | MIT | 5 | Third-party submodule | Use for scientific computing, computational biology, materials science, quantum computing, and ML engineering. Caveats: Tier-5 reference material with 160+ skills; treat as candidate tools and domain patterns. |
 | `superpowers` | `instructions/skills/external/superpowers/` | MIT | 5 | Third-party submodule | Use for development workflow skills. |
 | `system_prompts_leaks` | `instructions/prompts/external/system_prompts_leaks/` | CC0 1.0 (collection) | 5 | Third-party, unverified verbatim captures | Use as structural reference for how real agents serialize prompts (Cursor, Claude Code, etc.). Caveats: leaked material with unclear original ownership; use for structure only, never promote captured content as fact. |
 | `system-prompts-and-models-of-ai-tools` | `instructions/prompts/external/system-prompts-and-models-of-ai-tools/` | GPL-3.0 | 5 | Third-party, unverified leaks (older collection) | Use for cross-vendor prompt comparison. Caveats: **GPL-3.0 copyleft — reference-only, do NOT copy text into artifacts**; README contains sponsorship noise. |
@@ -99,5 +101,5 @@ Curated documents in `knowledge/` (Tier 1–4) — the highest-trust sources for
 
 ## Provenance
 
-- Compiled 2026-09-13 from `.gitmodules` (9 submodules), `deeptutor-eduhub/.hub-lock.json` (install ledger), and per-source LICENSE files.
+- Updated 2026-09-16 from `.gitmodules` (11 submodules), `deeptutor-eduhub/.hub-lock.json` (install ledger), and per-source LICENSE files.
 - Status flags reflect the repo's citation policy (`.agents/agents/directive/agent.md`): external content is Tier 5 — usable as curated reference, never as evidence.

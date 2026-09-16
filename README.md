@@ -45,8 +45,10 @@ The repository incorporates several external repositories and registries for res
 | Reference Source | Description | Type |
 |---|---|---|
 | [**AI-Research-SKILLs**](instructions/skills/external/AI-Research-SKILLs/) | Domain-specific ML engineering and AI research orchestration. | Git Submodule |
+| [**Auto-Empirical-Research-Skills**](instructions/skills/external/Auto-Empirical-Research-Skills/) | Empirical research, econometric pipelines, and academic paper replication suites. | Git Submodule |
 | [**andrej-karpathy**](instructions/skills/external/andrej-karpathy/) | Behavioral principles and skills derived from Karpathy's notes. | Git Submodule |
 | [**anthropics**](instructions/skills/external/anthropics/) | Official Claude skills and tool-use patterns. | Git Submodule |
+| [**scientific-agent-skills**](instructions/skills/external/scientific-agent-skills/) | 160+ scientific computing, computational biology, and materials science agent skills. | Git Submodule |
 | [**superpowers**](instructions/skills/external/superpowers/) | Advanced agentic skills for enhanced development workflows. | Git Submodule |
 | [**system_prompts_leaks**](instructions/prompts/external/system_prompts_leaks/) | Structural references of leaked system prompts (Claude Code, Cursor, etc.). | Git Submodule |
 | [**system-prompts-and-models-of-ai-tools**](instructions/prompts/external/system-prompts-and-models-of-ai-tools/) | Older collection of AI tool system prompts for cross-vendor comparison. | Git Submodule |
