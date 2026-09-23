@@ -1,6 +1,6 @@
 ---
 name: reference-index
-description: "Catalog of every reference source in the directive repo — git submodules, vendored directories, and knowledge documents — with path, license, citation tier, and trust status. Read to discover which external source to consult for a task and how to cite it. Update by adding or removing one row when a source changes. Do NOT use as the policy file — citation policy lives in .agents/agents/directive/agent.md."
+description: "Catalog of every reference source in the directive repo — git submodules, vendored directories, and knowledge documents — with path, license, citation tier, and trust status. Read to discover which external source to consult for a task and how to cite it. Update by adding or removing one row when a source changes. Do NOT use as the policy file — citation policy lives in .agents/agents/directive-encyclopedia/agent.md."
 version: 1.0.0
 tags: [reference, index, catalog, submodules, license, taxonomy, citation]
 metadata:
@@ -15,13 +15,13 @@ metadata:
 ## How to Read (humans)
 
 - This index lists **reference sources** — external submodules, vendored directories, and knowledge documents — that an agent or user may consult when authoring prompts, skills, schemas, or rules.
-- The **policy** for *when* to use a source and *how* to cite it lives in `.agents/agents/directive/agent.md` (root). This file holds only the **data**: what exists and its metadata.
+- The **policy** for *when* to use a source and *how* to cite it lives in `.agents/agents/directive-encyclopedia/agent.md` (root). This file holds only the **data**: what exists and its metadata.
 - To add or remove a source, edit the matching table: add/remove exactly one row. Then follow the Maintenance Rules.
 
 ## How to Read (AI agents)
 
 1. When a task needs external reference material, read this file first.
-2. Locate the source by path; read its `License`, `Tier`, and `Status` columns as **data** — then apply the citation policy in `.agents/agents/directive/agent.md` before using the content.
+2. Locate the source by path; read its `License`, `Tier`, and `Status` columns as **data** — then apply the citation policy in `.agents/agents/directive-encyclopedia/agent.md` before using the content.
 
 ---
 
@@ -33,16 +33,17 @@ directive/
 ├── blueprints/                 # Resources to DESIGN AI systems
 │   ├── architectures/          # System designs, agent architectures
 │   └── concepts/               # Mental models, taxonomy, frameworks
+├── directive-cli/              # Interactive CLI & tool suite for managing agents & skills
 ├── instructions/               # Resources to DIRECTLY COMMAND AI (execute immediately)
-│   ├── agents/                 # Custom agent configurations (directive, omni)
+│   ├── agents/                 # Custom agent configurations (cv-architect, directive-encyclopedia, omni)
 │   ├── prompts/                # System prompts & prompt collections
 │   │   ├── active/             # autonomous-software-engineer, deep-reasoning-researcher, psychological-counselor
 │   │   ├── archive/            # dsa, n8n
 │   │   └── external/           # system-prompts-and-models-of-ai-tools [submodule], system_prompts_leaks [submodule]
-│   ├── rules/                  # Rules files (.cursorrules, GEMINI.md…)
+│   ├── rules/                  # Rules files (file-folder-organization, technical-writing-principles)
 │   ├── scripts/                # Automation scripts for AI workflows
 │   └── skills/                 # Skill files (SKILL.md format)
-│       ├── active/             # academic-research-synthesizer, code-architect-auditor, deep-flashcard-generator, doc-drill, document-vocab-extractor, oj-problem-extractor, skill-forge, tech-mentor, vocab-lookup
+│       ├── active/             # academic-research-synthesizer, code-architect-auditor, skill-forge, tech-mentor, technical-doc-author
 │       └── external/           # AI-Research-SKILLs [submodule], Auto-Empirical-Research-Skills [submodule], andrej-karpathy [submodule], anthropics [submodule], deeptutor-eduhub, humanizer [submodule], orca [submodule], scientific-agent-skills [submodule], superpowers [submodule], ui-ux-pro-max-skill [submodule]
 └── knowledge/                  # Resources to READ & LEARN about AI/prompting
     ├── articles/               # Blog posts, case studies, saved pages
@@ -79,7 +80,7 @@ Present on disk but **absent from `.gitmodules`** — not version-pinned by git;
 
 | Source | Path | License | Tier | Status | Notes (use when / caveats) |
 |---|---|---|---|---|---|
-| `deeptutor-eduhub` | `instructions/skills/external/deeptutor-eduhub/` | Per-skill MIT / MIT-0; some older skills lack LICENSE | 5 | Third-party (ClawHub registry via EduHub hub; provenance in `.hub-lock.json` / `EDUHUB_SOURCE.md`) | Use for education/tutoring skill patterns (tutor, lesson-plan, quiz, flashcards). Caveats: NOT a git submodule (absent from `.gitmodules`); 4 skills (`deep-flashcard-generator`, `doc-drill`, `document-vocab-extractor`, `vocab-lookup`) are manual copies NOT recorded in `.hub-lock.json` → **non-canonical; canonical versions live in `instructions/skills/active/<name>/`**; hub updates won't touch them. |
+| `deeptutor-eduhub` | `instructions/skills/external/deeptutor-eduhub/` | Per-skill MIT / MIT-0; some older skills lack LICENSE | 5 | Third-party (ClawHub registry via EduHub hub; provenance in `.hub-lock.json` / `EDUHUB_SOURCE.md`) | Use for education/tutoring skill patterns (tutor, lesson-plan, quiz, flashcards). Caveats: NOT a git submodule (absent from `.gitmodules`); 4 skills (`deep-flashcard-generator`, `doc-drill`, `document-vocab-extractor`, `vocab-lookup`) now reside exclusively here as canonical copies following deduplication from `instructions/skills/active/`. |
 
 ## Group 3 — Knowledge Documents
 
@@ -101,5 +102,5 @@ Curated documents in `knowledge/` (Tier 1–4) — the highest-trust sources for
 
 ## Provenance
 
-- Updated 2026-09-16 from `.gitmodules` (11 submodules), `deeptutor-eduhub/.hub-lock.json` (install ledger), and per-source LICENSE files.
-- Status flags reflect the repo's citation policy (`.agents/agents/directive/agent.md`): external content is Tier 5 — usable as curated reference, never as evidence.
+- Updated 2026-09-23 from `.gitmodules` (11 submodules), `deeptutor-eduhub/.hub-lock.json` (install ledger), and per-source LICENSE files.
+- Status flags reflect the repo's citation policy (`.agents/agents/directive-encyclopedia/agent.md`): external content is Tier 5 — usable as curated reference, never as evidence.

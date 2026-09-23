@@ -407,7 +407,7 @@ Platform mapping (system prompts, function/tool schemas, JSON types, rules files
 Beyond its own `references/`, the skill must respect these repo-wide truths:
 - **Skill Authoring Methodology**: `knowledge/guides/the-complete-guide-to-building-skill-for-claude.pdf` (Tier 3) is the primary philosophical guide for skill creation.
 - **Anthropic Official Standards**: `instructions/skills/external/anthropics/template/SKILL.md` (Tier 5) is the baseline official template. `instructions/skills/external/anthropics/skills/skill-creator/SKILL.md` shows Anthropic's own iteration loop.
-- **Dynamic Skill Discovery Policy**: According to `.agents/agents/directive/agent.md`, agents discover skills *dynamically* by scanning the `tags` and `description` in the YAML frontmatter. Therefore, those fields must always be present, precise, and optimized for agent reading.
+- **Dynamic Skill Discovery Policy**: According to `.agents/agents/directive-encyclopedia/agent.md`, agents discover skills *dynamically* by scanning the `tags` and `description` in the YAML frontmatter. Therefore, those fields must always be present, precise, and optimized for agent reading.
 
 ---
 
