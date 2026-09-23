@@ -283,6 +283,7 @@ Skills are grouped by their primary function to help you select the best tool fo
 | 7 | [using-superpowers](external/superpowers/skills/using-superpowers/SKILL.md) | Superpowers | Design Ideas / UI Specs | Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying qu... |
 | 8 | [verification-before-completion](external/superpowers/skills/verification-before-completion/SKILL.md) | Superpowers | Design Ideas / UI Specs | Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirm... |
 | 9 | [web-artifacts-builder](external/anthropics/skills/web-artifacts-builder/SKILL.md) | Anthropic | Files / Documents | Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn... |
+| 10 | [technical-doc-author](active/technical-doc-author/SKILL.md) | Owner | Technical Documentation | Author, audit, restructure, and verify 8 core technical document types (SRS/PRD, SDD, ADR, RFC, Benchmark Reports, Postmortem/RCA, API specs, Runbooks) with 2-tier mechanical gates and anti-AI discipline. |
 
 
 ### Teaching & Mentoring
@@ -535,6 +536,7 @@ Skills are grouped by their origin. This helps you explore skills within a speci
 | 7 | [skill-forge](active/skill-forge/SKILL.md) | Files / Documents | Authoring engine for the directive knowledge base: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user ... |
 | 8 | [tech-mentor](active/tech-mentor/SKILL.md) | Files / Documents | The unified AI tech mentor — a deep engine that explains concepts, dissects functions, tutors projects, teaches tools, designs systems, and fixes b... |
 | 9 | [vocab-lookup](active/vocab-lookup/SKILL.md) | Text Prompt / Ideas | Receive a source text (passage, article, video transcript, document, etc.), then look up any English word, phrase, or idiom from that source. Retur... |
+| 10 | [technical-doc-author](active/technical-doc-author/SKILL.md) | Technical Documentation | Author, audit, restructure, and verify 8 core technical document types (SRS/PRD, SDD, ADR, RFC, Benchmark Reports, Postmortem/RCA, API specs, Runbooks) with 2-tier mechanical gates and anti-AI discipline. |
 
 
 ### Superpowers
