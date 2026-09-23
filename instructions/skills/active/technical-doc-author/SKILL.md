@@ -1,7 +1,7 @@
 ---
 name: technical-doc-author
-description: "Author, restructure, audit, and polish production-grade technical engineering documents across 8 core types (SRS, PRD, SDD, ADR, RFC proposals, technical investigation reports, incident postmortems, API contracts, runbooks) under strict anti-AI discipline, Diataxis principles, and context-adaptive quality gates. Trigger whenever the user asks to write, edit, review, or standardize any technical document or engineering report. Do NOT trigger for application coding or runtime debugging."
-version: "3.3.0"
+description: "Author, restructure, audit, and polish production-grade technical engineering documents across 8 core types (SRS, PRD, SDD, ADR, RFC, reports, postmortems, API specs, runbooks) under strict anti-AI discipline, Diataxis principles, and multi-subagent decontamination loops. Trigger whenever the user asks to write, edit, audit, humanize, or purge AI traces from technical documents. Do NOT trigger for application coding or debugging."
+version: "3.4.0"
 tags:
   - technical-writing
   - documentation
@@ -15,6 +15,8 @@ tags:
   - anti-ai
   - diataxis
   - doc-standards
+  - subagent-driven
+  - ai-decontamination
 license: MIT
 ---
 
@@ -35,10 +37,11 @@ Activate when the user requests:
   7. API Specifications and Data Schema Contracts.
   8. Operational Runbooks, How-to Guides, and Standard Operating Procedures (SOP).
 - Auditing, reviewing, humanizing, eliminating LLM stylistic residue, or repairing syntax collisions in technical documents.
+- Executing multi-subagent anti-AI audit, trace detection, pattern sweeping, or iterative decontamination loops on target technical documents.
 - Restructuring visual diagrams (native Mermaid, layered architectures, sequence diagrams, statecharts, incident fault trees) and enforcing cross-modal parity between diagrams and text.
 - Establishing bidirectional traceability matrices or quantitative evidence chains.
 
-Activation keywords: `technical documentation`, `author SRS`, `write SDD`, `draft ADR`, `write RFC`, `technical report`, `benchmark report`, `incident postmortem`, `root cause analysis`, `rca`, `api spec`, `standardize documentation`, `humanize doc`, `diataxis`, `runbook`.
+Activation keywords: `technical documentation`, `author SRS`, `write SDD`, `draft ADR`, `write RFC`, `technical report`, `benchmark report`, `incident postmortem`, `root cause analysis`, `rca`, `api spec`, `standardize documentation`, `humanize doc`, `diataxis`, `runbook`, `anti-ai audit loop`, `decontamination loop`, `multi-subagent anti-ai audit`, `ai trace detector`, `pattern sweeper`, `doc fixer`, `stranger review`, `purge ai traces`.
 
 Do NOT activate when:
 - Writing general application source code (use general coding agents).
@@ -223,7 +226,71 @@ Before finalizing any technical document, audit the output across the two-tier q
 
 ---
 
+### Execution Modes: Mode A (Direct Authoring & Standard 2-Tier Audit) vs Mode B (Multi-Subagent Anti-AI Audit & Decontamination Loop)
+
+This skill operates in two execution modes depending on user intent:
+- **Mode A: Direct Authoring & Standard 2-Tier Audit**: Use when authoring or updating documents from scratch following the 4-Phase Sequential Workflow above.
+- **Mode B: Multi-Subagent Anti-AI Audit & Decontamination Loop**: Use when auditing, reviewing, humanizing, or systematically purging LLM stylistic residue from an existing target document.
+
+#### Mode B Protocol: 5-Role Multi-Subagent Loop
+
+When Mode B triggers, the primary coordinator orchestrates 4 specialized worker subagents under strict Subagent-Driven Development (SDD) discipline:
+
+1. **Subagent `ai-trace-detector`**:
+   - Reads 100% of the target document; zero self-fixing.
+   - Evaluates every detected trace through the mandatory **Tri-Role Lens**:
+     * *AI Stylistic Tell Detector*: Identifies exact mechanical violation against `references/anti-ai-technical-catalog.md` and Gate U1–U10, E1–E4 in `instructions/rules/technical-writing-principles.rule.md`.
+     * *Academic & Rigor Evaluator*: Assesses whether the trace degrades academic credibility, introduces textbook preach, spurious math, or abstraction leakage.
+     * *Industry Tech Lead Reader*: Assesses whether the trace sounds synthetic, hollow marketing fluff, un-actionable, or untrustworthy to senior engineers.
+   - Emits table: `| Line | Raw Snippet | Trace Classification | Tri-Role Findings |`. Emits explicit "0 traces detected" report if clean.
+2. **Subagent `pattern-sweeper`**:
+   - Dispatched only when `ai-trace-detector` catalogues $\ge 1$ trace.
+   - Sweeps the entire document for all identical or isomorphic instances of each flagged pattern.
+   - Emits table: `| Pattern Type | Detection Rule / Regex | Total Occurrences | All Matched Lines |`.
+3. **Confirmation Checkpoint (Primary Coordinator)**:
+   - Formulates a structured remediation plan (`/plan`): Problem & blast radius, minimum 2 actionable options with explicit trade-offs (e.g. surgical keyword replacement vs structural rewrite), and recommended direction with rationale.
+   - Presents the plan to the user (`/doc-coauthoring`) in natural target language (natural Vietnamese without trailing English glosses in parentheses).
+   - **Immutable Gate**: FORBIDDEN from dispatching `doc-fixer` without explicit user acceptance (`accept` / `đồng ý`).
+4. **Subagent `doc-fixer`**:
+   - Dispatched ONLY after explicit user acceptance of the checkpoint plan.
+   - Applies the approved plan to all swept locations, strictly adhering to `technical-writing-principles.rule.md`.
+   - Blast Radius Lock: Forbidden from modifying lines outside approved scope.
+   - Emits unified diff of changes.
+5. **Subagent `stranger-reviewer`**:
+   - Dispatched immediately after `doc-fixer` completes edits.
+   - Independent blind audit: Confirms zero new AI stylistic tells introduced and 100% preservation of original technical/business semantics.
+   - Emits binary `PASS` or `FAIL` with specific remediation recipes.
+
+```mermaid
+flowchart TD
+  S1[1. ai-trace-detector] --> DecisionTrace{Traces >= 1?}
+  DecisionTrace -- No --> Done[Audit Complete: 0 Traces Detected]
+  DecisionTrace -- Yes --> S2[2. pattern-sweeper]
+  S2 --> S3[3. Coordinator Plan via /plan]
+  S3 --> S4[4. User Alignment via /doc-coauthoring]
+  S4 --> DecisionUser{User Accept?}
+  DecisionUser -- No / Revise --> S3
+  DecisionUser -- Accept --> S5[5. doc-fixer applies diffs]
+  S5 --> S6[6. stranger-reviewer validates]
+  S6 --> DecisionReview{Review PASS?}
+  DecisionReview -- FAIL --> S5
+  DecisionReview -- PASS --> DecisionCycle{Cycle < 6?}
+  DecisionCycle -- Yes --> S1
+  DecisionCycle -- No --> CapDone[Halt: Backlog Escalation]
+```
+
+**Mechanical Stopping Conditions (Loop Control)**:
+1. `ai-trace-detector` reports 0 traces in a full-document scan.
+2. User explicitly issues verbal stop command (e.g. "dừng lại", "tài liệu đã đạt").
+3. Hard ceiling: Maximum 6 iteration cycles. If reached without Condition 1, coordinator halts and escalates residual backlog to the user.
+
+Consult `references/anti-ai-audit-loop.md` for turnkey subagent dispatch prompt templates.
+
+---
+
 ## Output Contract
+
+### Mode A: Direct Authoring Output Contract
 
 Publish completed technical engineering documents enclosed in a single standalone Markdown code block per the schema below. Never prefix or suffix the document block with conversational commentary, pleasantries, or meta-explanations:
 
@@ -232,6 +299,17 @@ Publish completed technical engineering documents enclosed in a single standalon
 
 [Full technical document content complying with universal structural standards]
 ````
+
+### Mode B: Decontamination Loop Output Contract
+
+During Mode B execution, each phase emits a dedicated structured artifact:
+1. **Detection Pass (`ai-trace-detector`)**: Emits the Tri-Role findings table:
+   `| Line | Raw Snippet | Trace Classification | Tri-Role Findings (Detector / Academic / Practitioner) |`
+2. **Global Sweep (`pattern-sweeper`)**: Emits the pattern incidence table:
+   `| Pattern Type | Detection Rule / Regex | Total Occurrences | All Matched Lines |`
+3. **Confirmation Checkpoint**: Emits a structured remediation proposal (`/plan`) with Problem description, Options A & B with trade-offs, and Recommended direction.
+4. **Surgical Diff (`doc-fixer`)**: Emits a unified diff specifying target file path, line numbers, original text, and modified text.
+5. **Stranger Verification (`stranger-reviewer`)**: Emits binary `PASS` or `FAIL` verdict with itemized quality gate compliance check.
 
 ---
 
@@ -266,6 +344,10 @@ Publish completed technical engineering documents enclosed in a single standalon
 | Non-Neutral / 1st-2nd POV | Writing: "We designed a superior pipeline that allows you to easily authenticate client requests." | Use third-person entities with neutral empirical metrics: "The service verifies tokens with P99 latency under 1.2ms." | Count of first/second-person pronouns equals 0; count of subjective adjectives equals 0. |
 | Lazy Cross-Doc Deflection | Writing in body: "For database schema and replication details, refer to Document X." | Document is fully self-contained; external citations isolated in References only on explicit user request. | Count of cross-document references in body text equals 0. |
 | Tunnel-Vision Patching & Regression | Making isolated local edits that contradict existing sections, drop optimal specs, or degrade quantitative precision. | Conduct end-to-end blast radius audit, preserve verified optimizations, and align trade-offs with user. | Count of unresolved cross-section contradictions equals 0; 100% of existing optimal specifications preserved. |
+| Detector Self-Fixing (Role Blending) | Subagent `ai-trace-detector` modifies file content directly or suggests unrequested fixes in its scan pass. | Detector only catalogues issues; fixing is reserved exclusively for `doc-fixer` after user approval. | Count of file mutations or replacement edits initiated by detector equals 0. |
+| Unapproved Fix Execution (Bypassing User Checkpoint) | Subagent `doc-fixer` is dispatched immediately after detection without presenting options to user or awaiting accept. | Coordinator drafts plan with trade-offs; awaits explicit user acceptance before dispatching fixer. | Count of fixes executed without prior explicit user acceptance equals 0. |
+| Skipped Stranger Review (Unverified Fix Pass) | Marking an audit cycle complete without dispatching an independent third-party reviewer subagent. | Dispatch fresh `stranger-reviewer` to verify zero new tells and semantic invariance before accepting diffs. | Count of unverified fix cycles lacking stranger-reviewer sign-off equals 0. |
+| Unbounded Review Loop (Missing Mechanical Termination Boundary) | Iterating endlessly past diminishing returns without clear mechanical stopping criteria. | Halt on 0 traces, explicit user stop command, or 6-cycle cap with backlog escalation. | Count of review loops exceeding 6 iterations without user escalation equals 0. |
 
 ---
 
@@ -275,6 +357,8 @@ Engineering reference manuals and governance standards:
 - [document-types-matrix.md](references/document-types-matrix.md): Universal classification matrix, Diataxis architecture, and structural blueprints for 8 core engineering document types.
 - [visual-modeling-guide.md](references/visual-modeling-guide.md): Universal visual modeling guide across C4, data pipelines, sequence handshakes, statecharts, and incident fault trees with native Mermaid templates.
 - [anti-ai-technical-catalog.md](references/anti-ai-technical-catalog.md): Catalog of 34 AI stylistic tells, three-tier vocabulary matrix, and mechanical scoring rules.
+- [anti-ai-audit-loop.md](references/anti-ai-audit-loop.md): Operational manual and multi-subagent protocol for iterative anti-AI scanning, tri-role evaluation, pattern sweeping, confirmation checkpoint, and surgical decontamination.
 - [syntax-engineering-guide.md](references/syntax-engineering-guide.md): Technical guide for LaTeX pipe barriers in Markdown tables, clean code fences, and GitHub admonitions.
-- [technical-writing-principles.rule.md](../../rules/technical-writing-principles.rule.md): Repository governance rule defining the 10 universal engineering documentation principles and 2-tier adaptive quality gates.
+- [technical-writing-principles.rule.md](../../../rules/technical-writing-principles.rule.md): Repository governance rule defining the 10 universal engineering documentation principles and 2-tier adaptive quality gates.
+
 
