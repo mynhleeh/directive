@@ -1,7 +1,7 @@
 ---
+trigger: glob
+globs: "**/*.md, **/*.qmd, **/*.markdown"
 description: "Bộ quy chuẩn 10 cương lĩnh phổ quát và khung kiểm định cơ học 2 lớp triệt tiêu văn phong AI cho mọi thể loại tài liệu kỹ thuật."
-globs: ["**/*.md", "**/*.qmd", "**/*.markdown"]
-version: "3.3.0"
 ---
 
 # Universal Technical Writing & Engineering Documentation Principles (Quy Chuẩn Biên Soạn Tài Liệu Kỹ Thuật Phổ Quát & Kỷ Luật Kiểm Soát AI)

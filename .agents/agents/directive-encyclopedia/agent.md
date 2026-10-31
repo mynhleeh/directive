@@ -1,30 +1,33 @@
 ---
 name: directive-encyclopedia
-description: "A living encyclopedia for the directive knowledge base. Discovers skills dynamically, adapts resource allocation via a 3-tier execution model (fast-path direct lookup, targeted deep-dive, or dual-subagent cross-check), and grounds answers with hybrid web search to guarantee fast, exhaustive, hallucination-free responses."
+description: "Master librarian and living encyclopedia for the directive knowledge base. Trigger when researching, querying, discovering, or synthesizing prompts, skills, rules, architectural blueprints, or directives in the repository or web knowledge. Do NOT trigger for unrelated code modifications, CV creation, or tasks with no knowledge retrieval component."
 version: 2.0.0
-tags: [encyclopedia, knowledge-base, dynamic-discovery, adaptive-routing, tiered-execution, cross-check, subagent-driven, web-grounding, scanner, synthesizer]
+tags:
+  - encyclopedia
+  - knowledge-base
+  - dynamic-discovery
+  - adaptive-routing
+  - tiered-execution
+  - cross-check
+  - subagent-driven
+  - web-grounding
+  - scanner
+  - synthesizer
 tools:
-   - view_file
-   - list_dir
-   - find_by_name
-   - grep_search
-   - write_to_file
-   - replace_file_content
-
-   - run_command
-   - manage_task
-   - schedule
-
-   - search_web
-   - read_url_content
-   - generate_image
-   - ask_question
-
-   - invoke_subagent
-   - define_subagent
-   - manage_subagents
-   - send_message
-   - multi_replace_file_content
+  - read_file
+  - write_file
+  - edit_file
+  - run_command
+  - list_plugin_accounts
+  - manage_task
+  - schedule
+  - search_web
+  - search_marketplace
+  - ask_question
+  - invoke_subagent
+  - define_subagent
+  - manage_subagents
+  - send_message
 ---
 
 # Directive Encyclopedia Agent

@@ -1,27 +1,29 @@
 ---
 name: omni
-description: "A highly capable, domain-agnostic meta-agent. Triggers on any complex request requiring deep reasoning, web research, skill orchestration, and sub-agent coordination. It dynamically loads skills, cross-checks facts, and executes tasks using Subagent-Driven Development."
+description: "Domain-agnostic meta-orchestrator agent for complex, multi-faceted engineering tasks. Trigger when a task requires cross-domain reasoning, dynamic skill discovery, multi-subagent coordination, or iterative verification. Do NOT trigger for simple direct queries, standalone CV drafting, or single-file edits with obvious execution paths."
 version: 1.0.0
-tags: [omni, meta-agent, dynamic-skills, subagent-driven, general-purpose, reasoning]
+tags:
+  - omni
+  - meta-agent
+  - dynamic-skills
+  - subagent-driven
+  - general-purpose
+  - reasoning
 tools:
-   - view_file
-   - list_dir
-   - find_by_name
-   - grep_search
-   - write_to_file
-   - replace_file_content
-   - run_command
-   - manage_task
-   - schedule
-   - search_web
-   - read_url_content
-   - generate_image
-   - ask_question
-   - invoke_subagent
-   - define_subagent
-   - manage_subagents
-   - send_message
-   - multi_replace_file_content
+  - read_file
+  - write_file
+  - edit_file
+  - run_command
+  - list_plugin_accounts
+  - manage_task
+  - schedule
+  - search_web
+  - search_marketplace
+  - ask_question
+  - invoke_subagent
+  - define_subagent
+  - manage_subagents
+  - send_message
 ---
 
 # Omni-Agent

@@ -1,27 +1,31 @@
 ---
 name: cv-architect
-description: "High-impact CV and resume content architect. Orchestrates structured intake, deep STAR/XYZ interviewing, ATS keyword optimization, dual-auditor subagent verification, and standardized LaTeX compilation handoff. Activates whenever a user wants to create, revise, tailor, or optimize a CV or resume."
+description: "High-impact CV and resume content architect. Trigger when the user wants to create, revise, tailor, audit, or optimize a CV, resume, or technical portfolio, or prepare career experience using STAR/XYZ methods. Do NOT trigger for general programming tasks, repository organization, or non-career document authoring."
 version: 1.0.0
-tags: [cv, resume, career, content-strategy, star-method, ats-optimization, latex-ready, subagent-driven]
+tags:
+  - cv
+  - resume
+  - career
+  - content-strategy
+  - star-method
+  - ats-optimization
+  - latex-ready
+  - subagent-driven
 tools:
-  - view_file
-  - list_dir
-  - find_by_name
-  - grep_search
-  - write_to_file
-  - replace_file_content
+  - read_file
+  - write_file
+  - edit_file
   - run_command
+  - list_plugin_accounts
   - manage_task
   - schedule
   - search_web
-  - read_url_content
-  - generate_image
+  - search_marketplace
   - ask_question
   - invoke_subagent
   - define_subagent
   - manage_subagents
   - send_message
-  - multi_replace_file_content
 ---
 
 # CV Architect Agent

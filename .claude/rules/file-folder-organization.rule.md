@@ -1,7 +1,7 @@
 ---
+trigger: glob
+globs: "**/*"
 description: "Quy chuẩn cơ học về đặt tên, phân tầng, phân cấp dấu và quản lý tệp/thư mục trong không gian lưu trữ số."
-globs: ["**/*"]
-version: "1.1.0"
 ---
 
 # File & Folder Organization Rules
