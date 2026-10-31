@@ -1,0 +1,138 @@
+{
+  "bundle_format": "reuseforge-standalone-share-bundle/1.0",
+  "bundle_id": "reuseforge-standalone",
+  "bundle_version": "1.0.0",
+  "protocol": "reuseforge/1.0",
+  "created_date": "2026-09-27",
+  "purpose": "Portable standalone distribution of the complete ReuseForge skill family.",
+  "install_mode": "EXTRACT_OUTER_ZIP_THEN_UPLOAD_MEMBER_ZIPS_INDIVIDUALLY",
+  "standalone": true,
+  "hard_skill_dependencies": [],
+  "optional_integration": {
+    "solo_builder_dev_orchestrator": {
+      "required": false,
+      "relationship": "Optional Reuse Review subworkflow before Solo Builder DEV Gate C.",
+      "authority": "Solo Builder remains top-level DEV lifecycle authority; ReuseForge keeps its own RF Gates."
+    }
+  },
+  "members": [
+    {
+      "name": "reuseforge-orchestrator",
+      "role": "Strategic router, lifecycle state and Gate enforcement",
+      "artifact": "skills/reuseforge-orchestrator.zip",
+      "artifact_sha256": "bc46d487d5007d3fef901498bc4b343d0882d2f690f504bd9cad35a84309aa97",
+      "artifact_size_bytes": 11556,
+      "tree_sha256": "0cd1e8b296a821b373efe6d63013f33818639a6dbc6330a3d5781b011864de3e",
+      "member_version": null,
+      "version_state": "LEGACY_PINNED_EXACT_TREE"
+    },
+    {
+      "name": "reuseforge-project-framer",
+      "role": "Project framing and capability decomposition; Gate A",
+      "artifact": "skills/reuseforge-project-framer.zip",
+      "artifact_sha256": "8ee5d441ca03b4c212f35fdc117262fe04644a1dac87644c7889b980209cecf2",
+      "artifact_size_bytes": 11481,
+      "tree_sha256": "4fc6a687e7dfb54541ab45575fb01d10cccd64467ede96dce59a2d07673f2798",
+      "member_version": null,
+      "version_state": "LEGACY_PINNED_EXACT_TREE"
+    },
+    {
+      "name": "reuseforge-asset-scout",
+      "role": "Capability-first reusable asset discovery",
+      "artifact": "skills/reuseforge-asset-scout.zip",
+      "artifact_sha256": "55dce934d6a1866531f68774d2529d0884557ef263180584832e352a353e7c9c",
+      "artifact_size_bytes": 11622,
+      "tree_sha256": "7f12c86c59c7e6ae12bfa44891ed03a82b4cb9e2d8746b8b095ccadd07111894",
+      "member_version": null,
+      "version_state": "LEGACY_PINNED_EXACT_TREE"
+    },
+    {
+      "name": "reuseforge-candidate-auditor",
+      "role": "Adversarial verification of discovered candidates",
+      "artifact": "skills/reuseforge-candidate-auditor.zip",
+      "artifact_sha256": "fc38251d10bb58da8d23fc6097e2deb274cd205031912b0b7bd18eeb5298850e",
+      "artifact_size_bytes": 11818,
+      "tree_sha256": "8be8aae5c3de2fddf72c5cd7bfeeb6f4e150f5371086568ab5b037bb28f36534",
+      "member_version": null,
+      "version_state": "LEGACY_PINNED_EXACT_TREE"
+    },
+    {
+      "name": "reuseforge-solution-architect",
+      "role": "Evidence-backed reuse architecture and Gate B proposal",
+      "artifact": "skills/reuseforge-solution-architect.zip",
+      "artifact_sha256": "3ba2f05ab636d237a788bbe7769c563aa033813d2056fbee175812304d69055d",
+      "artifact_size_bytes": 11898,
+      "tree_sha256": "5674cf6b82fe535d2aba148bea94adc7c5a2c22eaf1874811d1a4a0e0bbde2c6",
+      "member_version": null,
+      "version_state": "LEGACY_PINNED_EXACT_TREE"
+    },
+    {
+      "name": "reuseforge-project-planner",
+      "role": "Implementation specification and task DAG after Gate B",
+      "artifact": "skills/reuseforge-project-planner.zip",
+      "artifact_sha256": "998cf5c792ebb7ef84f6dd7a329b3199204124cf6f16dad40b5170ee09b4c81a",
+      "artifact_size_bytes": 11490,
+      "tree_sha256": "d9b8e758bee0efbbc956926e23ebc066b786ca21f92b492bf8e5661aa65357b0",
+      "member_version": null,
+      "version_state": "LEGACY_PINNED_EXACT_TREE"
+    },
+    {
+      "name": "reuseforge-execution-handoff",
+      "role": "Deterministic executor manifests and Gate C binding",
+      "artifact": "skills/reuseforge-execution-handoff.zip",
+      "artifact_sha256": "cd29fa62112180423ee4d77103ec1a4b4a98605fdbb7f9884581dd1ac05c9ea2",
+      "artifact_size_bytes": 11865,
+      "tree_sha256": "17154b92ead44380bcf405e9297079edb1da4c10f94b81138c270647f1c45b5a",
+      "member_version": null,
+      "version_state": "LEGACY_PINNED_EXACT_TREE"
+    },
+    {
+      "name": "reuseforge-repair-router",
+      "role": "Evidence-backed diagnosis and repair routing",
+      "artifact": "skills/reuseforge-repair-router.zip",
+      "artifact_sha256": "adbef399f25042c0baa32cc97e7b6d156fd6a867687ecf7a2c68b97b3fdd4b91",
+      "artifact_size_bytes": 11834,
+      "tree_sha256": "23acf0d8a50d89cea6822e636edece67ce45fa38c7f827571db4fd2953a0f558",
+      "member_version": null,
+      "version_state": "LEGACY_PINNED_EXACT_TREE"
+    },
+    {
+      "name": "reuseforge-memory-recovery",
+      "role": "Recovery from canonical repository memory",
+      "artifact": "skills/reuseforge-memory-recovery.zip",
+      "artifact_sha256": "de7ebded23aa5c83541fbc779aae022e8b1580b7f3760fcebef356e5d1febe74",
+      "artifact_size_bytes": 11439,
+      "tree_sha256": "a4d269c3aad4295ccca056cb26cf9dc8369d927e466e10fcb7df37db16d490f9",
+      "member_version": null,
+      "version_state": "LEGACY_PINNED_EXACT_TREE"
+    }
+  ],
+  "recommended_install_order": [
+    "reuseforge-orchestrator",
+    "reuseforge-project-framer",
+    "reuseforge-asset-scout",
+    "reuseforge-candidate-auditor",
+    "reuseforge-solution-architect",
+    "reuseforge-project-planner",
+    "reuseforge-execution-handoff",
+    "reuseforge-repair-router",
+    "reuseforge-memory-recovery"
+  ],
+  "validation_summary": {
+    "official_skill_validator": "9/9 PASS",
+    "revalidate_after_extract": "9/9 PASS",
+    "zip_integrity": "9/9 PASS",
+    "json_parse": "PASS",
+    "yaml_parse": "PASS",
+    "internal_reference_resolution": "59/59 resolved",
+    "shared_protocol_reference_consistency": "7 shared protocol/reference files identical across all 9 skills",
+    "hard_external_skill_dependency_scan": "0 detected",
+    "fresh_chat_runtime_canary": "NOT_RUN_ON_RECIPIENT_ACCOUNT"
+  },
+  "limitations": [
+    "This outer archive is a distribution wrapper, not a single installable ChatGPT Skill.",
+    "Each member ZIP must be uploaded/installed individually.",
+    "Runtime access to web, GitHub, repository files, Codex/OpenCode, or other tools depends on the recipient account/environment.",
+    "Structural/package validation does not prove connector availability on another account."
+  ]
+}
