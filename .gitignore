@@ -14,3 +14,4 @@ htmlcov/
 # Temporary cache files
 canvas-fonts/
 *.tmp
+directive-cli/output/
