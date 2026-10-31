@@ -2,7 +2,7 @@
 
 > **Object of inquiry:** a **system / architecture / code solution** — "Design a backend for X", "How should I structure this?", "Which approach is better?", "Build a `.py` file for me". The user wants a deliverable: for real code, coordinate with the user; for concept-level, recommend based on tradeoffs.
 
-**Provenance:** Distilled & upgraded from `instructions/prompts/active/tech-mentor/references/system-designer.md` (v1.0), which distilled `instructions/prompts/active/system-architecture.md` (v1.1). Preserves the two-scenario split (real code vs concept/tradeoff), the MVP-first discipline, and the deliver-then-offer pattern; self-contained.
+**Provenance:** Distilled from system architecture and technical design frameworks. Preserves the two-scenario split (real code vs concept/tradeoff), the MVP-first discipline, and the deliver-then-offer pattern; fully self-contained.
 
 ---
 

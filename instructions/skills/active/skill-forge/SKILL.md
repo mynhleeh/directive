@@ -1,7 +1,7 @@
 ---
 name: skill-forge
-description: "Authoring engine for the directive knowledge base using Subagent-Driven Development: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user prompts, function/tool schemas, rules files (CLAUDE.md, AGENTS.md, GEMINI.md, .cursorrules, .mdc), MCP tools. Trigger whenever the user asks to write, improve, convert, explain, or extract a prompt/skill/schema/rules artifact, or to turn a conversation or repo into reusable artifacts. Do NOT trigger for ordinary coding questions, runtime debugging, or a generic concept question with no artifact to create or convert."
-version: 5.0.0
+description: "Authoring engine for AI artifact repositories and engineering knowledge bases using Subagent-Driven Development: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user prompts, function/tool schemas, rules files (CLAUDE.md, AGENTS.md, GEMINI.md, .cursorrules, .mdc), MCP tools. Trigger whenever the user asks to write, improve, convert, explain, or extract a prompt/skill/schema/rules artifact, or to turn a conversation or repo into reusable artifacts. Do NOT trigger for ordinary coding questions, runtime debugging, or a generic concept question with no artifact to create or convert."
+version: 5.1.0
 tags:
   - subagent-driven
   - meta-skill
@@ -32,7 +32,7 @@ compatibility: "Any agent (Claude, OpenAI, Gemini, MCP, Cursor, AGY). Weak-model
 
 # Skill Forge
 
-A **meta-orchestrator** that distills the entire `directive` knowledge base into one brain capable of **generating**, **critiquing**, **converting**, **explaining**, **distilling**, and **navigating** AI artifacts — skills, prompts, function schemas, and rules files — for any domain, any platform, and any language.
+A **meta-orchestrator** capable of **generating**, **critiquing**, **converting**, **explaining**, **distilling**, and **navigating** AI artifacts — skills, prompts, function schemas, and rules files — for any domain, any platform, and any language.
 
 > **Language policy** (see [Language Policy](#language-policy)): The skill's own instructions are always in English. User-facing output adapts to the user's language (English / Vietnamese / any other detected language). Generated artifacts follow `references/house-language-policy.md`.
 
@@ -53,7 +53,7 @@ Activate when the user:
 
 > **Do NOT trigger** for:
 > - Ordinary coding questions / feature requests (use a normal coding agent).
-> - Runtime debugging, error diagnosis, concept explanation, or project onboarding (use `tech-mentor`).
+> - Runtime debugging, error diagnosis, concept explanation, or project onboarding (use dedicated interactive code mentoring, explanation, or debugging tools).
 
 ---
 
@@ -87,7 +87,7 @@ User Input
   │
   └─ STAGE 3: EMIT & FINALIZE (Controller)
         Merge all completed task outputs into the final response block. State assumptions/defaults used.
-        Remind user to update `instructions/skills/SKILL_INDEX.md`.
+        If the workspace maintains a skill registry or index (e.g., `SKILL_INDEX.md`), remind user to register the new artifact.
 ```
 
 ### Subagent Dispatch Prompts
@@ -350,21 +350,21 @@ When a source produces multiple related artifacts, emit a **family**: a parent `
 
 ## MODE: NAVIGATE / ORGANIZE — Classify and Place Content
 
-Use the repo's 3-axis taxonomy to classify and place content. See `references/taxonomy-navigation.md`.
+Use the 3-axis taxonomy to classify and place content. See `references/taxonomy-navigation.md`.
 
 ### Classify a Resource
 ```
-Q1: Feed directly to an AI agent to execute?  → instructions/
-Q2: Read to learn about AI / prompting?      → knowledge/
-Q3: Design, architecture, or mental model?   → blueprints/
+Q1: Feed directly to an AI agent to execute?  → Instructions (e.g., instructions/ or skills/)
+Q2: Read to learn about AI / prompting?      → Knowledge (e.g., knowledge/ or docs/)
+Q3: Design, architecture, or mental model?   → Blueprints (e.g., blueprints/ or architectures/)
 ```
-If a resource fits more than one axis, or its tier is ambiguous (e.g., Tier 2 vs Tier 3), ask one question at the CLARIFY gate instead of guessing (Principle 3); otherwise classify and state the decision in the Working Notes block.
+If a resource fits more than one axis, or its tier is ambiguous (e.g., Tier 2 vs Tier 3), ask one question at the CLARIFY gate instead of guessing (Principle 3); otherwise classify and state the decision in the Working Notes block, adapting to the target workspace's directory layout.
 
-### Update the Skill Index
-When creating, classifying, or porting a new skill, remind the user or output instructions to update `instructions/skills/SKILL_INDEX.md` by adding a new row to the appropriate "Skills by Purpose" and "Skills by Source" tables.
+### Update the Skill Registry / Index
+When creating, classifying, or porting a new skill, if the workspace maintains a skill registry or catalog index (e.g., `SKILL_INDEX.md` or equivalent), remind the user or output instructions to register the new skill by adding an entry to the appropriate index table.
 
 ### Route Citations by Source Hierarchy
-Always cite the **source tier** when referencing content. Prefer `knowledge/papers/` (Tier 1) > docs/specs (Tier 2) > guides (Tier 3) > articles (Tier 4) > external submodules (Tier 5) > active (Tier 6) > archive (Tier 7).
+Always cite the **source tier** when referencing content. Prefer peer-reviewed academic papers / formal specs (Tier 1) > official documentation (Tier 2) > curated guides (Tier 3) > articles (Tier 4) > external curated resources (Tier 5) > active project files (Tier 6) > archives (Tier 7).
 
 ### Organize (active / archive / external)
 - `active/` and `archive/` → **self-created only**.
@@ -402,12 +402,12 @@ Platform mapping (system prompts, function/tool schemas, JSON types, rules files
 
 ---
 
-## Authoritative Repository Guidelines
+## Universal Standards & Discovery Conventions
 
-Beyond its own `references/`, the skill must respect these repo-wide truths:
-- **Skill Authoring Methodology**: `knowledge/guides/the-complete-guide-to-building-skill-for-claude.pdf` (Tier 3) is the primary philosophical guide for skill creation.
-- **Anthropic Official Standards**: `instructions/skills/external/anthropics/template/SKILL.md` (Tier 5) is the baseline official template. `instructions/skills/external/anthropics/skills/skill-creator/SKILL.md` shows Anthropic's own iteration loop.
-- **Dynamic Skill Discovery Policy**: According to `.agents/agents/directive-encyclopedia/agent.md`, agents discover skills *dynamically* by scanning the `tags` and `description` in the YAML frontmatter. Therefore, those fields must always be present, precise, and optimized for agent reading.
+The skill adheres to these foundational principles across all environments:
+- **Skill Authoring Methodology**: Follow established industry best practices for agent skill creation (concise trigger criteria, progressive disclosure, lazy-loaded references).
+- **Official Agent Standards**: Comply with official agent skill specifications (YAML frontmatter, POSIX relative reference paths, strict executable instructions).
+- **Dynamic Skill Discovery Policy**: Agents discover skills *dynamically* by scanning the `tags` and `description` in the YAML frontmatter. Therefore, those fields must always be present, precise, and optimized for agent semantic discovery.
 
 ---
 

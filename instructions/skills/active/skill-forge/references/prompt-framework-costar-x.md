@@ -1,8 +1,8 @@
 # Prompt Framework: COSTAR-X
 
-The **house prompt framework**, distilled from the three active prompts (`system-architecture.md`, `function-anatomist.md`, `git-github.md`). It is the canonical structure for authoring reusable, variable-isolated prompts that produce reliable, self-verifying output.
+The **house prompt framework**, distilled from proven production prompt architectures (`system-architecture`, `function-anatomist`, `tool-teacher`). It is the canonical structure for authoring reusable, variable-isolated prompts that produce reliable, self-verifying output.
 
-> **Why this file exists**: The three active prompts in `instructions/prompts/active/` shared an identical structure despite different domains. This reference extracts that shared scaffold into a reusable recipe so GENERATED prompts match it. Use it for the **CREATE** and **CONVERT** modes when the target artifact type is a *user prompt*.
+> **Why this file exists**: Production prompts require a consistent, rigorous scaffold across diverse domains. This reference extracts that shared scaffold into a reusable recipe so GENERATED prompts match it. Use it for the **CREATE** and **CONVERT** modes when the target artifact type is a *user prompt*.
 
 ---
 

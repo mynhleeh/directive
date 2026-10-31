@@ -45,7 +45,7 @@ Activation keywords: `technical documentation`, `author SRS`, `write SDD`, `draf
 
 Do NOT activate when:
 - Writing general application source code (use general coding agents).
-- Diagnosing runtime stack traces or debugging application code (use systematic-debugging or tech-mentor).
+- Diagnosing runtime stack traces or debugging application code (use dedicated interactive code debugging or system architecture tools/skills).
 - Drafting marketing copy, creative promotional articles, or sales emails.
 
 ---
@@ -239,7 +239,7 @@ When Mode B triggers, the primary coordinator orchestrates 4 specialized worker 
 1. **Subagent `ai-trace-detector`**:
    - Reads 100% of the target document; zero self-fixing.
    - Evaluates every detected trace through the mandatory **Tri-Role Lens**:
-     * *AI Stylistic Tell Detector*: Identifies exact mechanical violation against `references/anti-ai-technical-catalog.md` and Gate U1–U10, E1–E4 in `instructions/rules/technical-writing-principles.rule.md`.
+     * *AI Stylistic Tell Detector*: Identifies exact mechanical violation against `references/anti-ai-technical-catalog.md` and Universal Core Gates (Gate U1–U10) / Extension Gates (Gate E1–E4) defined in this skill, augmented by any project-specific engineering documentation standards or rules discovered in the workspace.
      * *Academic & Rigor Evaluator*: Assesses whether the trace degrades academic credibility, introduces textbook preach, spurious math, or abstraction leakage.
      * *Industry Tech Lead Reader*: Assesses whether the trace sounds synthetic, hollow marketing fluff, un-actionable, or untrustworthy to senior engineers.
    - Emits table: `| Line | Raw Snippet | Trace Classification | Tri-Role Findings |`. Emits explicit "0 traces detected" report if clean.
@@ -253,7 +253,7 @@ When Mode B triggers, the primary coordinator orchestrates 4 specialized worker 
    - **Immutable Gate**: FORBIDDEN from dispatching `doc-fixer` without explicit user acceptance (`accept` / `đồng ý`).
 4. **Subagent `doc-fixer`**:
    - Dispatched ONLY after explicit user acceptance of the checkpoint plan.
-   - Applies the approved plan to all swept locations, strictly adhering to `technical-writing-principles.rule.md`.
+   - Applies the approved plan to all swept locations, strictly adhering to the 2-tier quality gates defined in this skill and applicable project documentation guidelines.
    - Blast Radius Lock: Forbidden from modifying lines outside approved scope.
    - Emits unified diff of changes.
 5. **Subagent `stranger-reviewer`**:
@@ -359,6 +359,6 @@ Engineering reference manuals and governance standards:
 - [anti-ai-technical-catalog.md](references/anti-ai-technical-catalog.md): Catalog of 34 AI stylistic tells, three-tier vocabulary matrix, and mechanical scoring rules.
 - [anti-ai-audit-loop.md](references/anti-ai-audit-loop.md): Operational manual and multi-subagent protocol for iterative anti-AI scanning, tri-role evaluation, pattern sweeping, confirmation checkpoint, and surgical decontamination.
 - [syntax-engineering-guide.md](references/syntax-engineering-guide.md): Technical guide for LaTeX pipe barriers in Markdown tables, clean code fences, and GitHub admonitions.
-- [technical-writing-principles.rule.md](../../../rules/technical-writing-principles.rule.md): Repository governance rule defining the 10 universal engineering documentation principles and 2-tier adaptive quality gates.
+- Governance Standards: The 10 Universal Core Gates (Gate U1–U10) and 2-tier adaptive quality gates are encapsulated directly in this skill, with dynamic workspace discovery for project-specific rules.
 
 

@@ -2,7 +2,7 @@
 
 > **Object of inquiry:** a **software project / codebase** — "What does this project do?", "Explain this project", "Trace this data flow", "What is this folder?", "How does this feature work?". The user is onboarding to a specific codebase.
 
-**Provenance:** Distilled & upgraded from `instructions/prompts/active/tech-mentor/references/project-tutor.md` (v1.0), which distilled `instructions/skills/active/project-tutor/SKILL.md` (v1.1) + its `references/`. Preserves the phased analysis, interaction-mechanism focus, progressive disclosure, and verify-before-advance; self-contained so it does not chain-load the source skill.
+**Provenance:** Distilled from codebase onboarding and architectural walkthrough architectures. Preserves phased analysis, interaction-mechanism focus, progressive disclosure, and verify-before-advance; fully self-contained.
 
 ---
 

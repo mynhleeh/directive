@@ -16,7 +16,7 @@ compatibility: "Any agent"
 
 # Academic Research Synthesizer
 
-A rigorous scholarly literature synthesis and empirical critique engine. Distilled from `scientific-agent-skills` and `Auto-Empirical-Research-Skills`, this skill translates raw scientific papers and academic corpuses into structured evidence matrices, methodological critiques, and publication-ready literature syntheses.
+A rigorous scholarly literature synthesis and empirical critique engine. Built on systematic literature review and causal identification principles, this skill translates raw scientific papers and academic corpuses into structured evidence matrices, methodological critiques, and publication-ready literature syntheses.
 
 ---
 
@@ -33,8 +33,8 @@ Activate when the user asks to:
 
 > **Do NOT trigger** for:
 > - Casual blog post summaries or news overviews.
-> - Generating study flashcards from a single paper (use `deep-flashcard-generator`).
-> - General software architecture reviews (use `code-architect-auditor`).
+> - Generating study flashcards or rote memory aids from a single paper (use dedicated flashcard or study tools).
+> - General software architecture reviews or code diff auditing (use dedicated architecture audit tools).
 
 ---
 
@@ -125,11 +125,11 @@ Every literature review report must follow this format:
 |---|---|---|
 | Listing papers as disjointed bullet points | Grouping findings by theme, conflicting evidence, or methodology | Creates true scientific synthesis rather than an annotated bibliography |
 | Quoting percentage gains without baseline numbers | Quoting exact metric pairs (e.g., "improved from 74.2% to 78.5% on GSM8K") | Prevents misleading performance claims |
-| Treating unverified preprint claims as consensus facts | Explicitly flagging preprints vs peer-reviewed publications | Maintains academic trust tiers per repo policy |
+| Treating unverified preprint claims as consensus facts | Explicitly flagging preprints vs peer-reviewed publications | Maintains established academic evidence hierarchy (peer-reviewed > preprints) |
 | Inventing citations or generalizing beyond the text | Explicitly noting "Source document does not report metric for benchmark X" | Eliminates hallucination in academic synthesis |
 
 ---
 
 ## Provenance
-- Distilled 2026-09-16 from `instructions/skills/external/scientific-agent-skills/` (`literature-review`, `scientific-critical-thinking`) and `Auto-Empirical-Research-Skills/` (`01-lishix520-academic-paper-skills`).
-- Authored according to `skill-forge` House Conventions.
+- Distilled from systematic literature review methodologies, scientific critical thinking frameworks, and empirical paper analysis standards.
+- Formatted following universal agent skill conventions.

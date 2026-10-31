@@ -2,7 +2,7 @@
 
 Reference for `SKILL.md` v4.0.0. Read this file at **BASELINE TEST (RED)** and **GREEN TEST / REFACTOR** stages. It converts skill-authoring into Test-Driven Development: you observe an agent fail *without* the artifact, write the artifact that addresses exactly those failures, and refactor until the agent complies under pressure.
 
-> **Why this file exists**: The v3.0.0 pipeline verified only the *shape* of output (self-audit, counts). It never verified *behavior* — whether an agent actually complies under pressure. This file closes that gap by importing the empirical testing method (RED-GREEN-REFACTOR, pressure scenarios, rationalization capture) and generalizing it from skills to every artifact type. Source: distilled from `instructions/skills/external/superpowers/skills/writing-skills/` (Tier 5) — patterns only, rephrased; see Provenance at the end.
+> **Why this file exists**: The v3.0.0 pipeline verified only the *shape* of output (self-audit, counts). It never verified *behavior* — whether an agent actually complies under pressure. This file closes that gap by importing empirical behavioral testing methods (RED-GREEN-REFACTOR, pressure scenarios, rationalization capture) and generalizing them from skills to every artifact type.
 
 ---
 
@@ -237,7 +237,7 @@ Run in the EVALUATE/GREEN re-check. Each item PASS/FAIL with evidence.
 
 ## Provenance
 
-- **Source**: `instructions/skills/external/superpowers/skills/writing-skills/` (Tier 5, external submodule) + its references (`testing-skills-with-subagents.md`, `persuasion-principles.md`, `examples/CLAUDE_MD_TESTING.md`).
+- **Source**: Behavioral testing methodologies adapted from Test-Driven Development (TDD) for AI instructions and prompt engineering.
 - **Generalization moves**: skills-only testing → all 4 artifact types (test-form table); "watch it fail" → mandatory pre-authoring stage in the pipeline; rationalization capture → countable Working Notes item; persuasion → distilled to 5 applicable principles.
 - **Excluded**: superpowers TDD prerequisite chain (`test-driven-development` skill dependency), raw persuasion research data (cite only), `graphviz-conventions.dot` + `render-graphs.js` tooling (repo does not use graphviz), and all verbatim example scenarios (rephrased per house style).
 - **Epistemic status**: the empirical claims (prohibition backfire, nuance-clause degradation, persuasion effect sizes) are reported from the source's testing; treat them as Tier-5 evidence until independently reproduced.

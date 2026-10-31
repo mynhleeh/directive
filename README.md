@@ -45,18 +45,18 @@ The repository incorporates several external repositories and registries for res
 
 | Reference Source | Description | Type |
 |---|---|---|
-| [**AI-Research-SKILLs**](instructions/skills/external/AI-Research-SKILLs/) | Domain-specific ML engineering and AI research orchestration. | Git Submodule |
-| [**Auto-Empirical-Research-Skills**](instructions/skills/external/Auto-Empirical-Research-Skills/) | Empirical research, econometric pipelines, and academic paper replication suites. | Git Submodule |
-| [**andrej-karpathy**](instructions/skills/external/andrej-karpathy/) | Behavioral principles and skills derived from Karpathy's notes. | Git Submodule |
-| [**anthropics**](instructions/skills/external/anthropics/) | Official Claude skills and tool-use patterns. | Git Submodule |
-| [**scientific-agent-skills**](instructions/skills/external/scientific-agent-skills/) | 160+ scientific computing, computational biology, and materials science agent skills. | Git Submodule |
-| [**superpowers**](instructions/skills/external/superpowers/) | Advanced agentic skills for enhanced development workflows. | Git Submodule |
-| [**system_prompts_leaks**](instructions/prompts/external/system_prompts_leaks/) | Structural references of leaked system prompts (Claude Code, Cursor, etc.). | Git Submodule |
-| [**system-prompts-and-models-of-ai-tools**](instructions/prompts/external/system-prompts-and-models-of-ai-tools/) | Older collection of AI tool system prompts for cross-vendor comparison. | Git Submodule |
-| [**ui-ux-pro-max-skill**](instructions/skills/external/ui-ux-pro-max-skill/) | AI-powered design intelligence and UI/UX engineering workflows. | Git Submodule |
-| [**orca**](instructions/skills/external/orca/) | The AI Orchestrator for 100x builders (Codex, ClaudeCode, OpenCode, Pi). | Git Submodule |
-| [**humanizer**](instructions/skills/external/humanizer/) | Rewrite AI-sounding text so it reads like the writer without changing what it says. | Git Submodule |
-| [**deeptutor-eduhub**](instructions/skills/external/deeptutor-eduhub/) | Education and tutoring skill patterns via EduHub registry. | Vendored Dir |
+| [**AI-Research-SKILLs**](https://github.com/Orchestra-Research/AI-Research-SKILLs) | Domain-specific ML engineering and AI research orchestration. | Git Submodule |
+| [**Auto-Empirical-Research-Skills**](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) | Empirical research, econometric pipelines, and academic paper replication suites. | Git Submodule |
+| [**andrej-karpathy**](https://github.com/multica-ai/andrej-karpathy-skills) | Behavioral principles and skills derived from Karpathy's notes. | Git Submodule |
+| [**anthropics**](https://github.com/anthropics/skills) | Official Claude skills and tool-use patterns. | Git Submodule |
+| [**scientific-agent-skills**](https://github.com/K-Dense-AI/scientific-agent-skills) | 160+ scientific computing, computational biology, and materials science agent skills. | Git Submodule |
+| [**superpowers**](https://github.com/obra/superpowers) | Advanced agentic skills for enhanced development workflows. | Git Submodule |
+| [**system_prompts_leaks**](https://github.com/asgeirtj/system_prompts_leaks) | Structural references of leaked system prompts (Claude Code, Cursor, etc.). | Git Submodule |
+| [**system-prompts-and-models-of-ai-tools**](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools) | Older collection of AI tool system prompts for cross-vendor comparison. | Git Submodule |
+| [**ui-ux-pro-max-skill**](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | AI-powered design intelligence and UI/UX engineering workflows. | Git Submodule |
+| [**orca**](https://github.com/stablyai/orca) | The AI Orchestrator for 100x builders (Codex, ClaudeCode, OpenCode, Pi). | Git Submodule |
+| [**humanizer**](https://github.com/blader/humanizer) | Rewrite AI-sounding text so it reads like the writer without changing what it says. | Git Submodule |
+| [**deeptutor-eduhub**](https://eduhub.deeptutor.info) | Education and tutoring skill patterns via EduHub registry. | Vendored Dir |
 | [**Skillboard**](https://www.skillboard.lol/) | Global open-source catalog of custom skills for AI IDEs. | Website |
 
 ---

@@ -19,7 +19,7 @@ tags:
 license: MIT                    # optional — only for redistributable external content
 compatibility: "Product 1.x"    # optional — environment requirements
 metadata:                        # optional — arbitrary string map, use unique keys
-  author: "directive"
+  author: "author-or-org"
 allowed-tools: "read_file,write_file"   # optional — space-separated pre-approved tools
 ---
 ```

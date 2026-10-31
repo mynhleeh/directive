@@ -1,47 +1,52 @@
-# Taxonomy & Navigation
+# Universal Taxonomy & Navigation Architecture
 
-The repo's **intent-based classification system**, distilled from `README.md`. This is the mental model a meta-skill uses to decide *where* a generated artifact belongs and *which* source has the highest epistemic weight to cite.
+The **intent-based knowledge classification architecture** for AI repositories and engineering knowledge bases. This mental model enables a meta-skill to categorize AI engineering artifacts, organize workspaces, and route citations by epistemic weight.
 
-> **Why this file exists**: The meta-skill needs to (a) classify a resource into the right axis/folder, (b) route citations by trust level. This is the distilled reference for the **NAVIGATE / ORGANIZE** mode.
+> **Why this file exists**: The meta-skill needs to (a) classify an artifact into the right epistemic axis and directory, and (b) route citations by trust level. This is the distilled reference for the **NAVIGATE / ORGANIZE** mode.
 
 ---
 
 ## The 3 Axes — Intent-Based Taxonomy
 
-| Axis | Decision Question | Folder |
+Every engineering artifact serves one of three primary intents:
+
+| Axis | Decision Question | Canonical Folder Example |
 |---|---|---|
-| **INSTRUCTIONS** | Will I feed this directly to AI to execute? | `instructions/` |
-| **KNOWLEDGE** | Will I read this to learn about AI/prompting? | `knowledge/` |
-| **BLUEPRINTS** | Is this a design, blueprint, or mental model? | `blueprints/` |
+| **INSTRUCTIONS** | Will I feed this directly to AI to execute? | `instructions/` (or `skills/`, `.agents/`) |
+| **KNOWLEDGE** | Will I read this to learn or research a domain? | `knowledge/` (or `docs/`, `reference/`) |
+| **BLUEPRINTS** | Is this a design, blueprint, or mental model? | `blueprints/` (or `architectures/`, `design/`) |
 
 ### Decision Tree
 
 ```
 Q1: Will I feed this directly to an AI agent to execute?
-  → Yes → instructions/
+  → Yes → INSTRUCTIONS (e.g. instructions/skills/, prompts/, rules/)
   → No  → Q2
 
-Q2: Will I read this to learn about AI or prompting?
-  → Yes → knowledge/
+Q2: Will I read this to learn, research, or explain a domain?
+  → Yes → KNOWLEDGE (e.g. knowledge/guides/, papers/, articles/)
   → No  → Q3
 
 Q3: Is this a system design, architecture, or mental model?
-  → Yes → blueprints/
+  → Yes → BLUEPRINTS (e.g. blueprints/architectures/, concepts/)
+  → No  → Clarify with user / inspect project conventions
 ```
 
 ---
 
 ## Resource Classification Table
 
-| Resource type | Axis | Location |
+Map artifacts to their respective axis and adapt to host workspace layout:
+
+| Resource type | Axis | Standard Project Location Pattern |
 |---|---|---|
-| Skill files (`SKILL.md`) | INSTRUCTIONS | `instructions/skills/` |
+| Skill files (`SKILL.md`) | INSTRUCTIONS | `instructions/skills/` or `.agents/skills/` |
 | System prompts | INSTRUCTIONS | `instructions/prompts/` |
-| Rules files (`AGENTS.md`, `.cursorrules`) | INSTRUCTIONS | `instructions/rules/` |
-| Automation scripts | INSTRUCTIONS | `instructions/scripts/` |
-| How-to guides, tutorials | KNOWLEDGE | `knowledge/guides/` |
-| Academic / technical papers | KNOWLEDGE | `knowledge/papers/` |
-| Blog posts, saved articles | KNOWLEDGE | `knowledge/articles/` |
+| Rules files (`AGENTS.md`, `.cursorrules`) | INSTRUCTIONS | `instructions/rules/` or project root |
+| Automation scripts | INSTRUCTIONS | `instructions/scripts/` or `scripts/` |
+| How-to guides, tutorials | KNOWLEDGE | `knowledge/guides/` or `docs/guides/` |
+| Academic / technical papers | KNOWLEDGE | `knowledge/papers/` or `docs/papers/` |
+| Technical articles, case studies | KNOWLEDGE | `knowledge/articles/` |
 | System architecture diagrams | BLUEPRINTS | `blueprints/architectures/` |
 | Mental models, frameworks | BLUEPRINTS | `blueprints/concepts/` |
 
@@ -49,65 +54,60 @@ Q3: Is this a system design, architecture, or mental model?
 
 ## Dynamic Lifecycle Split (3 Tiers)
 
-Sub-folders are created **only when a folder contains 2 or more different tiers**.
+Sub-folders or tags are established to distinguish resource provenance and lifecycle state:
 
 | Tier | Purpose | Contains |
 |---|---|---|
-| `active/` | Currently used, maintained | Self-created resources in use |
-| `archive/` | Retired — historical only | Self-created, no longer used |
-| `external/` | Third-party, submodules | External repos, cloned resources |
+| `active/` | Currently used, maintained | Self-created resources actively in production |
+| `archive/` | Retired — historical only | Deprecated or superseded resources, preserved for history |
+| `external/` | Third-party, vendored | External repositories, submodules, or cloned tools |
 
 ### MECE Boundary
 - `active/` and `archive/` → **only self-created** resources.
 - `external/` → **only third-party** resources.
-- When an `external/` resource is no longer needed → **remove/untrack the submodule** (do NOT move to `archive/`).
+- When an `external/` resource is no longer needed → **remove/untrack** it (do NOT move to `archive/`).
 
 ---
 
-## Knowledge Source Hierarchy (Citation Priority)
+## Epistemic Source Hierarchy (Citation Priority)
 
 When citing or referencing content, apply this order. **Higher tiers carry greater epistemic weight** — always prefer the highest available tier.
 
-| Priority | Type | Location | Signal |
-|---|---|---|---|
-| Tier 1 | Academic papers, technical reports | `knowledge/papers/` | Peer-reviewed, cited, reproducible |
-| Tier 2 | Official documentation, specs | `blueprints/architectures/` (design/architecture specs); else `knowledge/guides/` with a `specs/` subfolder | Authoritative |
-| Tier 3 | Curated guides, tutorials | `knowledge/guides/` | Practitioner-verified |
-| Tier 4 | Articles, blog posts | `knowledge/articles/` | Community knowledge |
-| Tier 5 | External submodules | `instructions/*/external/` | Third-party curated |
-| Tier 6 | Active working files | `instructions/*/active/` | Operational, not evidence |
-| Tier 7 | Archive | `instructions/*/archive/` | Historical, may be outdated |
-
-> **Note on Tier 5 vs Tier 6**: External submodules rank above active files (broader scope, though unverified). Neither supports factual claims when Tier 1–4 exist.
-
-> **Tier 2 vs Tier 3 (shared folder):** `knowledge/guides/` holds both official specs (Tier 2) and curated guides (Tier 3). When both exist for the same topic, the Tier 2 source wins for factual claims; Tier 3 wins for methodology. Within the folder, prefix official specs with `specs/` to keep the tiers distinguishable.
+| Priority | Type | Epistemic Weight & Verification Signal |
+|---|---|---|
+| Tier 1 | Academic papers, formal technical reports | Peer-reviewed, cited, empirical, reproducible |
+| Tier 2 | Official documentation, specifications | Authoritative vendor/standards documentation |
+| Tier 3 | Curated practitioner guides, tutorials | Practitioner-verified workflows |
+| Tier 4 | Articles, blog posts | Community knowledge and case studies |
+| Tier 5 | External curated submodules / tools | Third-party curated, reference only |
+| Tier 6 | Active project working files | Operational context, not ground truth evidence |
+| Tier 7 | Archive / historical files | Deprecated or historical context |
 
 ---
 
 ## Trust & Citation Rules
 
 ```
-ALWAYS cite source tier when referencing content.
-PREFER knowledge/papers/ over any other source for factual claims.
-PREFER knowledge/guides/ over instructions/prompts/ for methodology.
-TREAT instructions/*/external/ as higher priority than active/archive context.
-TREAT instructions/*/active/ as operational context, NOT as evidence.
-DO NOT reference archive/ unless explicitly asked for historical context.
-DO NOT treat submodule content as peer-reviewed or verified, despite being external.
+ALWAYS cite source tier or evidence grade when referencing content.
+PREFER peer-reviewed research and official specs over informal sources for factual claims.
+PREFER authoritative guides over prompt snippets for methodology.
+TREAT project operational files as operational context, NOT as universal evidence.
+DO NOT reference archive files unless explicitly requested for historical evolution.
+DO NOT treat unverified third-party content as authoritative without verification.
 ```
 
 ---
 
 ## Agent Execution Protocol (Navigation)
 
-When any agent operates with this repo in context:
+When operating within a project workspace:
 
 ```
-Step 1: Read this README — establish repo scope.
-Step 2: Classify the request: INSTRUCT / LEARN / DESIGN → route to folder.
-Step 3: Consult the hierarchy before citing any resource.
+Step 1: Inspect workspace structure and active guidelines to establish scope.
+Step 2: Classify the request: INSTRUCT / LEARN / DESIGN → map to appropriate workspace location.
+Step 3: Consult the epistemic hierarchy before citing any resource.
 Step 4: Prioritize Tier 1–3 for factual/methodological claims.
-Step 5: Cross-reference YAML frontmatter for semantic matching.
+Step 5: Cross-reference YAML frontmatter and schemas for semantic matching.
 Step 6: Execute using the highest-tier applicable source.
 ```
 
@@ -115,6 +115,6 @@ Step 6: Execute using the highest-tier applicable source.
 
 ## How the Meta-Skill Uses This
 
-- **Classify** a requested artifact → decide its target folder (e.g., a generated skill → `instructions/skills/active/`).
+- **Classify** a requested artifact → decide its target category and appropriate project directory.
 - **Route citations** → in EXPLAIN/CONVERT modes, cite the source tier of the reference used.
 - **Organize** → in NAVIGATE/ORGANIZE mode, place a resource and decide active/archive/external split.

@@ -31,8 +31,8 @@ Activate when the user asks to:
 **Trigger keywords**: `review code`, `audit architecture`, `kiểm tra kiến trúc`, `audit diff`, `refactor clean`, `surgical change`, `đánh giá code`, `architecture review`.
 
 > **Do NOT trigger** for:
-> - Simple syntax errors or quick CLI fixes (use standard coding tools or `tech-mentor`).
-> - Generating new skills or prompt schemas (use `skill-forge`).
+> - Simple syntax errors or quick CLI fixes (use standard coding tools or interactive debugging/mentoring tools).
+> - Generating new skills, prompts, or meta-artifacts (use dedicated prompt/skill authoring tools).
 
 ---
 
@@ -54,8 +54,9 @@ Every audit and refactoring plan must strictly satisfy these four non-negotiable
 (Callers/Callees)     (Smells & Risks)    (Failing Testcase)    (Minimal Diff)       (Green Proof)
 ```
 
-### Step 1: Structural Mapping
+### Step 1: Structural & Contextual Mapping
 - Trace the entry point, public APIs, and data flow.
+- Scan for active project-level architecture guidelines, coding rules, or linter configs in the workspace (e.g., `.cursorrules`, `.editorconfig`, architecture decision records, or style guides) to align audit standards with project conventions.
 - Record any shared state, global variables, or hidden I/O dependencies.
 
 ### Step 2: Diagnostic & Smell Detection
@@ -134,5 +135,5 @@ Every audit report must be emitted in this exact structured format:
 ---
 
 ## Provenance
-- Distilled 2026-09-16 from `superpowers` (`systematic-debugging`, `requesting-code-review`, `verification-before-completion`) and `andrej-karpathy` behavioral principles.
-- Authored according to `skill-forge` House Conventions.
+- Distilled from systematic debugging methodologies, verification-before-completion quality gates, and Karpathy software architecture principles.
+- Formatted following universal agent skill conventions.

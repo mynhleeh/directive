@@ -2,7 +2,7 @@
 
 > The **single source of truth** for every object-file in this skill's `references/`. All 6 object-files depend on this file. Do NOT duplicate any of this content inside an object-file — reference this file instead.
 
-**Provenance:** Adapted from `instructions/prompts/active/tech-mentor/references/shared-conventions.md` (v1.0). Re-abstracted as the skill's own shared-conventions so the skill is self-contained and does not chain-load the system prompt.
+**Provenance:** The skill's shared conventions establishing universal language policy, output contract, diagram styling, and end-to-end impact governance; fully self-contained.
 
 ---
 

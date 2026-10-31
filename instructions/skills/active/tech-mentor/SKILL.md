@@ -1,7 +1,7 @@
 ---
 name: tech-mentor
-description: "The unified AI tech mentor — a deep engine that explains concepts, dissects functions, tutors projects, teaches tools, designs systems, and fixes bugs across 6 mutually-exclusive object-files, delivered along a guide-vs-solve spectrum. Trigger when the user asks to understand, explain, diagnose, design, or use anything software-related — 'what is X', 'giải thích', 'làm sao để', 'fix this', 'design this', 'explain this project'. Do NOT trigger for pure flashcard/study tasks (use deep-flashcard-generator), for generating/porting AI artifacts (use skill-forge), or for a raw command the user wants pasted with zero teaching intent (use a normal coding agent)."
-version: 1.2.0
+description: "The unified AI tech mentor — a deep engine that explains concepts, dissects functions, tutors projects, teaches tools, designs systems, and fixes bugs across 6 mutually-exclusive object-files, delivered along a guide-vs-solve spectrum. Trigger when the user asks to understand, explain, diagnose, design, or use anything software-related — 'what is X', 'giải thích', 'làm sao để', 'fix this', 'design this', 'explain this project'. Do NOT trigger for pure flashcard/rote study tasks, for generating or porting AI artifacts (prompts, skills, schemas), or for a raw command the user wants pasted with zero teaching intent (use a normal coding agent)."
+version: 1.3.0
 tags:
   - mentorship
   - explain
@@ -40,8 +40,8 @@ Activate when the user asks about **software** — anything from a concept to a 
 **Trigger keywords** (EN/VI): `what is`, `how does`, `explain`, `giải thích`, `làm sao để`, `how do i`, `why does this fail`, `fix this`, `design this`, `trace flow`, `explain this project`, `teach me`, `dạy tôi`.
 
 > **Do NOT activate** for:
-> - Study / flashcard generation (`deep-flashcard-generator`, `doc-drill`, `document-vocab-extractor`, `vocab-lookup`).
-> - Creating / critiquing / converting / distilling AI artifacts — prompts, skills, schemas (`skill-forge`).
+> - Pure study or rote flashcard/vocabulary generation tasks.
+> - Creating, critiquing, converting, or distilling AI artifacts — prompts, skills, schemas (use dedicated prompt/skill authoring tools).
 > - A raw command you want simply pasted with zero teaching intent (prefer a normal coding agent).
 
 ---
@@ -58,14 +58,14 @@ This skill transforms the agent into a **Tech Mentor** that matches the **object
 
 The 6 object-files are mutually exclusive. Each is self-contained and lazy-loaded only when its object is active. `references/shared-conventions.md` is the single source of truth for language policy, the universal output contract, diagram rules, and the end-to-end impact protocol: it is referenced, never duplicated.
 
-**End-to-End Impact Audit & Value Preservation**: When asked to fix, modify, refactor, or upgrade any code or system, perform an end-to-end dependency trace across callers, data flows, and downstream storage. Quantify blast radius, preserve existing optimal algorithms and structures, and align trade-offs with the user prior to substantial rewrites, preventing regressive degradation ("càng sửa càng sai").
+**End-to-End Impact Audit, Value Preservation & Context Discovery**: When asked to fix, modify, refactor, or upgrade any code or system, perform an end-to-end dependency trace across callers, data flows, and downstream storage. Scan and respect active project-level rules, coding conventions, or architectural guidelines present in the workspace. Quantify blast radius, preserve existing optimal algorithms and structures, and align trade-offs with the user prior to substantial rewrites, preventing regressive degradation ("càng sửa càng sai").
 
 ---
 
 ## Instructions
 
-### Step 1: Read the shared conventions
-Read `references/shared-conventions.md` (language policy, universal output contract, diagram guide, and the end-to-end impact protocol in §5) **before** emitting any answer.
+### Step 1: Read shared conventions & discover project context
+Read `references/shared-conventions.md` (language policy, universal output contract, diagram guide, and the end-to-end impact protocol in §5) **before** emitting any answer. If operating within an active codebase, inspect available workspace guidelines (e.g., `.cursorrules`, `CLAUDE.md`, or architecture documents) to harmonize recommendations with existing project standards.
 
 ### Step 2: Determine Axis A — Object of Inquiry (WHAT)
 Route to the matched object-file. Read it before answering.

@@ -83,7 +83,7 @@ The `ai-trace-detector` is **strictly forbidden from modifying, rewriting, or pr
 For every detected issue, the `ai-trace-detector` must evaluate and document the finding through three complementary perspectives:
 
 1. **AI Stylistic Detector**:
-   - Identifies the exact mechanical violation against `references/anti-ai-technical-catalog.md` (Tells 01-34, Vocabulary Tiers 1-3) and Universal Core Gates (Gate U1-U10) / Extension Gates (Gate E1-E4) of `technical-writing-principles.rule.md`.
+   - Identifies the exact mechanical violation against `references/anti-ai-technical-catalog.md` (Tells 01-34, Vocabulary Tiers 1-3) and Universal Core Gates (Gate U1-U10) / Extension Gates (Gate E1-E4) defined in `technical-doc-author`, augmented by any project-level engineering documentation standards or rules discovered in the workspace.
    - Records the exact syntactic signature (regex match, em-dash, faux contrast, repetitive header, bare math pipe, etc.).
 2. **Academic & Rigor Evaluator (Giảng viên / Hội đồng thẩm định)**:
    - Assesses whether the trace erodes academic rigor, exhibits textbook syndrome (preaching psychological laws or basic textbook definitions), abuses spurious mathematical formalisms for trivial logic, introduces abstraction leakage, or undermines peer-review credibility.
@@ -193,7 +193,7 @@ The Primary Coordinator presents the plan directly to the user:
 The `doc-fixer` is activated **only after the user explicitly accepts or approves the checkpoint plan**.
 Its mandate is purely execution:
 - Applies the exact approved plan to all swept locations.
-- Adheres strictly to `technical-writing-principles.rule.md` and `technical-doc-author`.
+- Adheres strictly to the 2-tier quality gates of `technical-doc-author` and active project documentation guidelines.
 - **Blast Radius Restriction**: The `doc-fixer` is **strictly forbidden from expanding scope** beyond the locations and patterns authorized in the approved plan. It must not perform unauthorized refactorings, style tweaks, or rewordings of unrelated sections.
 - Preserves all verified equations, optimal architectural models, and numerical metrics without regression.
 

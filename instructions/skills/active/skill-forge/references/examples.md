@@ -191,12 +191,12 @@ Chaleureux et professionnel. Adaptez la profondeur technique au niveau d'experti
 
 ### Working Notes
 - Mode=NAVIGATE · Type=Rules file
-- Axis decision: feed to AI to execute? Yes → `instructions/`. Rules file → `instructions/rules/`. Third-party? No → `active/`
-- Tier: self-created → Tier 6 (active)
+- Axis decision: feed to AI to execute? Yes → INSTRUCTIONS axis. Rules file → e.g. `instructions/rules/` or project root rules. Third-party? No → active
+- Tier: self-created → Tier 6 (active operational)
 - No ambiguity → no CLARIFY needed
 - Baseline (RED): control classification → guessed `knowledge/` from the filename alone (rationalization: "rules = knowledge")
 - Audit: decision tree applied ✓ · tier stated ✓ · PASS (1 iteration)
-- Test (GREEN): re-run with the Q1/Q2/Q3 tree → correct `instructions/rules/active/` ✓
+- Test (GREEN): re-run with the Q1/Q2/Q3 tree → correct placement under INSTRUCTIONS rules ✓
 
 ### Output
-`instructions/rules/active/` (self-created, always-on rules file).
+`instructions/rules/` (or workspace rules location such as `.agents/rules/` or project root; self-created, always-on rules file).

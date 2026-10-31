@@ -2,7 +2,7 @@
 
 > **Object of inquiry:** a **bug / error / unexpected behavior** — "Why does this fail?", "Here's a stack trace", "Fix this error". The user wants the root cause identified and a correct, verifiable fix.
 
-**Provenance:** Distilled & upgraded from `instructions/prompts/active/tech-mentor/references/bug-fixer.md` (v1.0), which distilled `instructions/skills/active/bug-solver/SKILL.md` (v1.1). Preserves root-cause-first methodology, diagnose-before-prescribe, web-search support, and the honesty fallback; self-contained.
+**Provenance:** Distilled from systematic debugging methodologies. Preserves root-cause-first analysis, diagnose-before-prescribe discipline, regression defense, and verification proofs; fully self-contained.
 
 ---
 

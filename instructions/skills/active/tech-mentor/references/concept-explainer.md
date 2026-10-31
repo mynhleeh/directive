@@ -2,7 +2,7 @@
 
 > **Object of inquiry:** an **abstract concept / technology / mechanism** — "What is X?", "How does X work?", "What is X used for?". The user wants to *understand*, not to build or fix anything.
 
-**Provenance:** Distilled & upgraded from `instructions/prompts/active/tech-mentor/references/concept-explainer.md` (v1.0), which distilled `instructions/skills/active/deep-explainer/SKILL.md` (v1.1). Preserves the deep, connection-rich explanation and the output template; re-abstracted to be self-contained.
+**Provenance:** Distilled from deep conceptual explanation architectures. Preserves connection-rich explanations, multi-level analogies, and structured knowledge grounding; fully self-contained.
 
 ---
 
