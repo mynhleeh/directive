@@ -1,114 +1,89 @@
 ---
 name: grounding-source-finder
-description: "Finds authoritative external documents (books, peer-reviewed papers, recognized standards, highly-regarded community references) to ground a decision when no internal knowledge source (docs/academic, docs/domain, docs/reference, .ops-memory) covers it. Generalizes the user's specific problem into the broader problem class before searching, so it accepts any credible source that resolves the class, not only sources naming the exact term. Trigger when the agent needs a citation before proceeding, when the user asks 'find me a source for X', 'tìm tài liệu về X', 'need a reference for this decision', or when a design/business-rule decision has no grounding under the internal knowledge tiers. Do NOT trigger for searching the repository's own internal files (use the existing internal resolution cascade) or for general web search unrelated to grounding a pending decision."
-version: 1.0.0
+description: "Use when a design choice, business rule, policy, formula, or methodological decision across any domain lacks coverage in local files and needs external standards, canonical books, or vetted specifications before proceeding. Trigger on 'find a source', 'need a reference', 'cơ sở lý thuyết', 'tìm chuẩn cho quyết định', or ungrounded rule gaps. Do NOT trigger for academic papers, DOIs, PubMed/arXiv preprints, or systematic reviews (use paper-lookup, deep-literature-search, or research-lookup), nor for local file lookups."
+version: "2.0.0"
 tags:
-  - research
   - grounding
-  - citation
-  - source-finding
-  - academic-search
-  - literature-review
-  - reference-vetting
+  - standards
+  - business-rules
+  - architecture
+  - decision-support
+  - source-vetting
+  - cross-domain
 license: MIT
-compatibility: "Any agent with web search"
+compatibility: "Platform-agnostic. Portable with zero hardcoded workspace paths; requires web search or fetch for live link verification."
 ---
 
 # Grounding Source Finder
 
-Finds and vets external authoritative documents on behalf of the user whenever a decision lacks grounding in the workspace's own knowledge tiers. Never invents a citation and never fabricates a source; every result returned is a real, checkable link.
+> Find and vet external standards, canonical books, and industry specifications to ground unverified decisions, rules, and designs across any domain before finalizing or saving them.
 
----
+## Scope Exclusions
 
-## When to Activate
+- Academic papers, DOIs/PMIDs/arXiv preprints, citation graphs, or PRISMA literature reviews -> delegate to `paper-lookup`, `deep-literature-search`, or `research-lookup`.
+- Existing workspace files (`docs/`, `references/`, `policies/`, `knowledge/`) -> read local files directly.
 
-Activate when:
-- A pending design decision, business rule, or architectural choice has no coverage in `docs/academic/`, `docs/domain/`, `docs/reference/`, or `.ops-memory/` (the workspace's internal knowledge tiers), and the agent would otherwise have to guess or ask the user to manually go find something.
-- The user explicitly asks to find a book, paper, standard, or reference for a stated problem.
-- The user says a decision needs a citation, a source, "cơ sở tri thức", or "tài liệu tham khảo" before it can be finalized.
+## Language Policy
 
-**Trigger keywords**: `find a source`, `find me a reference`, `need a citation`, `tìm tài liệu`, `tìm nguồn`, `cơ sở tri thức`, `reference for this decision`, `is there a paper on`, `tài liệu tham khảo cho`.
+Follow these English instructions internally. Respond in the user's writing language while preserving established English technical terms.
 
-> **Do NOT trigger** for:
-> - Looking inside the repository's own tracked files (`docs/`, `.ops-memory/`) — that is plain file search, not external sourcing.
-> - Open-ended web browsing with no decision to ground.
+## Workflow
 
----
+1. **Check internal tiers dynamically**: Inspect local project folders first, then shared workspace folders (`docs/`, `policies/`, `standards/`, `references/`, `reference/`, `academic/`, `knowledge/`). If covered internally, cite that path and stop.
+2. **Generalize to problem class**: Restate the narrow question as a domain-neutral problem class before searching, and print it in `Working Notes` so misframing is caught early.
+3. **Search >= 2 Tier 1-3 surfaces**: Query at least two independent surfaces from the ladder below and cross-check critical claims across >= 2 sources.
+4. **Verify every URL live**: Open or fetch each candidate link in this session to confirm it resolves the problem class. Never cite from memory or search snippets alone. Mark paywalled items and prefer comparable open-access equivalents.
+5. **Stop at Confirmation Gate**: Emit the `Output Contract` block and wait for explicit user approval before writing deliverables or saving references locally.
 
-## Core Principle: Generalize Before Searching
+| Narrow user ask | Generalized problem class |
+| --- | --- |
+| "Pro-rate mid-cycle upgrades and round VND/USD cents" | Mid-cycle subscription proration and currency minor-unit rounding |
+| "Approve refunds over 500 USD and log sensitive edits" | Dual-control authorization (segregation of duties) and tamper-evident audit logging |
+| "Set SLA timeouts for urgent vs normal support tickets" | Multi-tier service-level queue prioritization and escalation thresholds |
 
-A document about problem X rarely exists in isolation; most real documents that solve X also cover Y and Z. Searching for the literal narrow phrase the user typed under-returns results and over-filters credible sources that would in fact resolve the decision.
+## Source Authority Ladder
 
-Before issuing any search query, restate the user's concrete problem as the general problem class it belongs to. Only the general class needs to be resolved by the source; the source does not need to mention the user's specific term.
+| Tier | Authority Class | Examples | Rule |
+| --- | --- | --- | --- |
+| **Tier 1** | Standards and regulatory bodies | `ISO`, `IEEE`, `W3C`, `IETF RFC`, `NIST`, `COSO`, `IFRS/GAAP`, statutory agencies | Primary ground truth |
+| **Tier 2** | Canonical publishers and domain texts | `O'Reilly`, `Manning`, `Addison-Wesley`, `MIT Press`, `Pearson`, `Wiley`, domain handbooks | Primary ground truth |
+| **Tier 3** | Vetted industry and maintainer specs | `Martin Fowler`, `ThoughtWorks Radar`, `OWASP`, `NN/g`, official framework/protocol docs | Valid when corroborated |
+| **Tier 4** | Unranked blogs, Q&A, AI summaries | Personal blogs, unlinked Stack Overflow, LLM explainers | Supporting only; never standalone |
 
-| Concrete ask | General problem class to search |
-|---|---|
-| "Tìm tài liệu về cách tính lãi kép cho ví tiết kiệm" | Compound interest accrual models in personal finance systems |
-| "Cần nguồn cho việc chia lớp Wallet thành Cash/Bank/Ewallet" | Class hierarchy design for polymorphic account/instrument types in OOAD |
-| "Tài liệu nào nói về cách xử lý nợ trả góp" | Amortized debt/installment repayment modeling |
-
-State the generalized problem class back to the user in one line before searching (Working Notes), so a wrong generalization is caught immediately rather than silently narrowing the search.
-
----
-
-## Instructions
-
-1. **Restate and generalize.** Convert the concrete question into its general problem class (table above). If the class is ambiguous between two readings, ask one clarifying question instead of guessing.
-2. **Check internal tiers first.** Confirm the answer is genuinely absent from `docs/academic/`, `docs/domain/`, `docs/reference/`, and `.ops-memory/` in the active project. If it is already covered internally, report that instead of searching externally.
-3. **Search using the Credibility Filter** (`references/credibility-filter.md`) — run searches across at least two of: academic search engines (Google Scholar, Semantic Scholar, arXiv), publisher/standards catalogs (IEEE, ACM, ISO, official language/framework docs), and community-vetted technical references (O'Reilly, Manning, highly-starred canonical repos, Stack Overflow's linked canonical sources). Never treat an unranked blog post or an AI-generated summary page as sufficient on its own.
-4. **Rank candidates** using the scoring table in `references/credibility-filter.md`: recency, source tier, peer-review/editorial status, and community endorsement signal (citation count, stars, official adoption).
-5. **Verify each link resolves** before presenting it — do not include a URL that was not actually checked in this session.
-6. **Present the candidate list** (Output Contract below) and stop. Do not silently write the source into `docs/reference/` or treat it as ground truth — that promotion is the user's decision.
-7. **On user confirmation**, register the chosen source: if the target project defines a registration path (e.g., `docs/reference/`), place the citation there in the format that path already uses; otherwise ask where to file it.
-
----
+Require current editions (`<= 3` years or active standard) for security, compliance, protocols, and APIs; accept enduring texts (`10+` years) for invariant theory, algorithms, and accounting principles.
 
 ## Output Contract
 
-Emit a single block:
+Emit one block in the user's language containing only live-verified URLs (if none qualify, state `"No verified Tier 1-3 source found"` and ask whether to broaden the class or record an explicit assumption):
 
-```
+```markdown
 ## Working Notes
-- Concrete question: [...]
-- Generalized problem class: [...]
-- Internal tiers checked: [paths checked] → not covered
-- Search surfaces used: [list]
+- Concrete question: [restate ask]
+- Generalized problem class: [domain-neutral class]
+- Internal tiers checked: [discovered paths -> not covered]
+- Search surfaces used: [>= 2 Tier 1-3 surfaces]
 
 ## Candidate Sources
-| # | Title | Author/Publisher | Year | Tier | Link | Why it resolves the problem class |
-|---|---|---|---|---|---|---|
-| 1 | ... | ... | ... | ... | ... | ... |
+| # | Title | Author / Body | Year | Tier | Link | Problem-Class Coverage |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | ... | ... | ... | Tier 1..3 | [verified URL + access note] | ... |
 
 ## Recommendation
-[Which candidate is strongest and why, in one line]
+[Synthesis across >= 2 sources in 1-2 sentences, noting trade-offs]
 
 ## Next Step
-Awaiting confirmation before registering into [target path].
+Awaiting confirmation before registering [title, author/body, year, URL] into [target path].
 ```
 
----
+## Discipline Guardrails
 
-## Anti-Examples
+**Violating the letter of these rules is violating the spirit of these rules.**
 
-| ❌ Avoid | ✅ Prefer | Why |
-|---|---|---|
-| Searching only the literal phrase the user typed | Generalizing to the problem class first | Real documents rarely match a narrow phrase exactly |
-| Citing a source without opening/verifying the link | Verifying every link resolves before listing it | Prevents hallucinated or dead citations |
-| Auto-writing the result into `docs/reference/` | Presenting candidates and waiting for confirmation | Promotion to ground truth is the user's call (ask, don't invent) |
-| Accepting any blog post as sufficient | Applying the credibility tier filter | Ungated sources corrupt the grounding hierarchy |
+| Rationalization Under Pressure | Non-Negotiable Reality |
+| --- | --- |
+| "Demo or sprint is blocked; pick one top blog or vendor doc and save it now." | Urgency never bypasses vetting or confirmation. Emit vetted options and wait. |
+| "I know the standard citation from memory; skip opening the URL." | Memory fabricates editions and links. Verify every URL live in this session. |
+| "Search literally for the user's exact feature wording." | Narrow terms miss standards and textbooks. Generalize to the problem class first. |
+| "Workspace uses `standards/` or `policies/`, not `docs/reference/`, so skip local check." | Discover local and shared documentation folders dynamically before external search. |
 
----
-
-## Common Issues
-
-- **No credible source exists for the exact class.** Report this explicitly rather than stretching a loosely related paper to fit; ask the user whether to broaden the class further or proceed without external grounding (flagged as an assumption).
-- **Too many equally strong candidates.** Present up to 5, ranked, and let the user pick rather than arbitrarily choosing one.
-- **Paywalled source.** Note the paywall in the table and prefer an open-access equivalent (preprint, official standard summary) when one exists at comparable credibility.
-
----
-
-## References
-
-| File | Contents | Read when |
-|---|---|---|
-| `references/credibility-filter.md` | Source-tier ladder, scoring rubric, recency weighting, per-domain search surfaces | Every search, before ranking candidates |
+Red flags requiring immediate stop: unverified or memory citations; standalone Tier 4 blogs; missing `Working Notes`; writing into workspace files without confirmation.

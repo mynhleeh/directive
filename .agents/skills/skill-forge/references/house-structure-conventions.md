@@ -2,13 +2,11 @@
 
 The **unified structural template** for every generated skill. It codifies how a `SKILL.md` and its supporting directories should be organized, so the meta-skill emits consistent, well-structured artifacts every time.
 
-> **Why this file exists**: The repo's active skills varied — `deep-flashcard-generator` was self-contained, `doc-drill` used a lazy-loaded `references/` folder, `vocab-lookup` shipped a companion `prompt.md`. This file reconciles them into one canonical structure.
-
----
+> **Why this file exists**: The repo's historical study-skill baselines (now in `deeptutor-eduhub`) varied — `deep-flashcard-generator` was self-contained, `doc-drill` used a lazy-loaded `references/` folder, `vocab-lookup` shipped a companion `prompt.md`. This file reconciles them into one canonical structure.
 
 ## Directory Structure
 
-```
+```text
 skill-name/
 ├── SKILL.md          ← REQUIRED: the main instruction file
 ├── references/       ← OPTIONAL: docs loaded into context on demand (progressive disclosure)
@@ -17,14 +15,12 @@ skill-name/
 └── assets/           ← OPTIONAL: templates, icons, fonts used in output
 ```
 
----
-
 ## Canonical SKILL.md Skeleton
 
 ```markdown
 ---
 name: skill-name
-description: "What it does AND when to trigger."
+description: "Capability domain & scope AND when to trigger."
 version: 1.0.0
 tags: [tag1, tag2]
 ---
@@ -55,19 +51,18 @@ tags: [tag1, tag2]
 [Relative paths to reference files, with "when to read this"]
 ```
 
----
-
 ## Progressive Disclosure (Critical)
 
 The `references/` folder is the key to keeping `SKILL.md` lean. Follow the three-layer model:
 
 | Layer | What | Where | Loaded |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Metadata** | `name`, `description`, `tags` | Frontmatter | Always, at startup |
 | **Instructions** | Core workflow, output contract | `SKILL.md` body | On activation |
 | **Resources** | Detailed guides, tables, edge cases | `references/` | Only when needed |
 
 ### Rules
+
 - **Keep `SKILL.md` under 500 lines / 5000 tokens.** If a workflow needs more depth, split it into `references/`.
 - **Respect the token budget in practice.** Frequently-loaded micro skills should target < 500 words of core instructions; every token competes with conversation history. Cross-reference instead of repeating; point to `--help` or external files instead of listing details.
 - **Split by variant**, not by concern, when a domain has multiple flavors — e.g., `references/aws.md`, `references/gcp.md` so the agent reads only the relevant one.
@@ -78,8 +73,6 @@ The `references/` folder is the key to keeping `SKILL.md` lean. Follow the three
 - `references/adaptive-difficulty.md` — Read when the learner's accuracy drifts out of the target band.
 - `references/format-ladder.md` — Read when escalating card format complexity.
 ```
-
----
 
 ## Output Contract (Essential for Reliability)
 
@@ -93,8 +86,9 @@ Every generated skill that produces structured output **must** declare an explic
 Output a single `{format}` block. No preamble, no postamble, no conversation.
 ```
 
-### Example (from `deep-flashcard-generator`-style skills)
-```
+### Example (TSV/structured output pattern)
+
+```markdown
 ## Output Contract
 
 ## Cards
@@ -103,11 +97,10 @@ No other prose before or after the block.
 ```
 
 ### Why it matters
+
 - Eliminates the model "explaining" instead of emitting.
 - Makes output machine-parseable (TSV, JSON, Markdown table).
 - Mirrors the real-world skill pattern: *"output only this exact format."*
-
----
 
 ## Behavioral Discipline Sections (optional — discipline skills)
 
@@ -120,20 +113,18 @@ For skills that must enforce rules the agent is likely to skip under pressure (e
 ```markdown
 ### Rationalizations (anticipated + explicit negation)
 | Rationalization | Explicit negation |
-|---|---|
+| --- | --- |
 | "Helping = answering directly" | Never answer directly; always guide |
 | "This case is special" | No exceptions — not even this case |
 ```
 
-Full RED-GREEN-REFACTOR procedure and pressure-scenario design: `references/behavioral-testing.md`.
-
----
+Full RED-GREEN-REFACTOR procedure and pressure-scenario design: the `writing-skills` companion skill in your active workspace (`.agents/`, `.claude/`, `.codex/`).
 
 ## Anti-Examples (❌ / ✅)
 
 Every skill that bounds behavior should use explicit contrast pairs instead of abstract prose.
 
-```
+```text
 ❌ "Be accurate."              → too vague to enforce
 ✅ "If you are not 100% certain about a fact, omit the card entirely."
 ```
@@ -142,24 +133,20 @@ Every skill that bounds behavior should use explicit contrast pairs instead of a
 ## Anti-Examples
 
 | ❌ Avoid | ✅ Prefer | Why |
-|---|---|---|
+| --- | --- | --- |
 | "Be helpful" | "Guide the user to the answer without doing the work" | Concrete action |
 | "Never speculate" | "If uncertain, omit; use only universal known facts as support" | Enforceable |
 ```
 
----
-
 ## Naming & File Conventions
 
 | Item | Convention |
-|---|---|
+| --- | --- |
 | Folder + `name` | `kebab-case`, matches exactly |
 | Main file | `SKILL.md` (uppercase, `.md`) |
 | Scripts | `kebab-case.py` / `kebab-case.sh` |
 | Reference files | lowercase, hyphenated, descriptive |
 | Output blocks | A single fenced block, clearly labeled |
-
----
 
 ## Generated-Skill Checklist
 

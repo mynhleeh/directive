@@ -1,456 +1,233 @@
 ---
 name: skill-forge
-description: "Authoring engine for the directive knowledge base using Subagent-Driven Development: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user prompts, function/tool schemas, rules files (CLAUDE.md, AGENTS.md, GEMINI.md, .cursorrules, .mdc), MCP tools. Trigger whenever the user asks to write, improve, convert, explain, or extract a prompt/skill/schema/rules artifact, or to turn a conversation or repo into reusable artifacts. Do NOT trigger for ordinary coding questions, runtime debugging, or a generic concept question with no artifact to create or convert."
-version: 5.0.0
+description: "AI artifact architecture engine for System/User Prompts (COSTAR-X), cross-platform Function/Tool JSON Schemas with Round-Trip checks, Rules file multi-format sync, directive house contracts, DISTILL provenance, and NAVIGATE taxonomy. Trigger whenever prompt, schema, rules, skill house-contract, distillation, or placement work is requested. Do NOT trigger for full MCP server SDKs (use mcp-builder), standalone skill TDD/benchmarking/trigger optimization (use writing-skills or skill-creator), or ordinary coding/debugging (use tech-mentor)."
+version: 6.0.0
 tags:
-  - subagent-driven
   - meta-skill
-  - orchestrator
-  - prompt
   - system-prompt
   - user-prompt
   - function-calling
   - tool-schema
-  - skill
   - rules
-  - critique
   - convert
-  - explain
   - distill
   - navigate
+  - costar-x
+  - house-contracts
+  - taxonomy
   - multilingual
-  - reasoning
-  - chain-of-thought
-  - audit
-  - weak-model-first
-  - behavioral-testing
-  - red-green-refactor
-  - iron-law
+  - round-trip
   - sdo
-compatibility: "Any agent (Claude, OpenAI, Gemini, MCP, Cursor, AGY). Weak-model-first: every rule is mechanical and countable so average models comply; stronger models can only exceed the floor."
+compatibility: "Platform-agnostic (Claude, OpenAI, Gemini, MCP, Cursor, Codex, AGY). Direct-by-Default execution with mechanical rules; delegates companion skills dynamically via active workspace skill registries."
 ---
 
 # Skill Forge
 
-A **meta-orchestrator** that distills the entire `directive` knowledge base into one brain capable of **generating**, **critiquing**, **converting**, **explaining**, **distilling**, and **navigating** AI artifacts — skills, prompts, function schemas, and rules files — for any domain, any platform, and any language.
+AI artifact engineering engine for System Prompts, User Prompts (`COSTAR-X`), cross-platform Function/Tool JSON Schemas, Rules files, `directive` house-contract `SKILL.md` overlays, pattern distillation (`DISTILL`), and 3-axis resource placement (`NAVIGATE`).
 
-> **Language policy** (see [Language Policy](#language-policy)): The skill's own instructions are always in English. User-facing output adapts to the user's language (English / Vietnamese / any other detected language). Generated artifacts follow `references/house-language-policy.md`.
+## Overview
 
----
+`skill-forge` authors, critiques, converts, explains, distills, and organizes prompt, schema, rules, and house-contract skill artifacts using a Direct-by-Default 4-stage pipeline, lazy-loaded `references/`, and countable stranger-audit gates.
 
 ## When to Activate
 
-Activate when the user:
-- Wants to **CREATE** an artifact (skill / prompt / function schema / rules file)
-- Wants to **CRITIQUE & IMPROVE** an existing prompt or schema
-- Wants to **CONVERT** an artifact across platforms (OpenAI ↔ Anthropic ↔ MCP ↔ Gemini ↔ platform-agnostic)
-- Wants an **EXPLANATION** of a pattern, technique, or concept
-- Wants to **DISTILL** existing content (a conversation, a corpus, a repo) into a new artifact or skill family
-- Wants to **NAVIGATE / ORGANIZE** content using the repo's 3-axis taxonomy
-- Is working with **AI commanding** — turning instructions into repeatable, machine-usable artifacts
+Activate when the user requests work on prompts, schemas, rules files, house-contract skills, content distillation, or repository taxonomy placement.
 
-**Trigger keywords**: `prompt`, `system prompt`, `user prompt`, `skill`, `SKILL.md`, `function calling`, `tool schema`, `tool definition`, `rules file`, `CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, `.cursorrules`, `.mdc`, `MCP`, `critique`, `convert`, `distill`, `tạo skill`, `tạo prompt`, `système prompt`, `プロンプト`, `提示词`
+- **Keywords:** `prompt`, `system prompt`, `user prompt`, `COSTAR-X`, `skill`, `SKILL.md`, `function calling`, `tool schema`, `Prompt.txt`, `Tools.json`, `rules file`, `CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, `.cursorrules`, `.mdc`, `critique`, `convert`, `round-trip`, `distill`, `provenance`, `navigate`, `taxonomy`.
+- **Do NOT activate for:** full Python/TypeScript MCP server SDK builds (`mcp-builder`), standalone skill TDD/pressure testing (`writing-skills`), standalone skill benchmarking/trigger evals (`skill-creator`), Claude SDK migration alone (`claude-api`), or ordinary coding/debugging (`tech-mentor`).
 
-> **Do NOT trigger** for:
-> - Ordinary coding questions / feature requests (use a normal coding agent).
-> - Runtime debugging, error diagnosis, concept explanation, or project onboarding (use `tech-mentor`).
+## External Delegation & Runtime Resolution
 
----
+`skill-forge` avoids duplicating capabilities owned by installed companion skills. Delegate specialized domains using the matrix below:
 
-## Workflow Pipeline
+| Capability Domain | Handled by `skill-forge` | Delegated Companion Skill |
+| --- | --- | --- |
+| Skill TDD, pressure tests, persuasion | None (omitted) | `writing-skills` |
+| Skill evals, benchmarks, trigger optimization | Thin House Overlay checks only | `skill-creator` |
+| Full MCP server SDK and transport wiring | Standalone JSON schema mapping and `Prompt.txt` + `Tools.json` | `mcp-builder` |
+| Claude SDK migration and Claude prompt cruft audit | Cross-platform portability (`OpenAI <-> Claude <-> Gemini`) | `claude-api` |
+| Coding agent 4 core behavioral principles | Rules format matrix and Single-Source -> Multi-Format Sync | `karpathy-guidelines` |
 
-Every request runs the same pipeline. **Do not skip a stage; do not merge two stages into one pass.** The pipeline is a reasoning + verification loop, not a linear emit. Each stage has a countable outcome so a weak model cannot skip it silently:
+**Runtime resolution rule:** Resolve companion skills dynamically by canonical skill name inside the active workspace's skill directories (`.agents/`, `.claude/`, `.codex/`, or harness skill registries), matching exact names or collision-prefixed variants (e.g., `ant-skill-creator`, `aers-skill-creator`). Never hardcode repository-source external paths. If a needed companion skill is absent from the active workspace, name the missing canonical skill so the user can install or attach it, and execute only the in-scope `skill-forge` portion.
 
-```
-User Input
-  │
-  ├─ STAGE 1: PARSE, CLARIFY & PLAN (Controller)
-  │     Restate request. Classify: mode · artifact type · tier · platform.
-  │     Ambiguous or missing? → STOP and ask (ask as many questions as needed).
-  │     Break the request down into a Plan of N independent tasks (e.g., Task 1: Write main SKILL.md,
-  │     Task 2: Write references/guide.md).
-  │
-  ├─ STAGE 2: DYNAMIC TASK DISPATCH (For each Task 1..N)
-  │     │
-  │     ├─ DISPATCH FRESH IMPLEMENTER
-  │     │     Provide ONLY the specific task, context, and reference guides to a fresh subagent.
-  │     │     Implementer must run BASELINE TEST (RED) before writing (Iron Law),
-  │     │     then GENERATE the artifact to turn the test GREEN.
-  │     │
-  │     ├─ DISPATCH FRESH REVIEWER
-  │     │     Provide the generated artifact and Quality Gates to a new independent reviewer.
-  │     │     Reviewer audits for compliance (no XML tags, mechanical rules, format, SDO).
-  │     │
-  │     └─ FIX LOOP (Controller orchestrates)
-  │           If Reviewer finds issues, Controller sends findings back to Implementer.
-  │           Max 2 iterations. Unresolved issues are escalated to Controller to rule on.
-  │
-  └─ STAGE 3: EMIT & FINALIZE (Controller)
-        Merge all completed task outputs into the final response block. State assumptions/defaults used.
-        Remind user to update `instructions/skills/SKILL_INDEX.md`.
-```
+## Core Principles
 
-### Subagent Dispatch Prompts
+Every instruction and generated artifact obeys these 5 rules; `SKILL.md` overrides `references/` if any rule conflicts, and conflicts must be flagged immediately:
 
-- **Implementer Prompt**: *"You are the Skill Implementer. Your task is to generate [Specific Component] for [Domain]. You must first design a failing baseline test (RED). Then, write the artifact using strictly mechanical, countable rules to pass the test (GREEN). Output only the artifact. **Rule: You are forbidden from dispatching your own subagents (no helpers, no reviewers).***"
-- **Reviewer Prompt**: *"You are the Independent Stranger-Reviewer. You must audit the provided artifact against the Quality Gates. You are forbidden from passing the artifact if it contains XML tags in the frontmatter, lacks a clear trigger description, or relies on vague instructions like 'be helpful'. Return a list of PASS/FAIL with specific fix recipes for any FAIL."*
-
----
+1. **Countable & Mechanical:** Express every rule as a number, threshold, or deterministic pass/fail recipe (`0` vague adjectives or judgment calls) so average models execute reliably.
+2. **Principles over Instances:** Author generalizable rules and neutral examples with `0` real brands or user-supplied proper nouns; abstract specific cases into rules for the whole class.
+3. **Clarify Gate (`max 3` questions, 1 batch with defaults):** Never invent missing routing signals or ambiguous intent. Ask up to **3** questions in **1** batch, each paired with an explicit default option; if signals are confident, proceed and log chosen defaults with 1-line reasons in `## Working Notes`.
+4. **Surgical Scope:** Emit only the requested artifact and its declared contract. Put optional enhancements in `## Suggested Additions` (under `CRITIQUE`) or omit them.
+5. **Source-Grounded & Tier-Aware:** Trace every factual or methodological claim to user input or `Tier 1-7` (`references/taxonomy-navigation.md`). Prefer `Tier 1-3`; never copy external content verbatim and never promote unverified `Tier 5` material into a premise.
 
 ## Language Policy
 
-The skill responds in the user's language, bucketed into three groups. Only **user-facing output** follows the bucket; internal processing and the skill's own instructions stay in English.
+Internal skill instructions and all `references/` files remain in English; user-facing replies adapt to the user's language per `references/house-language-policy.md`.
 
-| User language | Skill responds in |
-|---|---|
-| English | English |
-| Vietnamese | Vietnamese |
-| Any other detected language (Japanese, French, ...) | That language |
-| Undetected / ambiguous | Ask one question at the CLARIFY gate (default option: English) |
+| Input Language | Reply Language | Technical Terms | Artifact Language |
+| --- | --- | --- | --- |
+| English | English | Preserve original | English (unless specified) |
+| Vietnamese / French / Japanese / Other | User's language | Preserve English terms | Follow user request (default: English) |
+| Ambiguous | Ask 1 Clarify question (default: English) | Preserve original | Ask at Clarify Gate |
 
-**For generated artifacts**: the artifact's language follows the user's request, defaulting to English if unspecified. Internal `references/` files remain English per `references/house-language-policy.md`. If unclear, ask at the CLARIFY gate: *"Should the artifact be in English, or in your language?"*
+## Instructions: Direct-by-Default Pipeline
 
----
+Run all 4 stages directly in the primary turn without dispatching subagents unless the user explicitly asks for them:
 
-## Reasoning Principles
+```text
+User Request
+  -> Stage 1: Parse, Clarify & Route (Mode, Artifact Type, Tier, Platform, Language)
+  -> Stage 2: Lazy-Load (1-2 references max) & Execute directly or Delegate by canonical name
+  -> Stage 3: Stranger-Audit (6 countable criteria, separate pass, max 2 iterations) + Mode Gates
+  -> Stage 4: Emit (compact ## Working Notes + single ## Output block)
+```
 
-Every artifact passes through these six principles. **They outrank any instruction below** — if a rule in a MODE section conflicts with a principle here, the principle wins and the conflict must be fixed or flagged, never silently ignored.
+### Stage 1: Parse, Clarify & Route
 
-1. **Weak-model-first.** Assume the user runs an average-to-weak model. Every rule must therefore be **mechanical and countable** — a number, a pass/fail boundary, a fixed recipe — never "use good judgment." A stronger model can only do better; the rules are a floor, not a ceiling.
-2. **Reasoning scales, rules do not.** Author *principles*, not hardcoded lists. When the user supplies one specific situation or example, transmute it into a general rule that applies to all similar cases — never tailor the artifact to a single instance (see DISTILL).
-3. **Ask, don't invent.** Never fabricate missing data. If any input is ambiguous, missing, or doubtful, stop at the CLARIFY gate and ask (ask as many questions as needed to resolve ambiguity). If nothing is ambiguous, proceed without asking (Principle 4).
-4. **Do exactly what's asked.** Deliver precisely the requested artifact — no scope creep, no extra sections, no unsolicited rewrites. Anything beyond the request belongs in Suggested Additions, not in the output.
-5. **Source-grounded.** Every factual claim in a generated artifact must trace to the user's input or a cited source tier (see `references/taxonomy-navigation.md`). Never promote unverified external material (Tier 5) into a premise.
-6. **Single source of truth.** This `SKILL.md` wins over its `references/`. When two instructions conflict, the one higher in this file wins — and the conflict must be fixed or flagged, never silently ignored.
+1. Classify `Mode` (`CREATE`, `CRITIQUE`, `CONVERT`, `EXPLAIN`, `DISTILL`, `NAVIGATE`), `Artifact Type` (`skill`, `system prompt`, `user prompt`, `function schema`, `rules file`), `Intensity Tier` (`micro`, `standard`, `deep engine`), `Platform` (`Claude`, `OpenAI`, `Gemini`, `MCP`, `platform-agnostic`), and `Language`.
+2. Split `KNOWN` vs `MISSING` signals. Stop at the Clarify Gate (`max 3` questions, 1 batch with defaults) only when a missing signal changes artifact structure.
 
----
+### Stage 2: Lazy-Load & Execute / Delegate
 
-## MODE: CREATE — Build from Scratch
+1. Open only the `1-2` reference files mapped to the active `Mode` and `Artifact Type` in the Reference Files Index; never bulk-load all references.
+2. Execute the active mode's recipe directly, or delegate to the matching companion skill via dynamic runtime resolution when the task enters an external domain.
 
-### Routing
+### Stage 3: Stranger-Audit & Mode Gates
 
-Determine **artifact type**, then **intensity tier**, then **platform** (Principle 4: do exactly what's asked — only infer the minimum needed to route). Infer from context first; ask at the CLARIFY gate only when a routing signal is genuinely missing (Principle 3). State your routing back in the Working Notes block.
+Re-read the generated artifact from top to bottom in a separate pass (never in the writing pass) and score all **6** countable criteria PASS/FAIL with quoted evidence or count; fix failed items only and re-check failed items (`max 2` iterations):
 
-| Signal | Options | Reference |
-|---|---|---|
-| **Artifact type** | skill / system prompt / user prompt / function schema / rules file | See per-type recipe below |
-| **Intensity tier** | micro / standard / deep engine | `references/domain-engine-tiers.md` |
-| **Platform** | Claude / OpenAI / Gemini / MCP / platform-agnostic (default) | `references/system-prompt-guide.md`, `references/function-schema-guide.md` |
-| **Language** | English / Vietnamese / other (follow user) | `references/house-language-policy.md` |
+| # | Criterion | Countable Pass Condition | Fix Recipe |
+| --- | --- | --- | --- |
+| 1 | Output Contract | Exactly `1` `## Output` block after `## Working Notes` (or `3` fixed sections for `CRITIQUE`) | Trim extras or move ideas to `## Suggested Additions` |
+| 2 | Countable Rules | `0` judgment-call instructions; every rule uses a number, threshold, or recipe | Replace vague phrasing with explicit threshold or condition |
+| 3 | Neutral Examples | `0` real brand names or single-case hardcodes from user input | Swap to neutral placeholder domain and abstract intent |
+| 4 | Source-Grounding | `100%` of factual claims trace to user input or cited `Tier 1-7`; `0` unverified `Tier 5` premises | Drop unsupported claims or cite verified tier |
+| 5 | Language | Reply matches user language; artifact matches request/default; English terms preserved | Re-serialize mismatched sections |
+| 6 | Budget & Contracts | Skill `< 500` lines (`references/` split if deep); frontmatter has `0` XML brackets and `0` workflow-summary verbs in `description` | Move depth to `references/` and strip summary verbs |
 
-> The **intensity tier** is the biggest structural lever. A micro skill is a single self-contained file; a deep engine is adaptive and stateful with lazy-loaded `references/`. Pick it before writing.
+Enforce mandatory mode gates during Stage 3 before advancing to Stage 4:
 
-> **Test-first (Iron Law)**: before writing any artifact, design and run the failing test (STAGE 3 BASELINE TEST) — pressure scenario for skills/rules, fresh-context run for prompts/schemas. Record rationalizations verbatim; they are the spec the artifact must defeat. Full procedure in `references/behavioral-testing.md`.
+- **CONVERT Gate:** Run **Loss Audit** (list every platform-specific field dropped or transformed) and **Round-Trip Test** (convert output back to source format in `## Working Notes` and account for every diff).
+- **DISTILL Gate:** Verify case-to-principle transmutation and append `## Provenance` (source + tier, generalization moves, excluded Tier-5 content).
+- **NAVIGATE Gate:** Verify 3-axis tree (`Q1`/`Q2`/`Q3`), `Tier 1-7` citation priority, MECE boundary (`active/` vs `archive/` vs `external/`), and workspace index update check.
 
-### Per-Type Recipe
+### Stage 4: Emit
 
-Each type has a recipe + a canonical reference. Emit the artifact **in a single output block** (see `references/house-structure-conventions.md`).
+Emit `## Working Notes` followed by a single `## Output` block. When creating, porting, or classifying a skill inside a workspace with a catalog index (e.g., `SKILL_INDEX.md`), add a 1-line registration reminder in `## Working Notes`.
 
-#### Skill (SKILL.md)
-Follow `references/skill-guide.md` + `references/house-structure-conventions.md`.
+## Modes
+
+### MODE: CREATE
+
+Route `Artifact Type` -> `Intensity Tier` (`references/domain-engine-tiers.md`) -> `Platform` -> `Language`, then apply the matching recipe:
+
+- **Skill (`SKILL.md` thin House Overlay):** Apply `references/house-frontmatter-contract.md` (note `metadata:` nesting when exporting to strict `agentskills.io` `quick_validate.py`), `references/house-structure-conventions.md`, `references/house-language-policy.md`, and `references/domain-engine-tiers.md`. Emit the canonical skeleton (`## When to Activate` for standard/deep, `## Overview`, `## Instructions`, `## Output Contract`, `## Anti-Examples`, `## References`). Delegate pressure testing to `writing-skills` and evals/trigger tuning to `skill-creator`.
+- **System Prompt:** Follow `references/system-prompt-guide.md`. Fill all 5 slots (`Role & Identity`, `Capabilities`, `Constraints`, `Communication Style`, `Context`), route Agent vs Assistant, pick serialization (`XML` for Claude, Markdown default, `YAML`/`JSON` for Gemini), and apply `<examples>`, `20k+` `<documents>` top-load, and adaptive-thinking guidance as needed.
+- **User Prompt:** Follow `references/user-prompt-guide.md` (4 input signals) and `references/prompt-framework-costar-x.md` (`COSTAR-X` scaffold, `<variable>` isolation, mandatory `<thinking>`). Include `XÁC NHẬN KHỞI ĐỘNG` **only** for interactive session-boot prompts; omit it for API calls, headless batch pipelines, or `Prompt.txt` agent configs.
+- **Function / Tool Schema:** Follow `references/function-schema-guide.md`. Use verb-first `snake_case` names, WHAT + WHEN descriptions, `required`, `additionalProperties: false` for strict schemas, `outputSchema` for MCP, and `Prompt.txt` + `Tools.json` parity for packaged agent resources. Delegate full MCP server SDKs to `mcp-builder`.
+- **Rules File:** Follow `references/rules-guide.md` for `CLAUDE.md`, `AGENTS.md`/`GEMINI.md`, `.cursor/rules/*.mdc`, and `.cursorrules`. Keep one canonical source synchronized across formats (`CLAUDE.md <-> .cursor/rules/*.mdc <-> GEMINI.md / AGENTS.md`) and delegate Karpathy's 4 coding principles to `karpathy-guidelines` (`Tier 5` candidate guidance).
+
+### MODE: CRITIQUE
+
+1. Audit the input across 6 criteria: **Clarity**, **Completeness**, **Consistency**, **Specificity** (concrete action rules over vague negations), **Format fit**, and **Language consistency**.
+2. Fix every unambiguous defect by underlying *principle* (not instance) across `max 2` Stranger-Audit iterations; ask at the Clarify Gate for ambiguous intent.
+3. Emit exactly these 3 sections in the user's language inside `## Output`:
 
 ```markdown
----
-name: skill-name
-description: "Trigger-optimized: what it does AND when to trigger."
-version: 1.0.0
-tags: [...]
----
+## Changes Made
 
-# {Display Name}
+- Changed "[old]" -> "[new]" because [violated principle]
 
-## When to Activate
-[...]
+## Improved Version
 
-## Overview
-[...]
+[Single improved artifact block]
 
-## Instructions
-[Step-by-step, imperative]
+## Suggested Additions
 
-## Output Contract
-[Single block — what to emit, and only that]
+- Consider adding: [missing context or optional enhancement]
+```
+
+### MODE: CONVERT
+
+Translate system prompts (`OpenAI <-> Claude <-> Gemini <-> Platform-agnostic` via `references/system-prompt-guide.md`), user prompts (`COSTAR-X` structural conversion via `references/prompt-framework-costar-x.md`), rules files (multi-format sync via `references/rules-guide.md`), or Function/Tool JSON Schemas (`references/function-schema-guide.md`) using the mapping table below, then run the mandatory **Loss Audit** and **Round-Trip Test**:
+
+| From -> To | Key Schema Changes |
+| --- | --- |
+| `OpenAI -> Anthropic` | `parameters` -> `input_schema`; drop `type: "function"` wrapper and `strict` |
+| `OpenAI -> MCP` | `parameters` -> `inputSchema`; drop `type: "function"` and `strict`; add optional `title` and `outputSchema` |
+| `OpenAI -> Gemini` | Keep `parameters`; UPPERCASE JSON types (`STRING`, `OBJECT`, `ARRAY`, `INTEGER`, `BOOLEAN`, `NUMBER`); drop `type: "function"`, `strict`, `additionalProperties` |
+| `Anthropic -> OpenAI` | `input_schema` -> `parameters`; add root `type: "function"` and `name`; evaluate `strict` and `additionalProperties: false` |
+| `MCP -> OpenAI` | `inputSchema` -> `parameters`; add root `type: "function"`; log lost `title` and `outputSchema` |
+| `Gemini -> OpenAI` | UPPERCASE types -> lowercase; add root `type: "function"` and `name` |
+| `Anthropic <-> MCP / Gemini` | Rename `input_schema` <-> `inputSchema` / `parameters`; add/drop `title` + `outputSchema` (MCP) or UPPERCASE types (Gemini) |
+
+Emit `## Converted [Type]: [Source] -> [Target]` containing `**Changes made:**`, `**Result:**`, and `**Notes:**` (all Loss Audit items and Round-Trip diff outcomes).
+
+### MODE: EXPLAIN
+
+1. State the concept's essential mechanism in `1-2` plain sentences matched to the user's technical level.
+2. Provide `1` neutral before/after contrast example (abstract user-supplied specifics into a general pattern first).
+3. Link the relevant `references/` file with its epistemic tier (`Tier 1-7`) and specify when to use vs skip the pattern across platforms.
+
+### MODE: DISTILL
+
+1. Extract workflow steps, tools, corrections, and I/O contracts from the source (conversation, document, corpus, or repo).
+2. Classify artifact type(s) and `Intensity Tier`; emit a **skill family** (parent router `SKILL.md` + `references/<variant>.md`) when multiple variants emerge.
+3. Transmute single user instances into general rules (`0` verbatim external copies; `0` `Tier 5` premises) and append a mandatory `## Provenance` block recording **Source (+ Tier)**, **Generalization moves**, and **Excluded external/Tier-5 content**.
+
+### MODE: NAVIGATE
+
+Classify and place resources using `references/taxonomy-navigation.md`:
+
+```text
+Q1: Feed directly to an AI agent to execute? -> INSTRUCTIONS (`instructions/`, `skills/`, `.agents/`)
+Q2: Read to learn, research, or explain?     -> KNOWLEDGE (`knowledge/`, `docs/`, `reference/`)
+Q3: System design, architecture, or model?  -> BLUEPRINTS (`blueprints/`, `architectures/`, `design/`)
+```
+
+- **MECE lifecycle:** `active/` and `archive/` hold self-created assets only; `external/` holds third-party content only (untrack/delete when obsolete, never move to `archive/`).
+- **Citation priority (`Tier 1-7`):** `Tier 1` (peer-reviewed/formal specs) > `Tier 2` (official vendor docs) > `Tier 3` (curated guides) > `Tier 4` (articles) > `Tier 5` (external submodules) > `Tier 6` (active project files) > `Tier 7` (archives).
+- **Registry check:** Remind the user to update `SKILL_INDEX.md` or `REFERENCE_INDEX.md` (when present) after adding or moving artifacts.
 
 ## Anti-Examples
+
 | ❌ Avoid | ✅ Prefer | Why |
-[...]
+| --- | --- | --- |
+| "Write clear rules and use good judgment" | "Cap each section at 5 rules; state a threshold per rule" | Mechanical rules enforce consistency |
+| Copy user repo/brand names into examples | Abstract intent into a neutral placeholder domain | Prevents prompt contamination |
+| Bulk-load all 11 reference files upfront | Lazy-load only the 1-2 mapped references per task | Preserves context budget |
+| Guess missing tier, language, or target | Ask max 3 Clarify questions in 1 batch with defaults | Prevents structural rework |
+| Emit `SKILL.md` with summary verbs in `description` | Put triggers and near-miss negatives only in `description` | Prevents body-skipping (SDO) |
 
-## Common Issues
-[Known failure modes + fixes]
+## Output Contract
 
-## References
-[Relative paths with "when to read this"]
+Every response emits `## Working Notes` followed by a single `## Output` block:
+
+```markdown
+## Working Notes
+
+- Route: Mode=[mode] | Type=[type] | Tier=[tier] | Platform=[platform] | Language=[lang]
+- Clarify: [none - proceed | defaults stated | 1-batch question]
+- Lazy-Load: [1-2 reference filenames]
+- Audit (Pass [1|2]): [6/6 criteria PASS + Mode Gate summary]
+
+## Output
+
+[Single artifact block or 3-section CRITIQUE block]
 ```
-
-#### System Prompt
-Follow `references/system-prompt-guide.md`. Include the 5-slot anatomy (Role, Capabilities, Constraints, Style, Context); choose platform serialization.
-
-#### User Prompt
-Follow `references/user-prompt-guide.md`. Cover Need, Artifact type, Intensity tier, Domain.
-
-#### Function / Tool Schema
-Follow `references/function-schema-guide.md`. Action-prefixed names, WHAT + WHEN, `required`, `additionalProperties: false` for strict; add `outputSchema` for MCP.
-
-#### Rules File
-Follow `references/rules-guide.md`. Karpathy 4-principle skeleton; single-source-to-multi-format sync.
-
-### Quality Gates (all types)
-Cross-check `references/house-structure-conventions.md` in the EVALUATE stage (stranger-review, never the writing pass):
-- [ ] Frontmatter follows House Frontmatter Contract (name matches dir, trigger description, no XML tags, no reserved words)
-- [ ] Role/identity is specific (not just "be helpful")
-- [ ] Constraints are concrete actions, not vague negations — each has a countable pass/fail boundary
-- [ ] Output format explicitly declared (single block)
-- [ ] Intensity tier actually matches the depth of the artifact
-- [ ] No contradictions; language consistent
-- [ ] Under 500 lines; depth moved to `references/` (progressive disclosure)
-- [ ] Examples are neutral and generalized — no domain-specific names or single-case hardcodes (Principle 2)
-- [ ] Every rule is mechanical and countable — a weak model can execute it without judgment calls (Principle 1)
-- [ ] Every claim traces to user input or a cited source tier (Principle 5)
-- [ ] Baseline test ran BEFORE writing (Iron Law) — rationalizations recorded verbatim (see `references/behavioral-testing.md`)
-- [ ] Guidance form matches the baseline failure type — recipe vs prohibition vs REQUIRED slot (Match the Form table)
-- [ ] Discipline artifact has a rationalization table + red flags; description includes violation symptoms
-- [ ] Description follows SDO — trigger conditions only, NO workflow summary (a summary lets agents follow the description and skip the body)
-- [ ] Token budget respected — SKILL.md ≤ 500 lines / ~5000 tokens; descriptions < 500 chars where possible
-
-Apply every FAIL item's fix recipe, then re-check the failed items only (LOOP, max 2 iterations).
-
----
-
-## MODE: CRITIQUE & IMPROVE — Review and Auto-Improve
-
-### Process
-
-1. **Analyze** the input against: *Clarity* (unambiguous to a new reader?), *Completeness*, *Consistency* (no contradictions), *Specificity* (concrete vs generic), *Format fit* (platform-appropriate), *Language consistency*.
-2. **Run the EVALUATE ⇄ TEST loop** (max 2 iterations): fix issues by *principle*, not by instance — each fix must state the general rule it enforces so the same class of defect is covered, not just the one occurrence (Principle 2).
-3. **Auto-fix** issues that can be improved unambiguously. If a defect's cause is ambiguous, ask at the CLARIFY gate instead of guessing (Principle 3).
-4. **Always output three sections** (in the user's language):
-
-```
-## 🔧 Changes Made
-- Changed "[old text]" → "[new text]" because [reason]
-- Added [element] because [reason]
-- Removed [element] because [reason]
-
-## ✅ Improved Version
-[The improved prompt / schema]
-
-## 💡 Suggested Additions
-- Consider adding: [specific missing info]
-- Optional improvement: [enhancement idea]
-- Needs clarification: [ambiguity that remains]
-```
-
-### Evaluation Criteria
-
-| Criterion | Check Question |
-|---|---|
-| Clarity | Would a new reader understand it without extra context? |
-| Role specificity | Is the role more specific than "be helpful"? |
-| Tone definition | Is the tone explicitly described? |
-| Concrete constraints | Are forbidden actions stated as specific behaviors? |
-| Format guidance | Is output format (length, structure, style) specified? |
-| No contradictions | Do any instructions conflict? |
-| Platform fit | Does it use platform features correctly? |
-| Language consistency | Is the language consistent and appropriate? |
-
-### Prefer Positive Instructions
-
-State what to do, not what to avoid:
-
-| ❌ Avoid | ✅ Prefer |
-|---|---|
-| "Don't use bullet points" | "Write in flowing prose paragraphs." |
-| "Do not use markdown" | "Write in plain text, no markdown syntax." |
-| "Be helpful" | "Give concrete, actionable answers in the user's language." |
-
----
-
-## MODE: CONVERT — Cross-Platform Translation
-
-### System Prompt Mapping
-
-| From → To | Key Changes |
-|---|---|
-| OpenAI → Claude | Add XML tags; allow more nuanced tone |
-| Claude → OpenAI | Remove XML wrapper tags if needed; keep plain Markdown |
-| Any → Gemini | Reformat for the `systemInstruction` field |
-| Any → Platform-agnostic | Remove all platform-specific syntax |
-
-### Function / Tool Schema Mapping
-
-| From → To | Key Changes |
-|---|---|
-| OpenAI → Anthropic | `parameters` → `input_schema`; remove `type:"function"` wrapper; remove `strict` |
-| OpenAI → MCP | `parameters` → `inputSchema`; add optional `title`; optional `outputSchema` |
-| OpenAI → Gemini | Same structure; make type names UPPERCASE (`STRING`, `OBJECT`, `ARRAY`, `INTEGER`, `BOOLEAN`, `NUMBER`) |
-| Anthropic → OpenAI | `input_schema` → `parameters`; add `type:"function"` + `name` at root |
-| MCP → OpenAI | `inputSchema` → `parameters`; add `type:"function"` wrapper |
-| Gemini → OpenAI | UPPERCASE type names → lowercase; wrap with `type:"function"` + `name` |
-
-### MCP Specifics
-
-- Tools are exposed over JSON-RPC 2.0 (not a REST wrapper).
-- Schema field is `inputSchema`; optional `title` (human-readable label) and `outputSchema`.
-- Root is the direct tool object (no `type:"function"` wrapper).
-
-### Output Format
-
-```
-## Converted [Type] — [Source] → [Target]
-
-**Changes made:**
-- [specific change 1]
-- [specific change 2]
-
-**Result:**
-[converted output]
-
-**Notes:**
-[Platform-specific caveats or features gained/lost in conversion]
-```
-
-### Round-Trip Test (mandatory)
-After converting, **convert the result back** to the source format in the Working Notes block and diff it against the original. Every meaningful difference is a conversion error or a deliberate, justified change — list each one in the output's **Changes made** section. This catches lost fields (`strict`, `title`, `outputSchema`, type-name casing) that a single-pass conversion misses.
-
----
-
-## MODE: EXPLAIN — Clarify Concepts
-
-When the user asks "Why use...", "How does... work", "What's the difference between...":
-
-1. **Explain** the concept in plain language at the user's level (STAGE 2 THINK: identify the concept's essential shape before writing).
-2. **Give a concrete example** (before/after or good/bad comparison) — but use a *neutral, generalizable* example; never anchor the explanation to a single user-supplied case (Principle 2). If the user gave a specific situation, first abstract it into the general pattern, then explain the pattern.
-3. **Link to related patterns** in the reference files.
-4. **Note when to use / when not to use** — including which models or platforms the pattern suits.
-5. If the question itself is ambiguous (e.g., which platform or which pattern), ask one clarifying question at the CLARIFY gate rather than answering a guessed version (Principle 3).
-
----
-
-## MODE: DISTILL — Turn Content Into Artifacts
-
-Distill existing content (a conversation, a corpus, a repo, a doc) into a reusable artifact or a **skill family**. This is the meta-skill acting on itself — the same process that created this knowledge base.
-
-### Skill Distillation Flow
-1. **Capture intent** — extract the workflow from the source: tools/actions used, step sequence, corrections, input/output formats.
-2. **Classify** — what artifact type(s) emerge from the source?
-3. **Select tier** — single task (micro) / 2–5 workflows (standard) / adaptive multi-phase (deep engine).
-4. **Transmute user cases into principles** — if the user supplied one specific situation or example, generalize it into a rule that covers the whole class of cases; if the source is domain-specific, abstract the reusable shape and note the generalization in the Provenance block (Principle 2).
-5. **Emit per House Contract** — follow frontmatter / language / structure conventions.
-6. **Validate** — run the EVALUATE ⇄ TEST loop (neutrality of examples, trigger test, countable rules).
-
-### Provenance Ledger (mandatory for distilled artifacts)
-Every distilled artifact ends with a `Provenance` block: source (conversation / corpus / repo / doc + tier), the generalization moves applied (e.g., "generalized from Git/GitHub to any CLI tool"), and the unverified external content deliberately excluded. The ledger makes "no hardcoding" auditable — a later reader can verify the artifact is a pattern, not a copy.
-
-### Skill Family Distillation
-When a source produces multiple related artifacts, emit a **family**: a parent `SKILL.md` that selects across variants, plus `references/<variant>.md` for each. This is the multi-domain organization pattern (see `references/skill-guide.md` → progressive disclosure).
-
-> **Critical rule**: Distill **patterns and templates**, never verbatim copy. External/Tier-5 material (leaked prompts, third-party submodules) is unverified — do not promote it into a premise. Generated content must be newly authored abstracted patterns.
-
----
-
-## MODE: NAVIGATE / ORGANIZE — Classify and Place Content
-
-Use the repo's 3-axis taxonomy to classify and place content. See `references/taxonomy-navigation.md`.
-
-### Classify a Resource
-```
-Q1: Feed directly to an AI agent to execute?  → instructions/
-Q2: Read to learn about AI / prompting?      → knowledge/
-Q3: Design, architecture, or mental model?   → blueprints/
-```
-If a resource fits more than one axis, or its tier is ambiguous (e.g., Tier 2 vs Tier 3), ask one question at the CLARIFY gate instead of guessing (Principle 3); otherwise classify and state the decision in the Working Notes block.
-
-### Update the Skill Index
-When creating, classifying, or porting a new skill, remind the user or output instructions to update `instructions/skills/SKILL_INDEX.md` by adding a new row to the appropriate "Skills by Purpose" and "Skills by Source" tables.
-
-### Route Citations by Source Hierarchy
-Always cite the **source tier** when referencing content. Prefer `knowledge/papers/` (Tier 1) > docs/specs (Tier 2) > guides (Tier 3) > articles (Tier 4) > external submodules (Tier 5) > active (Tier 6) > archive (Tier 7).
-
-### Organize (active / archive / external)
-- `active/` and `archive/` → **self-created only**.
-- `external/` — **third-party only**. Remove (un-track) it when no longer needed; do NOT move to `archive/`.
-
----
-
-## Quick-Reference Comparison Tables
-
-Platform mapping (system prompts, function/tool schemas, JSON types, rules files) lives in the reference guides. Read the relevant one before authoring or converting a cross-platform artifact:
-
-- **System prompt / platform matrix** → `references/system-prompt-guide.md`
-- **Function / tool schema matrix** → `references/function-schema-guide.md` + `references/openai-function-calling.md`
-- **Rules file platform matrix** → `references/rules-guide.md`
-- **MCP specifics** → `references/mcp-tool-spec.md`
-
----
-
-## Best-Practice Rules
-
-- **Think of the model as a smart new hire lacking your norms** — and assume it is an *average* model: if a colleague would be confused, the model will be too. Write every rule to be executed correctly by a weak model; a strong model only exceeds the floor (Principle 1).
-- **Behavior is verified, not assumed.** The self-audit proves the artifact's *shape*; the baseline test proves *compliance*. Run RED before writing (Iron Law), GREEN after — see `references/behavioral-testing.md`.
-- **Match the form to the failure.** Recipes fix wrong-shaped output; prohibitions + rationalization tables fix rule-skipping under pressure; REQUIRED slots fix omitted elements. Never default to prohibition (it backfires on shaping problems).
-- **Explain *why* a behavior matters**, not just *what* to do — but keep the *why* in one line; the *what* must stay mechanical and countable.
-- **Use few-shot examples** (2–5) to steer format, tone, and structure; wrap them in `<examples>` / `<example>` tags. Keep examples neutral and generalizable — never contaminate output with example content (Principle 2).
-- **Structure complex prompts with XML tags**: `<instructions>`, `<context>`, `<input>`, `<examples>`, `<thinking>`, `<answer>`.
-- **Give a role** — even one sentence improves performance.
-- **Apply progressive disclosure**: keep `SKILL.md` under 500 lines; push depth into `references/`.
-- **Respect the token budget.** Every token competes with conversation history. Keep frequently-loaded skills lean; reference `--help` or external files instead of listing details; cross-reference instead of repeating.
-- **Use persuasion deliberately for discipline rules** (authority, commitment, scarcity, social proof, unity) — see `references/behavioral-testing.md` § Persuasion Principles. Never for manipulation.
-- **Never copy submodule/external content verbatim** — extract patterns only (Tier 5 is unverified; Principle 5).
-- **State the chosen default** (platform/tier/language) back to the user in the Working Notes block so they can correct them.
-- **Audit as a stranger, never in the writing pass.** Models — weak or strong — fail when they "check" their own output in the same pass that produced it. Separate writing and reviewing; make every review item countable (PASS/FAIL boundary + fix recipe).
-- **Parameter naming** (`snake_case`), **enum for constrained values**, and **`additionalProperties: false` for strict schemas** — see `references/function-schema-guide.md`. For EXPERT-level artifacts also apply long-context handling (top-load data, `document` tags, grounded answers).
-
----
-
-## Authoritative Repository Guidelines
-
-Beyond its own `references/`, the skill must respect these repo-wide truths:
-- **Skill Authoring Methodology**: `knowledge/guides/the-complete-guide-to-building-skill-for-claude.pdf` (Tier 3) is the primary philosophical guide for skill creation.
-- **Anthropic Official Standards**: `instructions/skills/external/anthropics/template/SKILL.md` (Tier 5) is the baseline official template. `instructions/skills/external/anthropics/skills/skill-creator/SKILL.md` shows Anthropic's own iteration loop.
-- **Dynamic Skill Discovery Policy**: According to `.agents/agents/directive/agent.md`, agents discover skills *dynamically* by scanning the `tags` and `description` in the YAML frontmatter. Therefore, those fields must always be present, precise, and optimized for agent reading.
-
----
 
 ## Reference Files Index
 
 | File | Contents | Read when |
-|---|---|---|
-| `references/execution-protocol.md` | Long chain-of-thought sub-questions per mode; stranger-audit mechanics; test checklist; weak-model-first rules | Every request, STAGE 1 PLAN + STAGE 2 REVIEW |
-| `references/behavioral-testing.md` | RED-GREEN-REFACTOR procedure; pressure scenarios; rationalization capture; micro-test wording; persuasion principles | Every request, STAGE 2 IMPLEMENTER (BASELINE TEST + REFACTOR) |
-| `references/examples.md` | 5 worked examples rewritten through the v4.0.0 pipeline (Working Notes → baseline → audit → test) | Before first use of each MODE |
-| `references/house-frontmatter-contract.md` | Unified YAML schema: `name`/`description`/`version`/`tags`/`compatibility`/`metadata`/`allowed-tools`; trigger-optimized description anatomy; validation checklist | Every create/rewrite of a skill |
-| `references/house-language-policy.md` | English internal / user-language output; language buckets; artifact vs output distinction | Every multilingual artifact |
-| `references/house-structure-conventions.md` | Unified SKILL.md skeleton; progressive disclosure; lazy-loaded `references/`; output contract; anti-example table | Every skill |
-| `references/taxonomy-navigation.md` | 3-axis taxonomy; decision tree; Tier 1–7; MECE active/archive/external boundary | NAVIGATE/ORGANIZE, citation routing |
-| `references/domain-engine-tiers.md` | micro / standard / deep engine tiers; decision tree; lazy-load rule | Selecting intensity tier |
-| `references/prompt-framework-costar-x.md` | COSTAR-X framework; `<variable>` isolation; mandatory `<thinking>`; startup line | Authoring/porting prompts |
-| `references/user-prompt-guide.md` | How the user should phrase a request; the 4 routing signals; ask-vs-infer policy | CREATE (user prompt), routing |
-| `references/skill-guide.md` | Skill creation guide; frontmatter; sizing; progressive disclosure; skill-creator workflow | CREATE (skill) |
-| `references/rules-guide.md` | Rules file guide; platform matrix; candidate-principle skeleton; multi-format sync | CREATE (rules) |
-| `references/system-prompt-guide.md` | System prompt templates; 5-slot anatomy; agent-vs-assistant; XML vs Markdown | CREATE / CONVERT (system prompt) |
-| `references/function-schema-guide.md` | Cross-platform schema comparison; MCP conventions; `outputSchema`; `Prompt.txt`+`Tools.json` | CREATE / CONVERT (schema) |
-| `references/openai-function-calling.md` | OpenAI function calling schema, strict mode | CONVERT (schema) |
-| `references/mcp-tool-spec.md` | MCP tool specification | CREATE / CONVERT (MCP) |
-| `references/prompt-patterns.md` | 10 prompt patterns + anti-patterns | CREATE / EXPLAIN (prompt) |
-| `references/prompt-engineering-official.md` | Anthropic official best practices (Claude-specific — see annotation) | CREATE / EXPLAIN (all) |
-
----
-
-## Examples
-
-Five worked examples — CREATE (system prompt), CRITIQUE (multilingual), CONVERT (schema + round-trip), DISTILL (skill + provenance), NAVIGATE (classification) — rewritten through the v5.0.0 pipeline with Working Notes, audit, and test stages, live in **`references/examples.md`**. Read it before your first use of each MODE.
-
-### Inline example: Working Notes block shape (CREATE)
-
-```
-## Working Notes
-- Request: create a system prompt for a tutoring chatbot (EN input)
-- Mode=CREATE · Type=System Prompt · Platform=platform-agnostic · Tier=standard
-- Known: tutoring domain, target learners. Missing: none — proceed (no CLARIFY needed)
-- Baseline (RED): control run without artifact → agent gave the answer outright (rationalization: "helpful = answer")
-- Audit (stranger pass): 5-slot anatomy complete ✓ · constraints countable ✓ · neutral examples ✓
-- Test: GREEN run → agent guides instead of answering ✓ · acceptance 4/4 · PASS (1 iteration)
-
-## Output
-[the artifact, single block]
-```
+| --- | --- | --- |
+| `references/house-frontmatter-contract.md` | Unified YAML schema, SDO trigger anatomy, `agentskills.io` `metadata:` portability, validation checklist | Creating or reviewing any `SKILL.md` |
+| `references/house-language-policy.md` | English internals, user-language output buckets, artifact vs output language rule | Any multilingual request or skill |
+| `references/house-structure-conventions.md` | Canonical `SKILL.md` skeleton, progressive disclosure, Output Contract, anti-example table | Creating or restructuring a `SKILL.md` |
+| `references/domain-engine-tiers.md` | `micro` / `standard` / `deep engine` decision tree, lazy-load rule, tier-scaled testing pointers | Selecting or auditing intensity tier |
+| `references/taxonomy-navigation.md` | 3-axis taxonomy, Q1/Q2/Q3 tree, `Tier 1-7` hierarchy, MECE `active`/`archive`/`external` rules | `NAVIGATE` or citation tier routing |
+| `references/system-prompt-guide.md` | 5-slot anatomy, Agent vs Assistant, XML/Markdown/JSON templates, `<examples>`, `20k+` `<documents>`, adaptive thinking | `CREATE` / `CONVERT` / `CRITIQUE` system prompts |
+| `references/user-prompt-guide.md` | 4 routing signals, request anatomy, ask-vs-infer policy, request anti-patterns | `CREATE` user prompts or ambiguous routing |
+| `references/prompt-framework-costar-x.md` | `COSTAR-X` scaffold, `<variable>` isolation, `<thinking>` CoV, interactive-only `XÁC NHẬN KHỞI ĐỘNG` | `CREATE` / `CONVERT` / `EXPLAIN` user prompts |
+| `references/function-schema-guide.md` | `OpenAI` / `Anthropic` / `MCP` / `Gemini` matrix, Responses wire format, `Prompt.txt` + `Tools.json`, `mcp-builder` pointer | `CREATE` / `CONVERT` / `CRITIQUE` tool schemas |
+| `references/rules-guide.md` | `CLAUDE.md` / `AGENTS.md` / `GEMINI.md` / `.cursor/rules/*.mdc` / `.cursorrules` formats, multi-format sync, `karpathy-guidelines` pointer | `CREATE` / `CONVERT` / `NAVIGATE` rules files |
+| `references/examples.md` | 5 worked `v6.0.0` Direct-by-Default traces (`CREATE`, `CRITIQUE`, `CONVERT`, `DISTILL`, `NAVIGATE`) | First execution of any mode |

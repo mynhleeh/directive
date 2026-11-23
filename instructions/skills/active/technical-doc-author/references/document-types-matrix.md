@@ -1,43 +1,32 @@
 ---
-description: "Classification matrix for 8 core technical engineering document types, Diataxis documentation architecture, and structural blueprints for engineering documentation."
-version: "3.2.0"
+description: "Classification matrix for 8 core technical engineering document types, Diataxis documentation architecture, canonical POLA prefix registry, structural blueprints (DOC-1 to DOC-8), RTM, and lifecycle cross-referencing."
+version: "4.0.0"
 ---
 
 # Document Types Matrix & Diataxis Architectural Blueprint
 
-This reference defines the classification matrix, information domain boundaries, Diataxis structural framework, and standardized blueprints for 8 core industrial technical document types. Its primary purpose is to establish strict technical separation among problem, solution, decision, proposal, evaluation, postmortem, data contract, and procedural operational domains, eliminating phase leakage and enforcing mechanical documentation quality standards across engineering disciplines.
-
----
+Defines the classification matrix, information domain boundaries, Diataxis functional structure, POLA identifier registry, and standardized blueprints for 8 industrial engineering document archetypes (`DOC-1` to `DOC-8`), isolating problem, solution, decision, proposal, evaluation, retrospective, data contract, and procedural domains.
 
 ## 1. The Diataxis Documentation Framework
 
 ### 1.1 The Two Fundamental Axes
 
-The Diataxis framework, formulated by Daniele Procida, categorizes all technical documentation along two independent axes:
+1. **Horizontal Axis (Learning vs Practical Work)**: Separates readers acquiring new mental models and comprehension from practitioners executing production tasks, building systems, or resolving outages.
+2. **Vertical Axis (Action vs Cognition)**: Separates step-by-step execution sequences from reference specifications or analytical explanations.
 
-1. **Horizontal Axis: Learning (Acquisition) versus Practical Work (Application)**  
-   This axis reflects the reader's operational state. On the left, the reader acquires new mental models, explores foundational concepts, and builds comprehension. On the right, the reader executes production tasks, resolves specific technical bottlenecks, implements software systems, or mitigates outages.
-
-2. **Vertical Axis: Practical Execution (Action) versus Theoretical Understanding (Cognition)**  
-   This axis reflects the primary nature of the text. On the upper half, the documentation guides the reader through a concrete sequence of physical actions. On the lower half, the documentation provides reference information or theoretical explanations to assist analytical thinking and architectural decision-making.
-
-The intersection of these two axes forms four distinct quadrants:
-1. **Tutorials**: Intersection of Learning and Action.
-2. **How-to Guides / Runbooks**: Intersection of Practical Work and Action.
-3. **Reference / Specifications**: Intersection of Practical Work and Cognition.
-4. **Explanation / Architecture**: Intersection of Learning and Cognition.
+The intersection forms four quadrants: Tutorials (Learning x Action), How-to Guides / Runbooks (Practical Work x Action), Reference / Specifications (Practical Work x Cognition), and Explanation / Architecture (Learning x Cognition).
 
 ```mermaid
 flowchart TD
   subgraph DiataxisSpace["Diataxis Documentation Space"]
     direction TB
-    subgraph ActionQuadrant["Upper Plane: Action and Execution"]
-      TUT["Tutorials: Learning Through Guided Doing"]
-      HTG["How-To Guides & Runbooks: Solving Real Operational Problems"]
+    subgraph ActionPlane["Upper Plane: Action and Execution"]
+      TUT["Tutorials: Guided Learning"]
+      HTG["How-To Guides and Runbooks: Operational Execution"]
     end
-    subgraph CognitionQuadrant["Lower Plane: Cognition and Understanding"]
-      EXP["Explanation & Architecture: Design Rationale & Analysis"]
-      REF["Reference & Specifications: Precise Technical Contracts"]
+    subgraph CognitionPlane["Lower Plane: Cognition and Understanding"]
+      EXP["Explanation and Architecture: Rationale and Analysis"]
+      REF["Reference and Specifications: Technical Contracts"]
     end
   end
 ```
@@ -45,225 +34,130 @@ flowchart TD
 ### 1.2 Four Quadrants Comparison Matrix
 
 | Quadrant | Tutorials | How-To Guides / Runbooks | Reference / Specifications | Explanation / Architecture |
-|---|---|---|---|---|
-| **Coordinate Axes** | Learning x Action | Practical Work x Action | Practical Work x Cognition | Learning x Cognition |
-| **Core Focus** | Guided hands-on learning | Solving specific operational problems | Authoritative technical facts | System context and design rationale |
-| **Technical Objective** | Guide a beginner through an unbroken sequence of steps from start to working result | Provide step-by-step instructions to complete a real-world task in production | Provide complete, exact specifications of parameters, schemas, metrics, and endpoints | Clarify architectural trade-offs, technology choices, experimental conclusions, and system interactions |
-| **Reader Assumption** | No prior system knowledge; requires a predictable sandbox environment | Understands basic concepts; needs immediate steps to achieve a concrete goal | Actively writing code or operating systems; needs exact types, schemas, and return codes | Evaluating architecture or results; requires deep design rationale and empirical trade-off data |
-| **Writing Tone** | Instructive, supportive; explains immediate results after each step | Direct, imperative; emphasizes executable commands and verified outcomes | Neutral, terse, objective; zero conversational filler or editorial opinion | Analytical, expository; connects engineering history, constraints, benchmarks, and trade-offs |
-| **Typical Formats** | Getting started guides, onboarding walkthroughs | Incident runbooks, disaster recovery SOPs, deployment procedures | OpenAPI schemas, SRS requirements, configuration dictionaries, benchmark metrics | System design descriptions (SDD), ADRs, RFC proposals, postmortem RCAs, benchmark reports |
-| **Acceptance Metric** | 100% of readers achieve identical sample output; branching conditions equal 0 | 100% of steps have verification checks; recovery/completion time within target SLO | 100% of parameters specify types, valid ranges, and error conditions | Analyzes at least 3 concrete trade-off axes; specifies breaking points and empirical limits |
+| :--- | :--- | :--- | :--- | :--- |
+| Coordinate Axes | Learning x Action | Practical Work x Action | Practical Work x Cognition | Learning x Cognition |
+| Core Focus | Guided hands-on learning | Solving operational problems | Authoritative technical facts | System context and design rationale |
+| Reader State | Needs safe sandbox onboarding | Executing a live task or outage recovery | Writing code or verifying contracts | Evaluating architecture or empirical results |
+| Writing Tone | Instructive, supportive | Direct, imperative | Neutral, terse, objective | Analytical, expository |
+| Typical Formats | Onboarding walkthroughs | Incident runbooks, recovery SOPs, deployment guides | OpenAPI schemas, SRS requirements, benchmark tables | SDDs, ADRs, RFCs, postmortem RCAs, benchmark reports |
+| Acceptance Criterion | 100% reproducible sample output; 0 branching paths | Every step has stdout check; destructive steps have rollback | 100% parameters typed with bounds and error codes | >= 3 trade-off axes and numerical breaking point |
 
 ### 1.3 Boundary Isolation Discipline
 
-Blending multiple quadrants within a single section confuses reader cognition and degrades documentation utility. Four isolation rules are mandatory:
-
-1. **Never Embed Reference Schemas Inside Tutorials**:
-   Tutorials must remain an unbroken narrative thread. Inserting full API error tables or exhaustive configuration dictionaries into a getting-started guide interrupts hands-on execution. Place complete schemas in Reference documents and provide hyperlinks.
-
-2. **Never Embed Pedagogical Lessons Inside How-To Guides or Runbooks**:
-   Engineers consulting a runbook during a production incident need actionable commands. Do not include theoretical background or historical context in operational procedures.
-
-3. **Keep Reference Documents Free of Procedural Narratives**:
-   Reference manuals must remain strictly objective, indexed, and descriptive. Do not insert multi-step narrative walkthroughs inside API endpoint reference sections or requirements tables.
-
-4. **Confine Architectural Debates to Explanation Documents**:
-   Keep theoretical discussions of alternative database engines, consensus algorithms, and historical refactoring decisions out of daily operator how-to guides and API references. Confine architectural analysis to Explanations, SDDs, ADRs, and RFCs.
-
----
+1. **Zero Reference Dumps in Tutorials**: Keep tutorials an unbroken hands-on flow; link out to Reference tables instead of embedding exhaustive error dictionaries.
+2. **Zero Theory Essays in Runbooks**: Engineers under production outage pressure require deterministic commands and checks, not background WAL or protocol lectures.
+3. **Zero Walkthroughs in Reference Docs**: Keep API schemas and requirements tables strictly descriptive and indexed.
+4. **Confine Architectural Debates to Explanations**: Keep engine trade-offs and rejected alternatives inside SDDs, ADRs, RFCs, and Tech Reports.
 
 ## 2. The Eight Core Industrial Technical Document Types
 
-```mermaid
-mindmap
-  root((Technical Documents))
-    Problem Domain
-      DOC-1: SRS / PRD
-    Solution Domain
-      DOC-2: SDD
-      DOC-7: API Spec
-    Decision & Proposal Domain
-      DOC-3: ADR
-      DOC-4: RFC
-    Empirical & Investigative Domain
-      DOC-5: Tech Report / Benchmark
-      DOC-6: Postmortem / RCA
-    Operational Domain
-      DOC-8: Runbook / SOP
-```
+| Archetype | Information Domain | Primary Diataxis Quadrant | Secondary Quadrant (Dedicated Section Only) |
+| :---: | :--- | :--- | :--- |
+| `DOC-1` (SRS / PRD) | Problem (`WHAT`) | Reference (Rules, FRs, NFRs) | Explanation (Product Context) |
+| `DOC-2` (SDD) | Solution (`HOW`) | Explanation (Architecture & Trade-offs) | Reference (Interface & RTM Tables) |
+| `DOC-3` (ADR) | Decision (`WHY`) | Explanation (Drivers & Consequences) | N/A |
+| `DOC-4` (RFC) | Proposal (`PROPOSAL`) | Explanation (Design Rationale & Alternatives) | Reference (Contract & Migration Delta) |
+| `DOC-5` (Tech Report) | Empirical (`EVALUATION`) | Explanation (Saturation Analysis & Recs) | Reference (Harness Spec & Percentile Data) |
+| `DOC-6` (Postmortem / RCA) | Retrospective (`POSTMORTEM`) | Explanation (5-Whys & Systemic Factors) | Reference (UTC Timeline & Action Matrix) |
+| `DOC-7` (API Spec) | Integration (`CONTRACT`) | Reference (Schemas & Error Codes) | N/A |
+| `DOC-8` (Runbook / SOP) | Operational (`PROCEDURE`) | How-to Guide (Commands & Checks) | N/A |
 
-### 2.1 DOC-1: Software Requirements Specification (SRS / PRD - ISO/IEC/IEEE 29148)
+### 2.1 DOC-1: Software Requirements Specification (SRS / PRD, ISO/IEC/IEEE 29148)
 
-- **Information Domain**: Problem Domain (`WHAT`).
-- **Primary Audience**: Product Managers, Software Architects, QA Engineers, Business Stakeholders.
-- **Diataxis Quadrant**: Reference / Explanation (Requirements Domain).
-- **Scope & Boundaries**: Defines the problem space, business goals, user personas, system boundaries, and verifiable functional/non-functional requirements. Specifies what the system must accomplish from the perspective of external actors and business stakeholders without prescribing code implementation.
-- **Strict Prohibitions**:
-  - Zero OOA/OOD design patterns (Factory, Singleton, Strategy, Observer).
-  - Zero code implementation constructs: Service Layer, Controller, Repository, DAO, DTO, or Entity.
-  - Zero database-specific schemas, indexing strategies, or foreign key column constraints.
-  - Zero programming-language-specific constructs: forbid naming specific library methods (e.g., `BigDecimal.add()`), language types, or source-code exception class names (e.g., `SameWalletTransferException`).
-  - Zero spurious mathematical formalisms (Academic Overkill): forbid predicate logic ($\forall, \exists, \exists!$) or trivial cancellation algebra for routine CRUD rules.
-  - Zero flat non-namespaced UIDs: forbid flat identifiers (`UC01`, `FR01`); require hierarchical domain namespaces (`UC-WAL-01`, `FR-AUTH-01`).
-  - Zero "CRUD / God Use Cases": forbid naming use cases with generic "Manage [Entity]" / "Quản lý [Thực thể]" bundles; require atomic User Goals (`<Active Verb> + <Direct Object>`).
-  - Zero alternative flows acting as navigation menus to jump to other screens.
-  - Zero phantom use cases in diagrams lacking matching textual specifications.
-- **Core Sections**:
-  1. Product Purpose, Vision & System Context
-  2. External System Actors & User Personas
-  3. Immutable Business Rules (`BR-[DOMAIN]-[NN]`)
-  4. Functional Requirements (`FR-[SUBSYS]-[NN]`)
-  5. Goal-Oriented Use Case Specifications (`UC-[SUBSYS]-[NN]`)
-  6. Non-Functional Quantitative Requirements (`NFR-[SUBSYS]-[NN]`)
+- Information Domain: Problem Domain (`WHAT`).
+- Primary Audience: Product Managers, Architects, QA Engineers, Stakeholders.
+- Diataxis Quadrant: Reference (rules, requirements, NFRs) / Explanation (context & scope boundaries).
+- Strict Prohibitions: Zero OOD patterns (Factory, Strategy, Repository, DTO), zero programming-language calls (e.g., `Currency.add()`), zero exception class names, zero physical SQL table schemas or indexes, zero spurious predicate calculus ($\forall, \exists$) on CRUD rules, zero flat IDs (`UC01`, `FR01`), zero `"Manage [Entity]"` CRUD God bundles, and zero phantom diagram nodes.
+- Core Sections: Product Context & Boundary, External Actors, Business Rules (`BR-[DOMAIN]-[NN]`), Functional Requirements (`FR-[SUBSYS]-[NN]` or `REQ-[SUBSYS]-[NN]`), Goal-Oriented Use Cases (`UC-[SUBSYS]-[NN]`), Quantitative Non-Functional Requirements (`NFR-[SUBSYS]-[NN]`).
 
-### 2.2 DOC-2: Software Design Description (SDD - IEEE 1016)
+### 2.2 DOC-2: Software Design Description (SDD, IEEE 1016)
 
-- **Information Domain**: Solution Domain (`HOW`).
-- **Primary Audience**: Software Engineers, Infrastructure Engineers, Systems Architects.
-- **Diataxis Quadrant**: Explanation / Reference (Architecture Domain).
-- **Scope & Boundaries**: Defines the technical solution, component topology, deployment containers, communication protocols, persistent data schemas, internal algorithms, and system breaking points.
-- **Strict Prohibitions**:
-  - Never rewrite complete business rule narratives or user stories from the SRS; cite upstream requirement identifiers (`FR-xxx`, `BR-xxx`).
-  - Never claim universal scalability or performance without documenting concrete trade-offs and breaking point capacity limits.
-- **Core Sections**:
-  1. Architectural Thesis, System Context & Design Constraints
-  2. Container Topology & Subsystem Decomposition (C4 Tier 1 & Tier 2)
-  3. Interface Contracts & Inter-Service Communication Protocols
-  4. Persistent Data Models & Storage Partitioning Strategies
-  5. Requirement Traceability Matrix (Mapping `FR-xxx` to Components)
-  6. System Breaking Point, Resource Saturation & Capacity Limits
+- Information Domain: Solution Domain (`HOW`).
+- Primary Audience: Software Engineers, Infrastructure Engineers, Architects.
+- Diataxis Quadrant: Explanation (topology & trade-offs) / Reference (interface contracts & RTM).
+- Strict Prohibitions: Never copy full SRS business narratives; cite upstream UIDs (`BR-xxx`, `FR-xxx`, `REQ-xxx`). Never claim universal scalability without explicit trade-offs and a numerical breaking point.
+- Core Sections: Architectural Thesis & Workload Envelope, Container Topology (C4 Tier 1 & Tier 2, <= 9 nodes each), Interface Contracts & Protocols, Persistent Data & Caching Strategy, Requirement Traceability Matrix, System Breaking Point & Saturation Limits.
 
-### 2.3 DOC-3: Architectural Decision Record (ADR - MADR / Michael Nygard)
+### 2.3 DOC-3: Architecture Decision Record (ADR, MADR)
 
-- **Information Domain**: Decision Domain (`WHY`).
-- **Primary Audience**: Architecture Review Boards, Engineering Teams, Future Maintainers.
-- **Diataxis Quadrant**: Explanation (Decision History).
-- **Scope & Boundaries**: Captures a single significant architectural or design decision, describing the operational context, evaluated alternatives, decision drivers, chosen strategy, and resulting engineering trade-offs.
-- **Strict Prohibitions**:
-  - Do not convert ADRs into procedural step-by-step tutorials or installation guides.
-  - Never document a selected architecture without detailing discarded alternatives and their explicit disqualification criteria.
-  - Never omit negative consequences or operational liabilities introduced by the decision.
-- **Core Sections**:
-  1. Status (Draft, Proposed, Accepted, Deprecated, Superseded)
-  2. Operational Context & Technical Problem Statement
-  3. Decision Drivers (Latency, cost, compliance, team capability, resilience)
-  4. Evaluated Options & Comparative Multi-Criteria Trade-Off Matrix
-  5. Decision Outcome & Justification
-  6. Concrete Consequences (Positive, Negative, and Neutral Operational Realities)
+- Information Domain: Decision Domain (`WHY`).
+- Primary Audience: Architecture Review Boards, Engineering Teams, Maintainers.
+- Diataxis Quadrant: Explanation.
+- Strict Prohibitions: Never omit >= 2 rejected alternatives with explicit disqualification criteria, >= 3 trade-off axes, negative operational consequences, or the capacity breaking point. Never convert ADRs into step-by-step setup guides.
+- Core Sections: Status, Operational Context & Drivers, Considered Options, Multi-Criteria Trade-Off Matrix, Decision Outcome & Disqualification Rationale, Concrete Consequences (Positive/Negative/Neutral), Breaking Point & Re-Evaluation Trigger.
 
-### 2.4 DOC-4: Request for Comments / Engineering Proposal (RFC - IETF Style)
+### 2.4 DOC-4: Request for Comments / Engineering Proposal (RFC)
 
-- **Information Domain**: Proposal & Consensus Domain (`PROPOSAL`).
-- **Primary Audience**: Technical Leads, Cross-Functional Engineering Teams, Security & Ops Stakeholders.
-- **Diataxis Quadrant**: Explanation / Proposal.
-- **Scope & Boundaries**: Proposes a substantial technical change, new platform subsystem, protocol standard, or cross-cutting architectural evolution before implementation begins. Gathers organizational consensus, identifies edge-case risks, and defines migration strategies.
-- **Strict Prohibitions**:
-  - Never propose an architecture without at least two rejected alternative designs and explicit rationale.
-  - Never omit backward compatibility analysis or rollout/migration phases.
-  - Never hide unresolved architectural open questions or technical ambiguities under generic phrases.
-- **Core Sections**:
-  1. Summary & Motivation (Problem Statement & Business Justification)
-  2. High-Level Technical Design & Proposed Protocol/Interface Changes
-  3. Multi-Phase Implementation Plan & Work Breakdown
-  4. Migration, Compatibility & Deprecation Strategy
-  5. Security, Privacy & Operational Resilience Considerations
-  6. Evaluated Alternative Approaches & Disqualification Rationale
-  7. Unresolved Open Questions & Review Decisions
+- Information Domain: Proposal & Consensus Domain (`PROPOSAL`).
+- Primary Audience: Tech Leads, Cross-Functional Teams, Security & Ops.
+- Diataxis Quadrant: Explanation (motivation & rationale) / Reference (proposed contract delta).
+- Strict Prohibitions: Require >= 2 rejected alternatives with disqualification rationale, explicit backward-compatibility and rollback/migration plan, and candid unresolved open questions.
+- Core Sections: Summary & Motivation, Proposed Design & Contracts, Multi-Phase Rollout Plan, Compatibility & Deprecation Strategy, Security & Operational Resilience, Rejected Alternatives, Open Questions.
 
 ### 2.5 DOC-5: Technical Report & Benchmark Evaluation (ISO/IEC/IEEE 15289)
 
-- **Information Domain**: Empirical & Experimental Domain (`EVALUATION`).
-- **Primary Audience**: Performance Engineers, Systems Architects, Technical Leadership.
-- **Diataxis Quadrant**: Reference / Explanation (Empirical Facts).
-- **Scope & Boundaries**: Documents reproducible empirical findings, load testing, benchmark evaluations, capacity planning investigations, or hardware/software feasibility studies. Delivers measured facts, environment specifications, and statistical conclusions.
-- **Strict Prohibitions**:
-  - Never report benchmark numbers without specifying exact hardware, OS, network, workload parameters, and reproducible harness configurations.
-  - Never report sole mean/average values without percentiles (P50, P95, P99) and variance/confidence intervals.
-  - Never make subjective claims ("superior", "faster") without direct reference to tabular empirical data.
-- **Core Sections**:
-  1. Executive Summary & Experimental Objectives
-  2. Test Environment Specification (Hardware, Kernel, Software, Network Topology)
-  3. Methodology, Workload Profiling & Load Generation Harness
-  4. Quantitative Results & Percentile Distributions (Tables & Charts)
-  5. Resource Saturation Analysis (CPU, Memory, Disk I/O, Network Bandwidth)
-  6. Empirical Limitations, Anomaly Observations & Architectural Recommendations
+- Information Domain: Empirical Evaluation Domain (`EVALUATION`).
+- Primary Audience: Performance Engineers, Architects, Technical Leadership.
+- Diataxis Quadrant: Explanation (analysis & recommendations) / Reference (harness config & percentile tables).
+- Strict Prohibitions: Never omit hardware/OS/network/harness specs; never report sole means without `P50`/`P95`/`P99` percentiles and variance; never assert subjective superiority without direct tabular data; never fabricate unmeasured benchmark metrics.
+- Core Sections: Objectives & Findings Summary, Test Environment & Harness Spec, Workload Methodology, Percentile Results & Saturation Profiling, Breaking Point Analysis & Recommendations.
 
-### 2.6 DOC-6: Incident Postmortem & Root Cause Analysis (Postmortem / RCA - SRE)
+### 2.6 DOC-6: Incident Postmortem & Root Cause Analysis (RCA)
 
-- **Information Domain**: Investigative & Remediation Domain (`POSTMORTEM`).
-- **Primary Audience**: Engineering Leadership, Site Reliability Engineers, Product Stakeholders.
-- **Diataxis Quadrant**: Explanation / Reference (Operational Incident Analysis).
-- **Scope & Boundaries**: Provides a blameless, rigorous retrospective analysis of a production outage, data loss event, or service degradation. Establishes the exact timeline, primary root cause, contributing systemic factors, and preventative action items.
-- **Strict Prohibitions**:
-  - Zero personal blame ("human error", "operator mistake"); focus strictly on systemic safeguards, automated guardrails, and architectural deficiencies.
-  - Never omit an exact chronological timeline with coordinated UTC timestamps.
-  - Never leave preventative action items without a direct owner, priority, and tracking ticket identifier.
-- **Core Sections**:
-  1. Incident Metadata (Severity, Start/End UTC, Total Downtime, User Impact SLA/SLO)
-  2. Incident Summary & User-Facing Impact Assessment
-  3. Chronological Incident Timeline (UTC timestamps: Trigger, Detection, Escalation, Mitigation, Resolution)
-  4. Root Cause Analysis (5-Whys Chain & Fault Propagation Flowchart)
-  5. Systemic Contributing Factors & Trigger Mechanisms
-  6. What Went Well, What Went Poorly & Where We Got Lucky
-  7. Preventative & Corrective Action Items Matrix (Owner, Priority, Target Date, Tracking Ticket)
+- Information Domain: Investigative & Remediation Domain (`POSTMORTEM`).
+- Primary Audience: Engineering Leadership, SREs, Product Stakeholders.
+- Diataxis Quadrant: Explanation (5-Whys & systemic factors) / Reference (UTC timeline & action matrix).
+- Strict Prohibitions: Zero personal blame ("operator error", "human mistake"); never omit exact UTC chronology; never leave remediation actions without owner, priority, target date, and ticket UID.
+- Core Sections: Incident Metadata, User/SLA Impact, UTC Chronological Timeline, 5-Whys Root Cause & Fault Tree, Systemic Contributing Factors, Went Well / Went Poorly / Luck, Corrective Action Matrix (`ACT-[DOMAIN]-[NN]`).
 
-### 2.7 DOC-7: Interface and Data Contract Specifications (API Spec - OpenAPI 3.1)
+### 2.7 DOC-7: Interface and Data Contract Specifications (API Spec, OpenAPI 3.1)
 
-- **Information Domain**: Integration Domain (`DATA CONTRACT`).
-- **Primary Audience**: API Consumers, Backend Engineers, Frontend Engineers, Third-Party Integrators.
-- **Diataxis Quadrant**: Reference (Precise Information Lookup).
-- **Scope & Boundaries**: Defines the external interface contract between distributed systems. Specifies endpoints, HTTP methods, transport protocols (REST/gRPC), request parameters, response schemas, and structured error formats.
-- **Strict Prohibitions**:
-  - Forbid untyped JSON payloads (every field must specify explicit data types and boundary constraints).
-  - Forbid arbitrary non-standard error responses; require standardized schemas (e.g., RFC 7807 Problem Details or gRPC Status Codes).
-  - Forbid undocumented status codes or unhandled edge cases.
-- **Core Sections**:
-  1. Endpoint URI, Protocol, Transport & HTTP Method
-  2. Authentication, Scopes & Authorization Roles
-  3. Request Headers, Path Parameters & Query Parameters
-  4. Request Body Schema with Explicit Validation Invariants
-  5. Response Codes & Payloads (Success 2xx, Client Errors 4xx, Server Errors 5xx)
-  6. Concrete Request and Response Payload Examples (Success and RFC 7807 Failures)
+- Information Domain: Integration Domain (`CONTRACT`).
+- Primary Audience: API Consumers, Backend/Frontend Engineers, Integrators.
+- Diataxis Quadrant: Reference.
+- Strict Prohibitions: Zero untyped payloads (every field requires type, nullability, and bounds), zero ad-hoc error shapes (require RFC 7807 Problem Details or gRPC status codes), zero undocumented status codes, zero tutorial prose.
+- Core Sections: Endpoint Transport & Auth Scopes, Request Parameters & Body Schema, Response Schema & Error Status Matrix, Concrete Success & RFC 7807 Failure Payloads.
 
-### 2.8 DOC-8: Operational Runbooks & Standard Operating Procedures (SRE Runbook / SOP)
+### 2.8 DOC-8: Operational Runbooks & Standard Operating Procedures (SOP)
 
-- **Information Domain**: Operational Domain (`PROCEDURE`).
-- **Primary Audience**: On-Call Engineers, SREs, Systems Administrators.
-- **Diataxis Quadrant**: How-to Guide (Action & Execution).
-- **Scope & Boundaries**: Provides deterministic, reproducible, step-by-step procedures for system maintenance, deployment, failover, backup, disaster recovery, and incident remediation under operational pressure.
-- **Strict Prohibitions**:
-  - Never present an operational command without an immediate verification check and expected stdout/stderr output.
-  - Never write destructive operations without an explicit rollback procedure and safety check.
-  - Never include long theoretical essays or architectural debates.
-- **Core Sections**:
-  1. Incident Symptoms, Alert Name & Trigger Thresholds
-  2. Environmental Prerequisites, Access Privileges & CLI Tooling Requirements
-  3. Step-by-Step Executable Command Sequence
-  4. Verification Check and Expected Output per Step
-  5. Deterministic Rollback Procedure for Operational Failures
-  6. Escalation Paths, On-Call Roster & Communication Channels
+- Information Domain: Operational Domain (`PROCEDURE`).
+- Primary Audience: On-Call Engineers, SREs, Systems Administrators.
+- Diataxis Quadrant: How-to Guide.
+- Strict Prohibitions: Never list an executable command without an immediate stdout/stderr verification check; never include destructive actions (`rm`, `drop`, failover, truncate) without an explicit rollback routine; never embed theoretical tutorials or architecture essays.
+- Core Sections: Alert Symptoms & Trigger Thresholds, Prerequisites & Tooling, Numbered Execution Steps (Command + Expected Verification Output + Rollback for destructive steps), Escalation Roster.
 
----
+### 2.9 Canonical POLA Prefix Registry
 
-## 3. Structural Outlines and Blueprints
+Every traceable section heading MUST follow `### X.Y [PREFIX]-[DOMAIN]-[NN]: [Title]` (with top-level document IDs `ADR-[NNNN]` / `RFC-[NNNN]` permitted on `# H1` titles). Flat 2-part IDs (`UC01`, `FR01`) are forbidden.
 
-### 3.1 Software Requirements Specification (SRS / PRD) Blueprint
+| Archetype | Approved Section Heading Prefixes (`[PREFIX]-[DOMAIN]-[NN]`) | Document-Level H1 ID |
+| :--- | :--- | :--- |
+| `DOC-1` (SRS / PRD) | `BG-[DOMAIN]-[NN]`, `BR-[DOMAIN]-[NN]`, `FR-[SUBSYS]-[NN]`, `REQ-[SUBSYS]-[NN]`, `UC-[SUBSYS]-[NN]`, `NFR-[SUBSYS]-[NN]` | Optional |
+| `DOC-2` (SDD) | `THS-[DOMAIN]-[NN]`, `TOP-[DOMAIN]-[NN]`, `CMP-[SUBSYS]-[NN]`, `DAT-[DOMAIN]-[NN]`, `BRK-[DOMAIN]-[NN]` | Optional |
+| `DOC-3` (ADR) | `THS-[DOMAIN]-[NN]`, `DRV-[DOMAIN]-[NN]`, `TOP-[DOMAIN]-[NN]`, `DEC-[DOMAIN]-[NN]`, `ALT-[DOMAIN]-[NN]`, `CON-[DOMAIN]-[NN]`, `BRK-[DOMAIN]-[NN]` | `ADR-[NNNN]` |
+| `DOC-4` (RFC) | `THS-[DOMAIN]-[NN]`, `PROP-[DOMAIN]-[NN]`, `ROL-[DOMAIN]-[NN]`, `ALT-[DOMAIN]-[NN]`, `BRK-[DOMAIN]-[NN]` | `RFC-[NNNN]` |
+| `DOC-5` (Tech Report) | `HYP-[TOPIC]-[NN]`, `ENV-[TOPIC]-[NN]`, `FIND-[TOPIC]-[NN]`, `BRK-[TOPIC]-[NN]`, `REC-[TOPIC]-[NN]` | Optional |
+| `DOC-6` (Postmortem) | `INC-[YYYYMM]-[NN]`, `RCA-[TOPIC]-[NN]`, `ACT-[DOMAIN]-[NN]` | Optional |
+| `DOC-7` (API Spec) | `API-[SUBSYS]-[NN]`, `ERR-[SUBSYS]-[NN]` | Optional |
+| `DOC-8` (Runbook / SOP) | `SOP-[SUBSYS]-[NN]` | Optional |
+
+## 3. Structural Blueprints (`DOC-1` to `DOC-8` & Cross-Cutting Templates)
+
+### 3.1 DOC-1: Software Requirements Specification (SRS / PRD) Blueprint
 
 ```markdown
-# Software Requirements Specification: [System / Subsystem Name]
+# Software Requirements Specification: [System Name]
 
-## 1. Product Context & Objectives
-### 1.1 Business Purpose & Value Drivers
-### 1.2 System Boundary & Out-of-Scope Declarations
+## 1. Product Context & System Boundary
+### 1.1 BG-[DOMAIN]-01: Purpose & Business Objectives
+### 1.2 Scope & Out-of-Scope Boundaries
 ### 1.3 External Actors & User Personas
 
 ## 2. Business Rules & Invariants
 ### 2.1 BR-[DOMAIN]-01: [Rule Name]
-### 2.2 BR-[DOMAIN]-02: [Rule Name]
 
 ## 3. Functional Requirements
 ### 3.1 FR-[SUBSYS]-01: [Requirement Name]
-### 3.2 FR-[SUBSYS]-02: [Requirement Name]
 
 ## 4. Goal-Oriented Use Case Specifications
 ### 4.1 UC-[SUBSYS]-01: [Active Verb + Direct Object]
@@ -273,249 +167,239 @@ mindmap
 - Main Success Flow:
   1. Actor submits...
   2. System validates...
-  3. System persists...
+  3. System records...
 - Alternative / Exception Flows:
-  - 2a. Validation fails: System returns...
+  - 2a. [Business validation failure]: System rejects request with business error code.
 - Postconditions:
 
 ## 5. Non-Functional Quantitative Requirements
-### 5.1 NFR-PERF-01: [Latency / Throughput Threshold]
-### 5.2 NFR-SEC-01: [Encryption / Auth Invariant]
+### 5.1 NFR-PERF-01: [Metric with Threshold and Load Envelope]
+### 5.2 NFR-REL-01: [Availability / Consistency Invariant]
 ```
 
-### 3.2 Software Design Description (SDD) Blueprint
+### 3.2 DOC-2: Software Design Description (SDD) Blueprint
 
 ```markdown
-# Software Design Description: [System / Subsystem Name]
+# Software Design Description: [System Name]
 
-## 1. Architectural Thesis & Constraints
-### 1.1 Problem Statement & Thesis
-### 1.2 Architectural Constraints & Workload Envelope
+## 1. Architectural Thesis & Workload Envelope
+### 1.1 THS-[DOMAIN]-01: Problem Statement & Technical Thesis
+### 1.2 Accepted Constraints & Multi-Criteria Trade-Offs (>= 3 Axes)
 
-## 2. System Architecture & Container Topology
-### 2.1 Context Overview (C4 Level 1)
-### 2.2 Container Decomposition (C4 Level 2)
+## 2. System Topology (Two-Tier C4 <= 9 Nodes Each)
+### 2.1 TOP-[DOMAIN]-01: System Context Overview (Tier 1)
+### 2.2 TOP-[DOMAIN]-02: Container Decomposition (Tier 2)
 
-## 3. Component Design & Dynamic Interactions
-### 3.1 Ingestion Service Architecture
-### 3.2 State Persistence Engine
+## 3. Component Design & Interface Contracts
+### 3.1 CMP-[SUBSYS]-01: [Component Name]
+- Upstream Links: `FR-...`, `BR-...`
 
-## 4. Data Storage & Schema Design
-### 4.1 Relational Schema & Partitioning Strategy
-### 4.2 Caching Strategy & Eviction Invariants
+## 4. Persistent Storage & Caching Strategy
+### 4.1 DAT-[DOMAIN]-01: Data Partitioning & Consistency Invariants
 
-## 5. System Breaking Point & Capacity Limits
-### 5.1 Maximum Sustainable Throughput
-### 5.2 Failure Modes at Resource Saturation
+## 5. Requirement Traceability Matrix (RTM)
+
+## 6. System Breaking Point & Capacity Saturation Limits
+### 6.1 BRK-[DOMAIN]-01: Maximum Sustainable Envelope & Degradation Thresholds
 ```
 
-### 3.3 Architectural Decision Record (ADR) Blueprint
+### 3.3 DOC-3: Architecture Decision Record (ADR) Blueprint
 
 ```markdown
 # ADR-[NNNN]: [Short Decision Title]
 
-## Status
-[Proposed | Accepted | Deprecated | Superseded by ADR-XXXX]
+## 1. Status & Metadata
+- Status: [Proposed | Accepted | Deprecated | Superseded by ADR-XXXX]
+- Scope: [Target Subsystem / Pipeline]
 
-## Context & Problem Statement
-[Describe the technical context, environmental constraints, and specific architectural challenge.]
+## 2. Context, Workload & Decision Drivers
+### 2.1 THS-[DOMAIN]-01: Technical Thesis & Problem Constraints
+### 2.2 DRV-[DOMAIN]-01: Quantified Decision Drivers
 
-## Decision Drivers
-- Latency threshold (< 10ms P99)
-- Infrastructure operational cost budget
-- Team operational familiarity
+## 3. Considered Options & Multi-Criteria Trade-Off Matrix
+| Criterion | Option A | Option B | Option C |
+| :--- | :--- | :--- | :--- |
+| P99 Latency at Target Load | ... | ... | ... |
+| Consistency / Replay Guarantee | ... | ... | ... |
+| Operational Complexity & Cost | ... | ... | ... |
 
-## Considered Options
-1. Option A: [Description]
-2. Option B: [Description]
-3. Option C: [Description]
+## 4. Decision Outcome & Disqualification Rationale
+### 4.1 DEC-[DOMAIN]-01: Selected Architecture
+### 4.2 ALT-[DOMAIN]-01: Rejected Alternatives & Disqualification Criteria (>= 2 Options)
 
-## Multi-Criteria Decision Matrix
-| Evaluation Criteria | Option A | Option B | Option C |
-|---|---|---|---|
-| P99 Retrieval Latency | 3.2 ms | 12.5 ms | 28.0 ms |
-| Storage Operational Cost | High ($1.2k/mo) | Low ($250/mo) | Moderate ($600/mo) |
-| Operational Complexity | Minimal | High | Moderate |
-
-## Decision Outcome
-Chosen Option: [Option A], because [clear technical rationale based on decision drivers].
-
-## Consequences & Trade-Offs
-- Positive: [Guaranteed latency under peak load]
-- Negative: [Increased memory consumption requiring strict eviction monitoring]
-- Neutral: [Requires introducing a new Redis Sentinel cluster]
+## 5. Consequences, Breaking Point & Re-Evaluation Triggers
+### 5.1 CON-[DOMAIN]-01: Positive, Negative & Neutral Realities
+### 5.2 BRK-[DOMAIN]-01: Quantitative Breaking Point (Scale Threshold Requiring Re-Architecture)
 ```
 
-### 3.4 Request for Comments (RFC) Blueprint
+### 3.4 DOC-4: Request for Comments (RFC) Blueprint
 
 ```markdown
-# RFC-[NNNN]: [Proposed Technical Feature / Architectural Evolution]
+# RFC-[NNNN]: [Proposed Technical Feature or Architectural Evolution]
 
-## 1. Summary & Motivation
-### 1.1 Executive Summary
-### 1.2 Motivation & Current Pain Points
+## 1. Summary, Thesis & Motivation
+### 1.1 THS-[DOMAIN]-01: Technical Thesis & Workload Envelope
+### 1.2 Current Bottlenecks & Pain Points
 
-## 2. Proposed Technical Design
-### 2.1 Architectural Overview & System Impact
-### 2.2 Interface Contracts & Protocol Specifications
-### 2.3 Data Storage & Migration Strategy
+## 2. Proposed Design & Contracts
+### 2.1 PROP-[DOMAIN]-01: Topology Impact (<= 9 Nodes per Diagram + Contract Table)
+### 2.2 PROP-[DOMAIN]-02: Protocol & Schema Changes
 
-## 3. Multi-Phase Implementation Plan
-### 3.1 Phase 1: Prototype & Dark Launch
-### 3.2 Phase 2: Canary Deployment (5% Traffic)
-### 3.3 Phase 3: Full Production Migration & Deprecation
+## 3. Phased Rollout, Compatibility & Rollback Plan
+### 3.1 ROL-[DOMAIN]-01: Phase 1 Dark Launch / Canary
+### 3.2 ROL-[DOMAIN]-02: Phase 2 Full Migration & Deprecation Window
 
-## 4. Operational & Security Considerations
-### 4.1 Observability, Metrics & Alerting
-### 4.2 Security Threat Analysis & Mitigation
+## 4. Security, Resilience & Trade-Off Analysis
+### 4.1 Security Threats & Trade-Off Matrix (>= 3 Axes)
+### 4.2 BRK-[DOMAIN]-01: Quantitative Breaking Point & Saturation Threshold
 
-## 5. Alternative Designs Considered
-### 5.1 Rejected Alternative A & Disqualification Criteria
-### 5.2 Rejected Alternative B & Disqualification Criteria
-
-## 6. Open Questions & Unresolved Decisions
-- [ ] Question 1: [Specific technical uncertainty]
-- [ ] Question 2: [Hardware allocation constraint]
+## 5. Rejected Alternatives & Open Questions
+### 5.1 ALT-[DOMAIN]-01: Disqualified Options (>= 2 Options)
+### 5.2 Unresolved Review Questions
 ```
 
-### 3.5 Technical Report & Benchmark Evaluation Blueprint
+### 3.5 DOC-5: Technical Report & Benchmark Evaluation Blueprint
 
 ```markdown
-# Technical Report: [System / Subsystem Performance & Benchmark Evaluation]
+# Technical Report: [System Performance & Benchmark Evaluation]
 
-## 1. Executive Summary & Objectives
-### 1.1 Objective of Evaluation
-### 1.2 Key Findings Summary Table
+## 1. Executive Thesis & Findings Summary
+### 1.1 HYP-[TOPIC]-01: Evaluation Hypothesis & Workload Envelope
+### 1.2 FIND-[TOPIC]-01: Key Quantitative Findings
 
-## 2. Test Environment & Harness Specification
-### 2.1 Hardware, Kernel & OS Parameters
-### 2.2 Network Topology & Bandwidth Capacity
-### 2.3 Software Versions & Deployment Topology
+## 2. Reproducible Test Environment & Methodology
+### 2.1 ENV-[TOPIC]-01: Hardware, Kernel & Network Topology
+### 2.2 ENV-[TOPIC]-02: Software Versions & Harness Configuration
+### 2.3 Workload Methodology & Synthetic Traffic Profile
 
-## 3. Benchmark Methodology & Workload Profile
-### 3.1 Test Scenarios & Synthetic Traffic Profiles
-### 3.2 Measurement Tools & Telemetry Instrumentation
+## 3. Quantitative Results & Percentile Distributions
+### 3.1 Throughput vs Latency (`P50`, `P95`, `P99`, Error Rate)
+### 3.2 BRK-[TOPIC]-01: Resource Saturation & Breaking Point
 
-## 4. Quantitative Results & Percentile Distributions
-### 4.1 Throughput vs Latency Profile (RPS, P50, P95, P99)
-| Concurrency (Threads) | Target RPS | Achieved RPS | P50 (ms) | P95 (ms) | P99 (ms) | Error Rate (%) |
-|---|---|---|---|---|---|---|
-| 50 | 5,000 | 4,998 | 1.8 | 4.2 | 8.5 | 0.00% |
-| 200 | 20,000 | 19,840 | 3.5 | 9.1 | 18.2 | 0.02% |
-| 500 | 50,000 | 34,200 | 18.4 | 82.0 | 240.0 | 4.15% |
-
-### 4.2 Resource Saturation Profiling (CPU, Memory, Disk IOPS)
-
-## 5. Engineering Analysis & Recommendations
-### 5.1 System Breaking Point & Bottleneck Identification
-### 5.2 Architectural Tuning Recommendations
+## 4. Engineering Recommendations
+### 4.1 REC-[TOPIC]-01: [Actionable Recommendation Title]
 ```
 
-### 3.6 Incident Postmortem / Root Cause Analysis Blueprint
+### 3.6 DOC-6: Incident Postmortem / Root Cause Analysis Blueprint
 
 ```markdown
-# Incident Postmortem: [Date] - [Outage Summary Name]
+# Incident Postmortem: [YYYY-MM-DD] - [Incident Summary]
 
-## 1. Incident Metadata
-- Severity: SEV-1
-- Incident Date: YYYY-MM-DD
-- Incident Duration: 1h 42m (14:10 UTC - 15:52 UTC)
-- Impact: 14,200 payment transactions rejected (2.4% daily volume)
-- Incident Commander: [Name / Role]
+## 1. Incident Overview & Metadata
+### 1.1 INC-[YYYYMM]-01: Severity, Window & SLA Impact
+- Severity: [SEV-1 | SEV-2]
+- Window: [YYYY-MM-DD HH:MM UTC to HH:MM UTC]
+- Quantified User Impact: [Rejected requests / Error rate / SLA breach]
 
-## 2. User-Facing Impact & SLA Assessment
-[Detailed impact description including error rates, degraded customer journeys, and SLA penalty implications.]
+## 2. Chronological Incident Timeline (UTC)
 
-## 3. Chronological Incident Timeline (UTC)
-- 14:10 UTC: Deployment v2.14.0 promoted to 100% production traffic.
-- 14:15 UTC: Ingestion P99 latency alerts fire (Threshold > 500ms).
-- 14:22 UTC: On-call engineer pages Incident Commander; triage initiated.
-- 14:38 UTC: Root cause identified as connection pool starvation in Auth Proxy.
-- 14:45 UTC: Rollback initiated to v2.13.9 via canary pipeline.
-- 15:52 UTC: All connection pools normalized; error rates return to 0.00%.
+## 3. Root Cause Analysis
+### 3.1 RCA-[TOPIC]-01: 5-Whys Causal Chain & Fault Propagation Diagram
 
-## 4. Root Cause Analysis (5-Whys)
-1. Why did payment requests fail? Database connection pools were completely exhausted.
-2. Why were connection pools exhausted? Auth Proxy held open synchronous connections during slow external token lookups.
-3. Why did external token lookups slow down? Third-party identity provider experienced packet drop.
-4. Why did slow third-party calls block the main pool? Connection timeouts were set to 30 seconds with no circuit breaker.
-5. Why were timeouts set to 30s without circuit breaking? Default client library configuration was deployed without resilience testing.
+## 4. Systemic Factors: Went Well, Went Poorly & Luck
 
-## 5. What Went Well, What Went Poorly & Luck Factors
-- Went Well: Automated rollback script executed cleanly without data corruption.
-- Went Poorly: Alert threshold took 7 minutes to page on-call due to noisy alert grouping.
-- Luck: Incident occurred during low-traffic window, avoiding complete upstream queue overflow.
-
-## 6. Corrective & Preventative Action Items
-| Action Item | Type | Priority | Owner | Target Date | Tracking Ticket |
-|---|---|---|---|---|---|
-| Configure 2s timeout and circuit breaker on Auth Proxy | Prevent | P0 | NetSec Team | YYYY-MM-DD | SEC-402 |
-| Decouple alert notification from composite cluster metric | Detect | P1 | SRE Team | YYYY-MM-DD | SRE-891 |
-| Conduct chaos test for third-party token service latency | Mitigate | P2 | QA Team | YYYY-MM-DD | QA-105 |
+## 5. Preventative & Corrective Action Matrix
+| UID | Action | Type | Priority | Owner | Target Date | Ticket |
+| :--- | :--- | :--- | :---: | :--- | :---: | :--- |
+| `ACT-RES-01` | Configure 2s timeout + circuit breaker | Prevent | P0 | NetSec | YYYY-MM-DD | SEC-402 |
 ```
 
-### 3.7 Requirement Traceability Matrix (RTM) Template
+### 3.7 DOC-7: API Specification & Data Contract Blueprint
 
-All engineering specifications (DOC-1, DOC-2, DOC-7) must maintain bidirectional traceability linking business rules down to automated test cases:
+```markdown
+# API Contract: [Service / Resource Name] (`vX`)
+
+## 1. Endpoint Overview & Authorization
+### 1.1 API-[SUBSYS]-01: [HTTP Method + Resource URI]
+- Transport & Protocol: [REST JSON HTTP/2 | gRPC]
+- Auth & Required Scopes: [OAuth 2.0 Bearer / mTLS + Scope]
+- Idempotency & Rate Limit: [Header + RPS Quota]
+
+## 2. Request Contract
+| Parameter | Location | Type | Nullable | Required | Constraints | Default |
+| :--- | :---: | :--- | :---: | :---: | :--- | :--- |
+| `idempotency_key` | Header | `UUIDv4` | No | Yes | Unique per 24h | None |
+| `amount` | Body | `Decimal String` | No | Yes | `> 0.00`, scale 2 | None |
+
+## 3. Response Schema & Error Matrix (RFC 7807)
+| Field / Status | Type / URI | Nullable / Action | Constraints / Trigger Condition |
+| :--- | :--- | :---: | :--- |
+| `resource_id` | `UUIDv4` | No | Returned on `201 Created` |
+| `422` | `/errors/insufficient-funds` | Retry disabled | Available balance `< amount` |
+
+## 4. Concrete Payload Examples
+```
+
+### 3.8 DOC-8: Operational Runbook / SOP Blueprint
+
+````markdown
+# Runbook: [Operational Procedure or Recovery Title]
+
+## 1. Alert Triggers & Prerequisites
+### 1.1 SOP-[SUBSYS]-01: Symptoms & Firing Thresholds
+- Alert Name: `[AlertIdentifier]`
+- Trigger Threshold: [Numeric SLO breach, e.g., Primary unreachable >= 30s]
+### 1.2 Environment Prerequisites & Privileges
+- Required Access: [SSH / Bastion / DB superuser role]
+- Required CLI Tools: [`pg_ctl`, `systemctl`, `psql`]
+
+## 2. Execution Sequence (Verify Every Step)
+### 2.1 Step 1: [Imperative Action]
+1. Command:
+   ```bash
+   sudo systemctl stop postgresql
+   ```
+2. Verification Check (Expected Output):
+   ```bash
+   systemctl is-active postgresql
+   # Expected stdout: inactive (exit code 3)
+   ```
+3. Rollback Routine (Required for Destructive / State-Changing Steps):
+   ```bash
+   sudo systemctl start postgresql
+   ```
+
+## 3. Escalation Roster & Communication
+| Escalation Tier | Role / Channel | Trigger Condition | SLA |
+| :---: | :--- | :--- | :---: |
+| Tier 1 | Primary On-Call SRE | Initial alert page | <= 5m |
+| Tier 2 | Database Engineering Lead | Verification fails after Step 2 | <= 15m |
+````
+
+### 3.9 Requirement Traceability Matrix (RTM) Template
 
 | Goal ID | Business Rule | Functional Requirement | Use Case ID | Component Module | Automated Test Case | Status |
-|---|---|---|---|---|---|---|
-| BG-01 | BR-FIN-01 | FR-ORD-01 | UC-ORD-01 | PaymentGatewayProxy | `test_idempotent_order_settlement` | PASS |
-| BG-01 | BR-FIN-02 | FR-ORD-02 | UC-ORD-02 | LedgerPersistenceService | `test_ledger_daily_balance_invariant` | PASS |
-| BG-02 | BR-AUTH-01 | FR-AUTH-01 | UC-AUTH-01 | SecurityTokenValidator | `test_fido2_signature_verification` | PASS |
-| BG-03 | BR-INV-01 | FR-INV-01 | UC-INV-01 | InventoryReservationEngine | `test_concurrent_stock_allocation` | PASS |
-| BG-03 | BR-INV-02 | FR-INV-02 | UC-INV-02 | DispatchQueueWorker | `test_dead_letter_queue_redelivery` | PASS |
+| :--- | :--- | :--- | :--- | :--- | :--- | :---: |
+| `BG-ORD-01` | `BR-FIN-01` | `FR-ORD-01` | `UC-ORD-01` | `PaymentGatewayProxy` | `test_idempotent_order_settlement` | PASS |
+| `BG-ORD-01` | `BR-FIN-02` | `FR-ORD-02` | `UC-ORD-02` | `LedgerPersistenceService` | `test_ledger_daily_balance_invariant` | PASS |
+| `BG-AUTH-01` | `BR-AUTH-01` | `FR-AUTH-01` | `UC-AUTH-01` | `SecurityTokenValidator` | `test_fido2_signature_verification` | PASS |
 
-### 3.8 Multi-Criteria Architectural Trade-Off Analysis Matrix Template
+### 3.10 Multi-Criteria Trade-Off Matrix Template
 
-Mandatory for SDD (DOC-2), ADR (DOC-3), and RFC (DOC-4) documents to document engineering compromises:
+| Design Dimension | Evaluated Option A | Evaluated Option B | Selected | Primary Trade-Off Justification |
+| :--- | :--- | :--- | :---: | :--- |
+| State Storage | Redis Cluster | PostgreSQL | Option A | Trades volatile crash-recovery overhead for P99 `< 5 ms` reads. |
+| Ingestion | Long Polling | Push Webhooks | Option B | Cuts idle polling traffic at the cost of tenant health tracking. |
+| Consistency | Sync Replication | Async Replication | Option B | Preserves AZ availability during partitions, trading read freshness. |
 
-| Design Dimension | Evaluated Option A | Evaluated Option B | Selected Option | Primary Trade-Off Justification |
-|---|---|---|---|---|
-| State Storage | Distributed In-Memory Cache (Redis) | Relational Storage (PostgreSQL) | Option A | Accepts volatile crash recovery overhead in exchange for sub-5ms read latency. |
-| Message Ingestion | Pull-Based Long Polling | Push-Based Webhooks | Option B | Eliminates empty query bandwidth consumption at the cost of requiring tenant endpoint health tracking. |
-| Data Consistency | Strong Synchronous Replication | Eventual Asynchronous Replication | Option B | Maximizes availability across availability zones during partition events, trading immediate read freshness. |
-| RPC Transport | REST JSON over HTTP/1.1 | Protocol Buffers over gRPC (HTTP/2) | Option B | Sacrifices human readability in network packet inspections to achieve a 60 percent payload size reduction. |
-
----
-
-## 4. Cross-Linking, Transmutation Rules & Diataxis Lifecycle
-
-### 4.1 Lifecycle Relationship Graph Between Artifacts
-
-Technical documents interact across the entire engineering lifecycle:
+## 4. Lifecycle Graph & Cross-Referencing Discipline
 
 ```mermaid
 flowchart TD
-  SRS["DOC-1: SRS / PRD (Problem: WHAT)"] -->|"Shapes Solution"| SDD["DOC-2: SDD (Solution: HOW)"]
-  SDD -->|"Justifies Design"| ADR["DOC-3: ADR (Decision: WHY)"]
-  SDD -->|"Proposes Major Evolution"| RFC["DOC-4: RFC (Consensus: PROPOSAL)"]
+  SRS["DOC-1: SRS / PRD (WHAT)"] -->|"Shapes Solution"| SDD["DOC-2: SDD (HOW)"]
+  SDD -->|"Justifies Choice"| ADR["DOC-3: ADR (WHY)"]
+  SDD -->|"Proposes Evolution"| RFC["DOC-4: RFC (PROPOSAL)"]
   RFC -->|"Approved Design Feeds"| SDD
-  SDD -->|"Exposes Contract"| API["DOC-7: API Spec (Integration: CONTRACT)"]
-  SDD -->|"Operationalized By"| RUN["DOC-8: Runbook (Execution: PROCEDURE)"]
-  SDD -->|"Empirically Validated By"| TR["DOC-5: Tech Report (Empirical: BENCHMARK)"]
-  RUN -->|"Fails During Outage"| RCA["DOC-6: Postmortem (Retrospective: RCA)"]
-  RCA -->|"Corrective Actions Feed"| RFC
-  RCA -->|"Rule Changes Feed"| SRS
+  SDD -->|"Exposes Contract"| API["DOC-7: API Spec (CONTRACT)"]
+  SDD -->|"Operationalized By"| RUN["DOC-8: Runbook (PROCEDURE)"]
+  SDD -->|"Validated By"| TR["DOC-5: Tech Report (BENCHMARK)"]
+  RUN -->|"Fails in Outage"| RCA["DOC-6: Postmortem (RCA)"]
+  RCA -->|"Actions Feed"| RFC
+  RCA -->|"Invariant Changes"| SRS
 ```
 
-### 4.2 Cross-Referencing Discipline
-
-1. **Zero Redundant Copying**:
-   When an SDD references a business invariant or an API schema references a domain rule, cite the unique identifier (such as `BR-FIN-01` or `FR-ORD-02`). Do not copy the full narrative text from the SRS.
-
-2. **Backward Traceability**:
-   Every design component in an SDD, every endpoint in an API Spec, and every proposed change in an RFC must cite the upstream requirement identifier it implements. Artifacts lacking upstream justification are classified as architectural bloat.
-
-3. **Closed-Loop Remediation**:
-   Every corrective action item in a Postmortem (DOC-6) must result in a tracked issue that updates either the system requirements (DOC-1), the architectural safeguards (DOC-2), or the operational runbooks (DOC-8).
-
-4. **Document Self-Containment & Zero Unsolicited External Referencing**:
-   Every technical engineering document must be self-contained within its declared scope and abstraction level. Authors must never deflect specification responsibilities by referring to unprovided external documents in the body of the text (e.g., "see detailed database design in Document X"). Cross-document references are permitted ONLY when explicitly requested by the user or required by standardized formal templates (such as IEEE SRS References). When permitted, all external citations must be isolated 100% within a dedicated `## References` or `## Tài liệu tham khảo` section. Unrequested external document mentions in body text must equal 0.
-
-5. **Context Deduplication Across Hierarchical Sections**:
-   Sub-sections within a document automatically inherit the high-level system context established in parent sections. Authors must never repeat high-level project goals, business problem narratives, or system definitions in the opening sentences of sub-sections. Every sub-section must enter directly with local technical facts, entities, parameters, or schema constraints.
-
-6. **Global Consistency & Value Preservation during Evolution**:
-   When editing, updating, or refactoring existing technical documentation, authors must perform an end-to-end blast radius analysis across the document lifecycle. Edits must never degrade previously established high-rigor specifications, detailed numerical metrics, or verified architectural diagrams to resolve a narrow localized feedback item ("càng sửa càng sai"). Retain all optimal, compliant content and surgically update only invalid or outdated sections. If proposed modifications carry cascading risks or require breaking architectural compromises, summarize the blast radius and align the proposed resolution with stakeholders/users prior to modifying the document.
-
+1. **Zero Redundant Copying**: SDDs, API specs, and RFCs cite upstream requirement UIDs (`BR-FIN-01`, `FR-WAL-02`) rather than duplicating SRS narratives.
+2. **Backward Traceability**: Every component, endpoint, and RFC change cites an upstream goal or requirement UID; artifacts lacking upstream justification are rejected as scope bloat.
+3. **Closed-Loop Remediation**: Every Postmortem action item (`ACT-xxx`) tracks to an update in `DOC-1`, `DOC-2`, or `DOC-8`.
+4. **Document Self-Containment**: Keep the document self-contained within its abstraction layer without deflecting responsibility in body text (`refer to Document X for schema`); isolate requested citations inside `## References`.
+5. **Evolution Blast Radius & Value Preservation**: Trace cascading impacts across the lifecycle graph before modifying an existing document; preserve verified quantitative thresholds and align breaking trade-offs with stakeholders before rewriting.

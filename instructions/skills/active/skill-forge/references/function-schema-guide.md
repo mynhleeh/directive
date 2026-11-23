@@ -1,19 +1,15 @@
-﻿# Function & Tool Schema Guide
+# Function & Tool Schema Guide
 
 A reference for writing high-quality function and tool definitions across AI platforms.
-
----
 
 ## Overview
 
 Function and tool schemas allow AI models to call external functions. Each platform uses a similar structure based on JSON Schema, with minor differences in field names and wrapper formats.
 
----
-
 ## Platform Comparison Matrix
 
 | Feature | OpenAI | Anthropic | MCP | Gemini |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | **Root wrapper** | `type: "function"` + `name` | `name` (direct) | `name` (direct) | `name` (direct) |
 | **Schema field** | `parameters` | `input_schema` | `inputSchema` | `parameters` |
 | **Strict mode** | `strict: true` | Use `required` arrays | Not applicable | Not applicable |
@@ -22,8 +18,6 @@ Function and tool schemas allow AI models to call external functions. Each platf
 | **Required field** | In `parameters.required` | In `input_schema.required` | In `inputSchema.required` | In `parameters.required` |
 | **Output schema** | Not native | Not native | `outputSchema` (optional) | Not native |
 | **Protocol** | REST API | REST API | JSON-RPC 2.0 | REST API |
-
----
 
 ## OpenAI Function Schema
 
@@ -53,7 +47,14 @@ Function and tool schemas allow AI models to call external functions. Each platf
 }
 ```
 
----
+## Tool Call Wire Formats (OpenAI Responses vs Chat)
+
+In the OpenAI Responses API, the model returns a `function_call` item and receives a `function_call_output` item matched by `call_id` (versus Chat Completions `tool_calls` with `function.arguments` and `role: "tool"` matched by `tool_call_id`). Note: `arguments` is a **JSON string** — parse it before use.
+
+```jsonl
+{"type": "function_call", "call_id": "call_abc123", "name": "get_weather", "arguments": "{\"location\": \"Paris, France\", \"units\": \"celsius\"}"}
+{"type": "function_call_output", "call_id": "call_abc123", "output": "{\"temperature\": 22, \"conditions\": \"Sunny\"}"}
+```
 
 ## Anthropic Tool Schema
 
@@ -78,8 +79,6 @@ Function and tool schemas allow AI models to call external functions. Each platf
   }
 }
 ```
-
----
 
 ## MCP Tool Schema
 
@@ -115,8 +114,6 @@ Function and tool schemas allow AI models to call external functions. Each platf
 }
 ```
 
----
-
 ## Gemini Function Schema
 
 ```json
@@ -142,8 +139,6 @@ Function and tool schemas allow AI models to call external functions. Each platf
 
 > **Note**: Gemini uses UPPERCASE type names (`STRING`, `OBJECT`, `ARRAY`, `INTEGER`, `BOOLEAN`, `NUMBER`).
 
----
-
 ## Platform-Agnostic Schema (Recommended Default)
 
 Use this format when the target platform is unknown — it can be converted to any platform with minimal changes:
@@ -168,12 +163,10 @@ Use this format when the target platform is unknown — it can be converted to a
 }
 ```
 
----
-
 ## JSON Schema Type Reference
 
 | Type | Description | Example value |
-|---|---|---|
+| --- | --- | --- |
 | `string` | Text value | `"Paris, France"` |
 | `number` | Decimal number | `3.14` |
 | `integer` | Whole number | `42` |
@@ -182,11 +175,10 @@ Use this format when the target platform is unknown — it can be converted to a
 | `object` | Key-value map | `{"key": "value"}` |
 | `null` | Null value | `null` |
 
----
-
 ## Advanced Schema Features
 
 ### Array with typed items
+
 ```json
 {
   "tags": {
@@ -198,6 +190,7 @@ Use this format when the target platform is unknown — it can be converted to a
 ```
 
 ### Nested object
+
 ```json
 {
   "address": {
@@ -213,6 +206,7 @@ Use this format when the target platform is unknown — it can be converted to a
 ```
 
 ### oneOf / anyOf
+
 ```json
 {
   "value": {
@@ -225,16 +219,15 @@ Use this format when the target platform is unknown — it can be converted to a
 }
 ```
 
----
-
 ## Writing Quality Descriptions
 
 ### For the tool itself:
+
 - Explain **what it does** (the capability)
 - Explain **when to call it** (the trigger condition)
 - Mention any **important limitations**
 
-```
+```text
 ✅ "Retrieves current weather data for a location. Use when the user asks about
    weather conditions, temperature, or forecasts. Returns real-time data."
 
@@ -242,22 +235,22 @@ Use this format when the target platform is unknown — it can be converted to a
 ```
 
 ### For each parameter:
+
 - Explain **what value to provide**
 - Include **format** if non-obvious
 - Note **value constraints** (min/max, allowed values, examples)
 
-```
+```text
 ✅ "City and country in the format 'City, Country', e.g. 'Tokyo, Japan'.
    Required for disambiguation when multiple cities share a name."
 
 ❌ "The location."
 ```
 
----
-
 ## Common Tool Pattern Examples
 
 ### Database Query
+
 ```json
 {
   "name": "query_database",
@@ -282,6 +275,7 @@ Use this format when the target platform is unknown — it can be converted to a
 ```
 
 ### Knowledge Base Search
+
 ```json
 {
   "name": "search_documents",
@@ -310,8 +304,6 @@ Use this format when the target platform is unknown — it can be converted to a
 }
 ```
 
----
-
 ## Checklist for Quality Tool Definitions
 
 Run as a **stranger-review** — separate re-read after writing; each item PASS/FAIL with evidence; re-check failed items after fixes (max 2 iterations).
@@ -329,67 +321,19 @@ Run as a **stranger-review** — separate re-read after writing; each item PASS/
 - [ ] No sensitive data (passwords, keys) in descriptions
 - [ ] Tested that the model invokes the tool as expected
 
----
+## MCP Server Implementation (Delegated)
 
-## MCP Tool Conventions (from anthropics)
-
-MCP tools follow a stricter, more structured pattern than plain function schemas. Distilled and applied here.
-
-### Naming
-- **Action-prefixed**: verbs first (`search_documents`, `create_contact`, `send_email`), so models can infer intent at a glance. Avoid noun-only names.
-
-### Implied via Zod/Pydantic in generated MCP servers
-When emitting an MCP server tool (Python/TypeScript), the schema is usually derived from a validated model. Two common flavors:
-
-```python
-from pydantic import BaseModel, Field
-
-class Contact(BaseModel):
-    name: str = Field(..., description="Full name", min_length=1, max_length=100)
-    email: str = Field(..., description="Valid email address")
-```
-
-```typescript
-// Zod equivalent
-const SearchSchema = z.object({
-  query: z.string().describe("Natural language search query"),
-});
-```
-
-### `outputSchema`
-MCP tools can declare an **output schema** separate from the input schema, so the model knows the shape of the return value before calling:
-
-```json
-{
-  "name": "get_weather",
-  "inputSchema": { "type": "object", "properties": { "location": {"type": "string"} }, "required": ["location"] },
-  "outputSchema": {
-    "type": "object",
-    "properties": {
-      "temperature": {"type": "number"},
-      "conditions": {"type": "string"}
-    }
-  }
-}
-```
-
-### Actionable errors
-MCP tool errors should be descriptive and include a fix hint:
-
-```
-❌ "Error: something went wrong."
-✅ "Error: Contact not found for email 'foo@bar.com'. Check the email, or create a new contact first."
-```
-
----
+When building a full Python FastMCP or TypeScript MCP server (Pydantic or Zod model derivation, transport wiring, and handlers), invoke the `mcp-builder` skill resolved dynamically in the active runtime workspace (`.agents/`, `.claude/`, `.codex/`).
+Keep this guide scoped to standalone JSON schema authoring, cross-platform conversion, Loss Audit, Round-Trip Test, and `Prompt.txt` + `Tools.json` pairing.
+For standalone MCP schemas, use action-prefixed verb-first names, declare `outputSchema` when return shapes matter, and write actionable error messages (what failed + how to fix).
 
 ## `Prompt.txt` + `Tools.json` Pairing
 
 A common MCP/agent convention is to pair a **prompt** (the descriptive instructions for the agent) with a **tool registry** (the machine-readable tool definitions). When the target is a shared agent resource (not a single function call), emit both:
 
 | File | Purpose | Example content |
-|---|---|---|
+| --- | --- | --- |
 | `Prompt.txt` | Human/agent-facing description of the workflow | Natural-language guidance on when/what to do |
 | `Tools.json` | Machine-readable tool definitions | JSON Schema array of the server's tools |
 
-> **Rule**: When you emit a packaged agent resource, keep `Prompt.txt` and `Tools.json` in sync — the tools listed in the prompt must be the same set defined in the JSON. This mirrors the single-source → multi-format sync rule from `rules-guide.md`.
+> **Rule**: When you emit a packaged agent resource, keep `Prompt.txt` and `Tools.json` in sync — the tools listed in the prompt must be the same set defined in the JSON. This mirrors the single-source -> multi-format sync rule from `rules-guide.md`.

@@ -1,8 +1,6 @@
-﻿# System Prompt Guide
+# System Prompt Guide
 
 A guide for writing high-quality system prompts, with templates for all major platforms.
-
----
 
 ## What Is a System Prompt?
 
@@ -13,20 +11,16 @@ A system prompt is the highest-level instruction set, executed before any user m
 - **Tone & Style**: How it communicates
 - **Context**: The environment it operates in
 
----
-
 ## Platform Comparison
 
 | Feature | Claude (Anthropic) | GPT (OpenAI) | Gemini (Google) |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | System field | `system` (top-level param) | `messages[{role:"system"}]` | `systemInstruction` |
 | XML tags | First-class support | Treated as plain text | Partially supported |
 | Token limit | ~200k context window | Model-dependent | Model-dependent |
 | Tone default | Thoughtful, nuanced | Direct, helpful | Helpful, versatile |
 | Instruction following | Very literal (latest models) | Strong | Strong |
 | Role playing | Excellent | Good | Good |
-
----
 
 ## Platform-Agnostic Structure (Recommended Default)
 
@@ -49,14 +43,12 @@ Use this when the target platform is unknown or when portability matters:
 [Edge cases, tools, context-specific behavior]
 ```
 
----
-
 ## Cross-Platform Anatomy (What Every System Prompt Contains)
 
 Regardless of platform, every quality system prompt encodes the same five slots. This is the universal anatomy that underlies all platform-specific templates below:
 
 | Slot | Question it answers | Must be |
-|---|---|---|
+| --- | --- | --- |
 | **Role & Identity** | Who are you? | Specific, named persona |
 | **Capabilities** | What can you do? | Actionable, bounded |
 | **Constraints** | What must you NOT do? | Concrete, specific actions |
@@ -65,51 +57,48 @@ Regardless of platform, every quality system prompt encodes the same five slots.
 
 > A system prompt is **complete** only when all five slots are filled. Missing any one produces a generic or unreliable agent.
 
----
-
 ## Agent vs. Assistant Distinction
 
 A system prompt's shape differs sharply based on whether the target behaves as an **assistant** (conversational, single-turn answers) or an **agent** (autonomous, multi-step, tool-using loop).
 
 | Dimension | Assistant | Agent |
-|---|---|---|
+| --- | --- | --- |
 | **Goal** | Answer well | Complete a task autonomously |
-| **Loop** | Single turn → respond | Plan → act → observe → repeat |
+| **Loop** | Single turn -> respond | Plan -> act -> observe -> repeat |
 | **Tools** | Optional | Core; must know when/how to call |
 | **Planning** | Rarely explicit | Must state a plan, then execute |
 | **Verification** | Light | Chain-of-verification / self-check loops |
 | **Guardrails** | Tone + accuracy | Safety checks per action, approval gates |
 
 ### Agent system prompt components
+
 - **Tool contract** — which tools exist, their schemas, when to use each.
 - **Execution loop** — plan, act, evaluate interleaved.
 - **Verification & safety** — approval gates, error interception, conditional execution.
 - **Stop conditions** — when to declare done (vs. loop again).
 
 ### Assistant system prompt components
+
 - Persona + tone + format.
 - Capabilities + constraints.
 - Escalation rules (e.g., when to hand off to a human).
 
 > **Rule**: Route the generated system prompt to the agent path if it needs tools, a loop, or autonomous multi-step work; otherwise use the assistant path.
 
----
-
 ## XML vs. Markdown Serialization
 
 Different platforms handle structure differently. Serialization is a *delivery* choice — the anatomy stays the same.
 
 | Serialization | Platforms | Best for |
-|---|---|---|
+| --- | --- | --- |
 | **XML tags** (`<identity>...`) | Claude (first-class) | Structured, well-delimited sections; strong parsing |
 | **Markdown headers** (`## Role & Identity`) | Platform-agnostic, OpenAI, Gemini, AGY | Portability, human-readable |
 | **JSON blocks** | Gemini | Rule-based parsing, structured config |
 
 ### Choosing a serialization
+
 - **Weigh portability vs. fidelity.** XML delimiters are the most robust for Claude but less portable. Markdown is the recommended default for platform-agnostic output.
 - **Aim for structure the platform parses well.** If targeting Claude specifically, prefer XML for high-consequence sections (constraints, security rules).
-
-
 
 ## Claude-Optimized Structure
 
@@ -147,11 +136,9 @@ Always:
 </context>
 ```
 
----
-
 ## OpenAI-Optimized Structure
 
-```
+```text
 [Role Statement]
 You are [name], a [role] for [application/company].
 
@@ -174,11 +161,9 @@ Do not:
 [Relevant background information]
 ```
 
----
-
 ## Gemini-Optimized Structure
 
-```
+```yaml
 role: "[Role name and description]"
 
 capabilities:
@@ -193,12 +178,11 @@ tone: "[Professional/Friendly/etc.]"
 context: "[Application context]"
 ```
 
----
-
 ## Real-World System Prompt Templates
 
 ### Customer Support Bot
-```
+
+```text
 You are Alex, a customer support specialist for TechCorp, a software company.
 
 Your role: Help customers with product questions, troubleshooting, billing issues,
@@ -222,7 +206,8 @@ Use numbered steps for procedures.
 ```
 
 ### Coding Assistant
-```
+
+```text
 You are a senior software engineer with expertise in Python, TypeScript, and system design.
 
 When helping with code:
@@ -241,7 +226,8 @@ Constraints:
 ```
 
 ### Creative Writing Assistant
-```
+
+```text
 You are a creative writing coach with expertise in fiction, narrative structure,
 and character development.
 
@@ -260,13 +246,11 @@ You can:
 Tone: Enthusiastic, supportive, and creative. Use vivid language yourself.
 ```
 
----
-
 ## Language-Aware System Prompts
 
 When building multilingual assistants, add explicit language guidance:
 
-```
+```markdown
 # Language Policy
 Respond in the same language the user writes in.
 If the user writes in French, respond in French.
@@ -275,12 +259,11 @@ If the language is unclear, ask one question (default option: English).
 ```
 
 Or for a fixed language:
-```
+
+```markdown
 # Language
 Always respond in English, regardless of the language the user writes in.
 ```
-
----
 
 ## Quality Checklist
 
@@ -296,12 +279,10 @@ Before finalizing a system prompt:
 - [ ] **Language policy**: Is the language behavior specified?
 - [ ] **Tested**: Have you tested with 5+ diverse user inputs?
 
----
-
 ## Common Mistakes
 
 | Mistake | Problem | Fix |
-|---|---|---|
+| --- | --- | --- |
 | "Be helpful" | Too vague to act on | Specify what "helpful" means in this context |
 | Very long prompts | Instructions get diluted | Prioritize; put the most important instructions first |
 | No persona | Model behaves generically | Give a name and specific identity |
@@ -309,3 +290,10 @@ Before finalizing a system prompt:
 | No format guidance | Inconsistent outputs | Specify length, structure, and style |
 | Contradictory rules | Model picks one arbitrarily | Resolve all conflicts explicitly |
 | Missing language policy | Responds in wrong language | Add explicit language instruction |
+
+## High-Signal Prompting Patterns
+
+- **Few-Shot `<examples>` Wrapper:** Wrap `2-5` diverse, neutral I/O pairs in `<examples><example><input>...</input><output>...</output></example></examples>` to steer output format, tone, and edge-case handling.
+- **Long-Context Top-Load (`20k+` tokens):** Place source documents at the top of the prompt above instructions, examples, and queries inside `<documents><document index="N"><source>...</source><document_content>...</document_content></document></documents>` and require quote-grounding before synthesis.
+- **Grounding & Citation Guard:** Instruct the model to answer strictly from provided `<documents>`, cite the specific document index/section, and omit unsupported claims or state `"Not found in provided materials"` when absent.
+- **Adaptive vs. Manual Reasoning:** Prefer model-native adaptive thinking (guided by `effort` and query complexity) on modern reasoning models; fall back to explicit `<thinking>...</thinking><answer>...</answer>` delimiters only when native reasoning is unavailable or an audit trace is required. For Claude-specific SDK migration and prompt cruft cleanup, invoke the companion `claude-api` skill (`prompt-audit`).

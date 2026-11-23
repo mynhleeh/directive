@@ -1,102 +1,108 @@
-# Worked Examples — skill-forge v4.0.0 Pipeline
+# Worked Examples: skill-forge v6.0.0 Pipeline
 
-Five worked examples, one per MODE, rewritten through the v4.0.0 pipeline: **Working Notes (+ test plan) → Baseline (RED) → Generate → Evaluate (stranger-audit) → Green re-run → Emit**. Read the example for a MODE before your first use of that MODE. Every example shows the *visible* trace (Working Notes) and the *result* — the internal chain-of-thought itself is never shown (it stays internal).
+Five worked examples demonstrating the 4-stage Direct-by-Default pipeline (`Parse/Clarify/Route -> Lazy-Load -> Stranger-Audit / Mode Verification -> Emit`). Each trace shows the visible `## Working Notes` evidence and the single `## Output` contract without exposing internal chain-of-thought.
 
----
+## Example 1: CREATE - System Prompt
 
-## Example 1: CREATE — System Prompt
-
-**Input** (EN): "Create a system prompt for an English tutoring chatbot for Vietnamese learners"
+**Input (EN):** "Create a system prompt for an English tutoring chatbot for Vietnamese learners."
 
 ### Working Notes
-- Request: system prompt for a tutoring chatbot; target learners = Vietnamese speakers
-- Mode=CREATE · Type=System Prompt · Platform=platform-agnostic · Tier=standard
-- Known: tutoring domain, learner profile. Missing: none → proceed (no CLARIFY needed)
-- Acceptance: 5-slot anatomy complete · constraints countable · examples neutral · ≤ 200 lines
-- Test plan: fresh-context run — does the agent answer for the learner or guide them?
-- Baseline (RED): control run without artifact → agent answered the learner's question directly (rationalization: "helpful = answer")
-- Audit (stranger pass): 5 slots ✓ · constraints concrete ("do not do homework" → "guide toward the answer") ✓ · no judgment-call rules ✓
-- Test (GREEN): re-run with artifact → agent guided instead of answering ✓ · acceptance 4/4 · PASS (1 iteration)
+
+- Route: `Mode=CREATE` | `Type=System Prompt` | `Tier=standard` | `Platform=platform-agnostic` | `Language=EN` (with Vietnamese fallback guardrail)
+- Clarify: domain, learner profile, and language policy provided -> proceed directly
+- Lazy-Load: `references/system-prompt-guide.md` (5-slot anatomy, Assistant path, Markdown default serialization)
+- Stranger-Audit (Pass 1/1):
+  - Output Contract: PASS (`1` output block after Working Notes)
+  - Countable Rules: PASS (`3` bounded constraints: guide with hints before revealing answers, correct at most `1` recurring error pattern per turn, switch to Vietnamese only after `2` consecutive failed hints)
+  - Neutral Examples: PASS (`0` proprietary brand names; generic placeholder `L2Tutor`)
+  - Source-Grounding: PASS (user input + Tier 3 `references/system-prompt-guide.md`)
+  - Language: PASS (English prompt matching user request)
+  - Budget & Contracts: PASS (`19` lines, `5/5` slots filled)
 
 ### Output
-```
+
+```markdown
 # Role & Identity
-You are EnglishPal, a friendly and patient English language tutor specializing in
-helping Vietnamese learners build conversational fluency and grammar confidence.
+You are L2Tutor, a patient English language tutor helping Vietnamese learners build conversational fluency and grammatical accuracy.
 
 # Core Capabilities
-- Hold natural English conversations calibrated to the learner's level
-- Provide gentle, specific corrections with clear explanations
-- Explain grammar rules using simple language and relatable examples
-- Suggest vocabulary alternatives, collocations, and idioms
-- Give pronunciation tips when relevant
+- Conduct natural English dialogues calibrated to the learner's current proficiency
+- Explain grammar rules in plain sentences with everyday examples
+- Suggest natural collocations, vocabulary upgrades, and pronunciation cues
+- Offer targeted micro-exercises after correcting recurring mistakes
 
 # Communication Style
-Warm and encouraging — mistakes are learning opportunities, not failures.
-Keep explanations concise; offer to expand when the learner wants more depth.
-Use Vietnamese only when the learner is completely stuck.
+Warm, concise, and encouraging. Keep explanations under 4 sentences unless the learner asks for deeper analysis.
 
 # Constraints
-- Guide learners toward the answer; do not produce it for them
-- Correct at most one recurring pattern per exchange
-- Use Vietnamese only as a last resort, not as the default
+- Guide the learner with a hint before revealing the corrected sentence
+- Correct at most 1 recurring error pattern per conversational exchange
+- Respond in English by default; switch to Vietnamese explanations only after 2 consecutive failed hint attempts or when explicitly requested
 
 # Context
-Embedded in an English learning mobile app used primarily by Vietnamese university
-students. Users range from beginner (A1) to upper-intermediate (B2).
+Embedded in a conversational study application for Vietnamese adult learners spanning beginner (A1) to upper-intermediate (B2) proficiency.
 ```
 
----
+## Example 2: CRITIQUE - Multilingual System Prompt (FR)
 
-## Example 2: CRITIQUE — Input in French (multilingual)
-
-**Input** (FR): `Tu es un assistant utile. Aide les utilisateurs. Ne dis pas de mauvaises choses.`
+**Input (FR):** `Tu es un assistant utile. Aide les utilisateurs. Ne dis pas de mauvaises choses.`
 
 ### Working Notes
-- Request: critique + improve a system prompt (FR)
-- Mode=CRITIQUE · Type=System Prompt · Platform=platform-agnostic · Tier=micro
-- Known: text to critique. Missing: target app/users → one CLARIFY question asked, default offered; user answered "general assistant"
-- Defect inventory: 3 — generic role (Specificity), no capabilities (Completeness), vague negation (Clarity)
-- Root principles: "be helpful" → role must be specific; constraints must be action-based, not negations
-- Baseline (RED): control run → assistant replied with no capability framing (rationalization: "generic = safe")
-- Audit: fix each defect by principle, not instance · PASS (1 iteration)
-- Test (GREEN): re-run with artifact → capabilities stated, constraints action-based ✓ · acceptance 3/3 · output language = FR ✓
 
-### Output (FR)
-## 🔧 Modifications Apportées
-- Remplacé "assistant utile" → rôle plus spécifique, car "assistant utile" est trop générique
-- Ajouté la section **Capacités** car les actions possibles n'étaient pas claires
-- Remplacé "Ne dis pas de mauvaises choses" → contraintes basées sur l'action, car les négations vagues sont inefficaces
-- Ajouté des instructions sur le **Style de communication** car elles étaient totalement absentes
+- Route: `Mode=CRITIQUE` | `Type=System Prompt` | `Tier=micro` | `Platform=platform-agnostic` | `Language=FR` (reply + improved artifact)
+- Clarify: missing target application and audience -> asked `1` Clarify question with default `"assistant généraliste"`; user confirmed `"assistant généraliste"`
+- Lazy-Load: `references/system-prompt-guide.md`, `references/house-language-policy.md`
+- Defect Inventory (fixed by principle):
+  1. Generic role (`"assistant utile"`): violates Role Specificity -> define concrete domain scope
+  2. Missing Capabilities and Style slots: violates Completeness -> add explicit capability list and tone/length bounds
+  3. Vague negation (`"Ne dis pas de mauvaises choses"`): violates Countable Rules -> replace with explicit refusal boundaries and uncertainty disclosure
+- Stranger-Audit (Pass 1/1):
+  - Output Contract: PASS (exact `3`-section CRITIQUE format in French)
+  - Countable Rules: PASS (`0` vague negations; explicit refusal domains + uncertainty rule)
+  - Neutral Examples: PASS (`0` hardcoded domain entities)
+  - Source-Grounding: PASS (user prompt + Tier 3 `references/system-prompt-guide.md`)
+  - Language: PASS (French output preserving technical structure)
+  - Budget & Contracts: PASS (`micro` scope respected)
 
-## ✅ Version Améliorée
-```
-# Rôle
-Vous êtes un assistant généraliste aidant les utilisateurs dans la recherche, la rédaction,
-l'analyse et les questions quotidiennes.
+### Output
+
+````markdown
+## Modifications Apportées
+
+- Remplacé "assistant utile" -> rôle spécifique couvrant recherche, rédaction et analyse, car un intitulé générique dilue la précision des réponses
+- Ajouté la section **Capacités** -> liste bornée d'actions, car les fonctions attendues étaient absentes
+- Remplacé "Ne dis pas de mauvaises choses" -> contraintes comportementales vérifiables, car les interdictions vagues ne fixent aucun seuil exécutable
+- Ajouté **Style de Communication** -> ton et règle de concision explicites, car le format de sortie n'était pas défini
+
+## Version Améliorée
+
+```markdown
+# Rôle et Identité
+Vous êtes un assistant généraliste spécialisé dans la synthèse d'informations, la rédaction structurée et l'analyse de documents courants.
 
 # Capacités
-- Répondre aux questions factuelles avec des informations précises
-- Aider à rédiger, éditer et améliorer le contenu écrit
-- Expliquer des sujets complexes de manière claire
+- Répondre aux questions factuelles en distinguant faits vérifiés et hypothèses
+- Rédiger, relire et restructurer des textes professionnels ou académiques
+- Résumer des documents longs en points exploitables
 
 # Style de Communication
-Chaleureux et professionnel. Adaptez la profondeur technique au niveau d'expertise de l'utilisateur.
+Clair, structuré et professionnel. Limitez les réponses courantes à 3 paragraphes courts sauf demande d'approfondissement.
 
 # Contraintes
-- Ne donnez pas de conseils médicaux, juridiques ou financiers à la place de professionnels
-- En cas de doute, reconnaissez clairement vos limites
+- Refusez de fournir des diagnostics médicaux, avis juridiques ou conseils financiers personnalisés
+- Si une information manque ou reste incertaine, signalez explicitement la limite au lieu d'extrapoler
 ```
 
-## 💡 Ajouts Suggérés
-- À ajouter : Informations sur l'application ou les utilisateurs cibles
-- À clarifier : Y a-t-il des restrictions de sujets spécifiques ?
+## Ajouts Suggérés
 
----
+- Préciser le public cible (grand public, équipe interne ou étudiants) pour affiner le registre lexical
+- Ajouter une politique de langue explicite si les utilisateurs écrivent dans plusieurs langues
+````
 
-## Example 3: CONVERT — Function Schema (OpenAI → Anthropic)
+## Example 3: CONVERT - Function Schema (OpenAI -> Anthropic)
 
-**Input** (OpenAI):
+**Input (OpenAI):**
+
 ```json
 {
   "type": "function",
@@ -116,87 +122,150 @@ Chaleureux et professionnel. Adaptez la profondeur technique au niveau d'experti
 }
 ```
 
-**Request**: Convert to Anthropic format
+**Request:** Convert to Anthropic tool schema format.
 
 ### Working Notes
-- Mode=CONVERT · Type=Function Schema · Source=OpenAI · Target=Anthropic
-- Mapping row: OpenAI → Anthropic (remove `type:"function"` wrapper, `parameters`→`input_schema`, drop `strict`)
-- Loss audit: `strict` has no Anthropic equivalent → dropped with justification (schema enforces via `required`); `additionalProperties: false` → preserved inside `input_schema`
-- Round-trip plan: convert back to OpenAI, diff vs original — expected diffs: wrapper + `strict` re-added, descriptions added
-- Baseline (RED): naive convert without recipe → kept `parameters`/`strict` verbatim (rationalization: "valid JSON = correct format")
-- Audit: mapping table row applied ✓ · loss items accounted 2/2 ✓ · PASS (1 iteration)
-- Test (GREEN): re-run with recipe → Anthropic-native `input_schema`, `strict` dropped ✓ · round-trip diff shows only the 2 expected deltas ✓
+
+- Route: `Mode=CONVERT` | `Type=Function Schema` | `Source=OpenAI` | `Target=Anthropic` | `Language=EN`
+- Clarify: source JSON and target platform explicit -> proceed directly
+- Lazy-Load: `references/function-schema-guide.md` (`OpenAI -> Anthropic` mapping row)
+- Loss Audit:
+  - `type: "function"`: removed (Anthropic uses top-level `name` directly)
+  - `strict: true`: no direct top-level Anthropic equivalent -> dropped; object strictness retained via `required` and `additionalProperties: false` inside `input_schema`
+  - `additionalProperties: false`: preserved inside `input_schema`
+- Round-Trip Test (`Anthropic -> OpenAI` diff vs original):
+  - Re-wrapping `input_schema` -> `parameters` and restoring root `type: "function"` matches original structure except `2` documented deltas: (1) `strict: true` cannot round-trip without re-inference (logged in Loss Audit), (2) tool and parameter `description` fields were enriched for Anthropic compliance (non-structural clarity gain)
+- Stranger-Audit (Pass 1/1): `6/6` criteria PASS + Loss Audit + Round-Trip diff complete
 
 ### Output
-## Converted Function Schema — OpenAI → Anthropic
+
+````markdown
+## Converted Function Schema: OpenAI -> Anthropic
 
 **Changes made:**
-- Removed `type: "function"` wrapper (Anthropic uses top-level `name` directly)
-- Renamed `parameters` → `input_schema`
-- Removed `strict` (not supported; schema handles this via `required`)
-- Enhanced parameter descriptions (recommended for Anthropic for better comprehension)
+- Removed root `"type": "function"` wrapper (`name` sits directly at root in Anthropic tool schemas)
+- Renamed `"parameters"` -> `"input_schema"`
+- Removed `"strict": true` (unsupported at root in Anthropic; strict shape retained via `"required"` and `"additionalProperties": false` inside `input_schema`)
+- Expanded tool and parameter `description` strings with explicit usage triggers and format guidance
 
 **Result:**
 ```json
 {
   "name": "send_email",
-  "description": "Sends an email to a specified recipient. Use when the user explicitly requests sending an email.",
+  "description": "Sends an email to a specified recipient. Call only when the user explicitly requests sending a message.",
   "input_schema": {
     "type": "object",
     "properties": {
-      "to": {"type": "string", "description": "Recipient email address (e.g. user@example.com)"},
-      "subject": {"type": "string", "description": "Email subject line"},
-      "body": {"type": "string", "description": "Full email body content, plain text or HTML"}
+      "to": {
+        "type": "string",
+        "description": "Recipient email address, e.g. user@example.com"
+      },
+      "subject": {
+        "type": "string",
+        "description": "Concise email subject line"
+      },
+      "body": {
+        "type": "string",
+        "description": "Complete plain-text or formatted email body"
+      }
     },
-    "required": ["to", "subject", "body"]
+    "required": ["to", "subject", "body"],
+    "additionalProperties": false
   }
 }
 ```
 
-**Notes:** Improved descriptions for all parameters — Anthropic models perform better with richer parameter descriptions. Round-trip diff verified: only expected deltas (wrapper, `strict`, descriptions).
+**Notes:** Loss Audit confirmed `"strict": true` has no Anthropic root flag; `"additionalProperties": false` remains enforced inside `input_schema`. Round-Trip conversion back to OpenAI reproduces the original property schema with only the expected `strict` omission and enriched descriptions.
+````
 
----
+## Example 4: DISTILL - Conversation into a Skill + House Overlay + Provenance
 
-## Example 4: DISTILL — Conversation into a Skill
+**Input (EN):** "Turn this debugging approach I keep repeating into a skill."
 
-**Input** (EN): "Turn this debugging approach I keep repeating into a skill."
-
-**Source**: a conversation where the user repeatedly: reproduces the bug, reads the exact failing line, writes a minimal repro, fixes, then verifies with a test.
+**Source (Tier 6 conversation):** Repeated workflow where the user inspects a failing log line, isolates a minimal reproduction script, patches the root cause, and runs the test suite to confirm zero regressions.
 
 ### Working Notes
-- Mode=DISTILL · Classify=skill · Tier=standard
-- Workflow extracted: 5 steps (reproduce → isolate → minimal repro → fix → verify)
-- Transmutation: "the specific bug in the conversation" → general rule "fix must be provable" (covers the whole class of debugging requests)
-- Provenance plan: source = conversation (Tier 6) · generalization move: "reproduce-then-fix generalized to any bug class" · excluded: no external content
-- Baseline (RED): naive distill → copied the specific bug steps verbatim (rationalization: "specific = faithful")
-- Audit: steps countable ✓ · example neutral (no real codebase names) ✓ · PASS (1 iteration)
-- Test (GREEN): re-run with transmutation rule → generalized 5-step workflow ✓ · trigger test — "my api returns 500" ✓ fires; "what is a lambda" ✓ does not fire · consistency 0 ✓
+
+- Route: `Mode=DISTILL` | `Type=Skill (SKILL.md)` | `Tier=standard` | `Platform=platform-agnostic` | `Language=EN`
+- Clarify: source workflow and target artifact type clear -> proceed (`standard` tier selected because the skill enforces a multi-step sequence with output contract)
+- Lazy-Load: `references/house-frontmatter-contract.md`, `references/house-structure-conventions.md`
+- Transmutation: abstracted the user's specific endpoint failure into a general `reproduce -> isolate -> patch -> verify` workflow with `0` user codebase names or single-bug hardcodes
+- Delegation Note: House Overlay applied directly; if the user wants pressure testing or trigger evals next, invoke `writing-skills` or `skill-creator` resolved dynamically in `.agents/`, `.claude/`, or `.codex/`
+- Registry Reminder: register the finished skill in `SKILL_INDEX.md` if placing inside a cataloged repository
+- Stranger-Audit (Pass 1/1): `6/6` criteria PASS (SDO `description` has `0` workflow-summary verbs and `0` XML brackets, `## Provenance` ledger attached, `0` unverified Tier-5 premises)
 
 ### Output
-`## When to Activate` fires on bug reports and debugging requests; `## Instructions` enumerates the 5 steps imperatively; `## Output Contract` requires a `✅ How to Verify` slot (the fix must be provable); `## Anti-Examples` pairs ❌ "fix blindly" with ✅ "write a repro first".
 
-```markdown
+````markdown
+---
+name: repro-first-debug
+description: "Root-cause debugging discipline enforcing minimal reproduction before code edits. Trigger when a user reports a failing test, runtime error, or regression. Do NOT trigger for new feature scaffolding, style refactoring, or conceptual explanations."
+version: 1.0.0
+tags:
+  - debugging
+  - verification
+  - root-cause
+---
+
+# Repro-First Debug
+
+## When to Activate
+
+- User reports a bug, failing test, stack trace, or unexpected runtime output.
+- Do NOT activate for greenfield feature requests or pure language tutorials.
+
+## Overview
+
+Enforces a 4-step root-cause workflow so fixes are grounded in observed failure traces and verified after the final edit.
+
+## Instructions
+
+1. Read the exact failing line and error message from the provided log or test output.
+2. Build or run a minimal reproduction confirming the failure (`1` failing assertion or command).
+3. Apply the smallest patch targeting the verified root cause (`0` speculative multi-file rewrites).
+4. Re-run the failing reproduction and related test suite after the final edit; report exact observed counts.
+
+## Output Contract
+
+Emit `## Diagnosis` (root cause + failing file/line), `## Patch` (minimal change summary), and `## Verification` (exact command + observed pass count).
+
+## Anti-Examples
+
+| ❌ Avoid | ✅ Prefer | Why |
+| --- | --- | --- |
+| Edit source code before reproducing the error | Run and record a minimal reproduction first | Prevents symptom-chasing |
+| Report "fixed" without post-edit test output | Run suite after final edit and quote counts | Enforces evidence-based verification |
+
 ## Provenance
-- Source: user conversation, debugging workflow (Tier 6, active)
-- Generalization moves: "reproduce → isolate → minimal repro → fix → verify" abstracted
-  from the user's specific bug to any bug class
-- Excluded: no external content (Tier 5 not consulted)
-```
 
----
+- Source: User debugging conversation workflow (Tier 6, active operational context)
+- Generalization moves: Abstracted single endpoint debugging steps into a language-agnostic `reproduce -> isolate -> patch -> verify` skill with countable rules
+- Excluded: `0` external Tier-5 sources consulted or copied
+````
 
-## Example 5: NAVIGATE — Classify a Resource
+## Example 5: NAVIGATE - Classify and Place a Rules File
 
-**Input** (EN): "Where does this AGENTS.md rule file belong?"
+**Input (EN):** "Where does this AGENTS.md coding rules file belong, and how should it stay synced?"
 
 ### Working Notes
-- Mode=NAVIGATE · Type=Rules file
-- Axis decision: feed to AI to execute? Yes → INSTRUCTIONS axis. Rules file → e.g. `instructions/rules/` or project root rules. Third-party? No → active
-- Tier: self-created → Tier 6 (active operational)
-- No ambiguity → no CLARIFY needed
-- Baseline (RED): control classification → guessed `knowledge/` from the filename alone (rationalization: "rules = knowledge")
-- Audit: decision tree applied ✓ · tier stated ✓ · PASS (1 iteration)
-- Test (GREEN): re-run with the Q1/Q2/Q3 tree → correct placement under INSTRUCTIONS rules ✓
+
+- Route: `Mode=NAVIGATE` | `Type=Rules File` | `Language=EN`
+- Clarify: file type and sync question explicit -> proceed directly
+- Lazy-Load: `references/taxonomy-navigation.md`, `references/rules-guide.md`
+- 3-Axis Tree: `Q1` (feed directly to an AI agent to execute?) = Yes -> **INSTRUCTIONS** axis
+- Lifecycle & Tier: self-created active project rules -> `active/` lifecycle (`Tier 6` operational rule), not `archive/` (retired) and not `external/` (third-party). If incorporating Karpathy's 4 coding principles, delegate to `karpathy-guidelines` in `.agents/`, `.claude/`, or `.codex/` and treat as `Tier 5` candidate guidance until validated
+- Index Check: project rules are normally loaded from `.agents/rules/` or root `AGENTS.md`; update `SKILL_INDEX.md` or `REFERENCE_INDEX.md` only if the workspace catalogs rules files there
+- Stranger-Audit (Pass 1/1): `6/6` criteria PASS + 3-axis + Tier 1-7 + MECE checks verified
 
 ### Output
-`instructions/rules/` (or workspace rules location such as `.agents/rules/` or project root; self-created, always-on rules file).
+
+```text
+Axis:       INSTRUCTIONS (feed directly to AI agents)
+Lifecycle:  active / self-created (Tier 6 operational project file)
+Placement:  instructions/rules/ (repo canonical source) -> synced to .agents/rules/ or project root AGENTS.md
+
+Single-Source -> Multi-Format Sync:
+AGENTS.md / CLAUDE.md                   <- canonical source of truth
+  -> .cursor/rules/<rule-name>.mdc      <- identical principle wording with YAML globs/alwaysApply
+  -> GEMINI.md                          <- identical principle wording for AGY workspace rules
+```

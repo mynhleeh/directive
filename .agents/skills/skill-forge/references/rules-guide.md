@@ -1,8 +1,6 @@
-﻿# Rules File Guide
+# Rules File Guide
 
 A guide for writing always-on instruction files for AI agents and coding assistants.
-
----
 
 ## What Is a Rules File?
 
@@ -12,12 +10,10 @@ A rules file is a Markdown file containing **always-on instructions** for an age
 - Project-specific context
 - Forbidden actions
 
----
-
 ## Platform Comparison Matrix
 
 | Feature | CLAUDE.md | AGENTS.md / GEMINI.md | Cursor .mdc | .cursorrules |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | **Platform** | Claude / AGY | Generic agents / AGY | Cursor IDE | Cursor IDE (legacy) |
 | **Scope** | Project or global | Project or global | Per-file or global | Global |
 | **Format** | Markdown | Markdown | MDC (Markdown + YAML meta) | Plain text |
@@ -26,8 +22,6 @@ A rules file is a Markdown file containing **always-on instructions** for an age
 | **Frontmatter** | No | No | Yes (YAML) | No |
 | **Glob patterns** | No | No | Yes | No |
 | **Priority** | High | High | Context-dependent | Lower than .mdc |
-
----
 
 ## CLAUDE.md Structure (Andrej Karpathy Style)
 
@@ -66,65 +60,26 @@ Recommended for: Claude agents, coding agents, Antigravity IDE
 - DO NOT modify migration files directly
 ```
 
----
+## Behavioral Coding Principles (External Companion)
 
-## The Karpathy Four Principles (External / Tier-5 candidate)
+When authoring always-on rules that need behavioral guardrails (think before coding, simplicity first,
+surgical changes, goal-driven execution), invoke `karpathy-guidelines` resolved dynamically in the
+active runtime workspace (`.agents/`, `.claude/`, `.codex/`). Treat `karpathy-guidelines` as
+**Tier-5 candidate guidance** per `taxonomy-navigation.md` — validate each principle against project
+requirements before promoting it into a mandatory rule, and keep one canonical source synchronized
+across formats (`CLAUDE.md` <-> `.cursor/rules/*.mdc` <-> `GEMINI.md` / `AGENTS.md`).
 
-These principles come from an external submodule (Tier 5) — **unverified** per the repo's citation hierarchy (`taxonomy-navigation.md`). Treat them as *candidate* principles: useful, but validate each against your own experience before promoting it into a premise. A rules file that encodes them tends to produce more reliable agent behavior.
+## Single-Source -> Multi-Format Sync
 
-| Principle | Addresses | Core rule |
-|---|---|---|
-| **Think Before Coding** | Wrong assumptions, hidden confusion, missing tradeoffs | Don't assume; surface ambiguity; push back when warranted |
-| **Simplicity First** | Overcomplication, bloated abstractions | Minimum code that solves the problem; nothing speculative |
-| **Surgical Changes** | Orthogonal edits, touching code you shouldn't | Touch only what you must; clean up only your own mess |
-| **Goal-Driven Execution** | Leverage through tests-first, verifiable success criteria | Define success criteria; loop until verified |
+When a rules file is published across platforms (`CLAUDE.md` <-> `.cursor/rules/*.mdc` <-> `GEMINI.md` / `AGENTS.md`), keep shared principles in sync across all formats. If you edit them in one file, update all targets — the source of truth is one file, and formats multiply from it.
 
-### 1. Think Before Coding
-- **State assumptions explicitly** — if uncertain, ask rather than guess.
-- **Present multiple interpretations** — don't pick silently when ambiguity exists.
-- **Push back when warranted** — if a simpler approach exists, say so.
-- **Stop when confused** — name what's unclear and ask for clarification.
-
-### 2. Simplicity First
-- No features beyond what was asked; no speculative abstractions.
-- No "flexibility" or "configurability" that wasn't requested.
-- If 200 lines could be 50, rewrite it.
-
-> **The test:** Would a senior engineer say this is overcomplicated? If yes, simplify.
-
-### 3. Surgical Changes
-- Don't "improve" adjacent code, comments, or formatting.
-- Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it — don't delete it.
-
-> **The asymmetric orphan rule:** Remove imports/variables/functions **your changes** made unused — but **never** remove pre-existing dead code unless asked.
-
-> **The test:** Every changed line should trace directly to the user's request.
-
-### 4. Goal-Driven Execution
-Transform imperative tasks into verifiable goals:
-
-| Instead of... | Transform to... |
-|---|---|
-| "Add validation" | "Write tests for invalid inputs, then make them pass" |
-| "Fix the bug" | "Write a test that reproduces it, then make it pass" |
-| "Refactor X" | "Ensure tests pass before and after" |
-
----
-
-## Single-Source → Multi-Format Sync
-
-When a rules file is published across platforms (CLAUDE.md, .mdc, SKILL.md, GEMINI.md), keep the **four principles in sync** across all formats. If you edit the principles in one file, update all of them — the source of truth is one file, the formats multiply from it.
-
-```
-CLAUDE.md                 ← source of truth
-└── .cursor/rules/karpathy-guidelines.mdc   ← same principles, .mdc format
-└── skills/karpathy-guidelines/SKILL.md    ← same principles, skill format
+```text
+CLAUDE.md                                 <- source of truth
+└── .cursor/rules/karpathy-guidelines.mdc <- same principles, .mdc format
+└── GEMINI.md / AGENTS.md                 <- same principles, agent format
 ```
 
-> **Rule**: Use a section marker like `## Four Principles` and keep identical wording across formats so `diff`-based sync is trivial.
-
----
+> **Rule**: Use a section marker like `## Behavioral Coding Principles` or `## Four Principles` and keep identical wording across formats so `diff`-based sync is trivial.
 
 ## GEMINI.md / AGENTS.md Structure (AGY Style)
 
@@ -150,8 +105,6 @@ Recommended for: Antigravity IDE, generic agent systems
 [Important project context the agent should always know]
 ```
 
----
-
 ## Cursor .mdc Format
 
 ```markdown
@@ -176,17 +129,16 @@ alwaysApply: false
 ### .mdc Frontmatter Fields
 
 | Field | Description |
-|---|---|
+| --- | --- |
 | `description` | What these rules are for (displayed in the Cursor UI) |
 | `globs` | File patterns these rules apply to |
 | `alwaysApply` | If `true`, always included regardless of file context |
 
----
-
 ## Legacy .cursorrules Format
 
 Simple plain text, no frontmatter:
-```
+
+```text
 You are an expert in TypeScript, React, and Next.js.
 
 Code Style:
@@ -205,16 +157,16 @@ Testing:
 - Use React Testing Library for component tests
 ```
 
----
-
 ## Content Categories
 
 ### 1. Identity & Expertise
+
 ```markdown
 You are an expert in [domain] with deep knowledge of [technologies].
 ```
 
 ### 2. Code Style Preferences
+
 ```markdown
 ## Code Style
 - Prefer [pattern] over [anti-pattern]
@@ -223,6 +175,7 @@ You are an expert in [domain] with deep knowledge of [technologies].
 ```
 
 ### 3. Architecture Decisions
+
 ```markdown
 ## Architecture
 - [Component type] lives in [location]
@@ -231,6 +184,7 @@ You are an expert in [domain] with deep knowledge of [technologies].
 ```
 
 ### 4. Common Commands
+
 ```markdown
 ## Commands
 - Build: `npm run build`
@@ -239,6 +193,7 @@ You are an expert in [domain] with deep knowledge of [technologies].
 ```
 
 ### 5. Behavioral Instructions
+
 ```markdown
 ## Behavior
 - Always [action] before [other action]
@@ -247,6 +202,7 @@ You are an expert in [domain] with deep knowledge of [technologies].
 ```
 
 ### 6. Constraints & Safety
+
 ```markdown
 ## Constraints
 - NEVER [forbidden action]
@@ -254,11 +210,10 @@ You are an expert in [domain] with deep knowledge of [technologies].
 - DO NOT [risky action] without [safeguard]
 ```
 
----
-
 ## Writing Guidelines
 
 ### DO:
+
 - Use imperative voice ("Use", "Write", "Prefer")
 - Be specific and concrete
 - Include examples for rules that might be misinterpreted
@@ -266,16 +221,15 @@ You are an expert in [domain] with deep knowledge of [technologies].
 - Keep individual rules short (1–2 lines each)
 
 ### DON'T:
+
 - Write contradictory rules
 - Include confidential information (keys, passwords)
 - Write rules so vague they don't change behavior ("be good")
 - Include implementation details that are likely to change
 
----
-
 ## File Placement Strategy
 
-```
+```text
 Project Root/
 ├── CLAUDE.md            ← Global project rules (for coding agents)
 ├── GEMINI.md            ← AGY-specific rules
@@ -288,8 +242,6 @@ Project Root/
         ├── typescript.mdc
         └── python.mdc
 ```
-
----
 
 ## Checklist
 
