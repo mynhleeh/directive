@@ -15,3 +15,5 @@ htmlcov/
 canvas-fonts/
 *.tmp
 directive-cli/output/
+
+docs/superpowers/
