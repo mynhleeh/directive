@@ -28,8 +28,6 @@ This document provides a comprehensive index of all skills available in the inst
   - [Superpowers](#superpowers)
   - [UI/UX Pro Max](#ui-ux-pro-max)
 
----
-
 ## 1. Skills by Purpose
 
 Skills are grouped by their primary function to help you select the best tool for your current objective. A skill may appear in multiple categories if it serves multiple purposes.
@@ -37,7 +35,7 @@ Skills are grouped by their primary function to help you select the best tool fo
 ### AI Research & Engineering
 
 | # | Skill Name | Source | Target / Input | Description |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 1 | [academic-plotting](external/AI-Research-SKILLs/20-ml-paper-writing/academic-plotting/SKILL.md) | AI-Research-SKILLs | Text Prompt / Ideas | Generates publication-quality figures for ML papers from research context. Given a paper section or description, extracts system components and rel... |
 | 2 | [ara-compiler](external/AI-Research-SKILLs/22-agent-native-research-artifact/compiler/SKILL.md) | AI-Research-SKILLs | Text Prompt / Ideas | Compiles any research input — PDF papers, GitHub repositories, experiment logs, code directories, or raw notes — into a complete Agent-Native Resea... |
 | 3 | [ara-research-manager](external/AI-Research-SKILLs/22-agent-native-research-artifact/research-manager/SKILL.md) | AI-Research-SKILLs | Text Prompt / Ideas | Records research provenance as a post-task epilogue, scanning conversation history at the end of a coding or research session to extract decisions,... |
@@ -138,11 +136,10 @@ Skills are grouped by their primary function to help you select the best tool fo
 | 98 | [weights-and-biases](external/AI-Research-SKILLs/13-mlops/weights-and-biases/SKILL.md) | AI-Research-SKILLs | Text Prompt / Ideas | Track ML experiments with automatic logging, visualize training in real-time, optimize hyperparameters with sweeps, and manage model registry with ... |
 | 99 | [whisper](external/AI-Research-SKILLs/18-multimodal/whisper/SKILL.md) | AI-Research-SKILLs | Text Prompt / Ideas | OpenAI's general-purpose speech recognition model. Supports 99 languages, transcription, translation to English, and language identification. Six m... |
 
-
 ### Coding & Debugging
 
 | # | Skill Name | Source | Target / Input | Description |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 1 | [eduhub-skill-manager](external/deeptutor-eduhub/eduhub-skill-manager/SKILL.md) | DeepTutor | Design Ideas / UI Specs | Guide an agent through using the eduhub CLI to discover, inspect, install, package, publish, and verify Codex skills on an EduHub registry. Use whe... |
 | 2 | [karpathy-guidelines](external/andrej-karpathy/skills/karpathy-guidelines/SKILL.md) | Karpathy | Codebase / Repository | Behavioral guidelines to reduce common LLM coding mistakes. Use when writing, reviewing, or refactoring code to avoid overcomplication, make surgic... |
 | 3 | [python-playground-coach](external/deeptutor-eduhub/python-playground-coach/SKILL.md) | DeepTutor | Codebase / Repository | Teach beginner Python through tiny runnable challenges, hints, and debugging questions. Use when the learner wants to learn Python basics, understa... |
@@ -156,11 +153,10 @@ Skills are grouped by their primary function to help you select the best tool fo
 | 11 | [writing-plans](external/superpowers/skills/writing-plans/SKILL.md) | Superpowers | Codebase / Repository | Use when you have a spec or requirements for a multi-step task, before touching code |
 | 12 | [zuowen-score-expert](external/deeptutor-eduhub/zuowen-score-expert/SKILL.md) | DeepTutor | Project Ideas / Specs | Full-spectrum Chinese composition tutoring skill for the Composition Score Expert persona. Use when Codex needs to coach students on Chinese essay ... |
 
-
 ### Cognitive Frameworks
 
 | # | Skill Name | Source | Target / Input | Description |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 1 | [claude-api](external/anthropics/skills/claude-api/SKILL.md) | Anthropic | Text Prompt / Ideas | Reference for the Claude API / Anthropic SDK — model ids, pricing, params, streaming, tool use, MCP, agents, caching, token counting, model migrati... |
 | 2 | [mcp-builder](external/anthropics/skills/mcp-builder/SKILL.md) | Anthropic | Design Ideas / UI Specs | Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tool... |
 | 3 | [s05-review-model](external/deeptutor-eduhub/s05-review-model/SKILL.md) | DeepTutor | Text Prompt / Ideas | 当连续在同类事上踩坑、想把一次成功/失败沉淀成可复用方法、或要根治反复出现的问题时调用; 当用户遇到外部不可控失败、想"复盘"却易虚假归因时, 也应激活以引导只沉淀应对法而非强行因果。不要在单次偶发事件、纯外部不可控问题、或仅想宣泄情绪时调用。触发词: "又犯同样的错了"、"这次成功纯靠运气"... |
@@ -169,13 +165,12 @@ Skills are grouped by their primary function to help you select the best tool fo
 | 6 | [s11-model-tree-four-steps](external/deeptutor-eduhub/s11-model-tree-four-steps/SKILL.md) | DeepTutor | Text Prompt / Ideas | 用"外接大脑 / 六步提炼 / 存量标准化 / 形成体系"四步把一本书真正吃透。 |
 | 7 | [s12-prune-model-tree](external/deeptutor-eduhub/s12-prune-model-tree/SKILL.md) | DeepTutor | Text Prompt / Ideas | 何时调用：当你的模型树已建起、出现重复/混乱/想深入本质，或到了定期（每年）大修剪时使用；含用户想"一次修剪完美、之后不管"时，激活以纠正"修剪是终身迭代"。 何时不调用：当树还几乎是空的（先去 s11 总装），或你因"怕提炼错"而不敢动手时（错误可后期修）。 关键 trigger（中英双写）... |
 | 8 | [scientific-critical-thinking](external/deeptutor-eduhub/scientific-critical-thinking/SKILL.md) | DeepTutor | Text Prompt / Ideas | Evaluate scientific claims and evidence quality. Use for assessing experimental design validity, identifying biases and confounders, applying evide... |
-| 9 | [skill-forge](active/skill-forge/SKILL.md) | Owner | Files / Documents | Authoring engine for the directive knowledge base: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user ... |
-
+| 9 | [skill-forge](active/skill-forge/SKILL.md) | Owner | Files / Documents | AI artifact architecture engine (`v6.0.0`) for cross-platform System/User Prompts (`COSTAR-X`), Function/Tool JSON Schemas with Round-Trip verification, Rules File multi-format sync, and `directive` house governance/taxonomy (`DISTILL`, `NAVIGATE`, thin `SKILL.md` House Overlay). |
 
 ### File Format Processing
 
 | # | Skill Name | Source | Target / Input | Description |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 1 | [canvas-design](external/anthropics/skills/canvas-design/SKILL.md) | Anthropic | Files / Documents | Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, pi... |
 | 2 | [deep-flashcard-generator](external/deeptutor-eduhub/deep-flashcard-generator/SKILL.md) | DeepTutor | Files / Documents | Reads any attached document (PDF, DOCX, TXT, images, etc.), exhaustively extracts core concepts and generates high-quality Anki-ready flashcards us... |
 | 3 | [doc-drill](external/deeptutor-eduhub/doc-drill/SKILL.md) | DeepTutor | Text Prompt / Ideas | Activates a document-grounded adaptive batch quiz session (Doc Drill). Use when the user attaches a document (PDF, markdown, notes, slides, etc.) a... |
@@ -191,11 +186,10 @@ Skills are grouped by their primary function to help you select the best tool fo
 | 13 | [quiz-generator](external/deeptutor-eduhub/quiz-generator/SKILL.md) | DeepTutor | Design Ideas / UI Specs | Generate quizzes and assessments from any topic or content. Create questions of varying difficulty (easy, medium, hard), multiple formats (multiple... |
 | 14 | [xlsx](external/anthropics/skills/xlsx/SKILL.md) | Anthropic | Files / Documents | Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an... |
 
-
 ### Learning & Studying
 
 | # | Skill Name | Source | Target / Input | Description |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 1 | [acg-rust-teacher](external/deeptutor-eduhub/acg-rust-teacher/SKILL.md) | DeepTutor | Text Prompt / Ideas | ACG 视角 Rust 所有权系统教学工具，通过动漫类比（ReZero、Fate 等）讲解 Rust 核心概念，降低学习门槛。 |
 | 2 | [calculus-lobster-teacher](external/deeptutor-eduhub/calculus-lobster-teacher/SKILL.md) | DeepTutor | Text Prompt / Ideas | 高等数学智能课程助手 2.1：在 2.0 全栈能力上强化「认知高阶性」——分析、评价、创造与迁移； 同济七版 1–12 章；图谱 skillId 协同；题型级批改 + 高阶评分维度。 |
 | 3 | [concept-explainer](external/deeptutor-eduhub/concept-explainer/SKILL.md) | DeepTutor | Text Prompt / Ideas | Explain a hard concept clearly with progressive depth, a concrete analogy, and a check for understanding. Use when someone asks "what is X", "expla... |
@@ -233,11 +227,10 @@ Skills are grouped by their primary function to help you select the best tool fo
 | 35 | [teaching-physical-skills](external/deeptutor-eduhub/teaching-physical-skills/SKILL.md) | DeepTutor | Text Prompt / Ideas | Methods for teaching physical/embodied skills to others. Use when someone needs to teach a child or adult a hands-on physical skill like riding a b... |
 | 36 | [tutor](external/deeptutor-eduhub/tutor/SKILL.md) | DeepTutor | Text Prompt / Ideas | Personalized tutoring for any age and subject with adaptive teaching, progress tracking, and parent oversight. |
 
-
 ### Other / General
 
 | # | Skill Name | Source | Target / Input | Description |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 1 | [dispatching-parallel-agents](external/superpowers/skills/dispatching-parallel-agents/SKILL.md) | Superpowers | Text Prompt / Ideas | Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies |
 | 2 | [finishing-a-development-branch](external/superpowers/skills/finishing-a-development-branch/SKILL.md) | Superpowers | Text Prompt / Ideas | Use when implementation is complete, all tests pass, and you need to decide how to integrate the work |
 | 3 | [grill-me](external/deeptutor-eduhub/grill-me/SKILL.md) | DeepTutor | Text Prompt / Ideas | grill-me from mattpocock |
@@ -254,22 +247,20 @@ Skills are grouped by their primary function to help you select the best tool fo
 | 14 | [universal-flashcard-generator](external/deeptutor-eduhub/universal-flashcard-generator/SKILL.md) | DeepTutor | Text Prompt / Ideas | Trích xuất từ vựng từ mọi loại văn bản đầu vào (danh sách từ, câu, đoạn văn, bài kiểm tra,...) và xuất ra bộ flashcards 6 cột TSV, tương thích với ... |
 | 15 | [writing-skills](external/superpowers/skills/writing-skills/SKILL.md) | Superpowers | Text Prompt / Ideas | Use when creating new skills, editing existing skills, or verifying skills work before deployment |
 
-
 ### Project Workflow
 
 | # | Skill Name | Source | Target / Input | Description |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 1 | [discernment-nudge](external/anthropics/skills/discernment-nudge/SKILL.md) | Anthropic | Text Prompt / Ideas | After you give a substantive answer or draft that the user may act on — advice or recommendations, drafted artifacts such as goals, plans, pitches,... |
 | 2 | [doc-coauthoring](external/anthropics/skills/doc-coauthoring/SKILL.md) | Anthropic | Design Ideas / UI Specs | Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, d... |
 | 3 | [exam-blueprint](external/deeptutor-eduhub/exam-blueprint/SKILL.md) | DeepTutor | Design Ideas / UI Specs | Build a practice exam or quiz from a topic, syllabus, or set of notes — mixed item types, a difficulty spread, and a full answer key with explanati... |
 | 4 | [executing-plans](external/superpowers/skills/executing-plans/SKILL.md) | Superpowers | Project Ideas / Specs | Use when you have a written implementation plan to execute in a separate session with review checkpoints |
 | 5 | [subagent-driven-development](external/superpowers/skills/subagent-driven-development/SKILL.md) | Superpowers | Project Ideas / Specs | Use when executing implementation plans with independent tasks in the current session |
 
-
 ### Software Design & Planning
 
 | # | Skill Name | Source | Target / Input | Description |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 1 | [academy-guide](external/anthropics/skills/academy-guide/SKILL.md) | Anthropic | Design Ideas / UI Specs | Stop and check this skill before finishing any reply to a question about how to use Claude or a Claude product — it recommends matching courses, tu... |
 | 2 | [brainstorming](external/superpowers/skills/brainstorming/SKILL.md) | Superpowers | Design Ideas / UI Specs | You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user int... |
 | 3 | [brand-guidelines](external/anthropics/skills/brand-guidelines/SKILL.md) | Anthropic | Design Ideas / UI Specs | Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it whe... |
@@ -279,20 +270,18 @@ Skills are grouped by their primary function to help you select the best tool fo
 | 7 | [using-superpowers](external/superpowers/skills/using-superpowers/SKILL.md) | Superpowers | Design Ideas / UI Specs | Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying qu... |
 | 8 | [verification-before-completion](external/superpowers/skills/verification-before-completion/SKILL.md) | Superpowers | Design Ideas / UI Specs | Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirm... |
 | 9 | [web-artifacts-builder](external/anthropics/skills/web-artifacts-builder/SKILL.md) | Anthropic | Files / Documents | Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn... |
-| 10 | [technical-doc-author](active/technical-doc-author/SKILL.md) | Owner | Technical Documentation | Author, audit, restructure, and verify 8 core technical document types (SRS/PRD, SDD, ADR, RFC, Benchmark Reports, Postmortem/RCA, API specs, Runbooks) with 2-tier mechanical gates and anti-AI discipline. |
-
+| 10 | [technical-doc-author](active/technical-doc-author/SKILL.md) | Owner | Technical Documentation | Author and audit 8 core engineering document types (`DOC-1` to `DOC-8`: SRS/PRD, SDD, ADR, RFC, Benchmark Reports, Postmortem/RCA, API specs, Runbooks) with Diataxis isolation, abstraction locks, POLA UIDs, and traceability closure. |
 
 ### Teaching & Mentoring
 
 | # | Skill Name | Source | Target / Input | Description |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 1 | [math-mentor-simple](external/deeptutor-eduhub/math-mentor-simple/SKILL.md) | DeepTutor | Text Prompt / Ideas | 简化版数学辅导 skill，用于测试核心功能。提供分步提示、错误检查和基础总结。 |
-
 
 ### UI & Visual Design
 
 | # | Skill Name | Source | Target / Input | Description |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 1 | [algorithmic-art](external/anthropics/skills/algorithmic-art/SKILL.md) | Anthropic | Codebase / Repository | Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using c... |
 | 2 | [theme-factory](external/anthropics/skills/theme-factory/SKILL.md) | Anthropic | Codebase / Repository | Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes w... |
 | 3 | [vocab-lookup](external/deeptutor-eduhub/vocab-lookup/SKILL.md) | DeepTutor | Text Prompt / Ideas | Receive a source text (passage, article, video transcript, document, etc.), then look up any English word, phrase, or idiom from that source. Retur... |
@@ -303,7 +292,6 @@ Skills are grouped by their primary function to help you select the best tool fo
 | 8 | [slides](external/ui-ux-pro-max-skill/cli/assets/skills/slides/SKILL.md) | UI/UX Pro Max | Design Ideas / UI Specs | Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies. |
 | 9 | [ui-styling](external/ui-ux-pro-max-skill/cli/assets/skills/ui-styling/SKILL.md) | UI/UX Pro Max | Design Ideas / UI Specs | Create beautiful, accessible user interfaces with shadcn/ui components, Tailwind CSS utility-first styling, and canvas-based visual designs. |
 
-
 ## 2. Skills by Source
 
 Skills are grouped by their origin. This helps you explore skills within a specific ecosystem or from a particular author.
@@ -311,7 +299,7 @@ Skills are grouped by their origin. This helps you explore skills within a speci
 ### AI-Research-SKILLs
 
 | # | Skill Name | Target / Input | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | [academic-plotting](external/AI-Research-SKILLs/20-ml-paper-writing/academic-plotting/SKILL.md) | Text Prompt / Ideas | Generates publication-quality figures for ML papers from research context. Given a paper section or description, extracts system components and rel... |
 | 2 | [ara-compiler](external/AI-Research-SKILLs/22-agent-native-research-artifact/compiler/SKILL.md) | Text Prompt / Ideas | Compiles any research input — PDF papers, GitHub repositories, experiment logs, code directories, or raw notes — into a complete Agent-Native Resea... |
 | 3 | [ara-research-manager](external/AI-Research-SKILLs/22-agent-native-research-artifact/research-manager/SKILL.md) | Text Prompt / Ideas | Records research provenance as a post-task epilogue, scanning conversation history at the end of a coding or research session to extract decisions,... |
@@ -411,11 +399,10 @@ Skills are grouped by their origin. This helps you explore skills within a speci
 | 97 | [weights-and-biases](external/AI-Research-SKILLs/13-mlops/weights-and-biases/SKILL.md) | Text Prompt / Ideas | Track ML experiments with automatic logging, visualize training in real-time, optimize hyperparameters with sweeps, and manage model registry with ... |
 | 98 | [whisper](external/AI-Research-SKILLs/18-multimodal/whisper/SKILL.md) | Text Prompt / Ideas | OpenAI's general-purpose speech recognition model. Supports 99 languages, transcription, translation to English, and language identification. Six m... |
 
-
 ### Anthropic
 
 | # | Skill Name | Target / Input | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | [academy-guide](external/anthropics/skills/academy-guide/SKILL.md) | Design Ideas / UI Specs | Stop and check this skill before finishing any reply to a question about how to use Claude or a Claude product — it recommends matching courses, tu... |
 | 2 | [algorithmic-art](external/anthropics/skills/algorithmic-art/SKILL.md) | Codebase / Repository | Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using c... |
 | 3 | [brand-guidelines](external/anthropics/skills/brand-guidelines/SKILL.md) | Design Ideas / UI Specs | Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it whe... |
@@ -437,11 +424,10 @@ Skills are grouped by their origin. This helps you explore skills within a speci
 | 19 | [webapp-testing](external/anthropics/skills/webapp-testing/SKILL.md) | Codebase / Repository | Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior,... |
 | 20 | [xlsx](external/anthropics/skills/xlsx/SKILL.md) | Files / Documents | Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an... |
 
-
 ### DeepTutor
 
 | # | Skill Name | Target / Input | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | [acg-rust-teacher](external/deeptutor-eduhub/acg-rust-teacher/SKILL.md) | Text Prompt / Ideas | ACG 视角 Rust 所有权系统教学工具，通过动漫类比（ReZero、Fate 等）讲解 Rust 核心概念，降低学习门槛。 |
 | 2 | [calculus-lobster-teacher](external/deeptutor-eduhub/calculus-lobster-teacher/SKILL.md) | Text Prompt / Ideas | 高等数学智能课程助手 2.1：在 2.0 全栈能力上强化「认知高阶性」——分析、评价、创造与迁移； 同济七版 1–12 章；图谱 skillId 协同；题型级批改 + 高阶评分维度。 |
 | 3 | [concept-explainer](external/deeptutor-eduhub/concept-explainer/SKILL.md) | Text Prompt / Ideas | Explain a hard concept clearly with progressive depth, a concrete analogy, and a check for understanding. Use when someone asks "what is X", "expla... |
@@ -510,29 +496,26 @@ Skills are grouped by their origin. This helps you explore skills within a speci
 | 66 | [vocab-lookup](external/deeptutor-eduhub/vocab-lookup/SKILL.md) | Text Prompt / Ideas | Receive a source text (passage, article, video transcript, document, etc.), then look up any English word, phrase, or idiom from that source. Retur... |
 | 67 | [zuowen-score-expert](external/deeptutor-eduhub/zuowen-score-expert/SKILL.md) | Project Ideas / Specs | Full-spectrum Chinese composition tutoring skill for the Composition Score Expert persona. Use when Codex needs to coach students on Chinese essay ... |
 
-
 ### Karpathy
 
 | # | Skill Name | Target / Input | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | [karpathy-guidelines](external/andrej-karpathy/skills/karpathy-guidelines/SKILL.md) | Codebase / Repository | Behavioral guidelines to reduce common LLM coding mistakes. Use when writing, reviewing, or refactoring code to avoid overcomplication, make surgic... |
-
 
 ### Owner
 
 | # | Skill Name | Target / Input | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | [academic-research-synthesizer](active/academic-research-synthesizer/SKILL.md) | Academic Papers / Corpuses | Synthesizes academic literature, builds structured empirical evidence matrices, critiques methodology rigor, and verifies scholarly claims without hallucinations. |
 | 2 | [code-architect-auditor](active/code-architect-auditor/SKILL.md) | Codebase / Repositories | Audits software architecture, reviews proposed code changes, enforces surgical refactoring, and verifies test-driven implementation. |
-| 3 | [skill-forge](active/skill-forge/SKILL.md) | Files / Documents | Authoring engine for the directive knowledge base: create, critique, port, distill, or understand any AI artifact — skills (SKILL.md), system/user prompts, function/tool schemas, rules files, or external tools — with rigorous quality gates and Subagent-Driven Development. |
+| 3 | [skill-forge](active/skill-forge/SKILL.md) | Files / Documents | AI artifact architecture engine (`v6.0.0`) for cross-platform System/User Prompts (`COSTAR-X`), Function/Tool JSON Schemas with Round-Trip verification, Rules File multi-format sync, and `directive` house governance/taxonomy (`DISTILL`, `NAVIGATE`, thin `SKILL.md` House Overlay). |
 | 4 | [tech-mentor](active/tech-mentor/SKILL.md) | Files / Documents | The unified AI tech mentor — a deep engine that explains concepts, dissects functions, tutors projects, teaches tools, designs systems, and fixes bugs with Socratic scaffolding and multi-tier mental models. |
-| 5 | [technical-doc-author](active/technical-doc-author/SKILL.md) | Technical Documentation | Author, audit, restructure, and verify 8 core technical document types with 2-tier mechanical gates, Diataxis principles, and multi-subagent anti-AI decontamination loop. |
-
+| 5 | [technical-doc-author](active/technical-doc-author/SKILL.md) | Technical Documentation | Author and audit 8 core engineering document types (`DOC-1` to `DOC-8`) with Diataxis isolation, abstraction-layer locks, POLA UIDs, and empirical traceability closure. |
 
 ### Superpowers
 
 | # | Skill Name | Target / Input | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | [brainstorming](external/superpowers/skills/brainstorming/SKILL.md) | Design Ideas / UI Specs | You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user int... |
 | 2 | [dispatching-parallel-agents](external/superpowers/skills/dispatching-parallel-agents/SKILL.md) | Text Prompt / Ideas | Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies |
 | 3 | [executing-plans](external/superpowers/skills/executing-plans/SKILL.md) | Project Ideas / Specs | Use when you have a written implementation plan to execute in a separate session with review checkpoints |
@@ -548,12 +531,10 @@ Skills are grouped by their origin. This helps you explore skills within a speci
 | 13 | [writing-plans](external/superpowers/skills/writing-plans/SKILL.md) | Codebase / Repository | Use when you have a spec or requirements for a multi-step task, before touching code |
 | 14 | [writing-skills](external/superpowers/skills/writing-skills/SKILL.md) | Text Prompt / Ideas | Use when creating new skills, editing existing skills, or verifying skills work before deployment |
 
-
-
 ### UI/UX Pro Max
 
 | # | Skill Name | Target / Input | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | [banner-design](external/ui-ux-pro-max-skill/cli/assets/skills/banner-design/SKILL.md) | Design Ideas / UI Specs | Design banners for social media, ads, website heroes, creative assets, and print. Multiple art direction options with optional generated or supplied visuals. |
 | 2 | [brand](external/ui-ux-pro-max-skill/cli/assets/skills/brand/SKILL.md) | Design Ideas / UI Specs | Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets. |
 | 3 | [design](external/ui-ux-pro-max-skill/cli/assets/skills/design/SKILL.md) | Design Ideas / UI Specs | Comprehensive design skill: brand identity, design tokens, UI styling, logo generation, corporate identity program, HTML presentations, banner design, icon design, social photos. |
@@ -564,7 +545,7 @@ Skills are grouped by their origin. This helps you explore skills within a speci
 ### Orca
 
 | # | Skill Name | Target / Input | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | [computer-use](external/orca/skills/computer-use/SKILL.md) | Text Prompt / Ideas | Use Orca's computer-use CLI for OS/window-level inspection and input in visible local app windows. Use when a task must read or operate a native ap... |
 | 2 | [linear-tickets](external/orca/skills/linear-tickets/SKILL.md) | Text Prompt / Ideas | Use Orca's Linear CLI through `orca linear ...` commands to read linked ticket context with `orca linear issue --current --full --json`, post compl... |
 | 3 | [orca-cli](external/orca/skills/orca-cli/SKILL.md) | Text Prompt / Ideas | Use the public `orca` CLI to operate Orca-managed worktrees, folder contexts, terminals, repos, automations, artifacts, skill sharing, worktree com... |
@@ -577,7 +558,7 @@ Skills are grouped by their origin. This helps you explore skills within a speci
 ### Humanizer
 
 | # | Skill Name | Target / Input | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | [humanizer](external/humanizer/SKILL.md) | Text Prompt / Ideas | Rewrite AI-sounding text so it reads like the writer without changing what it says. Use when editing or reviewing prose for AI tells: not-X-but-Y contrasts, one-line closers, staged openers, forced triads, dashes everywhere, inflated claims, sales language, stock AI words, bold labels, or filler. |
 
 ### Auto-Empirical-Research-Skills
@@ -585,7 +566,7 @@ Skills are grouped by their origin. This helps you explore skills within a speci
 Tracked submodule at `instructions/skills/external/Auto-Empirical-Research-Skills/` (Stanford/brycewang). Contains 70+ empirical analysis, causal inference, and econometrics skill suites.
 
 | # | Skill Suite | Target / Input | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | [00-Full-empirical-analysis-skill_StatsPAI](external/Auto-Empirical-Research-Skills/skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md) | Empirical Research | End-to-end empirical research analysis pipeline covering data cleaning, summary statistics, baseline regression, robustness checks, and visualization. |
 | 2 | [00.1-Full-empirical-analysis-skill_Python](external/Auto-Empirical-Research-Skills/skills/00.1-Full-empirical-analysis-skill_Python/SKILL.md) | Python Research | Python econometric workflow with pandas, statsmodels, pyfixest, linearmodels, and publication-ready tables. |
 | 3 | [00.2-Full-empirical-analysis-skill_Stata](external/Auto-Empirical-Research-Skills/skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md) | Stata Research | Stata empirical pipeline for econometric estimation, outreg2/esttab table exports, and panel regression analysis. |
@@ -603,7 +584,7 @@ Tracked submodule at `instructions/skills/external/Auto-Empirical-Research-Skill
 Tracked submodule at `instructions/skills/external/scientific-agent-skills/` (K-Dense-AI). Contains 160+ scientific computing, computational biology, materials science, and quantum computing skills.
 
 | # | Skill Name | Target / Input | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | [anndata](external/scientific-agent-skills/skills/anndata/SKILL.md) | Bioinformatics | Annotated data matrices for single-cell omics analysis and integration with the scverse ecosystem (.h5ad files). |
 | 2 | [astropy](external/scientific-agent-skills/skills/astropy/SKILL.md) | Astronomy | Core Python library for astronomy and astrophysics workflows: units/quantities, coordinates, FITS I/O, tables, WCS, and cosmology. |
 | 3 | [benchling-integration](external/scientific-agent-skills/skills/benchling-integration/SKILL.md) | Lab Automation | Benchling Python SDK and REST API integration for registry entities, inventory, ELN entries, and workflows. |
