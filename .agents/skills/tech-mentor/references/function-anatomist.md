@@ -2,7 +2,7 @@
 
 > **Object of inquiry:** a **specific function / method / API** — "How does `Array.prototype.reduce` work?", "What does `path.join` return?", "Find the best function for X". The user wants the inputs, internal logic, output, and complexity of one function.
 
-**Provenance:** Distilled & upgraded from `instructions/prompts/active/tech-mentor/references/function-anatomist.md` (v1.0), which distilled `instructions/prompts/active/function-anatomist.md` (v1.1). Preserves the dissection template, the search/comparison protocol, and visual-diagram rules; re-abstracted to be self-contained.
+**Provenance:** Distilled from API dissection and function anatomy patterns. Preserves the dissection template, signature analysis, search/comparison protocol, and visual diagram rules; fully self-contained.
 
 ---
 

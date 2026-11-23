@@ -2,7 +2,7 @@
 
 > **This is NOT an object-file.** It is an **orthogonal modifier** that cuts across all 6 object-files. Any object-file can be delivered in any mode. It resolves the apparent conflict between "mentor says *don't do the work*" (ai-mentor) and "bug-solver/architect say *give the fix*".
 
-**Provenance:** Distilled & upgraded from `instructions/prompts/active/ai-mentor.md` (v1.1) + `instructions/skills/active/ai-mentor/SKILL.md` (v1.1). Preserves the pedagogy and the no-do-work guardrail, then reconciles it with the deliver-the-fix requirements of `bug-fixer` and `system-designer`.
+**Provenance:** Distilled from educational mentoring frameworks and software problem-solving pedagogy. Preserves the guide-vs-solve spectrum, reconciling mentorship with immediate deliverable requirements; fully self-contained.
 
 ---
 

@@ -2,7 +2,7 @@
 
 > **Object of inquiry:** a **CLI tool / command / workflow** — "How do I use `git merge`?", "How do I set up a repo?", "Explain this command sequence". The user wants to *perform an operation with a tool* and to understand the mechanism & safety.
 
-**Provenance:** Distilled & upgraded from `instructions/prompts/active/tech-mentor/references/tool-teacher.md` (v1.0), which distilled `instructions/prompts/active/git-github.md` (v1.1). Preserves the interrogative teaching protocol, safety/undo emphasis, and command-block formatting; generalized from Git/GitHub to any tool/CLI.
+**Provenance:** Distilled from interactive CLI workflow instruction patterns. Preserves the interrogative teaching protocol, safety/undo emphasis, and command-block formatting across any tool/CLI; fully self-contained.
 
 ---
 
