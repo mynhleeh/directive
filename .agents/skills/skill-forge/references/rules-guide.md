@@ -14,7 +14,7 @@ A rules file is a Markdown file containing **always-on instructions** for an age
 
 | Feature | CLAUDE.md | AGENTS.md / GEMINI.md | Cursor .mdc | .cursorrules |
 | --- | --- | --- | --- | --- |
-| **Platform** | Claude / AGY | Generic agents / AGY | Cursor IDE | Cursor IDE (legacy) |
+| **Platform** | Claude Code / CLI | Generic agent harnesses | Cursor IDE | Cursor IDE (legacy) |
 | **Scope** | Project or global | Project or global | Per-file or global | Global |
 | **Format** | Markdown | Markdown | MDC (Markdown + YAML meta) | Plain text |
 | **Auto-loaded** | Yes | Yes | On file match | Yes (legacy) |
@@ -25,7 +25,7 @@ A rules file is a Markdown file containing **always-on instructions** for an age
 
 ## CLAUDE.md Structure (Andrej Karpathy Style)
 
-Recommended for: Claude agents, coding agents, Antigravity IDE
+Recommended for: Claude agents, coding agents, generic agent workspaces
 
 ```markdown
 # Project Name
@@ -65,8 +65,8 @@ Recommended for: Claude agents, coding agents, Antigravity IDE
 When authoring always-on rules that need behavioral guardrails (think before coding, simplicity first,
 surgical changes, goal-driven execution), invoke `karpathy-guidelines` resolved dynamically in the
 active runtime workspace (`.agents/`, `.claude/`, `.codex/`). Treat `karpathy-guidelines` as
-**Tier-5 candidate guidance** per `taxonomy-navigation.md` — validate each principle against project
-requirements before promoting it into a mandatory rule, and keep one canonical source synchronized
+**Tier 4 candidate community heuristics** per `artifact-placement.md` — validate each principle against project
+requirements or `Tier 1-3` engineering standards before promoting it into a mandatory rule, and keep one canonical source synchronized
 across formats (`CLAUDE.md` <-> `.cursor/rules/*.mdc` <-> `GEMINI.md` / `AGENTS.md`).
 
 ## Single-Source -> Multi-Format Sync
@@ -81,9 +81,9 @@ CLAUDE.md                                 <- source of truth
 
 > **Rule**: Use a section marker like `## Behavioral Coding Principles` or `## Four Principles` and keep identical wording across formats so `diff`-based sync is trivial.
 
-## GEMINI.md / AGENTS.md Structure (AGY Style)
+## GEMINI.md / AGENTS.md Structure (Generic Agent Workspace)
 
-Recommended for: Antigravity IDE, generic agent systems
+Recommended for: Generic agent harnesses and multi-tool workspaces
 
 ```markdown
 # Project Rules
@@ -232,7 +232,7 @@ You are an expert in [domain] with deep knowledge of [technologies].
 ```text
 Project Root/
 ├── CLAUDE.md            ← Global project rules (for coding agents)
-├── GEMINI.md            ← AGY-specific rules
+├── GEMINI.md            ← Gemini-compatible agent rules
 ├── .agents/
 │   └── rules/
 │       ├── coding-style.md

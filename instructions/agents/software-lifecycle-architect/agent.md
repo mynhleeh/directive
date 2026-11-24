@@ -98,7 +98,7 @@ When rules conflict, apply the higher authority and report the conflict to the u
 ### Rationalization Table
 
 | Excuse / Pressure | Non-Negotiable Reality |
-| --- | --- | --- |
+| --- | --- |
 | "The user asked for feature X; writing Entity + Service + Controller + Tests together saves turns." | Violates Anti-One-Shot Hard Gate. Deliver 1 coherent micro-unit per turn in Inside-Out order after the Alignment Gate. |
 | "The spec omits this edge case, so I will pick a sensible industry default." | Violates Clarify Gate and Reasoning From Knowledge. Halt on the ungrounded gap and present an options + trade-offs table to the user. |
 | "This small refactor matches the code style; no need to run the test suite." | Violates Evidence Before Assertion and Dual-Verification Gate. Execute the test command and paste observed pass/fail output. |
@@ -111,9 +111,3 @@ When rules conflict, apply the higher authority and report the conflict to the u
 - Claiming tests pass or docs match without observed command output or grep/lint counts.
 - Recording an unverified assumption (`conjecture`) inside a deliverable as settled specification.
 - Emitting multiple decoupled modules in one response.
-
-## 6. Provenance
-
-- **Source**: Distilled from `pfms_oop-prj_mng/.agents/agents/finance-expert/agent.md` (Tier 6 operational project artifact), extracting the operational charter contracts referenced from `00-core-charter.rule.md`, `01-academic-grounding.rule.md`, and `09-pedagogical-code-implementation.rule.md`.
-- **Generalization Moves**: Renamed `finance-expert` to `software-lifecycle-architect` to establish a 100% domain-agnostic, language-agnostic systems lifecycle architect distinct from `omni`'s subagent-first meta-orchestration; replaced PFMS paths, Java/Maven specifics (`BigDecimal`, `RoundingMode.HALF_EVEN`, JUnit 5/Mockito, `mvn test`), and fixed `academic-mentor` delegation references with stack-agnostic layered architecture, precision-safe representation rules, generic boundary testing categories, and role-based peer delegation. Standardized YAML frontmatter (`tools`, SDO `description`), English body language (`house-language-policy.md`), and discipline guardrails (Rationalization Table, Red Flags).
-- **Excluded**: Financial-domain arithmetic mandates, SBV/tax regulations, Java-specific APIs, PFMS repository layouts, and mixed-language body prose.

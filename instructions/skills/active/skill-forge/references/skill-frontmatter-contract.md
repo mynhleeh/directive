@@ -1,8 +1,8 @@
-# House Frontmatter Contract
+# Skill Frontmatter Contract
 
-The **authoritative YAML frontmatter schema** for every skill this repo produces or distills. It unifies the formats used across in-house skills, study skills originally authored for the repo (`doc-drill` and `deep-flashcard-generator`, now housed under `deeptutor-eduhub` following deduplication), and the `anthropics/spec` standard, so every generated artifact is structurally consistent and discoverable.
+The **authoritative YAML frontmatter schema** for portable skills across agent harnesses. It establishes one canonical metadata structure so every generated or distilled skill is consistent, discoverable, and validator-ready.
 
-> **Why this file exists**: The repo's skills used inconsistent field sets (`skill-forge` used `name`/`description`/`tags`; `doc-drill` added `version`; others dropped fields). This contract is the single source of truth a meta-skill must generate against.
+> **Why this file exists**: Skill authors often diverge on frontmatter keys, trigger phrasing, and validator compatibility. This contract defines one single source of truth for generating and auditing `SKILL.md` frontmatter.
 
 ## The Canonical Schema
 
@@ -37,7 +37,7 @@ allowed-tools: "read_file write_file"   # optional — space-separated pre-appro
 
 ### Portability Note (`agentskills.io` Validators)
 
-`directive` places `version` and `tags` at top level per repo `README.md` conventions. Strict `agentskills.io` validators (`quick_validate.py`) allow only `name`, `description`, `license`, `allowed-tools`, `metadata`, and `compatibility` at top level. When exporting a skill to strict external validators, nest `version` and `tags` under `metadata:` rather than placing them at top level.
+Many skill catalogs place optional `version` and `tags` fields at top level for human readability. Strict `agentskills.io` validators (`quick_validate.py`) allow only `name`, `description`, `license`, `allowed-tools`, `metadata`, and `compatibility` at top level. When exporting a skill to strict external validators, nest `version` and `tags` under `metadata:` rather than placing them at top level.
 
 ## The `description` Field — Trigger-Optimized (Critical)
 
@@ -93,8 +93,8 @@ Run as a **stranger-review** — separate re-read after writing; each item PASS/
 - [ ] `description` contains both **capability domain & scope** and **when** to trigger
 - [ ] `description` includes at least one near-miss negative (SKIP condition)
 - [ ] `description` contains **0 workflow-summary verbs** ("generates", "critiques", "converts", "distills"…) — behavior, not steps (SDO rule)
-- [ ] `version` uses semver (if present; top-level in `directive`, or nested under `metadata:` for strict `agentskills.io` export)
-- [ ] `tags` array uses kebab-case or lowercase single words (top-level in `directive`, or nested under `metadata:` for strict `agentskills.io` export)
+- [ ] `version` uses semver (if present; top-level when supported, or nested under `metadata:` for strict `agentskills.io` export)
+- [ ] `tags` array uses kebab-case or lowercase single words (top-level when supported, or nested under `metadata:` for strict `agentskills.io` export)
 - [ ] No empty/blank required fields
 - [ ] (External/redistributable skills) `license` present
 

@@ -51,7 +51,7 @@ Embedded in a conversational study application for Vietnamese adult learners spa
 
 - Route: `Mode=CRITIQUE` | `Type=System Prompt` | `Tier=micro` | `Platform=platform-agnostic` | `Language=FR` (reply + improved artifact)
 - Clarify: missing target application and audience -> asked `1` Clarify question with default `"assistant généraliste"`; user confirmed `"assistant généraliste"`
-- Lazy-Load: `references/system-prompt-guide.md`, `references/house-language-policy.md`
+- Lazy-Load: `references/system-prompt-guide.md`, `references/skill-language-policy.md`
 - Defect Inventory (fixed by principle):
   1. Generic role (`"assistant utile"`): violates Role Specificity -> define concrete domain scope
   2. Missing Capabilities and Style slots: violates Completeness -> add explicit capability list and tone/length bounds
@@ -178,21 +178,21 @@ Clair, structuré et professionnel. Limitez les réponses courantes à 3 paragra
 **Notes:** Loss Audit confirmed `"strict": true` has no Anthropic root flag; `"additionalProperties": false` remains enforced inside `input_schema`. Round-Trip conversion back to OpenAI reproduces the original property schema with only the expected `strict` omission and enriched descriptions.
 ````
 
-## Example 4: DISTILL - Conversation into a Skill + House Overlay + Provenance
+## Example 4: DISTILL - Conversation into a Skill + Canonical Overlay + Provenance
 
 **Input (EN):** "Turn this debugging approach I keep repeating into a skill."
 
-**Source (Tier 6 conversation):** Repeated workflow where the user inspects a failing log line, isolates a minimal reproduction script, patches the root cause, and runs the test suite to confirm zero regressions.
+**Source (Operational Context — user conversation):** Repeated workflow where the user inspects a failing log line, isolates a minimal reproduction script, patches the root cause, and runs the test suite to confirm zero regressions.
 
 ### Working Notes
 
 - Route: `Mode=DISTILL` | `Type=Skill (SKILL.md)` | `Tier=standard` | `Platform=platform-agnostic` | `Language=EN`
 - Clarify: source workflow and target artifact type clear -> proceed (`standard` tier selected because the skill enforces a multi-step sequence with output contract)
-- Lazy-Load: `references/house-frontmatter-contract.md`, `references/house-structure-conventions.md`
+- Lazy-Load: `references/skill-frontmatter-contract.md`, `references/skill-structure-conventions.md`
 - Transmutation: abstracted the user's specific endpoint failure into a general `reproduce -> isolate -> patch -> verify` workflow with `0` user codebase names or single-bug hardcodes
-- Delegation Note: House Overlay applied directly; if the user wants pressure testing or trigger evals next, invoke `writing-skills` or `skill-creator` resolved dynamically in `.agents/`, `.claude/`, or `.codex/`
-- Registry Reminder: register the finished skill in `SKILL_INDEX.md` if placing inside a cataloged repository
-- Stranger-Audit (Pass 1/1): `6/6` criteria PASS (SDO `description` has `0` workflow-summary verbs and `0` XML brackets, `## Provenance` ledger attached, `0` unverified Tier-5 premises)
+- Delegation Note: Canonical Skill Overlay applied directly; if the user wants pressure testing or trigger evals next, invoke `writing-skills` or `skill-creator` resolved dynamically in `.agents/`, `.claude/`, or `.codex/`
+- Registry Reminder: if the target workspace maintains a skill catalog index, remind the user to register the finished skill there
+- Stranger-Audit (Pass 1/1): `6/6` criteria PASS (SDO `description` has `0` workflow-summary verbs and `0` XML brackets, `## Provenance` ledger attached, `0` unverified Tier-4 external premises)
 
 ### Output
 
@@ -238,9 +238,9 @@ Emit `## Diagnosis` (root cause + failing file/line), `## Patch` (minimal change
 
 ## Provenance
 
-- Source: User debugging conversation workflow (Tier 6, active operational context)
+- Source: User debugging conversation workflow (Operational Context — active session input)
 - Generalization moves: Abstracted single endpoint debugging steps into a language-agnostic `reproduce -> isolate -> patch -> verify` skill with countable rules
-- Excluded: `0` external Tier-5 sources consulted or copied
+- Excluded: `0` external Tier-4 sources consulted or copied
 ````
 
 ## Example 5: NAVIGATE - Classify and Place a Rules File
@@ -251,21 +251,21 @@ Emit `## Diagnosis` (root cause + failing file/line), `## Patch` (minimal change
 
 - Route: `Mode=NAVIGATE` | `Type=Rules File` | `Language=EN`
 - Clarify: file type and sync question explicit -> proceed directly
-- Lazy-Load: `references/taxonomy-navigation.md`, `references/rules-guide.md`
-- 3-Axis Tree: `Q1` (feed directly to an AI agent to execute?) = Yes -> **INSTRUCTIONS** axis
-- Lifecycle & Tier: self-created active project rules -> `active/` lifecycle (`Tier 6` operational rule), not `archive/` (retired) and not `external/` (third-party). If incorporating Karpathy's 4 coding principles, delegate to `karpathy-guidelines` in `.agents/`, `.claude/`, or `.codex/` and treat as `Tier 5` candidate guidance until validated
-- Index Check: project rules are normally loaded from `.agents/rules/` or root `AGENTS.md`; update `SKILL_INDEX.md` or `REFERENCE_INDEX.md` only if the workspace catalogs rules files there
-- Stranger-Audit (Pass 1/1): `6/6` criteria PASS + 3-axis + Tier 1-7 + MECE checks verified
+- Lazy-Load: `references/artifact-placement.md`, `references/rules-guide.md`
+- 3-Axis Tree: `Q1` (feed directly to an AI agent to execute?) = Yes -> **AGENT INSTRUCTIONS** axis
+- Lifecycle & Context: self-authored active project rules -> `active` lifecycle (`Operational Context`), not `archived` (retired) and not `third-party` (external). If incorporating Karpathy's 4 coding principles, delegate to `karpathy-guidelines` in `.agents/`, `.claude/`, or `.codex/` and treat as `Tier 4` candidate community heuristics until validated against project requirements or `Tier 1-3` standards
+- Index Check: project rules are normally loaded from `.agents/rules/` or root `AGENTS.md`; update a workspace index file only if the host project maintains one
+- Stranger-Audit (Pass 1/1): `6/6` criteria PASS + 3-axis + Operational Context vs Tier 1-4 + MECE checks verified
 
 ### Output
 
 ```text
-Axis:       INSTRUCTIONS (feed directly to AI agents)
-Lifecycle:  active / self-created (Tier 6 operational project file)
-Placement:  instructions/rules/ (repo canonical source) -> synced to .agents/rules/ or project root AGENTS.md
+Axis:       AGENT INSTRUCTIONS (feed directly to AI agents)
+Lifecycle:  active / self-authored (Operational Context)
+Placement:  project root AGENTS.md / CLAUDE.md or .agents/rules/ (per host workspace convention)
 
 Single-Source -> Multi-Format Sync:
 AGENTS.md / CLAUDE.md                   <- canonical source of truth
   -> .cursor/rules/<rule-name>.mdc      <- identical principle wording with YAML globs/alwaysApply
-  -> GEMINI.md                          <- identical principle wording for AGY workspace rules
+  -> GEMINI.md                          <- identical principle wording for Gemini-compatible rules
 ```

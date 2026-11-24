@@ -122,5 +122,3 @@ grep -c $'\xef\xbb\xbf' FILE
 ```
 
 Count these 3 properties directly by inspection (target = **0** defects): consecutive heading level jumps greater than `1`, out-of-sequence ordered lists (`1., 2., 3.`), and opening code fences lacking a language tag.
-
-*Provenance: Consolidated and generalized from `pfms_oop-prj_mng/.agents/rules/08-markdown-formatting.rule.md` and `02-technical-writing.rule.md (§3-§4)`.*

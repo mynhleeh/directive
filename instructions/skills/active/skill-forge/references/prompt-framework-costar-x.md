@@ -1,8 +1,8 @@
 # Prompt Framework: COSTAR-X
 
-The **house prompt framework**, distilled from proven production prompt architectures (`system-architecture`, `function-anatomist`, `tool-teacher`). It is the canonical structure for authoring reusable, variable-isolated prompts that produce reliable, self-verifying output.
+A **structured prompt framework** for authoring reusable, variable-isolated prompts that produce reliable, self-verifying output.
 
-> **Why this file exists**: Production prompts require a consistent, rigorous scaffold across diverse domains. This reference extracts that shared scaffold into a reusable recipe so GENERATED prompts match it. Use it for the **CREATE** and **CONVERT** modes when the target artifact type is a *user prompt*.
+> **Why this file exists**: Production prompts require a consistent, rigorous scaffold across diverse domains. This reference provides a canonical recipe so generated prompts match it. Use it for the **CREATE** and **CONVERT** modes when the target artifact type is a *user prompt*.
 
 ## The COSTAR-X Acronym
 
@@ -49,7 +49,7 @@ Before writing any output, complete the mandatory verification block.
 ## Format & Constraints
 - Output in {target_language}.
 - Use {format} — e.g., Markdown, single fenced block.
-- Cite the highest-tier source (see taxonomy-navigation.md).
+- Cite the highest-tier external source (normative standards, canonical texts, or vetted official docs; never standalone unverified blogs).
 - No speculation: if uncertain, say so or omit. Do NOT fabricate.
 
 ## Meta-Instruction (Chain of Verification) — MANDATORY
@@ -63,7 +63,7 @@ Before producing any final output, you MUST execute the verification block below
 </thinking>
 
 [Interactive Session-Boot Only — omit for single-turn API calls, headless batch pipelines, or Prompt.txt agent configs:]
-XÁC NHẬN KHỞI ĐỘNG
+[STARTUP_ACK]
 ```
 
 ## Core Principles
@@ -74,13 +74,13 @@ The prompt is a **template**, not a one-off. Inputs live in `<variable>` tags so
 
 ### 2. The Mandatory `<thinking>` Block
 
-Before ANY output, the model must reason inside `<thinking>`. This is the **chain of verification** — it forces explicit self-checking rather than a single-pass answer. It is non-negotiable in the house framework.
+Before ANY output, the model must reason inside `<thinking>`. This is the **chain of verification** — it forces explicit self-checking rather than a single-pass answer. It is a core reliability safeguard in COSTAR-X.
 
-### 3. The "XÁC NHẬN KHỞI ĐỘNG" Startup Line (Interactive Session-Boot Only)
+### 3. The `[STARTUP_ACK]` Startup Line (Interactive Session-Boot Only)
 
-A literal confirmation marker (`XÁC NHẬN KHỞI ĐỘNG` = "startup confirmed") used **only for interactive session-boot prompts** — conversational boot prompts that pause after reading the prompt to confirm readiness before receiving real input. **Omit this marker** for single-turn API calls, headless batch pipelines, or `Prompt.txt` agent configs, where printing a confirmation anchor wastes turns or pollutes structured output.
+An optional literal confirmation token (`[STARTUP_ACK]`, e.g., `READY` or a user-specified phrase) used **only for interactive session-boot prompts** — conversational boot prompts that pause after reading the prompt to confirm readiness before receiving real input. **Omit this marker** for single-turn API calls, headless batch pipelines, or `Prompt.txt` agent configs, where printing a confirmation anchor wastes turns or pollutes structured output.
 
-> **Language note:** When included, the marker is intentionally a **literal string** in Vietnamese, not translated — it is a fixed token, not prose. The house language policy ("internal processing: English") governs instructions; fixed literal markers are exempt.
+> **Language note:** When a fixed literal marker is configured by the user, preserve that exact token untranslated — it is a machine/session anchor, not prose. Otherwise, follow `skill-language-policy.md`.
 
 ### 4. Zero-Speculation Constraint
 
@@ -100,4 +100,4 @@ A hard rule that the model must not invent facts. Cite sources; if uncertain, st
 - **CONVERT prompt** -> restructure a source prompt (e.g. from OpenAI) into this COSTAR-X shape, mapping the equivalent sections.
 - **EXPLAIN prompt** -> analyze an existing prompt and categorize its sections against C-O-S-T-A-R-X to show structure.
 
-Use it together with `user-prompt-guide.md` (how to write *good* prompt text) — this file provides the *scaffold*, that file provides the *content quality*.
+Use it together with `user-prompt-guide.md` (how to write *good* prompt text) and `artifact-placement.md` (`Tier 1-4` external source authority ladder) — this file provides the *scaffold*, that file provides the *content quality*.

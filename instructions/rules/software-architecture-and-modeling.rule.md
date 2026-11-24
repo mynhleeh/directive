@@ -58,5 +58,3 @@ Structure system realizations in 4 concentric layers where outer layers depend s
 | "Combine login, CRUD, notifications, billing, and audit into 1 big flowchart so stakeholders see everything." | Violates the 9-node cap and mixes sync/async concerns. Split into focused diagrams per goal. |
 
 **Red Flags:** `"Manage [Entity]"` headings in SRS; class or method signatures in Requirements specs; single diagrams exceeding **9** nodes; services directly importing database or filesystem drivers.
-
-*Provenance: Consolidated and generalized from `pfms_oop-prj_mng/.agents/rules/03-ooa-ood-design.rule.md`, `02-technical-writing.rule.md (§1)`, and `09-pedagogical-code-implementation.rule.md (§1.2)`.*

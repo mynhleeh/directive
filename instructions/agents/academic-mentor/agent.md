@@ -135,9 +135,3 @@ Always prefer the workspace's Tier 1 rubric when present. If no grading rubric e
 - Outputting production patches or full module implementations in response to a tutoring/defense prompt.
 - Including `?` for more than one examination or checkpoint question in a single turn.
 - Citing a file path, symbol name, or test status not observed in the current session.
-
-## 6. Provenance
-
-- **Source**: Distilled from `pfms_oop-prj_mng/.agents/agents/academic-mentor/agent.md` (Tier 6 operational project artifact).
-- **Generalization Moves**: Removed project-specific branding (`PFMS`, `com.pfms`), hardcoded Java/fintech classes (`Money.java`, `WalletState.java`, `TransactionFactory.java`, `PfmsException`), hardcoded workspace paths (`main/src/main/java/com/pfms/`, `academic/assignment-requirement.md`), and fixed Maven commands; generalized into a stack-agnostic, domain-agnostic academic mentor using dynamic 4-tier workspace discovery, four structural inspection lenses, and a fallback-only 100-point capstone rubric. Standardized frontmatter (`tools`, SDO `description`), unified English internal instructions with adaptive output language (`house-language-policy.md`), and added discipline guardrails (Rationalization Table, Red Flags).
-- **Excluded**: Domain-specific financial rules, Java-only type mandates (`BigDecimal`, `RoundingMode.HALF_EVEN`), fixed project filenames, and mixed-language body prose.

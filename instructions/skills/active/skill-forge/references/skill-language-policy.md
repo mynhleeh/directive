@@ -1,8 +1,8 @@
-# House Language Policy
+# Skill Language Policy
 
-The **standard bilingual behavior** for every artifact this repo produces or distills. It governs both the *behavior of a generated skill* and the *language of the meta-skill's own output*.
+The **standard bilingual behavior** for portable skills and AI artifacts. It governs both the *behavior of a generated skill* and the *language of the meta-skill's own output*.
 
-> **Why this file exists**: Every multilingual repo skill (including active skills like `conversation-export` and study skills moved to `deeptutor-eduhub`) follows the same pattern — **English internal instructions, user-language output**. This file makes that a reusable, enforced contract.
+> **Why this file exists**: Multilingual skills across diverse domains follow one clear separation: **English internal instructions, user-language output**. This file turns that pattern into an explicit, reusable contract.
 
 ## The Core Rule
 
@@ -30,7 +30,7 @@ The language the user writes in determines the artifact's output language.
 1. **Generated skill's own output** — every skill a meta-skill produces must include a `Language Policy` section (see template below).
 2. **The meta-skill's output** — when the meta-skill responds to a user, it matches the user's language.
 3. **Reference files** — remain in English (they are internal instructions).
-4. **Frontmatter `description`** — generally English or the repo's working language (frontmatter is discovery metadata; keep it consistent).
+4. **Frontmatter `description`** — generally English or the workspace's primary language (frontmatter is discovery metadata; keep it consistent).
 
 ## Language Policy Template (for Generated Skills)
 

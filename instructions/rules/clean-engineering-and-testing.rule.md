@@ -63,5 +63,3 @@ No code micro-unit may be marked complete until both gates pass after the final 
 | "Skip running tests or pick a default rounding mode to meet the deadline." | Guessing business rules violates R2, and claiming readiness without test output violates R3. |
 
 **Red Flags:** using `float`/`double` for currency; writing only 1-to-2 happy-path assertions; generating `Entity + Service + Controller` together; declaring code ready without a post-edit test runner log.
-
-*Provenance: Consolidated and generalized from `pfms_oop-prj_mng/.agents/rules/04-clean-code-java.rule.md` and `09-pedagogical-code-implementation.rule.md (§1, §2, §4, §5, §6)`.*

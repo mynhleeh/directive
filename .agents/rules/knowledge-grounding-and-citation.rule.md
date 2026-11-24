@@ -22,17 +22,17 @@ When Tier 2 is ambiguous or silent on a business rule, formula, or threshold, st
 
 ## 2. Dynamic Multi-Scope Resolution & Decoupled Traceability
 
-1. **Active Scope Auto-Detection (`ACTIVE_BRANCH`):** Infer the active branch or working clone from the target file path. When no path is given, inspect the workspace root and ask the user once to select the target branch.
+1. **Active Scope Auto-Detection (`ACTIVE_SCOPE`):** Infer the active working directory, branch, or service module from the target file path. When no path is given, inspect the workspace root and ask the user once to select the target scope.
 2. **Local-Over-Global Cascade:** Search in strict priority order:
-   - *Level 1 (Local):* Active branch's documentation subtree (`docs/` or equivalent).
-   - *Level 2 (Shared):* Workspace-level shared reference directory (`reference/` or equivalent), consulting other sibling branches only as a last resort and explicitly tagging any sibling reference with its branch scope in chat.
+   - *Level 1 (Local):* Active scope's documentation subtree (`docs/` or equivalent).
+   - *Level 2 (Shared):* Workspace-level shared reference directory (`reference/` or equivalent), consulting other sibling scopes only as a last resort and explicitly tagging any sibling reference with its scope in chat.
 3. **Dynamic Path Verification:** Treat remembered paths from earlier turns as unverified hints. Re-list or search the directory tree at session start and whenever a path fails to resolve.
 4. **Decoupled Traceability:** Never hardcode identifier prefixes (`REQ-`, `UC-`, `BR-`). Discover and enforce whatever identifier convention Tier 2 defines.
 
 ## 3. External Knowledge Grounding & Ingestion Gate
 
 1. **Resolution Sequence:** When Tiers 1 and 3 lack required domain standards or methodology, consult authoritative primary literature (official standards like IEEE/ISO/RFC, peer-reviewed texts, canonical specifications) rather than unverified blog snippets, and cross-check critical claims across at least **2** credible sources.
-2. **Persistent Ingestion Proposal:** When an external standard will serve as a recurring baseline across multiple deliverables, propose local ingestion in chat (providing title, author/body, year, DOI/ISBN/URL, and target shared folder such as `reference/` or `academic/`) so subsequent tasks ground locally.
+2. **Persistent Ingestion Proposal:** When an external standard will serve as a recurring baseline across multiple deliverables, propose local ingestion in chat (providing title, author/body, year, DOI/ISBN/URL, and target shared folder such as `reference/` or `standards/`) so subsequent tasks ground locally.
 
 ## 4. Three-Channel Source Attribution Discipline
 
@@ -40,7 +40,7 @@ Every source reference belongs strictly to **1 of 3 separate channels**. Never m
 
 | Channel | Allowed Location | Required Format & Rules |
 | --- | --- | --- |
-| **Chat Pointer** | Chat responses only | Informal `file path (section or page)` or URL accompanying every factual or numeric claim; NEVER copy internal repo paths or branch paths into formal deliverables |
+| **Chat Pointer** | Chat responses only | Informal `file path (section or page)` or URL accompanying every factual or numeric claim; NEVER copy internal repo paths or scope paths into formal deliverables |
 | **Inference & Notes** | Chat responses only | Agent derivations, assumptions, and trade-offs explicitly labeled `Inference` or `Note`; NEVER combine source facts and agent inferences in the same sentence without explicit markers |
 | **Deliverable Citation** | Target deliverable's bibliography section only | Formal citation style (APA current edition unless the deliverable establishes another style); body text uses only the document's in-text citation marker |
 
@@ -55,9 +55,7 @@ Every source reference belongs strictly to **1 of 3 separate channels**. Never m
 
 | Rationalization Under Pressure | Mandatory Counter-Rule |
 | --- | --- |
-| "Sibling branch `feature-v2/notes.md` has a concrete number, so use it and link the file path in the spec." | Sibling branch notes are non-authoritative when `main` Tier 2 is silent, and repo paths MUST NOT appear inside deliverables. Flag the conflict in chat and ask the user. |
+| "Sibling scope `sibling-scope/notes.md` has a concrete number, so use it and link the file path in the spec." | Sibling scope notes are non-authoritative when primary Tier 2 is silent, and repo paths MUST NOT appear inside deliverables. Flag the conflict in chat and ask the user. |
 | "Put a `[TBD: e.g., 15-60 min]` conjecture inside the spec text so stakeholders see an estimate." | Unconfirmed numbers are conjectures (R6) and must stay out of deliverables until confirmed. Present options in chat instead. |
 
-**Red Flags:** relative repo paths (`feature-v2/notes.md`, `../reference/`) appearing inside SRS/SDD prose; blending source facts and agent guesses into one unmarked sentence; bibliography entries not cited in body text.
-
-*Provenance: Consolidated and generalized from `pfms_oop-prj_mng/.agents/rules/01-academic-grounding.rule.md` and `07-source-citation.rule.md`.*
+**Red Flags:** relative repo paths (`sibling-scope/notes.md`, `../reference/`) appearing inside SRS/SDD prose; blending source facts and agent guesses into one unmarked sentence; bibliography entries not cited in body text.

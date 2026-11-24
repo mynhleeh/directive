@@ -2,7 +2,7 @@
 
 A framework for deciding **how deep** a generated artifact should be. A meta-skill must pick the right "intensity tier" before writing — the depth of the requested capability dictates the structure of the output.
 
-> **Why this file exists**: The repo spans micro-skills (simple lookup) to deep multi-phase engines. A single-skill template can't fit all; this tier system tells a meta-skill how much structure to emit. Distilled from current active skills (`grounding-source-finder`, `conversation-export`, `tech-mentor`) alongside `deeptutor-eduhub` study baselines (`doc-drill`, `vocab-lookup`, `deep-flashcard-generator`).
+> **Why this file exists**: Skills span simple one-pass lookups to deep multi-phase engines. A single template cannot fit all; this tier system tells a meta-skill how much structure to emit based on workflow depth (`grounding-source-finder`, `conversation-export`, `tech-mentor`, `technical-doc-author`).
 
 > **Model-strength note (Principle 1 of `SKILL.md`):** tier choice is independent of model strength. A micro artifact still needs countable, mechanical rules — tier decides *how deep*, weak-model-first decides *how precise each rule is*.
 
@@ -10,9 +10,9 @@ A framework for deciding **how deep** a generated artifact should be. A meta-ski
 
 | Tier | Description | SKILL.md length | References? | Example |
 | --- | --- | --- | --- | --- |
-| **Micro** | Single, focused task; one-pass | 50–100 lines | Usually none | `grounding-source-finder`, `vocab-lookup` (`deeptutor-eduhub`, word -> card) |
-| **Standard** | 2–5 related workflows | 100–300 lines | Optional, 1–2 files | `conversation-export`, `document-vocab-extractor` (`deeptutor-eduhub`, multi-phase linear) |
-| **Deep Engine** | Multi-domain, adaptive, multi-phase, stateful | 300+ lines core | `references/` with several files | `tech-mentor`, `doc-drill` / `deep-flashcard-generator` (`deeptutor-eduhub` adaptive engines) |
+| **Micro** | Single, focused task; one-pass | 50–100 lines | Usually none | `grounding-source-finder`, `term-lookup` (single-pass lookup) |
+| **Standard** | 2–5 related workflows | 100–300 lines | Optional, 1–2 files | `conversation-export`, linear multi-phase extraction skills |
+| **Deep Engine** | Multi-domain, adaptive, multi-phase, stateful | 300+ lines core | `references/` with several files | `tech-mentor`, `technical-doc-author`, `adaptive-quiz-engine` (stateful engines) |
 
 ## Decision Tree — Choosing a Tier
 
@@ -26,7 +26,7 @@ How many distinct phases / workflows does the task need?
 ### Ask these to classify:
 
 1. **How many phases?** One pass (micro) vs. several (standard) vs. a loop that reads state (deep).
-2. **Does it adapt based on prior output?** Then it's a deep engine (like `doc-drill`'s difficulty band in `deeptutor-eduhub` or `tech-mentor`'s adaptive coaching) — it needs an adaptive loop.
+2. **Does it adapt based on prior output?** Then it's a deep engine (like an adaptive quiz engine's difficulty band or `tech-mentor`'s adaptive coaching) — it needs an adaptive loop.
 3. **How many domain variants?** Many variants (AWS/GCP/Azure) -> deep, with split references.
 4. **Is a fixed output contract enough?** Yes -> micro/standard; no -> deep.
 
@@ -38,8 +38,8 @@ How many distinct phases / workflows does the task need?
 
 ```markdown
 ---
-name: vocab-lookup
-description: "Looks up an English word and outputs a Vietnamese meaning card. Trigger when the user provides a word to translate."
+name: term-lookup
+description: "Looks up a domain term and outputs a structured meaning card. Trigger when the user provides a term to define or translate."
 ---
 
 ## Instructions
@@ -104,7 +104,7 @@ Adaptive, document-grounded quiz engine.
 4. Phase: regenerate if accuracy out of band
 ```
 
-### Lazy-Load Rule (from `doc-drill` in `deeptutor-eduhub` and active deep engines)
+### Lazy-Load Rule (for Deep Engines)
 
 > Reference files are loaded **only when their phase is entered**, not all at once. Each reference carries a "when to read this" note so the agent knows whether to open it.
 

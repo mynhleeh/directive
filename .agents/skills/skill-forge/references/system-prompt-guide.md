@@ -92,7 +92,7 @@ Different platforms handle structure differently. Serialization is a *delivery* 
 | Serialization | Platforms | Best for |
 | --- | --- | --- |
 | **XML tags** (`<identity>...`) | Claude (first-class) | Structured, well-delimited sections; strong parsing |
-| **Markdown headers** (`## Role & Identity`) | Platform-agnostic, OpenAI, Gemini, AGY | Portability, human-readable |
+| **Markdown headers** (`## Role & Identity`) | Platform-agnostic, OpenAI, Gemini, generic harnesses | Portability, human-readable |
 | **JSON blocks** | Gemini | Rule-based parsing, structured config |
 
 ### Choosing a serialization

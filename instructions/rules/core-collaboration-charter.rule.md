@@ -38,7 +38,7 @@ Mandatory behavioral invariants governing every agent operating in a managed wor
 
 1. **Zero Preamble:** Omit conversational filler ("Sure, here is...", "As requested...") and never echo the user's prompt back. Lead directly with the result, proposal, or blocking question.
 2. **High Information Density:** Cap bullet lists at 3 concise points per argument and prefer compact comparison tables over long prose.
-3. **Workspace Permission Boundaries:** Inspect the workspace root structure and `README.md` before modifying files. Treat reference libraries, curriculum folders, backups, and non-active repository clones as read-only unless explicitly targeted by the user.
+3. **Workspace Permission Boundaries:** Inspect the workspace root structure and project entry documentation (e.g., `README.md`) before modifying files. Treat reference libraries, curriculum folders, backups, and non-active repository clones as read-only unless explicitly targeted by the user.
 4. **Destructive Action Gate:** Run `delete`, `overwrite`, `commit`, `push`, or repository-wide rewrites only on explicit user request.
 
 ## 3. Rationalization Blockers & Red Flags
@@ -63,5 +63,3 @@ When two active rules conflict, apply the higher-ranking authority and report th
 | 4 | `markdown-formatting-and-layout.rule.md` and `file-folder-organization.rule.md` | Physical file structure and Markdown hygiene |
 | 5 | Domain rules (`knowledge-grounding-and-citation.rule.md`, `technical-writing-principles.rule.md`, `software-architecture-and-modeling.rule.md`, `clean-engineering-and-testing.rule.md`) | Sourcing, prose discipline, modeling, and engineering |
 | 6 | `task-workflow-and-construction.rule.md` | Pipeline orchestration serving all rules above |
-
-*Provenance: Distilled and generalized from `pfms_oop-prj_mng/.agents/rules/00-core-charter.rule.md` and workspace isolation rules in `README.md`.*

@@ -12,7 +12,7 @@ Standard execution pipeline for any task, integrating incremental scaffold-first
 ### Phase 0: Classification & Grounding
 
 1. Classify the request into one primary type: `SPECIFY`, `DESIGN`, `CODE`, `REVIEW`, `RESEARCH`, `EXPLAIN`, `MAINTAIN`, or `MIXED` (split `MIXED` into typed units).
-2. Resolve the active workspace scope (`ACTIVE_BRANCH`) and rank available grounding sources per `knowledge-grounding-and-citation.rule.md`.
+2. Resolve the active workspace scope (`ACTIVE_SCOPE`) and rank available grounding sources per `knowledge-grounding-and-citation.rule.md`.
 3. If an authoritative source is missing or requirements are ambiguous, stop and ask 1 focused question per message (R2); otherwise proceed immediately.
 
 ### Phase 1: Dynamic Skill Discovery
@@ -89,5 +89,3 @@ Track every unit in chat using explicit states: `PENDING`, `SCAFFOLDED`, `BLOCKE
 | "It is faster to draft all 5 sections together and let the user edit." | Monolithic generation hides compound errors. Emit the scaffold first (Step B), then build 1 approved unit per turn. |
 
 **Red Flags:** writing prose for a `BLOCKED` unit using assumed contracts; skipping Step D draft approval; declaring `DONE` without post-build verification output.
-
-*Provenance: Consolidated and generalized from `pfms_oop-prj_mng/.agents/rules/05-scaffold-first-construction.rule.md`, `06-general-workflow.rule.md`, and `00-core-charter.rule.md [R8]`.*

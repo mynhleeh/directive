@@ -1,8 +1,8 @@
-# House Structure Conventions
+# Skill Structure Conventions
 
-The **unified structural template** for every generated skill. It codifies how a `SKILL.md` and its supporting directories should be organized, so the meta-skill emits consistent, well-structured artifacts every time.
+The **unified structural template** for every generated skill. It codifies how a `SKILL.md` and its supporting directories should be organized, so generated artifacts remain consistent, modular, and easy for agents to load progressively.
 
-> **Why this file exists**: The repo's historical study-skill baselines (now in `deeptutor-eduhub`) varied — `deep-flashcard-generator` was self-contained, `doc-drill` used a lazy-loaded `references/` folder, `vocab-lookup` shipped a companion `prompt.md`. This file reconciles them into one canonical structure.
+> **Why this file exists**: Skills vary in complexity—micro skills fit inside one self-contained file, while multi-phase workflows rely on lazy-loaded `references/` and helper scripts. This document reconciles those variants into one canonical structure.
 
 ## Directory Structure
 
@@ -108,7 +108,7 @@ For skills that must enforce rules the agent is likely to skip under pressure (e
 
 1. **Rationalization table** — anticipated excuses for skipping each rule (time pressure, sunk cost, authority, economic, exhaustion, social, pragmatic) + the explicit negation for each ("no-exceptions" wording).
 2. **Red flags** — observable violation symptoms in the agent's reasoning/output, so the agent can catch itself.
-3. **Description violation symptoms** — the expected violation phrased as a near-miss negative in frontmatter (see `house-frontmatter-contract.md` rule 6).
+3. **Description violation symptoms** — the expected violation phrased as a near-miss negative in frontmatter (see `skill-frontmatter-contract.md` rule 6).
 
 ```markdown
 ### Rationalizations (anticipated + explicit negation)
@@ -152,7 +152,7 @@ Every skill that bounds behavior should use explicit contrast pairs instead of a
 
 Run this as a **stranger-review** — a separate re-read after writing, never the same pass. Each item is PASS/FAIL with evidence (a count or a quoted line); every FAIL gets its fix recipe applied, then the failed items are re-checked (max 2 iterations).
 
-- [ ] Frontmatter follows the House Frontmatter Contract (name matches dir, trigger description)
+- [ ] Frontmatter follows the Skill Frontmatter Contract (name matches dir, trigger description)
 - [ ] `## When to Activate` present (for standard/deep tiers)
 - [ ] `## Overview` states scope
 - [ ] `## Instructions` is imperative and step-by-step
