@@ -31,3 +31,6 @@
 [submodule "instructions/skills/external/Auto-Empirical-Research-Skills"]
 	path = instructions/skills/external/Auto-Empirical-Research-Skills
 	url = https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills
+[submodule "instructions/skills/external/ppt-master"]
+	path = instructions/skills/external/ppt-master
+	url = https://github.com/hugohe3/ppt-master.git

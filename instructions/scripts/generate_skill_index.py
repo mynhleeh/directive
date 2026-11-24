@@ -66,6 +66,14 @@ SOURCE_METADATA: Dict[str, Dict[str, Any]] = {
         "notes": "Prefix `orc-` on collision",
         "rel_path": "external/orca/",
     },
+    "ppt-master": {
+        "focus": "Native editable PPTX generation, templates, and SVG-to-DrawingML workflows",
+        "tier": 3,
+        "origin": "Git Submodule",
+        "license": "MIT (optional `PyMuPDF` dependency is AGPL-3.0)",
+        "notes": "Standalone skill under `skills/ppt-master/`; optional `PyMuPDF` is AGPL-3.0",
+        "rel_path": "external/ppt-master/",
+    },
     "scientific-agent-skills": {
         "focus": "Scientific computing, bioinformatics, chemistry, quantum",
         "tier": 3,
@@ -375,7 +383,9 @@ def main() -> int:
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(content, encoding="utf-8", newline="\n")
-    print(f"SUCCESS: Generated {output_path} (1489 canonical skills across 13 sources).")
+    skill_count = sum(1 for line in content.splitlines() if re.match(r"^\|\s*\d+\s*\|", line))
+    source_count = sum(1 for line in content.splitlines() if line.startswith("### "))
+    print(f"SUCCESS: Generated {output_path} ({skill_count} canonical skills across {source_count} sources).")
     return 0
 
 
