@@ -1,7 +1,7 @@
 ---
 name: agents-index
 description: "Index, capabilities catalog, and trust classification for agent specifications under instructions/agents/. Read to discover available specialized agents."
-version: 1.2.0
+version: 1.3.0
 tags: [agents, index, tiers, orchestration, capabilities]
 metadata:
   author: "directive"
@@ -20,8 +20,9 @@ All owned agent specifications in this directory are in-house AI-authored workin
 
 | Agent | Archetype / Focus | Description |
 | --- | --- | --- |
-| [`academic-mentor`](academic-mentor/agent.md) | Academic Examiner & Coach | Academic mentor and capstone defense examiner for software engineering and OOP projects |
+| [`academic-mentor`](academic-mentor/agent.md) | Academic Examiner & Coach | Read-only Socratic tutor and defense examiner for software, database, and CS capstone projects |
 | [`cv-architect`](cv-architect/agent.md) | Career & Resume Strategist | High-impact CV, resume, and technical portfolio architect using STAR/XYZ methods |
+| [`database-architect`](database-architect/agent.md) | Data & SQL Architect | Relational data modeler and SQL engineer for ER/EER design, 1NF-BCNF normalization, DDL/triggers, and parity audits |
 | [`directive-encyclopedia`](directive-encyclopedia/agent.md) | Living Repository Librarian | Master librarian and living encyclopedia for the directive knowledge base and external grounding |
 | [`omni`](omni/agent.md) | Meta-Orchestrator | Domain-agnostic meta-orchestrator for multi-faceted tasks, dynamic skill discovery, and subagents |
 | [`software-lifecycle-architect`](software-lifecycle-architect/agent.md) | Systems Architect | Systems architect governing requirements, OOA/OOD architecture, inside-out coding, and reviews |

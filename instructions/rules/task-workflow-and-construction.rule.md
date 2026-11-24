@@ -38,7 +38,8 @@ Execute 1 unit per turn (R1), applying the Scaffold-First Construction Protocol 
 
 1. After all units finish, search the entire active workspace scope for every modified or deprecated identifier and term; unhandled matches MUST equal **0** (keep command + count as evidence).
 2. Report out-of-scope matches to the user without silently modifying unrelated files.
-3. Re-run all checks of `markdown-formatting-and-layout.rule.md` across every Markdown file created or edited in the session, since later edits can invalidate earlier passes.
+3. On environments where POSIX `rg` or `awk` are unavailable in `PATH` (such as native Windows PowerShell), implement multi-file sweeps and parity checks using pure Python scripts or native shell utilities (`Select-String`) rather than failing on missing UNIX binaries.
+4. Re-run all checks of `markdown-formatting-and-layout.rule.md` across every Markdown file created or edited in the session, since later edits can invalidate earlier passes.
 
 ### Phase 5: Handover
 
@@ -80,6 +81,8 @@ Track every unit in chat using explicit states: `PENDING`, `SCAFFOLDED`, `BLOCKE
 
 - Read any target file immediately before editing; modify only the smallest region required by the unit (except formatting sweeps on files touched in the current session).
 - Never rely on remembered paths from earlier turns; inspect the current directory tree before acting.
+- Never delete or silently overwrite compiled or binary deliverables (`.pdf`, `.docx`, binary model files, exported images) without explicit user instruction.
+- Never silently edit working drafts when finalized deliverables were targeted, or vice versa, unless explicitly included in an approved synchronization unit.
 
 ## 5. Rationalization Blockers & Red Flags
 

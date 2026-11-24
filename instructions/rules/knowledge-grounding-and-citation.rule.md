@@ -13,21 +13,24 @@ Workspace directory structures evolve continuously. Discover paths dynamically b
 
 | Tier | Functional Role | Authority & Obligations |
 | --- | --- | --- |
-| **Tier 1: Primary Mandate** | Assignment specs, project charters, rubrics, regulatory mandates, grading or acceptance criteria | Highest structural and compliance authority; never omit a mandatory Tier 1 deliverable or criterion |
-| **Tier 2: Requirements Authority** | Project requirements specification (SRS/PRD, use cases, business rules) | Highest authority for domain rules, formulas, scope, and terminology; all agreed decisions are written into Tier 2 (no separate decision ledger); if missing, draft from seed material + Tier 3, then supersede seed material |
-| **Tier 3: Technical Standards** | Shared workspace reference library, engineering standards, textbooks, exemplary templates | Benchmarks architecture, formatting, and methodology; never overrides Tier 2 business rules |
-| **Tier 4: Project Deliverables** | Analysis, design models, source code, and automated test suites | Must maintain bidirectional traceability back to Tiers 1 and 2 |
+| **Tier 1: Primary Mandate** | Assignment specs, project charters, rubrics, regulatory mandates, grading or acceptance criteria | Highest structural and compliance authority; strictly **read-only**; never omit a mandatory Tier 1 deliverable or criterion |
+| **Tier 2: Requirements Authority** | Project requirements specification (SRS/PRD, use cases, business rules) | Highest authority for domain rules, formulas, scope, and terminology; writable under approved decisions (no separate decision ledger); if missing, draft from seed material + Tier 3, then supersede seed material |
+| **Tier 3: Technical Standards** | Shared workspace reference library, engineering standards, textbooks, exemplary templates | Benchmarks architecture, formatting, and methodology; strictly **read-only**; never overrides Tier 2 business rules |
+| **Tier 4: Project Deliverables** | Analysis, design models, schemas, source code, scripts, reports, and automated test suites | Writable under approved changes; must maintain bidirectional traceability back to Tiers 1 and 2 |
 
 When Tier 2 is ambiguous or silent on a business rule, formula, or threshold, stop and ask per `core-collaboration-charter.rule.md` [R2], then record the user's decision into Tier 2.
 
+**Implementation vs. Documentation Drift Protocol:** Whenever executable artifacts (source code, SQL schemas, scripts, or runtime configs) diverge from upstream requirements, models, diagrams, or report tables, inspect both, report the exact element delta, and ask the user which artifact is authoritative before synchronizing.
+
 ## 2. Dynamic Multi-Scope Resolution & Decoupled Traceability
 
-1. **Active Scope Auto-Detection (`ACTIVE_SCOPE`):** Infer the active working directory, branch, or service module from the target file path. When no path is given, inspect the workspace root and ask the user once to select the target scope.
+1. **Unrestricted Workspace Discovery (`ACTIVE_SCOPE`):** Discover and connect freely across all relevant workspace directories, sibling docs, and user-provided external paths without artificial path restrictions. Infer the active working directory, branch, or service module from the target file path; when no path is given and multiple scopes exist, list candidates and ask once.
 2. **Local-Over-Global Cascade:** Search in strict priority order:
    - *Level 1 (Local):* Active scope's documentation subtree (`docs/` or equivalent).
    - *Level 2 (Shared):* Workspace-level shared reference directory (`reference/` or equivalent), consulting other sibling scopes only as a last resort and explicitly tagging any sibling reference with its scope in chat.
 3. **Dynamic Path Verification:** Treat remembered paths from earlier turns as unverified hints. Re-list or search the directory tree at session start and whenever a path fails to resolve.
-4. **Decoupled Traceability:** Never hardcode identifier prefixes (`REQ-`, `UC-`, `BR-`). Discover and enforce whatever identifier convention Tier 2 defines.
+4. **Draft vs. Finalized Binary Hygiene:** Inspect timestamps and file contents rather than inferring finality from folder names alone; flag unresolved placeholders or stale drafts explicitly, and never assume an editable source draft matches a compiled binary deliverable (`.pdf`, `.docx`).
+5. **Decoupled Traceability:** Never hardcode identifier prefixes (`REQ-`, `UC-`, `BR-`). Discover and enforce whatever identifier convention Tier 2 defines.
 
 ## 3. External Knowledge Grounding & Ingestion Gate
 
@@ -48,7 +51,7 @@ Every source reference belongs strictly to **1 of 3 separate channels**. Never m
 
 1. Locate the deliverable's bibliography section by reading the document; if absent, ask where it belongs before adding entries.
 2. Cite the original primary source; if only a secondary summary was verified, state so in chat and cite the summary as read.
-3. Reuse existing bibliography entries instead of duplicating sources. Never fabricate missing bibliographic fields (year, publisher, DOI/URL); flag missing fields to the user first.
+3. Reuse existing bibliography entries instead of duplicating sources. Never fabricate missing bibliographic fields (edition, chapter, page, year, publisher, DOI/URL); flag missing fields to the user first.
 4. **Zero-Orphan Parity Check:** Verify before handover that the count of in-text markers lacking bibliography entries equals **0** and the count of unused bibliography entries equals **0** (retain search commands and counts per R3).
 
 ## 5. Rationalization Blockers & Red Flags

@@ -1,7 +1,7 @@
 ---
 name: rules-index
 description: "Index, authority hierarchy, and trust classification for workspace rules under instructions/rules/. Read to discover active governance invariants and operational constraints."
-version: 1.2.0
+version: 1.3.0
 tags: [rules, index, tiers, governance, constraints, standards]
 metadata:
   author: "directive"
@@ -22,12 +22,13 @@ All owned rules in this directory are in-house synthesized engineering and forma
 | --- | --- | --- | --- |
 | [`clean-engineering-and-testing`](clean-engineering-and-testing.rule.md) | Code Quality & Testing | Priority 5 | Micro-unit inside-out delivery, zero-guesswork halting, precision arithmetic, edge-case test matrix |
 | [`core-collaboration-charter`](core-collaboration-charter.rule.md) | Core Collaboration | Priority 2 & 3 | Single-unit incremental delivery, clarify gate, evidence-backed claims, four-link reasoning |
-| [`file-folder-organization`](file-folder-organization.rule.md) | File & Folder Hygiene | Priority 4 | Strict MECE directory structure, intent taxonomy, dynamic lifecycle state splits, and naming conventions |
-| [`knowledge-grounding-and-citation`](knowledge-grounding-and-citation.rule.md) | Knowledge Grounding | Priority 5 | Multi-tier grounding hierarchy, dynamic branch resolution, ingestion gate, and 3-channel citations |
+| [`database-design-and-sql`](database-design-and-sql.rule.md) | Database Design & SQL | Priority 5 | ER/EER modeling, 1NF-BCNF normalization proofs, exact DECIMAL math, symmetric triggers, 5-category SQL verification |
+| [`file-folder-organization`](file-folder-organization.rule.md) | File & Folder Hygiene | Priority 4 | Mechanical naming delimiters, 4-level hierarchy, plural pools, root hygiene, and 6 verification gates |
+| [`knowledge-grounding-and-citation`](knowledge-grounding-and-citation.rule.md) | Knowledge Grounding | Priority 5 | Multi-tier grounding hierarchy, read-only standard tiers, drift/draft hygiene, and 3-channel citations |
 | [`markdown-formatting-and-layout`](markdown-formatting-and-layout.rule.md) | Markdown Layout | Priority 4 | Content density, compact tables, zero thematic breaks, zero HTML entities, deterministic awk checks |
 | [`software-architecture-and-modeling`](software-architecture-and-modeling.rule.md) | Software Architecture | Priority 5 | Separation of Requirements/OOA/OOD, Inside-Out dependencies, SOLID principles, and UML modeling |
-| [`task-workflow-and-construction`](task-workflow-and-construction.rule.md) | Task Orchestration | Priority 6 | Six-phase pipeline, scaffold-first unit construction (FIFO/LIFO), risk classes, whole-scope sweeps |
-| [`technical-writing-principles`](technical-writing-principles.rule.md) | Technical Writing | Priority 5 | Anti-AI writing principles, elimination of filler rhetoric, precise vocabulary, and factual calibration |
+| [`task-workflow-and-construction`](task-workflow-and-construction.rule.md) | Task Orchestration | Priority 6 | Six-phase pipeline, scaffold-first construction, binary deliverable safety, cross-platform whole-scope sweeps |
+| [`technical-writing-principles`](technical-writing-principles.rule.md) | Technical Writing | Priority 5 | Ten universal authoring principles, anti-AI filters, 2-tier quality gates, and pre-export deliverable hygiene |
 
 ## Maintenance Rules
 

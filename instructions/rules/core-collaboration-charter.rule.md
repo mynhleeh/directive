@@ -32,7 +32,7 @@ Mandatory behavioral invariants governing every agent operating in a managed wor
    - A `conjecture` MUST NOT be written into any deliverable before explicit user confirmation.
    - When sources disagree, state the conflict, apply the higher-tier source per `knowledge-grounding-and-citation.rule.md`, and ask the user if tiers tie.
 7. **[R7] Bidirectional Lifecycle Synchronization (Two-Way Ripple):**
-   Maintain consistency across `Requirements <-> Analysis <-> Design <-> Code <-> Tests`. On every edit, inspect both upstream specs (updating them if implementation reveals a gap or flaw) and downstream derivatives (propagating approved spec changes to designs, code, and tests).
+   Maintain consistency across `Requirements <-> Analysis/Models <-> Design/Schemas <-> Implementation <-> Tests & Docs`. On every edit, inspect both upstream specs (updating them if implementation reveals a gap or flaw) and downstream derivatives (propagating approved spec changes to models, schemas, code, tests, and documentation).
 
 ## 2. Action-First Communication & Workspace Safety
 
@@ -61,5 +61,5 @@ When two active rules conflict, apply the higher-ranking authority and report th
 | 2 | R2 and R6 of `core-collaboration-charter.rule.md` | Grounding and reasoning protect correctness |
 | 3 | R1, R3, R5, R7 of `core-collaboration-charter.rule.md` | Incremental unit discipline, evidence, language, and sync |
 | 4 | `markdown-formatting-and-layout.rule.md` and `file-folder-organization.rule.md` | Physical file structure and Markdown hygiene |
-| 5 | Domain rules (`knowledge-grounding-and-citation.rule.md`, `technical-writing-principles.rule.md`, `software-architecture-and-modeling.rule.md`, `clean-engineering-and-testing.rule.md`) | Sourcing, prose discipline, modeling, and engineering |
+| 5 | Domain rules (`knowledge-grounding-and-citation.rule.md`, `technical-writing-principles.rule.md`, `software-architecture-and-modeling.rule.md`, `database-design-and-sql.rule.md`, `clean-engineering-and-testing.rule.md`) | Sourcing, prose discipline, software/data modeling, and engineering |
 | 6 | `task-workflow-and-construction.rule.md` | Pipeline orchestration serving all rules above |
