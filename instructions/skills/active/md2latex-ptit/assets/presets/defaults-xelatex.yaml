@@ -1,0 +1,43 @@
+# Preset defaults for Pandoc -> XeLaTeX (copy into project docs/latex/ and adjust paths)
+from: markdown
+to: latex
+standalone: true
+template: ${.}/../templates/report-unicode.tex
+filters:
+  - ${.}/../../scripts/report-prep.lua
+top-level-division: chapter
+table-of-contents: true
+toc-depth: 3
+wrap: none
+eol: lf
+fail-if-warnings: true
+resource-path:
+  - .
+variables:
+  documentclass: report
+  cover-style: boxed
+  lof: true
+  lot: false
+  compact-toc: false
+metadata:
+  lang: en
+  institution: POSTS AND TELECOMMUNICATIONS INSTITUTE OF TECHNOLOGY
+  faculty: FACULTY OF INFORMATION TECHNOLOGY
+  cover-logo: logo.png
+  title: COURSE PROJECT REPORT
+  subtitle: System Analysis, Design, and Implementation
+  course: Course Code [Class]
+  team: "Team 01"
+  members:
+    - name: Student One
+      id: B24XXXX001
+    - name: Student Two
+      id: B24XXXX002
+  instructor: Instructor Name
+  location-year: "Hanoi, 2026"
+  prep:
+    strip-cover: none
+    strip-heading-numbers: true
+    code-listings: true
+    prefer-vector-pdf: true
+    callout-boxes: true

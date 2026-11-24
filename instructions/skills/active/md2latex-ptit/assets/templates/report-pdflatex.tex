@@ -1,0 +1,476 @@
+\RequirePackage{fix-cm}
+\documentclass[a4paper,12pt]{$if(documentclass)$$documentclass$$else$report$endif$}
+
+% --- Legacy pdfLaTeX Encoding & Font ---
+\usepackage[utf8]{inputenc}
+\usepackage[T5,T1]{fontenc}
+\usepackage[english,vietnamese]{babel}
+\usepackage{lmodern}
+
+% --- Page Layout ---
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% --- Core Utilities & Localization ---
+\usepackage{etoolbox}
+\newcommand{\reportlang}{$if(lang)$$lang$$else$en$endif$}
+\newcommand{\coverstyle}{$if(cover-style)$$cover-style$$else$boxed$endif$}
+\newcommand{\ifvi}[2]{%
+  \ifdefstring{\reportlang}{vi}{#1}{%
+    \ifdefstring{\reportlang}{vi-VN}{#1}{#2}%
+  }%
+}
+
+\AtBeginDocument{%
+  $if(babel-lang)$
+  \selectlanguage{$babel-lang$}%
+  $else$
+  \ifvi{\selectlanguage{vietnamese}}{\selectlanguage{english}}%
+  $endif$
+  \ifcsdef{chaptername}{\renewcommand{\chaptername}{\chapternameword}}{}%
+  \renewcommand{\appendixname}{\appendixnameword}%
+  \renewcommand{\contentsname}{\tocheadingword}%
+  \renewcommand{\listfigurename}{\lofheadingword}%
+  \renewcommand{\listtablename}{\lotheadingword}%
+  \ifcsdef{bibname}{\renewcommand{\bibname}{\refheadingword}}{}%
+  \ifcsdef{refname}{\renewcommand{\refname}{\refheadingword}}{}%
+  \renewcommand{\figurename}{\figureword}%
+  \renewcommand{\tablename}{\tableword}%
+}
+
+\ifvi{%
+  \newcommand{\chapternameword}{Chương}%
+  \newcommand{\appendixnameword}{Phụ lục}%
+  \newcommand{\tocheadingword}{Mục lục}%
+  \newcommand{\lofheadingword}{Danh mục hình vẽ}%
+  \newcommand{\lotheadingword}{Danh mục bảng}%
+  \newcommand{\refheadingword}{Tài liệu tham khảo}%
+  \newcommand{\figureword}{Hình}%
+  \newcommand{\tableword}{Bảng}%
+  \newcommand{\courseword}{Học phần}%
+  \newcommand{\teamword}{Nhóm}%
+  \newcommand{\membersheadingword}{Danh sách thành viên}%
+  \newcommand{\fullnamecolword}{Họ và tên}%
+  \newcommand{\studentidcolword}{Mã sinh viên}%
+  \newcommand{\rolecolword}{Nhiệm vụ}%
+  \newcommand{\instructorword}{Giảng viên hướng dẫn}%
+  \newcommand{\defaultinstitution}{HỌC VIỆN CÔNG NGHỆ BƯU CHÍNH VIỄN THÔNG}%
+  \newcommand{\defaultfaculty}{KHOA CÔNG NGHỆ THÔNG TIN}%
+}{%
+  \newcommand{\chapternameword}{Chapter}%
+  \newcommand{\appendixnameword}{Appendix}%
+  \newcommand{\tocheadingword}{Contents}%
+  \newcommand{\lofheadingword}{List of Figures}%
+  \newcommand{\lotheadingword}{List of Tables}%
+  \newcommand{\refheadingword}{References}%
+  \newcommand{\figureword}{Figure}%
+  \newcommand{\tableword}{Table}%
+  \newcommand{\courseword}{Course}%
+  \newcommand{\teamword}{Team}%
+  \newcommand{\membersheadingword}{Team Members}%
+  \newcommand{\fullnamecolword}{Full Name}%
+  \newcommand{\studentidcolword}{Student ID}%
+  \newcommand{\rolecolword}{Role}%
+  \newcommand{\instructorword}{Instructor}%
+  \newcommand{\defaultinstitution}{POSTS AND TELECOMMUNICATIONS INSTITUTE OF TECHNOLOGY}%
+  \newcommand{\defaultfaculty}{FACULTY OF INFORMATION TECHNOLOGY}%
+}
+
+% --- Graphics & Landscape Support ---
+\usepackage{graphicx}
+$if(graphicspath)$
+\graphicspath{$for(graphicspath)${$graphicspath$}$endfor$}
+$else$
+\graphicspath{{../}{./}}
+$endif$
+\usepackage{float}
+\usepackage{pdflscape}
+\usepackage{subcaption}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{%
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi%
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox\pandoc@box%
+  \fi%
+}
+\def\fps@figure{htbp}
+\makeatother
+
+% --- Tables ---
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{csvsimple-l3}
+\usepackage{calc}
+\newcounter{none}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+\AtBeginEnvironment{longtable}{\setlength{\tabcolsep}{3.5pt}}
+
+% --- Math & Units ---
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\sisetup{round-mode=places,round-precision=2,group-digits=false}
+
+% --- Colors, Code Listings & UTF-8 Verbatim Fallback ---
+\usepackage{xcolor}
+\definecolor{ptitblue}{RGB}{$if(accent-color-rgb)$$accent-color-rgb$$else$0,51,153$endif$}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+\definecolor{codecomment}{RGB}{106,153,85}
+\definecolor{codestring}{RGB}{163,21,21}
+\definecolor{calloutnote}{RGB}{0,51,153}
+\definecolor{callouttip}{RGB}{22,120,72}
+\definecolor{calloutimportant}{RGB}{118,52,158}
+\definecolor{calloutwarning}{RGB}{180,100,10}
+\definecolor{calloutcaution}{RGB}{175,35,35}
+
+\usepackage{listings}
+\lstdefinelanguage{json}{
+  morestring=[b]",
+  morecomment=[l]{//},
+  morekeywords={true,false,null},
+  sensitive=true
+}
+\lstdefinelanguage{yaml}{
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[b]',
+  morekeywords={true,false,null,yes,no},
+  sensitive=true
+}
+\lstdefinestyle{reportcode}{
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{ptitblue}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  showstringspaces=false,
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=flexible,
+  keepspaces=true,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=8pt,
+  tabsize=4,
+  aboveskip=8pt,
+  belowskip=8pt
+}
+\lstdefinestyle{sqlstyle}{
+  style=reportcode,
+  language=SQL,
+  morekeywords={TRIGGER,BEFORE,AFTER,EACH,ROW,SIGNAL,SQLSTATE,MESSAGE_TEXT,WITH,RECURSIVE,IF,THEN,END,ELSEIF,DELIMITER,ENGINE,CHARSET,COLLATE,AUTO_INCREMENT,ON,DUPLICATE,KEY,UPDATE,ENUM,UNSIGNED,COMMENT,TRUNCATE,FOREIGN_KEY_CHECKS,USE,DROP,DATABASE,EXISTS}
+}
+\lstset{style=reportcode}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+$if(code-verbatim)$
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{lstlisting}{Verbatim}{
+  frame=single,
+  rulecolor=\color{codeframe},
+  fillcolor=\color{codebg},
+  framesep=3mm,
+  fontsize=\footnotesize,
+  breaklines=true
+}
+$endif$
+
+\usepackage[most]{tcolorbox}
+\newenvironment{reportcallout}[2]{%
+  \begin{tcolorbox}[
+    breakable,
+    enhanced,
+    colback=codebg,
+    colframe=#2,
+    boxrule=0.6pt,
+    leftrule=3pt,
+    arc=2pt,
+    top=6pt,
+    bottom=6pt,
+    left=8pt,
+    right=8pt,
+    fonttitle=\bfseries\small,
+    title={#1}
+  ]%
+}{%
+  \end{tcolorbox}%
+}
+
+% --- Hyperlinks & Bookmarks ---
+\usepackage[hidelinks,unicode]{hyperref}
+\usepackage{url}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{}
+\urlstyle{same}
+
+% --- Section Formatting ---
+\usepackage{titlesec}
+$if(compact-toc)$
+\usepackage[titles]{tocloft}
+\setlength{\cftbeforetoctitleskip}{-12pt}
+\setlength{\cftaftertoctitleskip}{12pt}
+\ifcsdef{chapter}{\setlength{\cftbeforechapskip}{4pt}}{}
+\setlength{\cftbeforesecskip}{1pt}
+$endif$
+
+\makeatletter
+\ifcsdef{chapter}{%
+  \titleformat{\chapter}[display]
+    {\normalfont\fontsize{22}{26}\bfseries}
+    {\@chapapp\ \thechapter}{14pt}{\fontsize{22}{26}\bfseries}
+  \titlespacing*{\chapter}{0pt}{-10pt}{24pt}
+}{}
+\makeatother
+
+\titleformat{\section}
+  {\normalfont\fontsize{16}{20}\bfseries\raggedright}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{18pt}{10pt}
+
+\titleformat{\subsection}
+  {\normalfont\fontsize{13}{17}\bfseries\raggedright}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{14pt}{8pt}
+
+\titleformat{\subsubsection}
+  {\normalfont\fontsize{12}{15}\bfseries\itshape\raggedright}{\thesubsubsection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{10pt}{6pt}
+
+% --- Caption ---
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf, skip=8pt}
+
+% --- Landscape Figure Helper ---
+\newcommand{\landscapefigure}[2]{%
+  \begin{landscape}
+  \thispagestyle{plain}%
+  \begin{figure}[p]
+  \centering
+  \includegraphics[width=\linewidth,height=0.88\textheight,keepaspectratio]{#1}
+  \ifstrempty{#2}{}{\caption{#2}}
+  \end{figure}
+  \end{landscape}
+}
+
+% --- Header / Footer ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% --- TOC & Section Numbering Depth ---
+\setcounter{tocdepth}{$if(toc-depth)$$toc-depth$$else$3$endif$}
+\setcounter{secnumdepth}{$if(secnumdepth)$$secnumdepth$$else$3$endif$}
+
+% --- Paragraph Indentation & Pandoc Helpers ---
+\usepackage{indentfirst}
+\setlength{\parindent}{1cm}
+\tolerance=1600
+\setlength{\emergencystretch}{5em}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+
+% --- Citeproc / BibLaTeX / Natbib ---
+$if(csl-refs)$
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+\let\@cite@ofmt\@firstofone
+\def\@biblabel#1{}
+\def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2]
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+$endif$
+$if(biblatex)$
+\usepackage[$if(biblio-style)$style=$biblio-style$,$endif$backend=biber]{biblatex}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+$endif$
+$if(natbib)$
+\usepackage{natbib}
+\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+$endif$
+
+% --- TikZ for Academic Cover Border ---
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+\begin{document}
+
+% =============================================================
+% TITLE / COVER PAGE
+% =============================================================
+\ifdefstring{\coverstyle}{boxed}{%
+  \hypersetup{pageanchor=false}
+  \begin{titlepage}
+  \thispagestyle{empty}
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[line width=1.6pt]
+      ([shift={(1.2cm,-1.2cm)}]current page.north west)
+      rectangle
+      ([shift={(-1.2cm,1.2cm)}]current page.south east);
+    \draw[line width=0.5pt]
+      ([shift={(1.45cm,-1.45cm)}]current page.north west)
+      rectangle
+      ([shift={(-1.45cm,1.45cm)}]current page.south east);
+  \end{tikzpicture}
+  \begin{center}
+  \textbf{\fontsize{13}{16}\selectfont $if(institution)$$institution$$else$\defaultinstitution{}$endif$}\\[0.25cm]
+  \textbf{\fontsize{13}{16}\selectfont $if(faculty)$$faculty$$else$\defaultfaculty{}$endif$}\\[0.15cm]
+  {\centering\rule[0.5ex]{10cm}{0.4pt}\par}
+  \vspace{0.8cm}
+  $if(cover-logo)$
+  \includegraphics[width=3.5cm]{$cover-logo$}
+  \vspace{0.8cm}
+  $endif$
+  {\fontsize{20}{26}\selectfont\bfseries\color{ptitblue}
+  $if(title)$$title$$else$\ifvi{BÁO CÁO ĐỒ ÁN}{PROJECT REPORT}$endif$}\\[0.4cm]
+  $if(subtitle)$
+  {\fontsize{14}{19}\selectfont\bfseries\color{ptitblue}
+  $subtitle$}$if(phase)$\\[0.2cm]
+  {\fontsize{12}{16}\selectfont\itshape\color{ptitblue}
+  ($phase$)}$endif$\\[0.9cm]
+  $endif$
+  $if(course)$
+  {\large\textbf{\courseword:} $course$$if(team)$ \quad--\quad \textbf{\teamword:} $team$$endif$}\\[0.6cm]
+  $endif$
+  $if(members)$
+  {\fontsize{11}{14}\selectfont
+  \textit{\membersheadingword}\\[0.3cm]
+  $if(show-member-role)$
+  \begin{tabular}{l c c}
+  \textbf{\fullnamecolword} & \textbf{\studentidcolword} & \textbf{\rolecolword} \\ \hline
+  \rule{0pt}{0.1cm} \\[-0.4cm]
+  $for(members)$
+  $members.name$ & $members.id$ & $members.role$ \\[0.1cm]
+  $endfor$
+  \end{tabular}
+  $else$
+  \begin{tabular}{l c}
+  \textbf{\fullnamecolword} & \textbf{\studentidcolword} \\ \hline
+  \rule{0pt}{0.1cm} \\[-0.4cm]
+  $for(members)$
+  $members.name$ & $members.id$ \\[0.1cm]
+  $endfor$
+  \end{tabular}
+  $endif$
+  }
+  \vspace{0.8cm}
+  $endif$
+  $if(instructor)$
+  {\large\textbf{\instructorword:} $instructor$}
+  $endif$
+  \vfill
+  $if(location-year)$
+  {\large $location-year$}
+  $endif$
+  \end{center}
+  \end{titlepage}
+  \hypersetup{pageanchor=true}
+}{%
+  \ifdefstring{\coverstyle}{minimal}{%
+    \hypersetup{pageanchor=false}
+    \begin{titlepage}
+    \thispagestyle{empty}
+    \begin{center}
+    \vspace*{2cm}
+    {\fontsize{22}{28}\selectfont\bfseries\color{ptitblue} $if(title)$$title$$else$\ifvi{Báo cáo kỹ thuật}{Technical Report}$endif$}\\[0.5cm]
+    $if(subtitle)${\fontsize{14}{19}\selectfont\itshape $subtitle$}\\[0.8cm]$endif$
+    $if(course)${\large\textbf{\courseword:} $course$}\\[0.4cm]$endif$
+    $if(members)$
+    $for(members)$$members.name$$if(members.id)$ ($members.id$)$endif$$sep$ \\ $endfor$\\[0.6cm]
+    $endif$
+    $if(instructor)${\large\textbf{\instructorword:} $instructor$}\\[0.6cm]$endif$
+    \vfill
+    $if(location-year)${\large $location-year$}$endif$
+    \end{center}
+    \end{titlepage}
+    \hypersetup{pageanchor=true}
+  }{}
+}
+
+% =============================================================
+% TABLE OF CONTENTS & LISTS
+% =============================================================
+$if(toc)$
+\newpage
+\begingroup
+\setlength{\parskip}{0pt}
+\linespread{1.0}\selectfont
+\tableofcontents
+\endgroup
+$endif$
+
+$if(lof)$
+\newpage
+\listoffigures
+\ifcsdef{chapter}{\addcontentsline{toc}{chapter}{\lofheadingword}}{\addcontentsline{toc}{section}{\lofheadingword}}
+$endif$
+
+$if(lot)$
+\newpage
+\listoftables
+\ifcsdef{chapter}{\addcontentsline{toc}{chapter}{\lotheadingword}}{\addcontentsline{toc}{section}{\lotheadingword}}
+$endif$
+
+$if(toc)$\newpage$else$$if(lof)$\newpage$else$$if(lot)$\newpage$endif$$endif$$endif$
+
+% =============================================================
+% BODY
+% =============================================================
+$body$
+
+$if(natbib)$
+$if(bibliography)$
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography[title=\refheadingword]
+$endif$
+
+$for(include-after)$
+$include-after$
+$endfor$
+
+\end{document}

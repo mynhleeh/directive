@@ -1,0 +1,54 @@
+{
+  "skill_name": "md2latex-ptit",
+  "evals": [
+    {
+      "id": 1,
+      "name": "vietnamese-db-report-lualatex",
+      "prompt": "Convert our Vietnamese PTIT project report into a boxed PTIT PDF using LuaLaTeX without editing the Markdown headings manually. Fix tight bullet lists, render the wide 5-column table cleanly with breakable snake_case identifiers, merge the adjacent Vietnamese figure caption, and prove zero missing characters or LaTeX errors.",
+      "expected_output": "Compiled PDF with PTIT boxed Vietnamese cover, clean auto-numbered chapters and Phu luc A appendix, unbroken Vietnamese code comments inside Python/SQL blocks, adapted 5-col table, and verified JSON audit passing with 0 errors and 0 missing characters.",
+      "files": [
+        "instructions/skills/active/md2latex-ptit/tests/fixtures/sample-vi.md",
+        "instructions/skills/active/md2latex-ptit/tests/fixtures/diagram.pdf",
+        "instructions/skills/active/md2latex-ptit/tests/fixtures/logo.png"
+      ],
+      "assertions": [
+        "Report PDF compiles via LuaLaTeX with non-zero file size (>5KB)",
+        "Generated LaTeX strips manual '# 1.' prefix cleanly into '\\chapter{Tổng quan kiến trúc}' and emits '\\appendix'",
+        "Audit log JSON reports passed=true, 0 errors, and 0 missing_chars for Vietnamese glyphs and code comments",
+        "Adjacent caption '*Hình 1: Kiến trúc tổng thể*' becomes clean figure caption and table emits adaptive sizing"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "multifile-en-citeproc-xelatex",
+      "prompt": "Assemble our multi-file English report chapters directory with refs.bib citations and compile with XeLaTeX into an English PDF using citeproc, boxed cover preset metadata, and a compact TOC.",
+      "expected_output": "Assembled Markdown without leaked chapter YAML headers, PDF built with XeLaTeX, resolved bibliography entries from refs.bib, compact TOC, and zero undefined references/citations.",
+      "files": [
+        "instructions/skills/active/md2latex-ptit/tests/fixtures/chapters/00-preface.md",
+        "instructions/skills/active/md2latex-ptit/tests/fixtures/chapters/01-intro.md",
+        "instructions/skills/active/md2latex-ptit/tests/fixtures/refs.bib"
+      ],
+      "assertions": [
+        "Chapters assemble in deterministic numeric order without secondary YAML leaks",
+        "Generated LaTeX includes resolved CSLReferences citations for knuth1984 and vaswani2017",
+        "XeLaTeX compiles multi-pass PDF with compact TOC enabled and passed=true log audit"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "pdflatex-legacy-verbatim-and-preflight-gate",
+      "prompt": "Compile our Vietnamese report containing UTF-8 Vietnamese comments inside fenced Python/SQL blocks using pdfLaTeX fallback mode safely, and separately verify that a Markdown document containing unrendered Mermaid fences and missing image paths is blocked before LaTeX runs.",
+      "expected_output": "pdfLaTeX succeeds using --code-verbatim (fvextra) with zero listings UTF-8 crash, while the broken Markdown report fails cleanly at preflight stage before invoking Pandoc or creating a PDF.",
+      "files": [
+        "instructions/skills/active/md2latex-ptit/tests/fixtures/sample-vi.md",
+        "instructions/skills/active/md2latex-ptit/tests/fixtures/sample-broken.md",
+        "instructions/skills/active/md2latex-ptit/tests/fixtures/diagram.pdf",
+        "instructions/skills/active/md2latex-ptit/tests/fixtures/logo.png"
+      ],
+      "assertions": [
+        "pdfLaTeX build succeeds with code-verbatim/fvextra fallback enabled and passed=true log audit",
+        "Preflight gate blocks sample-broken.md referencing raw mermaid fence and missing asset before generating any PDF"
+      ]
+    }
+  ]
+}
